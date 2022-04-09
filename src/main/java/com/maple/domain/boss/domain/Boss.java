@@ -24,6 +24,7 @@ public class Boss extends BaseEntity {
     private int level;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "class")
     private BossClass clazz;
 
     private int entryMinLevel;
