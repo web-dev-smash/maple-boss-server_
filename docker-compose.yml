@@ -1,0 +1,10 @@
+services:
+  mapleboss-mysql:
+    image: mysql
+    container_name: mapleboss-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - ./config/:/docker-entrypoint-initdb.d/
+    ports:
+      - 3306:3306
