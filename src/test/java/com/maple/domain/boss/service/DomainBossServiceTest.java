@@ -2,16 +2,14 @@ package com.maple.domain.boss.service;
 
 import com.maple.domain.boss.domain.BossRepository;
 import com.maple.fixture.BossFixture;
+import com.maple.support.BaseServiceTest;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
-@SpringBootTest(webEnvironment = NONE)
-class DomainBossServiceTest {
+class DomainBossServiceTest extends BaseServiceTest {
 
     @Autowired
     private BossRepository bossRepository;
