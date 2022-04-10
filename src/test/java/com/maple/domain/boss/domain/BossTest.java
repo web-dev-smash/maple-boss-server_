@@ -39,7 +39,6 @@ class BossTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 보스_이름이_널이거나_빈값이면_실패(String name) {
-
         assertThatIllegalArgumentException().isThrownBy(() -> new Boss(name, 1, BossClass.EASY, 1, 2, 100L, 200L, 300L, 0L, 100, 5));
     }
 
@@ -75,6 +74,6 @@ class BossTest {
     void HP_페이즈의_총합을_구할수_있다() {
         val boss = BossFixture.createBoss();
 
-        assertThat(boss.totalHp()).isEqualTo(100L + 200L + 300L + 400L);
+        assertThat(boss.totalHpPhase()).isEqualTo(100L + 200L + 300L + 400L);
     }
 }

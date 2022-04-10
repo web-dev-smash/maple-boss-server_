@@ -14,9 +14,9 @@ import javax.persistence.Enumerated;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
 public class Boss extends BaseEntity {
     private String name;
 
@@ -71,7 +71,7 @@ public class Boss extends BaseEntity {
         this.deathLimit = deathLimit;
     }
 
-    public long totalHp() {
+    public long totalHpPhase() {
         return hpPhaseOne + hpPhaseTwo + hpPhaseThree + hpPhaseFour;
     }
 }
