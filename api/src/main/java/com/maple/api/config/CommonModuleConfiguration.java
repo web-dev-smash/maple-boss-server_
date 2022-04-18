@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import static com.maple.common.support.Constants.COMMON_BASE_PACKAGE;
 
-
 @EntityScan(basePackages = COMMON_BASE_PACKAGE)
 @EnableJpaRepositories(basePackages = COMMON_BASE_PACKAGE)
 @ComponentScan(value = COMMON_BASE_PACKAGE)
