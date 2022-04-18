@@ -18,6 +18,9 @@ public class BossApi {
 
     private final BossService bossService;
 
+    /**
+     * 보스 생성
+     */
     @PostMapping
     public BossCreateResponse createBoss(@RequestBody BossCreateRequest req) {
         val boss = bossService.create(req.toEntity());
