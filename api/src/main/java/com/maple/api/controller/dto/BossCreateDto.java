@@ -10,6 +10,7 @@ public class BossCreateDto {
     @Getter
     @AllArgsConstructor
     public static class BossCreateRequest {
+
         private String name;
         private int level;
         private BossClass clazz;
@@ -30,12 +31,14 @@ public class BossCreateDto {
     @Getter
     @AllArgsConstructor
     public static class BossCreateResponse {
+
         private BossCreateData boss;
     }
 
     @Getter
     @AllArgsConstructor
     public static class BossCreateData {
+
         private long id;
         private String name;
         private int level;

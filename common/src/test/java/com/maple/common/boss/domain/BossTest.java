@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class BossTest {
+
     @Test
     void 보스생성_성공() {
         val boss = new Boss("윌", 1, BossClass.EASY, 1, 2, 100L, 200L, 300L, 0L, 100, 5);
