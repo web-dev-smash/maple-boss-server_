@@ -17,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 
 /**
- * 아이템 (기본 메타데이터).
+ * 아이템 (기본 메타데이터)
  */
 @Getter
 @Entity
