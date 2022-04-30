@@ -1,5 +1,6 @@
 services:
   mapleboss-mysql:
+    platform: linux/x86_64
     image: mysql
     container_name: mapleboss-mysql
     environment:
