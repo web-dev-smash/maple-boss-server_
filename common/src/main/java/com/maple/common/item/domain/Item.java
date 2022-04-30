@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseEntity {
+
     /**
      * 아이템 이름
      **/
