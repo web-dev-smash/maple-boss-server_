@@ -1,7 +1,9 @@
 package com.maple.common.bossitem.domain;
 
 import com.google.common.primitives.Ints;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
@@ -12,6 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 @Getter
 @Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FixedBossAmount {
 
     /* 수량의 최대 값 */
