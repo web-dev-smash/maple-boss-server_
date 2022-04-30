@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
+/**
+ * 보스 아이템
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,11 +24,14 @@ import java.time.OffsetDateTime;
 @Inheritance
 public abstract class BossItem extends BaseEntity {
 
+    /* 보스 */
     @ManyToOne(fetch = FetchType.LAZY)
     private Boss boss;
 
+    /* 이이템 */
     @ManyToOne(fetch = FetchType.LAZY)
     private Item item;
 
+    /* 생성일 */
     private OffsetDateTime createAt = OffsetDateTime.now();
 }

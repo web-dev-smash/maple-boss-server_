@@ -14,6 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Embeddable
 public class FixedBossAmount {
 
+    /* 수량의 최대 값 */
     public static final int ALLOWED_MINIMUM_AMOUNT = 1;
 
     /* 최소 수량 */

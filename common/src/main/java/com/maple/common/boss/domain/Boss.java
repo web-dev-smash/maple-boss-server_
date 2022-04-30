@@ -11,36 +11,51 @@ import javax.persistence.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+/**
+ * 보스
+ */
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(
         uniqueConstraints = @UniqueConstraint(name = "uq_class_name", columnNames = {"name", "class"})
 )
 public class Boss extends BaseEntity {
+
+    /* 보스 이름 */
     private String name;
 
+    /* 보스 레벨 */
     @Column(name = "level_")
     private int level;
 
+    /* 보스 난이도 */
     @Enumerated(EnumType.STRING)
     @Column(name = "class")
     private BossClass clazz;
 
+    /*  보스 입장 최소 레벨  */
     private int entryMinLevel;
 
+    /*  보스 입장 최대 레벨  */
     private int entryMaxLevel;
 
+    /*  보스 1페이지 체력  */
     private Long hpPhaseOne;
 
+    /*  보스 2페이지 체력  */
     private Long hpPhaseTwo;
 
+    /*  보스 3페이지 체력  */
     private Long hpPhaseThree;
 
+    /*  보스 4페이지 체력  */
     private Long hpPhaseFour;
 
+    /*  보스 아케인포스 요구량  */
     private int arcaneForce;
 
+    /*  보스 도전 목숨 최대값 */
     private int deathLimit;
 
     // TODO: 2022/04/09 유저 도메인 만들면 옮겨야함

@@ -15,6 +15,7 @@ import java.time.OffsetDateTime;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+
 /**
  * 아이템 (기본 메타데이터)
  */
@@ -23,29 +24,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseEntity {
 
-    /**
-     * 아이템 이름
-     **/
+    /* 아이템 이름 */
     @Column(length = 50)
     private String name;
 
-    /**
-     * 아이템 부위
-     **/
+    /* 아이템 타입 */
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ItemType type;
 
-    /**
-     * 아이템 상태
-     **/
+    /* 아이템 상태 */
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ItemStatus status = ItemStatus.CREATED;
 
-    /**
-     * 생성 날짜
-     **/
+    /* 생성일 */
     private OffsetDateTime createAt = OffsetDateTime.now();
 
     public Item(String name, ItemType type) {
