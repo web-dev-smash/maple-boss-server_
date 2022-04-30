@@ -26,11 +26,11 @@ public abstract class BossItem extends BaseEntity {
 
     /* 보스 */
     @ManyToOne(fetch = FetchType.LAZY)
-    private Boss boss;
+    protected Boss boss;
 
     /* 이이템 */
     @ManyToOne(fetch = FetchType.LAZY)
-    private Item item;
+    protected Item item;
 
     /* 생성일 */
     private OffsetDateTime createAt = OffsetDateTime.now();
