@@ -17,3 +17,5 @@ spring:
           validation:
             mode: none
     show-sql: true
+  flyway:
+    enabled: true
