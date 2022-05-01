@@ -4,6 +4,7 @@ import com.maple.common.bossitem.domain.FixedBossItem;
 import com.maple.common.bossitem.domain.FixedBossItemAmount;
 import lombok.val;
 
+
 public class FixedBossItemCreateDto {
 
     public record FixedBossItemCreateRequest(
@@ -28,6 +29,7 @@ public class FixedBossItemCreateDto {
             int maximumAmount,
             long price
     ) {
+
         public static FixedBossItemCreateData create(FixedBossItem fixedBossItem) {
             val amount = fixedBossItem.getAmount();
 
