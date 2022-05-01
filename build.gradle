@@ -70,7 +70,7 @@ project(':api') {
     }
 
     bootJar {
-        enabled = false
+        enabled = true
     }
 
     jar {
@@ -88,7 +88,7 @@ project(':admin') {
     }
 
     bootJar {
-        enabled = false
+        enabled = true
     }
 
     jar {
