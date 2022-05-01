@@ -4,6 +4,7 @@ import com.maple.common.bossitem.domain.FixedBossItem;
 import com.maple.common.bossitem.domain.FixedBossItemAmount;
 import lombok.val;
 
+
 public class FixedBossItemCreateDto {
 
     public record FixedBossItemCreateRequest(
@@ -13,7 +14,6 @@ public class FixedBossItemCreateDto {
             int maximumAmount,
             Long price
     ) {
-
         public com.maple.admin.service.dto.FixedBossItemCreateDto toDto() {
             return new com.maple.admin.service.dto.FixedBossItemCreateDto(bossId, itemId, new FixedBossItemAmount(minimumAmount, maximumAmount), price);
         }

@@ -2,57 +2,45 @@ package com.maple.admin.controller.dto;
 
 import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.domain.BossClass;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 public class BossCreateDto {
 
-    @Getter
-    @AllArgsConstructor
-    public static class BossCreateRequest {
-
-        private String name;
-        private int level;
-        private BossClass clazz;
-        private int entryMinLevel;
-        private int entryMaxLevel;
-        private Long hpPhaseOne;
-        private Long hpPhaseTwo;
-        private Long hpPhaseThree;
-        private Long hpPhaseFour;
-        private int arcaneForce;
-        private int deathLimit;
-
+    public record BossCreateRequest(
+            String name,
+            int level,
+            BossClass clazz,
+            int entryMinLevel,
+            int entryMaxLevel,
+            Long hpPhaseOne,
+            Long hpPhaseTwo,
+            Long hpPhaseThree,
+            Long hpPhaseFour,
+            int arcaneForce,
+            int deathLimit
+    ) {
         public Boss toEntity() {
             return new Boss(name, level, clazz, entryMinLevel, entryMaxLevel, hpPhaseOne, hpPhaseTwo, hpPhaseThree, hpPhaseFour, arcaneForce, deathLimit);
         }
     }
 
-    @Getter
-    @AllArgsConstructor
-    public static class BossCreateResponse {
-
-        private BossCreateData boss;
+    public record BossCreateResponse(BossCreateData boss) {
     }
 
-    @Getter
-    @AllArgsConstructor
-    public static class BossCreateData {
-
-        private long id;
-        private String name;
-        private int level;
-        private BossClass clazz;
-        private int entryMinLevel;
-        private int entryMaxLevel;
-        private Long hpPhaseOne;
-        private Long hpPhaseTwo;
-        private Long hpPhaseThree;
-        private Long hpPhaseFour;
-        private Long totalHpPhase;
-        private int arcaneForce;
-        private int deathLimit;
-
+    public record BossCreateData(
+            long id,
+            String name,
+            int level,
+            BossClass clazz,
+            int entryMinLevel,
+            int entryMaxLevel,
+            Long hpPhaseOne,
+            Long hpPhaseTwo,
+            Long hpPhaseThree,
+            Long hpPhaseFour,
+            Long totalHpPhase,
+            int arcaneForce,
+            int deathLimit
+    ) {
         public static BossCreateData create(Boss boss) {
             return new BossCreateData(
                     boss.getId(), boss.getName(), boss.getLevel(), boss.getClazz(), boss.getEntryMinLevel(), boss.getEntryMaxLevel(),
