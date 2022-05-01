@@ -1,13 +1,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${db.url:jdbc:mysql://localhost:3306/mapleboss}
-    username: root
-    password: 1234
+    url: ${db.url:jdbc:mysql://localhost:3306/maplebosstest}
+    username: ${db.username:root}
+    password: ${db.password:1234}
   jpa:
+    generate-ddl: true
     hibernate:
-      ddl-auto: validate
-
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: false
@@ -16,4 +16,5 @@ spring:
         persistence:
           validation:
             mode: none
-    show-sql: true
+  flyway:
+    enabled: false

@@ -1,11 +1,11 @@
-package com.maple.api.service;
+package com.maple.admin.service;
 
-import com.maple.api.service.dto.FixedBossItemCreateDto;
-import com.maple.api.service.dto.RandomBossItemCreateDto;
+import com.maple.admin.service.dto.FixedBossItemCreateDto;
+import com.maple.admin.service.dto.RandomBossItemCreateDto;
 import com.maple.common.bossitem.domain.FixedBossItem;
 import com.maple.common.bossitem.domain.RandomBossItem;
 
-public interface BossItemAppService {
+public interface BossItemAdminService {
 
     /**
      * 고정 보스 아이템 생성

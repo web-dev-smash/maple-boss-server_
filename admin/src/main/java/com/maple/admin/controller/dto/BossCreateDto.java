@@ -1,4 +1,4 @@
-package com.maple.api.controller.dto;
+package com.maple.admin.controller.dto;
 
 import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.domain.BossClass;

@@ -82,6 +82,24 @@ project(':api') {
     }
 }
 
+project(':admin') {
+    dependencies {
+        implementation(project(':common'))
+    }
+
+    bootJar {
+        enabled = false
+    }
+
+    jar {
+        enabled = true
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
 project(':integration') {
     dependencies {
         implementation(project(':common'))
