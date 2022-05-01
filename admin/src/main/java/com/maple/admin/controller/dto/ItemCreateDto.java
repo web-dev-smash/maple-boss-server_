@@ -11,6 +11,7 @@ public class ItemCreateDto {
             String name,
             ItemType type
     ) {
+
         public Item toEntity() {
             return new Item(name, type);
         }
@@ -25,6 +26,7 @@ public class ItemCreateDto {
             ItemType type,
             OffsetDateTime createAt
     ) {
+
         public static ItemCreateData create(Item item) {
             return new ItemCreateData(item.getId(), item.getName(), item.getType(), item.getCreateAt());
         }

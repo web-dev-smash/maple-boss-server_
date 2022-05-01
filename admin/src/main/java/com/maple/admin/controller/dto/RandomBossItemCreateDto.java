@@ -12,6 +12,7 @@ public class RandomBossItemCreateDto {
             int minimumAmount,
             int maximumAmount
     ) {
+
         public com.maple.admin.service.dto.RandomBossItemCreateDto toDto() {
             return new com.maple.admin.service.dto.RandomBossItemCreateDto(bossId, itemId, new RandomBossItemAmount(minimumAmount, maximumAmount));
         }
@@ -25,6 +26,7 @@ public class RandomBossItemCreateDto {
             int minimumAmount,
             int maximumAmount
     ) {
+        
         public static RandomBossItemCreateData create(RandomBossItem randomBossItem) {
             val amount = randomBossItem.getAmount();
 

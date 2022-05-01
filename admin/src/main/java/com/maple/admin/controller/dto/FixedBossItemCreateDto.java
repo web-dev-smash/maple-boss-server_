@@ -14,6 +14,7 @@ public class FixedBossItemCreateDto {
             int maximumAmount,
             Long price
     ) {
+
         public com.maple.admin.service.dto.FixedBossItemCreateDto toDto() {
             return new com.maple.admin.service.dto.FixedBossItemCreateDto(bossId, itemId, new FixedBossItemAmount(minimumAmount, maximumAmount), price);
         }
@@ -28,6 +29,7 @@ public class FixedBossItemCreateDto {
             int maximumAmount,
             long price
     ) {
+
         public static FixedBossItemCreateData create(FixedBossItem fixedBossItem) {
             val amount = fixedBossItem.getAmount();
 
