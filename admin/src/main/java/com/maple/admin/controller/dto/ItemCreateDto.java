@@ -1,4 +1,4 @@
-package com.maple.api.controller.dto;
+package com.maple.admin.controller.dto;
 
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.domain.ItemType;

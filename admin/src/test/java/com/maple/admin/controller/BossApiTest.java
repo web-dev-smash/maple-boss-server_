@@ -1,7 +1,7 @@
-package com.maple.api.controller;
+package com.maple.admin.controller;
 
-import com.maple.api.controller.dto.BossCreateDto;
-import com.maple.api.support.BaseApiTest;
+import com.maple.admin.controller.dto.BossCreateDto;
+import com.maple.admin.support.BaseApiTest;
 import com.maple.common.boss.domain.BossClass;
 import lombok.val;
 import org.junit.jupiter.api.Test;

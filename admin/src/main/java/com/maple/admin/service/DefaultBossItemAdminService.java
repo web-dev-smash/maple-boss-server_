@@ -1,7 +1,7 @@
-package com.maple.api.service;
+package com.maple.admin.service;
 
-import com.maple.api.service.dto.FixedBossItemCreateDto;
-import com.maple.api.service.dto.RandomBossItemCreateDto;
+import com.maple.admin.service.dto.FixedBossItemCreateDto;
+import com.maple.admin.service.dto.RandomBossItemCreateDto;
 import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.bossitem.domain.FixedBossItem;
 import com.maple.common.bossitem.domain.RandomBossItem;
@@ -17,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class DefaultBossItemAppService implements BossItemAppService {
+public class DefaultBossItemAdminService implements BossItemAdminService {
 
     private final BossItemService bossItemService;
 

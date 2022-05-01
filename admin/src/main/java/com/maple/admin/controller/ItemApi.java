@@ -1,8 +1,8 @@
-package com.maple.api.controller;
+package com.maple.admin.controller;
 
-import com.maple.api.controller.dto.ItemCreateDto.ItemCreateData;
-import com.maple.api.controller.dto.ItemCreateDto.ItemCreateRequest;
-import com.maple.api.controller.dto.ItemCreateDto.ItemCreateResponse;
+import com.maple.admin.controller.dto.ItemCreateDto.ItemCreateData;
+import com.maple.admin.controller.dto.ItemCreateDto.ItemCreateRequest;
+import com.maple.admin.controller.dto.ItemCreateDto.ItemCreateResponse;
 import com.maple.common.item.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;

@@ -1,4 +1,4 @@
-package com.maple.api.service.dto;
+package com.maple.admin.service.dto;
 
 import com.maple.common.bossitem.domain.FixedBossItemAmount;
 

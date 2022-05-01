@@ -1,8 +1,8 @@
-package com.maple.api.controller;
+package com.maple.admin.controller;
 
-import com.maple.api.controller.dto.BossCreateDto.BossCreateData;
-import com.maple.api.controller.dto.BossCreateDto.BossCreateRequest;
-import com.maple.api.controller.dto.BossCreateDto.BossCreateResponse;
+import com.maple.admin.controller.dto.BossCreateDto.BossCreateData;
+import com.maple.admin.controller.dto.BossCreateDto.BossCreateRequest;
+import com.maple.admin.controller.dto.BossCreateDto.BossCreateResponse;
 import com.maple.common.boss.service.BossService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
