@@ -1,0 +1,34 @@
+package com.maple.api.controller;
+
+import com.maple.api.controller.dto.ItemCreateDto.ItemCreateRequest;
+import com.maple.api.support.BaseApiTest;
+import com.maple.common.item.domain.ItemType;
+import lombok.val;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
+class ItemApiTest extends BaseApiTest {
+
+    @Test
+    void 아이템_생성() throws Exception {
+        val req = new ItemCreateRequest("태초의정수", ItemType.EXTRA);
+
+        mockMvc.perform(post("/item")
+                        .content(objectMapper.writeValueAsString(req))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpectAll(
+                        status().isOk(),
+                        jsonPath("$.item.id").isNotEmpty(),
+                        jsonPath("$.item.name").value("태초의정수"),
+                        jsonPath("$.item.type").value(ItemType.EXTRA.name()),
+                        jsonPath("$.item.createAt").isNotEmpty()
+                );
+    }
+}
