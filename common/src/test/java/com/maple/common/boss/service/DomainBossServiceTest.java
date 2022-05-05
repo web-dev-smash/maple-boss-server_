@@ -42,7 +42,7 @@ class DomainBossServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 보스_상세_조회_실패() {
+    void 보스_상세_조회_실패_존재하지_않음() {
         assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> bossService.getBoss(1L));
     }
 }

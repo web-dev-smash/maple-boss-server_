@@ -34,7 +34,7 @@ public class BossApi {
      */
     @GetMapping("/{id}")
     public BossFindResponse findBoss(@PathVariable("id") Long id) {
-        val foundBoss = bossService.findById(id);
+        val foundBoss = bossService.getBoss(id);
 
         return new BossFindResponse(create(foundBoss));
     }
