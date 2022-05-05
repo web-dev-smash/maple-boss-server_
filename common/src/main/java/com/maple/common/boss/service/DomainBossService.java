@@ -17,4 +17,9 @@ public class DomainBossService implements BossService {
     public Boss create(final Boss boss) {
         return bossRepository.save(boss);
     }
+
+    @Override
+    public Boss getBoss(Long id) {
+        return bossRepository.findById(id).orElseThrow();
+    }
 }

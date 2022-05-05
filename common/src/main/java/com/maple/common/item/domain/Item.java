@@ -36,10 +36,10 @@ public class Item extends BaseEntity {
     /* 아이템 상태 */
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    private ItemStatus status = ItemStatus.CREATED;
+    private final ItemStatus status = ItemStatus.CREATED;
 
     /* 생성일 */
-    private OffsetDateTime createAt = OffsetDateTime.now();
+    private final OffsetDateTime createAt = OffsetDateTime.now();
 
     public Item(String name, ItemType type) {
         checkNotNull(type, "타입 필수입니다.");

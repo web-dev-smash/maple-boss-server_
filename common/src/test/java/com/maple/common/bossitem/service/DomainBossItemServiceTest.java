@@ -56,7 +56,7 @@ class DomainBossItemServiceTest extends BaseServiceTest {
 
     @Test
     void 고정_보스_아이템이_null_이면_생성_실패() {
-        assertThatNullPointerException().isThrownBy(()-> bossItemService.createFixedBossItem(null));
+        assertThatNullPointerException().isThrownBy(() -> bossItemService.createFixedBossItem(null));
     }
 
     @Test
@@ -72,6 +72,6 @@ class DomainBossItemServiceTest extends BaseServiceTest {
 
     @Test
     void 랜덤_보스_아이템이_null_이면_생성_실패() {
-        assertThatNullPointerException().isThrownBy(()-> bossItemService.createRandomBossItem(null));
+        assertThatNullPointerException().isThrownBy(() -> bossItemService.createRandomBossItem(null));
     }
 }
