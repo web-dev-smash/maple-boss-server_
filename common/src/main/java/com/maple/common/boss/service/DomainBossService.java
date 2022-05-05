@@ -19,7 +19,7 @@ public class DomainBossService implements BossService {
     }
 
     @Override
-    public Boss findById(Long id) {
+    public Boss getBoss(Long id) {
         return bossRepository.findById(id).orElseThrow();
     }
 }

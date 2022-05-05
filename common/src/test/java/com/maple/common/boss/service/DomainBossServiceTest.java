@@ -5,10 +5,13 @@ import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.fixture.BossFixture;
 import com.maple.common.support.BaseServiceTest;
 import lombok.val;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.NoSuchElementException;
+
+import static org.assertj.core.api.Assertions.*;
 
 class DomainBossServiceTest extends BaseServiceTest {
 
@@ -30,11 +33,16 @@ class DomainBossServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 보스_상세_조회_테스트() {
-        final Boss save = bossRepository.save(BossFixture.createBoss());
+    void 보스_상세_조회_성공() {
+        final Boss boss = bossRepository.save(BossFixture.createBoss());
 
-        val foundBoss = bossService.findById(save.getId());
+        val foundBoss = bossService.getBoss(boss.getId());
 
-        assertThat(foundBoss).isEqualTo(save);
+        assertThat(foundBoss).isEqualTo(boss);
+    }
+
+    @Test
+    void 보스_상세_조회_실패() {
+        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> bossService.getBoss(1L));
     }
 }

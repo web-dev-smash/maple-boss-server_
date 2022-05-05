@@ -10,8 +10,7 @@ public interface BossService {
     Boss create(Boss boss);
 
     /**
-     * 보스 상세 조회 
+     * 보스 상세 조회
      */
-    Boss findById(Long id);
-
+    Boss getBoss(Long id);
 }
