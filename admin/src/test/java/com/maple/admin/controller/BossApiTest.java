@@ -2,7 +2,6 @@ package com.maple.admin.controller;
 
 import com.maple.admin.fixture.BossFixture;
 import com.maple.admin.support.BaseApiTest;
-import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.domain.BossClass;
 import com.maple.common.boss.domain.BossRepository;
 import lombok.val;
