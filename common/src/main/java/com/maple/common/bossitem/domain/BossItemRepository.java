@@ -1,5 +1,6 @@
 package com.maple.common.bossitem.domain;
 
+import com.maple.common.boss.domain.Boss;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -7,6 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BossItemRepository extends JpaRepository<BossItem, Long> {
+
+    @Query("""
+            select b
+            from BossItem b
+            where b.boss = :boss
+            """)
+    List<BossItem> findAll(Boss boss);
 
     @Query("""
             select f
