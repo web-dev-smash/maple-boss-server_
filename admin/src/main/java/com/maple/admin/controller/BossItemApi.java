@@ -1,5 +1,7 @@
 package com.maple.admin.controller;
 
+import com.maple.admin.controller.dto.BossItemDto.BossItemData;
+import com.maple.admin.controller.dto.BossItemDto.BossItemResponse;
 import com.maple.admin.controller.dto.FixedBossItemCreateDto.FixedBossItemCreateData;
 import com.maple.admin.controller.dto.FixedBossItemCreateDto.FixedBossItemCreateRequest;
 import com.maple.admin.controller.dto.FixedBossItemCreateDto.FixedBossItemCreateResponse;
@@ -7,12 +9,10 @@ import com.maple.admin.controller.dto.RandomBossItemCreateDto.RandomBossItemCrea
 import com.maple.admin.controller.dto.RandomBossItemCreateDto.RandomBossItemCreateRequest;
 import com.maple.admin.controller.dto.RandomBossItemCreateDto.RandomBossItemCreateResponse;
 import com.maple.admin.service.BossItemAdminService;
+import com.maple.common.bossitem.service.DomainBossItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/boss-item")
@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BossItemApi {
 
     private final BossItemAdminService bossItemAdminService;
+
+    private final DomainBossItemService domainBossItemService;
 
     /**
      * 고정 보스 아이템 생성
@@ -39,5 +41,15 @@ public class BossItemApi {
         val randomBossItem = bossItemAdminService.createRandomBossItem(req.toDto());
 
         return new RandomBossItemCreateResponse(RandomBossItemCreateData.create(randomBossItem));
+    }
+
+    /**
+     * 보스 아이템 목록 조회
+     */
+    @GetMapping("/{bossId}")
+    public BossItemResponse getBossItems(@PathVariable long bossId) {
+        val bossItems = domainBossItemService.getBossItems(bossId);
+
+        return new BossItemResponse(BossItemData.create(bossItems));
     }
 }

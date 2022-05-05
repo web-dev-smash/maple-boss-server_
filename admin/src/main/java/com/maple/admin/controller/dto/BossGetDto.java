@@ -3,12 +3,12 @@ package com.maple.admin.controller.dto;
 import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.domain.BossClass;
 
-public class BossFindDto {
+public class BossGetDto {
 
-    public record BossFindResponse(BossFindData boss) {
+    public record BossGetResponse(BossGetData boss) {
     }
 
-    public record BossFindData(
+    public record BossGetData(
             long id,
             String name,
             int level,
@@ -24,8 +24,8 @@ public class BossFindDto {
             int deathLimit
     ) {
 
-        public static BossFindData create(Boss boss) {
-            return new BossFindData(
+        public static BossGetData create(Boss boss) {
+            return new BossGetData(
                     boss.getId(), boss.getName(), boss.getLevel(), boss.getClazz(), boss.getEntryMinLevel(), boss.getEntryMaxLevel(),
                     boss.getHpPhaseOne(), boss.getHpPhaseTwo(), boss.getHpPhaseThree(), boss.getHpPhaseFour(), boss.totalHpPhase(),
                     boss.getArcaneForce(), boss.getDeathLimit()
