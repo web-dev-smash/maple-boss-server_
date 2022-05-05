@@ -1,6 +1,7 @@
 package com.maple.common.bossitem.domain;
 
 import com.maple.common.boss.domain.Boss;
+import com.maple.common.boss.domain.BossClass;
 import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.domain.ItemRepository;
@@ -60,6 +61,33 @@ class BossItemRepositoryTest {
         val foundBossItems = bossItemRepository.findAll();
 
         assertThat(foundBossItems).containsExactly(randomBossItem, fixedBossItem);
+    }
+
+    @Test
+    void 보스_아이템_전체조회() {
+        val randomBossItem1 = createRandomBossItem(boss, item1);
+        val randomBossItem2 = createRandomBossItem(boss, item2);
+
+        val fixedBossItem1 = createFixedBossItem(boss, item3);
+        val fixedBossItem2 = createFixedBossItem(boss, item4);
+        val fixedBossItem3 = createFixedBossItem(boss, item5);
+
+        var otherBoss = new Boss("다른보스", 1, BossClass.EASY, 1, 10, 1L, 2L, 3L, 4L, 1, 1);
+
+        otherBoss = bossRepository.save(otherBoss);
+
+        val otherBossItem1 = bossItemRepository.save(createFixedBossItem(otherBoss, item1));
+        val otherBossItem2 = bossItemRepository.save(createRandomBossItem(otherBoss, item4));
+
+        bossItemRepository.saveAll(List.of(
+                randomBossItem1, randomBossItem2, fixedBossItem1, fixedBossItem2, fixedBossItem3,
+                otherBossItem1, otherBossItem2
+        ));
+
+        val bossItems = bossItemRepository.findAll(boss);
+
+        assertThat(bossItems).containsExactly(randomBossItem1, randomBossItem2, fixedBossItem1, fixedBossItem2, fixedBossItem3);
+        assertThat(bossItems).doesNotContain(otherBossItem1, otherBossItem2);
     }
 
     @Test
