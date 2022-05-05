@@ -26,7 +26,7 @@ public class RandomBossItemCreateDto {
             int minimumAmount,
             int maximumAmount
     ) {
-        
+
         public static RandomBossItemCreateData create(RandomBossItem randomBossItem) {
             val amount = randomBossItem.getAmount();
 

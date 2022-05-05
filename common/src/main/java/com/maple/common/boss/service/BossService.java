@@ -8,4 +8,10 @@ public interface BossService {
      * 보스 생성
      */
     Boss create(Boss boss);
+
+    /**
+     * 보스 상세 조회 
+     */
+    Boss findById(Long id);
+
 }

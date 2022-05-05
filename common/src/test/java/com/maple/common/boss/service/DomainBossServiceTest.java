@@ -1,5 +1,6 @@
 package com.maple.common.boss.service;
 
+import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.fixture.BossFixture;
 import com.maple.common.support.BaseServiceTest;
@@ -26,5 +27,14 @@ class DomainBossServiceTest extends BaseServiceTest {
         val foundBoss = bossRepository.findById(boss.getId()).orElseThrow();
 
         assertThat(foundBoss).isEqualTo(boss);
+    }
+
+    @Test
+    void 보스_상세_조회_테스트() {
+        final Boss save = bossRepository.save(BossFixture.createBoss());
+
+        val foundBoss = bossService.findById(save.getId());
+
+        assertThat(foundBoss).isEqualTo(save);
     }
 }
