@@ -101,7 +101,7 @@ class BossApiTest extends BaseApiTest {
                 jsonPath("""
                         $.boss[{index}].level""".replace("{index}", indexString)).value(boss.getLevel()),
                 jsonPath("""
-                        $.boss[{index}].clazz""".replace("{index}", indexString)).isNotEmpty(),
+                        $.boss[{index}].clazz""".replace("{index}", indexString)).value(boss.getClazz().name()),
                 jsonPath("""
                         $.boss[{index}].entryMinLevel""".replace("{index}", indexString)).value(boss.getEntryMinLevel()),
                 jsonPath("""

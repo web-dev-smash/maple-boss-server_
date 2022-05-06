@@ -50,9 +50,9 @@ class DomainBossServiceTest extends BaseServiceTest {
 
     @Test
     void 보스_전체_조회_성공() {
-        boss1 = bossService.create(new Boss("A", 1, BossClass.EASY, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
-        boss2 = bossService.create(new Boss("A", 1, BossClass.HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
-        boss3 = bossService.create(new Boss("A", 1, BossClass.NORMAL, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
+        val boss1 = bossService.create(new Boss("A", 1, BossClass.EASY, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
+        val boss2 = bossService.create(new Boss("A", 1, BossClass.HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
+        val boss3 = bossService.create(new Boss("A", 1, BossClass.NORMAL, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
 
         val bosses = bossService.getBosses();
 
