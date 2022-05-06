@@ -5,12 +5,9 @@ import com.maple.common.item.domain.ItemType;
 import com.maple.common.support.BaseServiceTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 class DefaultItemServiceTest extends BaseServiceTest {
 

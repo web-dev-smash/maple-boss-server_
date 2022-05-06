@@ -25,11 +25,11 @@ class ItemRepositoryTest {
 
         assertThat(item.getId()).isNotNull();
 
-        val findItem = itemRepository.findById(item.getId()).orElseThrow();
+        val foundItem = itemRepository.findById(item.getId()).orElseThrow();
 
-        assertThat(findItem.getName()).isEqualTo("태초의정수");
-        assertThat(findItem.getType()).isEqualTo(ItemType.EXTRA);
-        assertThat(findItem.getStatus()).isEqualTo(ItemStatus.CREATED);
-        assertThat(findItem.getCreateAt()).isNotNull();
+        assertThat(foundItem.getName()).isEqualTo("태초의정수");
+        assertThat(foundItem.getType()).isEqualTo(ItemType.EXTRA);
+        assertThat(foundItem.getStatus()).isEqualTo(ItemStatus.CREATED);
+        assertThat(foundItem.getCreateAt()).isNotNull();
     }
 }
