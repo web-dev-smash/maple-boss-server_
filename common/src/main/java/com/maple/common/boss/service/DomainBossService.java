@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -21,5 +23,10 @@ public class DomainBossService implements BossService {
     @Override
     public Boss getBoss(Long id) {
         return bossRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Boss> getBosses() {
+        return bossRepository.findAll();
     }
 }

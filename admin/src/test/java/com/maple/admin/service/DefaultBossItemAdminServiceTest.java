@@ -33,6 +33,7 @@ class DefaultBossItemAdminServiceTest extends BaseServiceTest {
     private Boss boss;
     private Item item;
 
+
     @BeforeEach
     void setUp() {
         boss = bossService.create(createBoss());
