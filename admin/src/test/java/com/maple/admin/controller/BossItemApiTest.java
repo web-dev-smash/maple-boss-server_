@@ -52,7 +52,7 @@ class BossItemApiTest extends BaseApiTest {
     }
 
     private ResultMatcher[] 보스아이템_목록_조회_검증(int index, Boss boss, Item item) {
-        final String indexString = String.valueOf(index);
+        val indexString = String.valueOf(index);
 
         return List.of(
                 jsonPath("""
