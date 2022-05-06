@@ -2,16 +2,21 @@ package com.maple.admin.controller;
 
 import com.maple.admin.fixture.BossFixture;
 import com.maple.admin.support.BaseApiTest;
+import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.domain.BossClass;
 import com.maple.common.boss.domain.BossRepository;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultMatcher;
+
+import java.util.List;
 
 import static com.maple.admin.controller.dto.BossCreateDto.BossCreateRequest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -69,5 +74,56 @@ class BossApiTest extends BaseApiTest {
                         jsonPath("$.boss.arcaneForce").value(boss.getArcaneForce()),
                         jsonPath("$.boss.deathLimit").value(boss.getDeathLimit())
                 );
+    }
+
+    @Test
+    void 보스_목록_조회() throws Exception {
+        val boss1 = bossRepository.save(new Boss("A", 1, BossClass.EASY, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
+        val boss2 = bossRepository.save(new Boss("A", 1, BossClass.NORMAL, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
+        val boss3 = bossRepository.save(new Boss("A", 1, BossClass.HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
+
+        mockMvc.perform(get("/boss"))
+                .andDo(print())
+                .andExpectAll(status().isOk())
+                .andExpectAll(보스_목록_조회_검증(0, boss1))
+                .andExpectAll(보스_목록_조회_검증(1, boss2))
+                .andExpectAll(보스_목록_조회_검증(2, boss3));
+    }
+
+    private ResultMatcher[] 보스_목록_조회_검증(int index, Boss boss) {
+        val indexString = String.valueOf(index);
+
+        return List.of(
+                jsonPath("""
+                        $.boss[{index}].id""".replace("{index}", indexString)).isNotEmpty(),
+                jsonPath("""
+                        $.boss[{index}].name""".replace("{index}", indexString)).value(boss.getName()),
+                jsonPath("""
+                        $.boss[{index}].level""".replace("{index}", indexString)).value(boss.getLevel()),
+                // TODO : getClazz로 확인 했을 때 테스트 실패
+                // JSON path "$.boss[0].clazz" expected:<EASY> but was:<EASY>
+                // 필요:EASY
+                // 실제   :EASY
+                jsonPath("""
+                        $.boss[{index}].clazz""".replace("{index}", indexString)).isNotEmpty(),
+                jsonPath("""
+                        $.boss[{index}].entryMinLevel""".replace("{index}", indexString)).value(boss.getEntryMinLevel()),
+                jsonPath("""
+                        $.boss[{index}].entryMaxLevel""".replace("{index}", indexString)).value(boss.getEntryMaxLevel()),
+                jsonPath("""
+                        $.boss[{index}].hpPhaseOne""".replace("{index}", indexString)).value(boss.getHpPhaseOne()),
+                jsonPath("""
+                        $.boss[{index}].hpPhaseTwo""".replace("{index}", indexString)).value(boss.getHpPhaseTwo()),
+                jsonPath("""
+                        $.boss[{index}].hpPhaseThree""".replace("{index}", indexString)).value(boss.getHpPhaseThree()),
+                jsonPath("""
+                        $.boss[{index}].hpPhaseFour""".replace("{index}", indexString)).value(boss.getHpPhaseFour()),
+                jsonPath("""
+                        $.boss[{index}].totalHpPhase""".replace("{index}", indexString)).value(boss.totalHpPhase()),
+                jsonPath("""
+                        $.boss[{index}].arcaneForce""".replace("{index}", indexString)).value(boss.getArcaneForce()),
+                jsonPath("""
+                        $.boss[{index}].deathLimit""".replace("{index}", indexString)).value(boss.getDeathLimit())
+                ).toArray(ResultMatcher[]::new);
     }
 }

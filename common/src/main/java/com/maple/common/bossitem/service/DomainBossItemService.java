@@ -43,4 +43,5 @@ public class DomainBossItemService implements BossItemService {
 
         return bossItemRepository.findAll(boss);
     }
+
 }
