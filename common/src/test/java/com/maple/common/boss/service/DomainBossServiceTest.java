@@ -23,15 +23,6 @@ class DomainBossServiceTest extends BaseServiceTest {
     @Autowired
     private BossService bossService;
 
-    private Boss boss1;
-    private Boss boss2;
-    private Boss boss3;
-
-    @BeforeEach
-    void setUp() {
-
-    }
-
     @Test
     void 보스_생성_성공() {
         var boss = BossFixture.createBoss();
