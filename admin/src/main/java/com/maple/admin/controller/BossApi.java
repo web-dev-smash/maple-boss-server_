@@ -42,6 +42,9 @@ public class BossApi {
         return new BossGetResponse(BossGetData.create(boss));
     }
 
+    /**
+     * 보스 전체 조회
+     */
     @GetMapping
     public BossesGetResponse getBosses(){
         val bosses = bossService.getBosses();

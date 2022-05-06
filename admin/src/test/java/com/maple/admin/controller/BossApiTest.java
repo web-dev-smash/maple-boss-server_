@@ -100,10 +100,6 @@ class BossApiTest extends BaseApiTest {
                         $.boss[{index}].name""".replace("{index}", indexString)).value(boss.getName()),
                 jsonPath("""
                         $.boss[{index}].level""".replace("{index}", indexString)).value(boss.getLevel()),
-                // TODO : getClazz로 확인 했을 때 테스트 실패
-                // JSON path "$.boss[0].clazz" expected:<EASY> but was:<EASY>
-                // 필요:EASY
-                // 실제   :EASY
                 jsonPath("""
                         $.boss[{index}].clazz""".replace("{index}", indexString)).isNotEmpty(),
                 jsonPath("""
