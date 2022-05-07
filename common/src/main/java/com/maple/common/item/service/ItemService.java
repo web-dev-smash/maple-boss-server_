@@ -2,6 +2,8 @@ package com.maple.common.item.service;
 
 import com.maple.common.item.domain.Item;
 
+import java.util.List;
+
 public interface ItemService {
 
     /**
@@ -9,4 +11,9 @@ public interface ItemService {
      * status = CREATED
      */
     Item create(Item item);
+
+    /**
+     * 아이템 전체 조회
+     */
+    List<Item> getItems();
 }
