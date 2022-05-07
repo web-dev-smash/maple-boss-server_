@@ -15,17 +15,12 @@ class ItemRepositoryTest extends BaseRepositoryTest {
 
     @Test
     void 아이템_생성_성공() {
-        var item = ItemFixture.createItem();
-
-        item = itemRepository.save(item);
+        val item = itemRepository.save(ItemFixture.createItem());
 
         assertThat(item.getId()).isNotNull();
 
         val foundItem = itemRepository.findById(item.getId()).orElseThrow();
 
-        assertThat(foundItem.getName()).isEqualTo("태초의정수");
-        assertThat(foundItem.getType()).isEqualTo(ItemType.EXTRA);
-        assertThat(foundItem.getStatus()).isEqualTo(ItemStatus.CREATED);
-        assertThat(foundItem.getCreateAt()).isNotNull();
+        assertThat(foundItem).isEqualTo(item);
     }
 }
