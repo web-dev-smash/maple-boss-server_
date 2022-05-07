@@ -6,7 +6,6 @@ import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.fixture.BossFixture;
 import com.maple.common.support.BaseServiceTest;
 import lombok.val;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
