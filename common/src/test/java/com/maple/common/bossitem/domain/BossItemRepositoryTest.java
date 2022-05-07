@@ -35,28 +35,40 @@ class BossItemRepositoryTest {
     private BossItemRepository bossItemRepository;
 
     private Boss boss;
+    private Boss otherBoss;
+    private Item randomItem;
+    private Item fixedItem;
+
     private Item item1;
     private Item item2;
     private Item item3;
     private Item item4;
     private Item item5;
+    private Item item6;
+
+    private RandomBossItem randomBossItem1;
+    private RandomBossItem randomBossItem2;
+    private RandomBossItem randomBossItem3;
+    private FixedBossItem fixedBossItem1;
+    private FixedBossItem fixedBossItem2;
+    private FixedBossItem fixedBossItem3;
+
+    private FixedBossItem otherBossItem1;
+    private RandomBossItem otherBossItem2;
 
     @BeforeEach
     void setUp() {
         boss = bossRepository.save(createBoss());
-        item1 = itemRepository.save(createItem());
-        item2 = itemRepository.save(createItem());
-        item3 = itemRepository.save(createItem());
-        item4 = itemRepository.save(createItem());
-        item5 = itemRepository.save(createItem());
+        otherBoss = bossRepository.save(new Boss("다른보스", 1, BossClass.EASY, 1, 10, 1L, 2L, 3L, 4L, 1, 1));
+
+        randomItem = itemRepository.save(createItem());
+        fixedItem = itemRepository.save(createItem());
     }
 
     @Test
     void 보스_아이템_등록_성공() {
-        val randomBossItem = createRandomBossItem(boss, item1);
-        val fixedBossItem = createFixedBossItem(boss, item2);
-
-        bossItemRepository.saveAll(List.of(randomBossItem, fixedBossItem));
+        val randomBossItem = bossItemRepository.save(createRandomBossItem(boss, randomItem));
+        val fixedBossItem = bossItemRepository.save(createFixedBossItem(boss, fixedItem));
 
         val foundBossItems = bossItemRepository.findAll();
 
@@ -65,78 +77,55 @@ class BossItemRepositoryTest {
 
     @Test
     void 보스_아이템_전체조회() {
-        val randomBossItem1 = createRandomBossItem(boss, item1);
-        val randomBossItem2 = createRandomBossItem(boss, item2);
-
-        val fixedBossItem1 = createFixedBossItem(boss, item3);
-        val fixedBossItem2 = createFixedBossItem(boss, item4);
-        val fixedBossItem3 = createFixedBossItem(boss, item5);
-
-        var otherBoss = new Boss("다른보스", 1, BossClass.EASY, 1, 10, 1L, 2L, 3L, 4L, 1, 1);
-
-        otherBoss = bossRepository.save(otherBoss);
-
-        val otherBossItem1 = bossItemRepository.save(createFixedBossItem(otherBoss, item1));
-        val otherBossItem2 = bossItemRepository.save(createRandomBossItem(otherBoss, item4));
-
-        bossItemRepository.saveAll(List.of(
-                randomBossItem1, randomBossItem2, fixedBossItem1, fixedBossItem2, fixedBossItem3,
-                otherBossItem1, otherBossItem2
-        ));
+        보스_아이팀_세팅();
 
         val bossItems = bossItemRepository.findAll(boss);
 
-        assertThat(bossItems).containsExactly(randomBossItem1, randomBossItem2, fixedBossItem1, fixedBossItem2, fixedBossItem3);
+        assertThat(bossItems).containsExactly(randomBossItem1, randomBossItem2, randomBossItem3, fixedBossItem1, fixedBossItem2, fixedBossItem3);
         assertThat(bossItems).doesNotContain(otherBossItem1, otherBossItem2);
     }
 
     @Test
-    void 고정_보스_아이템_전체조회() {
-        val randomBossItem1 = createRandomBossItem(boss, item1);
-        val randomBossItem2 = createRandomBossItem(boss, item2);
+    void 고정_보스_아이템_목록조회() {
+        보스_아이팀_세팅();
 
-        val fixedBossItem1 = createFixedBossItem(boss, item3);
-        val fixedBossItem2 = createFixedBossItem(boss, item4);
-        val fixedBossItem3 = createFixedBossItem(boss, item5);
-
-        bossItemRepository.saveAll(List.of(
-                randomBossItem1, randomBossItem2,
-                fixedBossItem1, fixedBossItem2, fixedBossItem3
-        ));
-
-        val foundFixedBossItems = bossItemRepository.findAllFixedBossItem();
+        val foundFixedBossItems = bossItemRepository.findAllFixedBossItem(boss);
 
         assertThat(foundFixedBossItems).containsExactly(fixedBossItem1, fixedBossItem2, fixedBossItem3);
     }
 
     @Test
-    void 랜덤_보스_아이템_전체조회() {
-        val randomBossItem1 = createRandomBossItem(boss, item1);
-        val randomBossItem2 = createRandomBossItem(boss, item2);
-        val randomBossItem3 = createRandomBossItem(boss, item3);
+    void 랜덤_보스_아이템_목록조회() {
+        보스_아이팀_세팅();
 
-        val fixedBossItem1 = createFixedBossItem(boss, item4);
-        val fixedBossItem2 = createFixedBossItem(boss, item5);
-
-        bossItemRepository.saveAll(List.of(
-                randomBossItem1, randomBossItem2, randomBossItem3,
-                fixedBossItem1, fixedBossItem2
-        ));
-
-        val foundRandomBossItems = bossItemRepository.findAllRandomBossItem();
+        val foundRandomBossItems = bossItemRepository.findAllRandomBossItem(boss);
 
         assertThat(foundRandomBossItems).containsExactly(randomBossItem1, randomBossItem2, randomBossItem3);
     }
 
+    private void 보스_아이팀_세팅() {
+        item1 = itemRepository.save(createItem());
+        item2 = itemRepository.save(createItem());
+        item3 = itemRepository.save(createItem());
+        item4 = itemRepository.save(createItem());
+        item5 = itemRepository.save(createItem());
+        item6 = itemRepository.save(createItem());
+
+        randomBossItem1 = bossItemRepository.save(createRandomBossItem(boss, item1));
+        randomBossItem2 = bossItemRepository.save(createRandomBossItem(boss, item2));
+        randomBossItem3 = bossItemRepository.save(createRandomBossItem(boss, item3));
+        fixedBossItem1 = bossItemRepository.save(createFixedBossItem(boss, item4));
+        fixedBossItem2 = bossItemRepository.save(createFixedBossItem(boss, item5));
+        fixedBossItem3 = bossItemRepository.save(createFixedBossItem(boss, item6));
+
+        otherBossItem1 = bossItemRepository.save(createFixedBossItem(otherBoss, item1));
+        otherBossItem2 = bossItemRepository.save(createRandomBossItem(otherBoss, item4));
+    }
+
     @Test
     void 고정_보스_아이템_조회() {
-        var fixedBossItem = createFixedBossItem(boss, item1);
-        var randomBossItem = createRandomBossItem(boss, item2);
-
-        fixedBossItem = bossItemRepository.save(fixedBossItem);
-        randomBossItem = bossItemRepository.save(randomBossItem);
-
-        assertThat(fixedBossItem.getId()).isNotNull();
+        val randomBossItem = bossItemRepository.save(createRandomBossItem(boss, randomItem));
+        val fixedBossItem = bossItemRepository.save(createFixedBossItem(boss, fixedItem));
 
         val foundFixedBossItem = bossItemRepository.findFixedBossItem(fixedBossItem.getId()).orElseThrow();
         val notFoundBossItem = bossItemRepository.findFixedBossItem(randomBossItem.getId());
@@ -147,13 +136,8 @@ class BossItemRepositoryTest {
 
     @Test
     void 랜덤_보스_아이템_조회() {
-        var randomBossItem = createRandomBossItem(boss, item1);
-        var fixedBossItem = createFixedBossItem(boss, item2);
-
-        randomBossItem = bossItemRepository.save(randomBossItem);
-        fixedBossItem = bossItemRepository.save(fixedBossItem);
-
-        assertThat(randomBossItem.getId()).isNotNull();
+        val randomBossItem = bossItemRepository.save(createRandomBossItem(boss, randomItem));
+        val fixedBossItem = bossItemRepository.save(createFixedBossItem(boss, fixedItem));
 
         val foundRandomBossItem = bossItemRepository.findRandomBossItem(randomBossItem.getId()).orElseThrow();
         val notFoundBossItem = bossItemRepository.findRandomBossItem(fixedBossItem.getId());

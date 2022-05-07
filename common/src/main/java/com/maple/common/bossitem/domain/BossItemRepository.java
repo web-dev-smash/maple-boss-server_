@@ -19,14 +19,16 @@ public interface BossItemRepository extends JpaRepository<BossItem, Long> {
     @Query("""
             select f
             from FixedBossItem f
+            where f.boss = :boss
              """)
-    List<FixedBossItem> findAllFixedBossItem();
+    List<FixedBossItem> findAllFixedBossItem(Boss boss);
 
     @Query("""
             select r
             from RandomBossItem r
+            where r.boss = :boss
             """)
-    List<RandomBossItem> findAllRandomBossItem();
+    List<RandomBossItem> findAllRandomBossItem(Boss boss);
 
     @Query("""
             select f
