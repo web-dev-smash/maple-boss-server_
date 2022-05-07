@@ -5,25 +5,19 @@ import com.maple.common.boss.domain.BossClass;
 import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.domain.ItemRepository;
+import com.maple.common.support.BaseRepositoryTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.util.List;
 
 import static com.maple.common.fixture.BossFixture.createBoss;
 import static com.maple.common.fixture.BossItemFixture.createFixedBossItem;
 import static com.maple.common.fixture.BossItemFixture.createRandomBossItem;
 import static com.maple.common.fixture.ItemFixture.createItem;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = NONE)
-class BossItemRepositoryTest {
+class BossItemRepositoryTest extends BaseRepositoryTest {
 
     @Autowired
     private BossRepository bossRepository;
