@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-class DefaultItemServiceTest extends BaseServiceTest {
+class DomainItemServiceTest extends BaseServiceTest {
 
     @Autowired
     private ItemService itemService;
