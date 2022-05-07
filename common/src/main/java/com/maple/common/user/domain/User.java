@@ -16,7 +16,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(
         uniqueConstraints = {
-                @UniqueConstraint(name = "uq_login_id", columnNames = "login_id"),
+                @UniqueConstraint(name = "uq_login_id", columnNames = "loginId"),
                 @UniqueConstraint(name = "uq_email", columnNames = "email")
         }
 )
