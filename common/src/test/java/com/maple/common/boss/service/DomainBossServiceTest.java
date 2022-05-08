@@ -1,7 +1,6 @@
 package com.maple.common.boss.service;
 
 import com.maple.common.boss.domain.Boss;
-import com.maple.common.boss.domain.BossClass;
 import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.fixture.BossFixture;
 import com.maple.common.support.BaseServiceTest;

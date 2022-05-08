@@ -7,7 +7,7 @@ import static com.maple.common.user.domain.UserStatus.CREATED;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class UserTest {
-    
+
     @Test
     void User_생성_성공() {
         val user = new User("goyounha11", "1", "신철호", "쩌로", "goyounha11@naver.com");
