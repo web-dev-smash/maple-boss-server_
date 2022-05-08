@@ -14,7 +14,6 @@ public class ExceptionEventListener {
 
     @EventListener(UnhandledExceptionEvent.class)
     public void onUnhandledExceptionEvent(UnhandledExceptionEvent event) {
-        System.out.println("event = " + event);
         slackApi.chatPostMessage(event.getBotName(), event.getChannel(), event.getMessage());
     }
 }
