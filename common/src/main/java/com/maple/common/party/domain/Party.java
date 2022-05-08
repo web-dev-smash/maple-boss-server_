@@ -62,6 +62,14 @@ public class Party extends BaseEntity {
         this.description = description;
     }
 
+    public long getLeaderId() {
+        return this.leader.getId();
+    }
+
+    public String getLeaderNickname() {
+        return this.leader.getNickname();
+    }
+
     public void update(String name, String description) {
         checkArgument(name != null && !name.isEmpty() && !name.isBlank());
 
