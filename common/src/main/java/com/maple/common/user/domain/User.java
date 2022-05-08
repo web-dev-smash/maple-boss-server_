@@ -54,11 +54,11 @@ public class User extends BaseEntity {
     private OffsetDateTime createAt = OffsetDateTime.now();
 
     public User(String loginId, String password, String name, String nickname, String email) {
-        checkArgument(Strings.isNotBlank(loginId), "로그인아이디는 필수입니다.");
-        checkArgument(Strings.isNotBlank(password), "비밀번호는 필수입니다.");
-        checkArgument(Strings.isNotBlank(name), "이름은 필수입니다.");
-        checkArgument(Strings.isNotBlank(nickname), "닉네임은 필수입니다.");
-        checkArgument(Strings.isNotBlank(email), "이메일은 필수입니다.");
+        checkArgument(Strings.isNotBlank(loginId));
+        checkArgument(Strings.isNotBlank(password));
+        checkArgument(Strings.isNotBlank(name));
+        checkArgument(Strings.isNotBlank(nickname));
+        checkArgument(Strings.isNotBlank(email));
 
         this.loginId = loginId;
         this.password = password;
