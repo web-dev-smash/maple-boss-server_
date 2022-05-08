@@ -4,6 +4,8 @@ import com.maple.common.bossitem.domain.RandomBossItem;
 import com.maple.common.bossitem.domain.RandomBossItemAmount;
 import lombok.val;
 
+import java.time.OffsetDateTime;
+
 public class RandomBossItemCreateDto {
 
     public record RandomBossItemCreateRequest(
@@ -18,19 +20,20 @@ public class RandomBossItemCreateDto {
         }
     }
 
-    public record RandomBossItemCreateResponse(RandomBossItemCreateData fixedBossItem) {
+    public record RandomBossItemCreateResponse(RandomBossItemCreateData randomBossItem) {
     }
 
     public record RandomBossItemCreateData(
             long id,
             int minimumAmount,
-            int maximumAmount
+            int maximumAmount,
+            OffsetDateTime createAt
     ) {
 
         public static RandomBossItemCreateData create(RandomBossItem randomBossItem) {
             val amount = randomBossItem.getAmount();
 
-            return new RandomBossItemCreateData(randomBossItem.getId(), amount.getMinimum(), amount.getMaximum());
+            return new RandomBossItemCreateData(randomBossItem.getId(), amount.getMinimum(), amount.getMaximum(), randomBossItem.getCreateAt());
         }
     }
 }
