@@ -16,11 +16,6 @@ public class TestApi {
         throw new Exception();
     }
 
-    @GetMapping("/runtime-ex")
-    public void handleRuntimeException() {
-        throw new RuntimeException();
-    }
-
     @GetMapping("/maple-boss-ex")
     public void handleMapleBossException() {
         throw new MapleBossException(TEST_HELLO_WORLD);

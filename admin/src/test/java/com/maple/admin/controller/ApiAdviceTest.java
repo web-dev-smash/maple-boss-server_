@@ -15,17 +15,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ApiAdviceTest extends BaseApiTest {
 
     @Test
-    void 체크드_예외발생() throws Exception {
+    void 예외발생() throws Exception {
         mockMvc.perform(get("/test/ex"))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.error.message").value("예상치 못한 에러가 발생했습니다.")
-                );
-    }
-
-    @Test
-    void 언체크드_예외발생() throws Exception {
-        mockMvc.perform(get("/test/runtime-ex"))
                 .andExpectAll(
                         status().isOk(),
                         jsonPath("$.error.message").value("예상치 못한 에러가 발생했습니다.")
