@@ -20,7 +20,6 @@ import java.util.List;
 import static com.maple.admin.fixture.BossFixture.createBoss;
 import static com.maple.admin.fixture.ItemFixture.createItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,7 +44,6 @@ class BossItemApiTest extends BaseApiTest {
         bossItemService.createRandomBossItem(new RandomBossItem(boss, item2, new RandomBossItemAmount(1, 1)));
 
         mockMvc.perform(get("/boss-item/{bossId}", boss.getId()))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(보스아이템_목록_조회_검증(0, boss, item1))
                 .andExpectAll(보스아이템_목록_조회_검증(1, boss, item2));

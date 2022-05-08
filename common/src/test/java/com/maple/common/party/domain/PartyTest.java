@@ -1,7 +1,6 @@
 package com.maple.common.party.domain;
 
 import com.maple.common.fixture.PartyFixture;
-import com.maple.common.fixture.UserFixture;
 import com.maple.common.user.domain.User;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,8 +22,11 @@ class PartyTest {
 
     @BeforeEach
     void setUp() {
-        leader = UserFixture.createUser();
+        leader = mock(User.class);
         member = mock(User.class);
+
+        given(leader.getId()).willReturn(99L);
+        given(leader.getNickname()).willReturn("닉네임");
     }
 
     @Test
@@ -34,6 +36,8 @@ class PartyTest {
         assertThat(party.getName()).isEqualTo("파티");
         assertThat(party.getDescription()).isEqualTo("파티부가설명");
         assertThat(party.getLeader()).isEqualTo(leader);
+        assertThat(party.getLeaderId()).isEqualTo(leader.getId());
+        assertThat(party.getLeaderNickname()).isEqualTo(leader.getNickname());
         assertThat(party.getMembers()).isEmpty();
         assertThat(party.getStatus()).isEqualTo(PartyStatus.CREATED);
         assertThat(party.getCreateAt()).isNotNull();
