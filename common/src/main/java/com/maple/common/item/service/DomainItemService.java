@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class DefaultItemService implements ItemService {
+public class DomainItemService implements ItemService {
 
     private final ItemRepository itemRepository;
 

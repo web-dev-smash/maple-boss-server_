@@ -120,6 +120,6 @@ class BossApiTest extends BaseApiTest {
                         $.boss[{index}].arcaneForce""".replace("{index}", indexString)).value(boss.getArcaneForce()),
                 jsonPath("""
                         $.boss[{index}].deathLimit""".replace("{index}", indexString)).value(boss.getDeathLimit())
-                ).toArray(ResultMatcher[]::new);
+        ).toArray(ResultMatcher[]::new);
     }
 }
