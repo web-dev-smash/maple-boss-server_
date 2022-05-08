@@ -4,9 +4,12 @@ import com.maple.common.support.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * 회원
@@ -23,23 +26,23 @@ import java.time.OffsetDateTime;
 public class User extends BaseEntity {
 
     /* 로그인 아이디 */
-    @Column(length = 15)
+    @Column(length = 15 , nullable = false)
     private String loginId;
 
     /* 비밀번호 */
-    @Column(length = 100)
+    @Column(length = 100 , nullable = false)
     private String password;
 
     /* 이름 */
-    @Column(length = 30)
+    @Column(length = 30 , nullable = false)
     private String name;
 
     /* 닉네임 */
-    @Column(length = 7)
+    @Column(length = 7 , nullable = false)
     private String nickname;
 
     /* 이메일 */
-    @Column(length = 30)
+    @Column(length = 30 , nullable = false)
     private String email;
 
     /* 상태 */
@@ -51,6 +54,12 @@ public class User extends BaseEntity {
     private OffsetDateTime createAt = OffsetDateTime.now();
 
     public User(String loginId, String password, String name, String nickname, String email) {
+        checkArgument(Strings.isNotBlank(loginId));
+        checkArgument(Strings.isNotBlank(password));
+        checkArgument(Strings.isNotBlank(name));
+        checkArgument(Strings.isNotBlank(nickname));
+        checkArgument(Strings.isNotBlank(email));
+
         this.loginId = loginId;
         this.password = password;
         this.name = name;

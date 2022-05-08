@@ -16,7 +16,6 @@ import java.util.List;
 import static com.maple.admin.controller.dto.BossCreateDto.BossCreateRequest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -83,7 +82,6 @@ class BossApiTest extends BaseApiTest {
         val boss3 = bossRepository.save(new Boss("A", 1, BossClass.HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
 
         mockMvc.perform(get("/boss"))
-                .andDo(print())
                 .andExpectAll(status().isOk())
                 .andExpectAll(보스_목록_조회_검증(0, boss1))
                 .andExpectAll(보스_목록_조회_검증(1, boss2))
@@ -120,6 +118,6 @@ class BossApiTest extends BaseApiTest {
                         $.boss[{index}].arcaneForce""".replace("{index}", indexString)).value(boss.getArcaneForce()),
                 jsonPath("""
                         $.boss[{index}].deathLimit""".replace("{index}", indexString)).value(boss.getDeathLimit())
-                ).toArray(ResultMatcher[]::new);
+        ).toArray(ResultMatcher[]::new);
     }
 }

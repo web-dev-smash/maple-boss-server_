@@ -4,6 +4,8 @@ import com.maple.common.bossitem.domain.FixedBossItem;
 import com.maple.common.bossitem.domain.FixedBossItemAmount;
 import lombok.val;
 
+import java.time.OffsetDateTime;
+
 
 public class FixedBossItemCreateDto {
 
@@ -27,13 +29,14 @@ public class FixedBossItemCreateDto {
             long id,
             int minimumAmount,
             int maximumAmount,
-            long price
+            long price,
+            OffsetDateTime createAt
     ) {
 
         public static FixedBossItemCreateData create(FixedBossItem fixedBossItem) {
             val amount = fixedBossItem.getAmount();
 
-            return new FixedBossItemCreateData(fixedBossItem.getId(), amount.getMinimum(), amount.getMaximum(), fixedBossItem.getPrice());
+            return new FixedBossItemCreateData(fixedBossItem.getId(), amount.getMinimum(), amount.getMaximum(), fixedBossItem.getPrice(), fixedBossItem.getCreateAt());
         }
     }
 }

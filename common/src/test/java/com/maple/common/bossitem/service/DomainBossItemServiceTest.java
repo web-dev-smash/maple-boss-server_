@@ -2,9 +2,7 @@ package com.maple.common.bossitem.service;
 
 import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.service.BossService;
-import com.maple.common.bossitem.domain.BossItemRepository;
-import com.maple.common.bossitem.domain.FixedBossItem;
-import com.maple.common.bossitem.domain.RandomBossItem;
+import com.maple.common.bossitem.domain.*;
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.service.ItemService;
 import com.maple.common.support.BaseServiceTest;
@@ -71,14 +69,19 @@ class DomainBossItemServiceTest extends BaseServiceTest {
 
     @Test
     void 고정_보스_아이템_생성_성공() {
-        var fixedBossItem = createFixedBossItem(boss, item);
+        val amount = new FixedBossItemAmount(1, 1);
+        var fixedBossItem = new FixedBossItem(boss, item, amount, 10000L);
 
         fixedBossItem = bossItemService.createFixedBossItem(fixedBossItem);
 
+        assertThat(fixedBossItem.getId()).isNotNull();
+
         val foundFixedBossItem = bossItemRepository.findFixedBossItem(fixedBossItem.getId()).orElseThrow();
 
-        assertThat(foundFixedBossItem.getAmount()).isEqualTo(fixedBossItem.getAmount());
-        assertThat(foundFixedBossItem.getPrice()).isEqualTo(fixedBossItem.getPrice());
+        assertThat(foundFixedBossItem.getBoss()).isEqualTo(boss);
+        assertThat(foundFixedBossItem.getItem()).isEqualTo(item);
+        assertThat(foundFixedBossItem.getAmount()).isEqualTo(amount);
+        assertThat(foundFixedBossItem.getPrice()).isEqualTo(10000L);
     }
 
     @Test
@@ -88,13 +91,18 @@ class DomainBossItemServiceTest extends BaseServiceTest {
 
     @Test
     void 랜덤_보스_아이템_생성_성공() {
-        var randomBossItem = createRandomBossItem(boss, item);
+        val amount = new RandomBossItemAmount(1, 1);
+        var randomBossItem = new RandomBossItem(boss, item, amount);
 
         randomBossItem = bossItemService.createRandomBossItem(randomBossItem);
 
+        assertThat(randomBossItem.getId()).isNotNull();
+
         val foundRandomBossItem = bossItemRepository.findRandomBossItem(randomBossItem.getId()).orElseThrow();
 
-        assertThat(foundRandomBossItem.getAmount()).isEqualTo(randomBossItem.getAmount());
+        assertThat(foundRandomBossItem.getBoss()).isEqualTo(boss);
+        assertThat(foundRandomBossItem.getItem()).isEqualTo(item);
+        assertThat(foundRandomBossItem.getAmount()).isEqualTo(amount);
     }
 
     @Test
