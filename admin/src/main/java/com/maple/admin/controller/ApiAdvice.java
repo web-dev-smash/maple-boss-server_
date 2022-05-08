@@ -1,6 +1,7 @@
 package com.maple.admin.controller;
 
 import com.maple.common.exception.MapleBossException;
+import com.maple.common.notification.event.UnhandledExceptionEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -18,6 +19,9 @@ public class ApiAdvice {
     private final MessageSource messageSource;
     private final ApplicationEventPublisher eventPublisher;
 
+    public static final String LOG_CHANNEL = "C03BKF0CYL8";
+    public static final String BOT_NAME = "Maple Boss Admin";
+
     @ExceptionHandler(MapleBossException.class)
     public ErrorResponse mapleBossException(MapleBossException ex) {
         log.error(ex.getMessage(), ex);
@@ -31,8 +35,7 @@ public class ApiAdvice {
     public ErrorResponse runtimeException(RuntimeException ex) {
         log.error(ex.getMessage(), ex);
 
-        // TODO: 2022/05/08 슬랙메시지 추가 필요
-        // eventPublisher.publishEvent(new SlackEvent(ex));
+        eventPublisher.publishEvent(new UnhandledExceptionEvent(BOT_NAME, LOG_CHANNEL, ex));
 
         return new ErrorResponse(new ErrorData("예상치 못한 에러가 발생했습니다."));
     }
@@ -41,8 +44,7 @@ public class ApiAdvice {
     public ErrorResponse exception(Exception ex) {
         log.error(ex.getMessage(), ex);
 
-        // TODO: 2022/05/08 슬랙메시지 추가 필요
-        // eventPublisher.publishEvent(new SlackEvent(ex));
+        eventPublisher.publishEvent(new UnhandledExceptionEvent(BOT_NAME, LOG_CHANNEL, ex));
 
         return new ErrorResponse(new ErrorData("예상치 못한 에러가 발생했습니다."));
     }
@@ -53,4 +55,3 @@ public class ApiAdvice {
     public record ErrorData(String message) {
     }
 }
-
