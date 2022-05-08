@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${db.url:jdbc:mysql://localhost:3306/maplebosstest}
+    username: ${db.username:root}
+    password: ${db.password:1234}
+
+slack:
+  bot-token: xoxb-3365127034325-3517887020528-HUEpG4p0WDHtuq2eTSUMivSD
