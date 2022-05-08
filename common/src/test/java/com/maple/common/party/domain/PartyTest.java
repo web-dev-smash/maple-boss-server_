@@ -53,7 +53,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티장이_널이면_실패() {
+    void 파티장이_null_이면_실패() {
         assertThatNullPointerException().isThrownBy(() -> new Party(null, "파티", "파티부가설명"));
     }
 
@@ -75,14 +75,14 @@ class PartyTest {
     }
 
     @Test
-    void 파티원이_널이면_파티원_추가_실패() {
+    void 파티원이_null_이면_파티원_추가_실패() {
         val party = PartyFixture.createParty(leader);
 
         assertThatNullPointerException().isThrownBy(() -> party.addMember(null));
     }
 
     @Test
-    void 파티장을_추가혀려고하면_파티원_추가_실패() {
+    void 파티장을_추가하려고하면_파티원_추가_실패() {
         val party = PartyFixture.createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.addMember(leader));
@@ -134,7 +134,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원이_널이면_파티원_제거_실패() {
+    void 파티원이_null_이면_파티원_제거_실패() {
         val party = PartyFixture.createParty(leader);
 
         assertThatNullPointerException().isThrownBy(() -> party.removeMember(null));
@@ -201,7 +201,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원이_널이면_파티장_변경_실패() {
+    void 파티원이_null_이면_파티장_변경_실패() {
         val party = PartyFixture.createParty(leader);
 
         assertThatNullPointerException().isThrownBy(() -> party.changeLeader(null));
