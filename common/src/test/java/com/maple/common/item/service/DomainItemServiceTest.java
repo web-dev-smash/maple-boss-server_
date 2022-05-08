@@ -2,6 +2,7 @@ package com.maple.common.item.service;
 
 import com.maple.common.fixture.ItemFixture;
 import com.maple.common.item.domain.Item;
+import com.maple.common.item.domain.ItemRepository;
 import com.maple.common.item.domain.ItemType;
 import com.maple.common.support.BaseServiceTest;
 import lombok.val;
@@ -17,6 +18,9 @@ class DomainItemServiceTest extends BaseServiceTest {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private ItemRepository itemRepository;
+
     private Item item1;
     private Item item2;
     private Item item3;
@@ -29,13 +33,17 @@ class DomainItemServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 아이탬_생성_성공() {
-        var item = ItemFixture.createItem();
+    void 아이템_생성_성공() {
+        var item = new Item("태초의정수", ItemType.EXTRA);
 
         item = itemService.create(item);
 
-        assertThat(item.getName()).isEqualTo("태초의정수");
-        assertThat(item.getType()).isEqualTo(ItemType.EXTRA);
+        assertThat(item.getId()).isNotNull();
+
+        val foundItem = itemRepository.findById(item.getId()).orElseThrow();
+
+        assertThat(foundItem.getName()).isEqualTo("태초의정수");
+        assertThat(foundItem.getType()).isEqualTo(ItemType.EXTRA);
     }
 
     @Test
