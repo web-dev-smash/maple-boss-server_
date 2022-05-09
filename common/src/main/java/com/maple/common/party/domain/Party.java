@@ -5,7 +5,6 @@ import com.maple.common.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.val;
 import org.apache.logging.log4j.util.Strings;
 
 import javax.persistence.*;
@@ -49,9 +48,9 @@ public class Party extends BaseEntity {
     private PartyStatus status = CREATED;
 
     /* 생성일 */
-    private OffsetDateTime createAt = OffsetDateTime.now();
+    private final OffsetDateTime createAt = OffsetDateTime.now();
 
-    public static final int MAXIMUM_MEMBER = 3;
+    public static final int MAXIMUM_MEMBER = 6;
 
     public Party(User leader, String name, String description) {
         checkNotNull(leader);
@@ -60,6 +59,7 @@ public class Party extends BaseEntity {
         this.leader = leader;
         this.name = name;
         this.description = description;
+        this.members.add(leader);
     }
 
     public long getLeaderId() {
@@ -79,7 +79,6 @@ public class Party extends BaseEntity {
 
     public void addMember(User member) {
         checkNotNull(member);
-        checkArgument(!member.equals(leader));
 
         validate((members.size() < MAXIMUM_MEMBER), ALREADY_MAXIMUM_PARTY_MEMBER);
         validate(!members.contains(member), ALREADY_EXISTS_PARTY_MEMBER);
@@ -97,12 +96,8 @@ public class Party extends BaseEntity {
 
     public void changeLeader(User member) {
         checkNotNull(member);
-
-        val previousLeader = leader;
+        checkArgument(members.contains(member));
 
         this.leader = member;
-
-        removeMember(member);
-        addMember(previousLeader);
     }
 }
