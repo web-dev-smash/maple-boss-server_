@@ -70,6 +70,10 @@ public class Party extends BaseEntity {
         return this.leader.getNickname();
     }
 
+    public boolean isLeader(User user) {
+        return leader.equals(user);
+    }
+
     public void update(String name, String description) {
         checkArgument(name != null && !name.isEmpty() && !name.isBlank());
 
@@ -79,6 +83,7 @@ public class Party extends BaseEntity {
 
     public void addMember(User member) {
         checkNotNull(member);
+        checkArgument(!isLeader(member));
 
         validate((members.size() < MAXIMUM_MEMBER), ALREADY_MAXIMUM_PARTY_MEMBER);
         validate(!members.contains(member), ALREADY_EXISTS_PARTY_MEMBER);
@@ -88,6 +93,7 @@ public class Party extends BaseEntity {
 
     public void removeMember(User member) {
         checkNotNull(member);
+        checkArgument(!isLeader(member));
 
         validate(members.contains(member), NOT_EXISTS_PARTY_MEMBER);
 

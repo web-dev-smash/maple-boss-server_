@@ -62,6 +62,20 @@ class PartyTest {
     }
 
     @Test
+    void 파티장이면_true() {
+        val party = createParty(leader);
+
+        assertThat(party.isLeader(leader)).isTrue();
+    }
+
+    @Test
+    void 파티장아니면_false() {
+        val party = createParty(leader);
+
+        assertThat(party.isLeader(member)).isFalse();
+    }
+
+    @Test
     void 파티원_추가() {
         val otherMember = mock(User.class);
 
@@ -76,6 +90,13 @@ class PartyTest {
         party.addMember(otherMember);
 
         assertThat(party.getMembers()).containsExactly(leader, member, otherMember);
+    }
+
+    @Test
+    void 파티장을_추가하려고_하면_실패() {
+        val party = createParty(leader);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> party.addMember(leader));
     }
 
     @Test
@@ -123,11 +144,18 @@ class PartyTest {
 
         party.addMember(member);
 
-        assertThat(party.getMembers()).hasSize(2);
+        assertThat(party.getMembers()).containsExactly(leader, member);
 
         party.removeMember(member);
 
-        assertThat(party.getMembers()).hasSize(1);
+        assertThat(party.getMembers()).containsExactly(leader);
+    }
+
+    @Test
+    void 파티장을_제거하려고_하면_실패() {
+        val party = createParty(leader);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> party.removeMember(leader));
     }
 
     @Test

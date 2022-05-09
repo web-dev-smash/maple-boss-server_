@@ -21,13 +21,15 @@ class PartyRepositoryTest extends BaseRepositoryTest {
     private UserRepository userRepository;
 
     private User leader;
+    private User otherLeader;
     private User member;
 
     @BeforeEach
     void setUp() {
         leader = userRepository.save(createUser());
+        otherLeader = userRepository.save(new User("otherLeader", "1234", "다른리더", "다른리더", "otherLeader@gmail.com"));
 
-        member = userRepository.save(new User("member1", "1234", "member1", "member1", "member1@gmail.com"));
+        member = userRepository.save(new User("member", "1234", "member", "member", "member@gmail.com"));
     }
 
     @Test
@@ -42,7 +44,7 @@ class PartyRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 나의_파티목록_조회() {
+    void 나의_파티목록_조회__파티원() {
         val party1 = partyRepository.save(createParty(leader));
         val party2 = partyRepository.save(createParty(leader));
         val party3 = partyRepository.save(createParty(leader));
@@ -57,5 +59,45 @@ class PartyRepositoryTest extends BaseRepositoryTest {
 
         assertThat(parties).containsExactly(party1, party2, party3);
         assertThat(parties).doesNotContain(otherParty1, otherParty2);
+    }
+
+    @Test
+    void 나의_파티목록_조회__파티장() {
+        val party1 = partyRepository.save(createParty(leader));
+        val party2 = partyRepository.save(createParty(leader));
+        val party3 = partyRepository.save(createParty(leader));
+        val otherParty1 = partyRepository.save(createParty(otherLeader));
+        val otherParty2 = partyRepository.save(createParty(otherLeader));
+
+        party1.addMember(member);
+        party2.addMember(member);
+        party3.addMember(member);
+
+        val parties = partyRepository.findAllParty(leader);
+
+        assertThat(parties).containsExactly(party1, party2, party3);
+        assertThat(parties).doesNotContain(otherParty1, otherParty2);
+    }
+
+    @Test
+    void 나의_파티목록_조회__파티장이면서_다른_파티에_참여() {
+        val party1 = partyRepository.save(createParty(leader));
+        val party2 = partyRepository.save(createParty(leader));
+        val party3 = partyRepository.save(createParty(leader));
+        val otherParty1 = partyRepository.save(createParty(otherLeader));
+        val otherParty2 = partyRepository.save(createParty(otherLeader));
+
+        party1.addMember(member);
+        party2.addMember(member);
+        party3.addMember(member);
+        otherParty1.addMember(leader);
+        otherParty2.addMember(leader);
+
+        val parties = partyRepository.findAllParty(leader);
+
+        assertThat(parties).containsExactly(party1, party2, party3, otherParty1, otherParty2);
+        assertThat(parties)
+                .extracting(party -> party.isLeader(leader))
+                .containsExactly(true, true, true, false, false);
     }
 }
