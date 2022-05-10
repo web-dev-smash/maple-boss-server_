@@ -1,6 +1,7 @@
 package com.maple.api.service;
 
 import com.maple.api.fixture.UserFixture;
+import com.maple.api.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.api.service.dto.PartyCreateDto;
 import com.maple.api.support.BaseServiceTest;
 import com.maple.common.party.service.PartyService;
@@ -32,7 +33,7 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     @BeforeEach
     void setUp() {
         leader = userRepository.save(UserFixture.createUser());
-        otherLeader = userRepository.save(new User("member", "1234", "member", "member", "member@gmail.com"));
+        otherLeader = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
     }
 
     @Test
