@@ -3,6 +3,7 @@ package com.maple.api.service;
 import com.maple.api.fixture.UserFixture;
 import com.maple.api.service.dto.PartyCreateDto;
 import com.maple.api.support.BaseServiceTest;
+import com.maple.common.party.service.PartyService;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
 import lombok.val;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.maple.api.fixture.PartyFixture.createParty;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
@@ -19,13 +21,18 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     private PartyAppService partyAppService;
 
     @Autowired
+    private PartyService partyService;
+
+    @Autowired
     private UserRepository userRepository;
 
     private User leader;
+    private User otherLeader;
 
     @BeforeEach
     void setUp() {
         leader = userRepository.save(UserFixture.createUser());
+        otherLeader = userRepository.save(new User("member", "1234", "member", "member", "member@gmail.com"));
     }
 
     @Test
@@ -40,5 +47,32 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     @Test
     void dto가_null_이면_파티_생성_실패() {
         assertThatNullPointerException().isThrownBy(() -> partyAppService.create(null));
+    }
+
+    @Test
+    void 내_파티_목록_조회() {
+        val party1 = partyService.create(createParty(leader));
+        val party2 = partyService.create(createParty(leader));
+        val party3 = partyService.create(createParty(leader));
+
+        val otherParty1 = partyService.create(createParty(otherLeader));
+        val otherParty2 = partyService.create(createParty(otherLeader));
+        val otherParty3 = partyService.create(createParty(otherLeader));
+
+        val noneParty1 = partyService.create(createParty(otherLeader));
+        val noneParty2 = partyService.create(createParty(otherLeader));
+        val noneParty3 = partyService.create(createParty(otherLeader));
+
+        otherParty1.addMember(leader);
+        otherParty2.addMember(leader);
+        otherParty3.addMember(leader);
+
+        val pair = partyAppService.getParties(leader.getId());
+
+        assertThat(pair.getFirst()).isEqualTo(leader);
+        assertThat(pair.getSecond())
+                .containsExactly(party1, party2, party3, otherParty1, otherParty2, otherParty3);
+        assertThat(pair.getSecond())
+                .doesNotContain(noneParty1, noneParty2, noneParty3);
     }
 }

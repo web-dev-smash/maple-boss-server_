@@ -1,6 +1,7 @@
 package com.maple.common.party.service;
 
 import com.maple.common.party.domain.Party;
+import com.maple.common.user.domain.User;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface PartyService {
     /**
      * 파티 목록 조회
      */
-    List<Party> getParties(long userId);
+    List<Party> getParties(User user);
 }

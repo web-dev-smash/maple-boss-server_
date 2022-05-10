@@ -7,13 +7,13 @@ import java.time.OffsetDateTime;
 public class PartyCreateDto {
 
     public record PartyCreateRequest(
-            long id,
+            long leaderId,
             String name,
             String description
     ) {
 
         public com.maple.api.service.dto.PartyCreateDto toDto() {
-            return new com.maple.api.service.dto.PartyCreateDto(this.id, this.name, this.description);
+            return new com.maple.api.service.dto.PartyCreateDto(this.leaderId, this.name, this.description);
         }
     }
 
