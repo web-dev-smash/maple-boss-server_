@@ -169,7 +169,7 @@ class PartyTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 파티_이름이_널이거나_빈값이면_파티_수정_실패(String name) {
+    void 파티_이름이_null_이거나_빈값이면_파티_수정_실패(String name) {
         val party = PartyFixture.createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.update(name, "updated description"));
