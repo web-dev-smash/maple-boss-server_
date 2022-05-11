@@ -45,7 +45,7 @@ class PartyTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 파티_이름이_널이거나_빈값이면_실패(String name) {
+    void 파티_이름이_null_이거나_빈값이면_실패(String name) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Party(leader, name, "파티부가설명"));
     }
 
