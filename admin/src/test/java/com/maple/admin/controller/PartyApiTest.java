@@ -1,6 +1,5 @@
 package com.maple.admin.controller;
 
-import com.maple.admin.service.PartyAdminService;
 import com.maple.admin.support.BaseApiTest;
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.domain.PartyRepository;
@@ -22,9 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class PartyApiTest extends BaseApiTest {
-
-    @Autowired
-    private PartyAdminService partyAdminService;
 
     @Autowired
     private PartyRepository partyRepository;
@@ -62,14 +58,22 @@ class PartyApiTest extends BaseApiTest {
                         .param("size", "3"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpectAll(파티_목록_조회_검증(0, party1));
+                .andExpectAll(파티_목록_조회_검증(0, party1))
+                .andExpectAll(파티_목록_조회_검증(1, party2))
+                .andExpectAll(파티_목록_조회_검증(2, party3));
     }
 
     private ResultMatcher[] 파티_목록_조회_검증(int index, Party party) {
         val indexString = String.valueOf(index);
 
         return List.of(
-                jsonPath("$.parties[{index}].id".replace("index", indexString)).value(party.getId())
+                jsonPath("$.parties[{index}].id".replace("{index}", indexString)).value(party.getId()),
+                jsonPath("$.parties[{index}].leaderId".replace("{index}", indexString)).value(party.getLeaderId()),
+                jsonPath("$.parties[{index}].leaderNickname".replace("{index}", indexString)).value(party.getLeaderNickname()),
+                jsonPath("$.parties[{index}].name".replace("{index}", indexString)).value(party.getName()),
+                jsonPath("$.parties[{index}].description".replace("{index}", indexString)).value(party.getDescription()),
+                jsonPath("$.parties[{index}].status".replace("{index}", indexString)).value(party.getStatus().name()),
+                jsonPath("$.parties[{index}].createAt".replace("{index}", indexString)).isNotEmpty()
         ).toArray(ResultMatcher[]::new);
     }
 

@@ -1,6 +1,6 @@
 package com.maple.admin.controller;
 
-import com.maple.admin.controller.dto.PartyGetDto.PartiesGetResponse;
+import com.maple.admin.controller.dto.PartyGetAllDto.PartyGetAllResponse;
 import com.maple.admin.service.PartyAdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -17,9 +17,9 @@ public class PartyApi {
     private final PartyAdminService partyAdminService;
 
     @GetMapping
-    public PartiesGetResponse getAllParties(Pageable pageable) {
+    public PartyGetAllResponse getAllParties(Pageable pageable) {
         val parties = partyAdminService.getAllParties(pageable);
 
-        return PartiesGetResponse.create(parties);
+        return PartyGetAllResponse.create(parties);
     }
 }
