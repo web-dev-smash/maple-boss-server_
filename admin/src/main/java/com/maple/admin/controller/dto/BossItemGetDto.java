@@ -8,12 +8,12 @@ import lombok.val;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public final class BossItemDto {
+public final class BossItemGetDto {
 
-    public record BossItemResponse(List<BossItemData> bossItems) {
+    public record BossItemsGetResponse(List<BossItemsGetData> bossItems) {
     }
 
-    public record BossItemData(
+    public record BossItemsGetData(
             long id,
             String bossName,
             BossClass bossClass,
@@ -22,17 +22,17 @@ public final class BossItemDto {
             OffsetDateTime createAt
     ) {
 
-        public static List<BossItemData> create(List<BossItem> bossItems) {
+        public static List<BossItemsGetData> create(List<BossItem> bossItems) {
             return bossItems.stream()
-                    .map(BossItemData::create)
+                    .map(BossItemsGetData::create)
                     .toList();
         }
 
-        private static BossItemData create(BossItem bossItem) {
+        private static BossItemsGetData create(BossItem bossItem) {
             val boss = bossItem.getBoss();
             val item = bossItem.getItem();
 
-            return new BossItemData(
+            return new BossItemsGetData(
                     bossItem.getId(), boss.getName(), boss.getClazz(),
                     item.getName(), item.getType(), bossItem.getCreateAt()
             );
