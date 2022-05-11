@@ -1,6 +1,7 @@
 package com.maple.common.party.domain;
 
 import com.maple.common.support.BaseRepositoryTest;
+import com.maple.common.user.domain.MockCertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
 import lombok.val;
@@ -27,9 +28,9 @@ class PartyRepositoryTest extends BaseRepositoryTest {
     @BeforeEach
     void setUp() {
         leader = userRepository.save(createUser());
-        otherLeader = userRepository.save(new User("otherLeader", "1234", "다른리더", "다른리더", "otherLeader@gmail.com"));
+        otherLeader = userRepository.save(new User("otherLeader", "1234", "다른리더", "다른리더", new MockCertCodeGenerator()));
 
-        member = userRepository.save(new User("member", "1234", "member", "member", "member@gmail.com"));
+        member = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
     }
 
     @Test
