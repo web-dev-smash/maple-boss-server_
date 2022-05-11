@@ -2,6 +2,7 @@ package com.maple.api.controller;
 
 import com.maple.api.controller.dto.PartyCreateDto.PartyCreateRequest;
 import com.maple.api.fixture.PartyFixture;
+import com.maple.api.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.api.support.BaseApiTest;
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.service.PartyService;
@@ -36,7 +37,7 @@ class PartyApiTest extends BaseApiTest {
     @BeforeEach
     void setUp() {
         user = userRepository.save(createUser());
-        member = userRepository.save(new User("member", "1234", "member", "member", "member@gmail.com"));
+        member = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
     }
 
     @Test

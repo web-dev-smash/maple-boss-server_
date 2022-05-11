@@ -1,5 +1,6 @@
 package com.maple.admin.service;
 
+import com.maple.admin.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.admin.support.BaseServiceTest;
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.domain.PartyRepository;
@@ -39,7 +40,7 @@ class DefaultPartyAdminServiceTest extends BaseServiceTest {
     @BeforeEach
     void setUp() {
         user1 = userRepository.save(createUser());
-        user2 = userRepository.save(new User("user2", "1234", "user2", "user2", "user2@gmail.com"));
+        user2 = userRepository.save(new User("user2", "1234", "user2", "user2", new MockCertCodeGenerator()));
 
         party1 = partyRepository.save(createParty(user1));
         party2 = partyRepository.save(createParty(user1));
