@@ -92,32 +92,19 @@ class BossApiTest extends BaseApiTest {
         val indexString = String.valueOf(index);
 
         return List.of(
-                jsonPath("""
-                        $.boss[{index}].id""".replace("{index}", indexString)).isNotEmpty(),
-                jsonPath("""
-                        $.boss[{index}].name""".replace("{index}", indexString)).value(boss.getName()),
-                jsonPath("""
-                        $.boss[{index}].level""".replace("{index}", indexString)).value(boss.getLevel()),
-                jsonPath("""
-                        $.boss[{index}].clazz""".replace("{index}", indexString)).value(boss.getClazz().name()),
-                jsonPath("""
-                        $.boss[{index}].entryMinLevel""".replace("{index}", indexString)).value(boss.getEntryMinLevel()),
-                jsonPath("""
-                        $.boss[{index}].entryMaxLevel""".replace("{index}", indexString)).value(boss.getEntryMaxLevel()),
-                jsonPath("""
-                        $.boss[{index}].hpPhaseOne""".replace("{index}", indexString)).value(boss.getHpPhaseOne()),
-                jsonPath("""
-                        $.boss[{index}].hpPhaseTwo""".replace("{index}", indexString)).value(boss.getHpPhaseTwo()),
-                jsonPath("""
-                        $.boss[{index}].hpPhaseThree""".replace("{index}", indexString)).value(boss.getHpPhaseThree()),
-                jsonPath("""
-                        $.boss[{index}].hpPhaseFour""".replace("{index}", indexString)).value(boss.getHpPhaseFour()),
-                jsonPath("""
-                        $.boss[{index}].totalHpPhase""".replace("{index}", indexString)).value(boss.totalHpPhase()),
-                jsonPath("""
-                        $.boss[{index}].arcaneForce""".replace("{index}", indexString)).value(boss.getArcaneForce()),
-                jsonPath("""
-                        $.boss[{index}].deathLimit""".replace("{index}", indexString)).value(boss.getDeathLimit())
+                jsonPath("$.boss[{index}].id".replace("{index}", indexString)).isNotEmpty(),
+                jsonPath("$.boss[{index}].name".replace("{index}", indexString)).value(boss.getName()),
+                jsonPath("$.boss[{index}].level".replace("{index}", indexString)).value(boss.getLevel()),
+                jsonPath("$.boss[{index}].clazz".replace("{index}", indexString)).value(boss.getClazz().name()),
+                jsonPath("$.boss[{index}].entryMinLevel".replace("{index}", indexString)).value(boss.getEntryMinLevel()),
+                jsonPath("$.boss[{index}].entryMaxLevel".replace("{index}", indexString)).value(boss.getEntryMaxLevel()),
+                jsonPath("$.boss[{index}].hpPhaseOne".replace("{index}", indexString)).value(boss.getHpPhaseOne()),
+                jsonPath("$.boss[{index}].hpPhaseTwo".replace("{index}", indexString)).value(boss.getHpPhaseTwo()),
+                jsonPath("$.boss[{index}].hpPhaseThree".replace("{index}", indexString)).value(boss.getHpPhaseThree()),
+                jsonPath("$.boss[{index}].hpPhaseFour".replace("{index}", indexString)).value(boss.getHpPhaseFour()),
+                jsonPath("$.boss[{index}].totalHpPhase".replace("{index}", indexString)).value(boss.totalHpPhase()),
+                jsonPath("$.boss[{index}].arcaneForce".replace("{index}", indexString)).value(boss.getArcaneForce()),
+                jsonPath("$.boss[{index}].deathLimit".replace("{index}", indexString)).value(boss.getDeathLimit())
         ).toArray(ResultMatcher[]::new);
     }
 }

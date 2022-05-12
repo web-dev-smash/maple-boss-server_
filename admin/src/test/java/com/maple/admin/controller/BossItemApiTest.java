@@ -96,18 +96,12 @@ class BossItemApiTest extends BaseApiTest {
         val indexString = String.valueOf(index);
 
         return List.of(
-                jsonPath("""
-                        $.bossItems[{index}].id""".replace("{index}", indexString)).isNotEmpty(),
-                jsonPath("""
-                        $.bossItems[{index}].bossName""".replace("{index}", indexString)).value(boss.getName()),
-                jsonPath("""
-                        $.bossItems[{index}].bossClass""".replace("{index}", indexString)).value(boss.getClazz().name()),
-                jsonPath("""
-                        $.bossItems[{index}].itemName""".replace("{index}", indexString)).value(item.getName()),
-                jsonPath("""
-                        $.bossItems[{index}].itemType""".replace("{index}", indexString)).value(item.getType().name()),
-                jsonPath("""
-                        $.bossItems[{index}].createAt""".replace("{index}", indexString)).isNotEmpty()
+                jsonPath("$.bossItems[{index}].id".replace("{index}", indexString)).isNotEmpty(),
+                jsonPath("$.bossItems[{index}].bossName".replace("{index}", indexString)).value(boss.getName()),
+                jsonPath("$.bossItems[{index}].bossClass".replace("{index}", indexString)).value(boss.getClazz().name()),
+                jsonPath("$.bossItems[{index}].itemName".replace("{index}", indexString)).value(item.getName()),
+                jsonPath("$.bossItems[{index}].itemType".replace("{index}", indexString)).value(item.getType().name()),
+                jsonPath("$.bossItems[{index}].createAt".replace("{index}", indexString)).isNotEmpty()
         ).toArray(ResultMatcher[]::new);
     }
 }
