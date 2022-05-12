@@ -3,8 +3,8 @@ package com.maple.api.controller;
 import com.maple.api.controller.dto.PartyCreateDto.PartyCreateData;
 import com.maple.api.controller.dto.PartyCreateDto.PartyCreateRequest;
 import com.maple.api.controller.dto.PartyCreateDto.PartyCreateResponse;
-import com.maple.api.controller.dto.PartyDto.PartyData;
-import com.maple.api.controller.dto.PartyDto.PartyResponses;
+import com.maple.api.controller.dto.PartyGetAllDto.PartyGetAllData;
+import com.maple.api.controller.dto.PartyGetAllDto.PartyGetAllResponse;
 import com.maple.api.service.PartyAppService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -34,9 +34,9 @@ public class PartyApi {
      * TODO: Security 이후 로그인한 유저 ID가 user ID로 대체
      */
     @GetMapping
-    public PartyResponses getParties(long userId) {
+    public PartyGetAllResponse getParties(long userId) {
         val parties = partyAppService.getParties(userId);
 
-        return new PartyResponses(PartyData.create(parties));
+        return new PartyGetAllResponse(PartyGetAllData.create(parties));
     }
 }

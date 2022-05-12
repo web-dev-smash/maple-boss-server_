@@ -33,16 +33,16 @@ public class PartyGetAllDto {
             OffsetDateTime createAt
     ) {
 
-        public static List<PartyGetAllData> create(Page<Party> parties) {
-            return parties.map(PartyGetAllData::create).stream().toList();
-        }
-
-        private static PartyGetAllData create(Party party) {
-            return new PartyGetAllData(
+        private PartyGetAllData(Party party) {
+            this(
                     party.getId(), party.getLeaderId(), party.getLeaderNickname(),
                     party.getName(), party.getDescription(),
                     party.getStatus(), party.getCreateAt()
             );
+        }
+
+        public static List<PartyGetAllData> create(Page<Party> parties) {
+            return parties.map(PartyGetAllData::new).toList();
         }
     }
 }
