@@ -87,20 +87,13 @@ class PartyApiTest extends BaseApiTest {
         val indexString = String.valueOf(index);
 
         return List.of(
-                jsonPath("""
-                        $.parties[{index}].id""".replace("{index}", indexString)).isNotEmpty(),
-                jsonPath("""
-                        $.parties[{index}].leaderId""".replace("{index}", indexString)).value(leader.getId()),
-                jsonPath("""
-                        $.parties[{index}].leaderNickname""".replace("{index}", indexString)).value(leader.getNickname()),
-                jsonPath("""
-                        $.parties[{index}].name""".replace("{index}", indexString)).value(party.getName()),
-                jsonPath("""
-                        $.parties[{index}].description""".replace("{index}", indexString)).value(party.getDescription()),
-                jsonPath("""
-                        $.parties[{index}].isLeader""".replace("{index}", indexString)).value(party.isLeader(member)),
-                jsonPath("""
-                        $.parties[{index}].createAt""".replace("{index}", indexString)).isNotEmpty()
+                jsonPath("$.parties[{index}].id".replace("{index}", indexString)).isNotEmpty(),
+                jsonPath("$.parties[{index}].leaderId".replace("{index}", indexString)).value(leader.getId()),
+                jsonPath("$.parties[{index}].leaderNickname".replace("{index}", indexString)).value(leader.getNickname()),
+                jsonPath("$.parties[{index}].name".replace("{index}", indexString)).value(party.getName()),
+                jsonPath("$.parties[{index}].description".replace("{index}", indexString)).value(party.getDescription()),
+                jsonPath("$.parties[{index}].isLeader".replace("{index}", indexString)).value(party.isLeader(member)),
+                jsonPath("$.parties[{index}].createAt".replace("{index}", indexString)).isNotEmpty()
         ).toArray(ResultMatcher[]::new);
     }
 }
