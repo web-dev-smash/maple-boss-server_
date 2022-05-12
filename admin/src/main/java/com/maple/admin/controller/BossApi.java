@@ -4,7 +4,7 @@ import com.maple.admin.controller.dto.BossCreateDto.BossCreateData;
 import com.maple.admin.controller.dto.BossCreateDto.BossCreateRequest;
 import com.maple.admin.controller.dto.BossCreateDto.BossCreateResponse;
 import com.maple.admin.controller.dto.BossGetAllDto.BossGetAllData;
-import com.maple.admin.controller.dto.BossGetAllDto.BossesGetAllResponse;
+import com.maple.admin.controller.dto.BossGetAllDto.BossGetAllResponse;
 import com.maple.admin.controller.dto.BossGetDto.BossGetData;
 import com.maple.admin.controller.dto.BossGetDto.BossGetResponse;
 import com.maple.common.boss.service.BossService;
@@ -43,9 +43,9 @@ public class BossApi {
      * 보스 전체 조회
      */
     @GetMapping
-    public BossesGetAllResponse getBosses() {
+    public BossGetAllResponse getBosses() {
         val bosses = bossService.getBosses();
 
-        return new BossesGetAllResponse(BossGetAllData.create(bosses));
+        return new BossGetAllResponse(BossGetAllData.create(bosses));
     }
 }

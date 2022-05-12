@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BossGetAllDto {
 
-    public record BossesGetAllResponse(List<BossGetAllData> boss) {
+    public record BossGetAllResponse(List<BossGetAllData> boss) {
     }
 
     public record BossGetAllData(
