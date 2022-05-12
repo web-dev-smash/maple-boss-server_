@@ -3,9 +3,10 @@ package com.maple.admin.controller;
 import com.maple.admin.controller.dto.BossCreateDto.BossCreateData;
 import com.maple.admin.controller.dto.BossCreateDto.BossCreateRequest;
 import com.maple.admin.controller.dto.BossCreateDto.BossCreateResponse;
+import com.maple.admin.controller.dto.BossGetAllDto.BossGetAllData;
+import com.maple.admin.controller.dto.BossGetAllDto.BossesGetAllResponse;
 import com.maple.admin.controller.dto.BossGetDto.BossGetData;
 import com.maple.admin.controller.dto.BossGetDto.BossGetResponse;
-import com.maple.admin.controller.dto.BossGetDto.BossesGetResponse;
 import com.maple.common.boss.service.BossService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -42,9 +43,9 @@ public class BossApi {
      * 보스 전체 조회
      */
     @GetMapping
-    public BossesGetResponse getBosses() {
+    public BossesGetAllResponse getBosses() {
         val bosses = bossService.getBosses();
 
-        return new BossesGetResponse(BossGetData.create(bosses));
+        return new BossesGetAllResponse(BossGetAllData.create(bosses));
     }
 }
