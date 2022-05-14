@@ -19,7 +19,6 @@ public class PartyApi {
 
     /**
      * 파티 생성
-     * <p>
      * TODO: Security 이후 로그인한 유저 ID가 leader ID로 대체
      */
     @PostMapping

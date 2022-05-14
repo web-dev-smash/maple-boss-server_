@@ -36,7 +36,7 @@ class DomainUserServiceTest extends BaseServiceTest {
 
     @Test
     void 유저_생성_성공() {
-        var user = new User("goyounha11", "1", "쩌로", "goyounha11@naver.com", new MockCertCodeGenerator());
+        var user = new User("peubel", "1", "아아", "peubel@naver.com", new MockCertCodeGenerator());
 
         user = userService.create(user);
 
