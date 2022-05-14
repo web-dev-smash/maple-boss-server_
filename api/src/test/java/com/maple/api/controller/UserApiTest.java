@@ -34,7 +34,7 @@ class UserApiTest extends BaseApiTest {
     }
 
     @Test
-    void 회원_가입() throws Exception {
+    void 유저_가입() throws Exception {
         val req = new UserCreateRequest("woogie", "1234", "우기", "woogie@gmail.com");
 
         mockMvc.perform(post("/user")
@@ -52,7 +52,7 @@ class UserApiTest extends BaseApiTest {
     }
 
     @Test
-    void 회원_탈퇴_준비() throws Exception {
+    void 유저_탈퇴_준비() throws Exception {
         user.activate(OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
 
         mockMvc.perform(post("/user/{id}/prepare-withdrawal", user.getId())

@@ -18,7 +18,7 @@ public class UserApi {
     private final UserAppService userAppService;
 
     /**
-     * 회원 가입
+     * 유저 가입
      */
     @PostMapping
     public UserCreateResponse create(@RequestBody UserCreateRequest req) {
@@ -28,7 +28,7 @@ public class UserApi {
     }
 
     /**
-     * 회원 탈퇴 준비
+     * 유저 탈퇴 준비
      * TODO: Security 이후 로그인한 유저 ID가 leader ID로 대체
      */
     @PostMapping("/{id}/prepare-withdrawal")
