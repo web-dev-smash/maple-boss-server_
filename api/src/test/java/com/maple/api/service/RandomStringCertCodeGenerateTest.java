@@ -18,7 +18,7 @@ public class RandomStringCertCodeGenerateTest {
     private RandomStringCertCodeGenerate randomStringCertCodeGenerate;
 
     @Test
-    void CertCodeGenerate_길이_검증() {
+    void CertCode_길이_검증() {
         val certCode = randomStringCertCodeGenerate.generate();
 
         assertThat(certCode.length()).isEqualTo(LENGTH);
