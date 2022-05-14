@@ -4,13 +4,23 @@ import com.maple.common.support.BaseServiceTest;
 import com.maple.common.user.domain.MockCertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
+import com.maple.common.user.domain.UserStatus;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.OffsetDateTime;
+
+import static com.maple.common.exception.ErrorCode.INVALID_CERT_CODE;
+import static com.maple.common.fixture.UserFixture.createUser;
+import static com.maple.common.support.MapleBossExceptionTest.assertThatMapleBossException;
+import static com.maple.common.user.domain.User.CERTIFICATE_MINUTES;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DomainUserServiceTest extends BaseServiceTest {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -19,10 +29,35 @@ class DomainUserServiceTest extends BaseServiceTest {
     void 유저_생성_성공() {
         var user = new User("goyounha11", "1", "쩌로", "goyounha11@naver.com", new MockCertCodeGenerator());
 
-        user = userRepository.save(user);
+        user = userService.create(user);
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
-       assertThat(foundUser).isEqualTo(user);
+        assertThat(foundUser).isEqualTo(user);
+    }
+
+    @Test
+    void 활성화_처리() {
+        var user = createUser();
+
+        user = userService.create(user);
+
+        val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
+
+        userService.activate(user.getId(), currentTime, new MockCertCodeGenerator());
+
+        val foundUser = userRepository.findById(user.getId()).orElseThrow();
+
+        assertThat(foundUser.getStatus()).isEqualTo(UserStatus.ACTIVATED);
+    }
+
+    @Test
+    void 인증코드가_다르면_활성화_실패() {
+        val user = userService.create(createUser());
+
+        val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
+
+        assertThatMapleBossException(INVALID_CERT_CODE)
+                .isThrownBy(() -> userService.activate(user.getId(), currentTime, () -> "FAKE_CODE"));
     }
 }

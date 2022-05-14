@@ -1,9 +1,12 @@
 package com.maple.common.user.service;
 
+import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 
-public interface UserService {
-    User createUser(User member);
+import java.time.OffsetDateTime;
 
-    void activate(long id, String code);
+public interface UserService {
+    User create(User member);
+
+    void activate(long id, OffsetDateTime currentTime, CertCodeGenerator codeGenerator);
 }

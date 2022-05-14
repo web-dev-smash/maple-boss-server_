@@ -1,9 +1,6 @@
 package com.maple.common.user.service;
 
-import com.maple.common.user.domain.User;
-import com.maple.common.user.domain.UserActiveEvent;
-import com.maple.common.user.domain.UserCreateEvent;
-import com.maple.common.user.domain.UserRepository;
+import com.maple.common.user.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.context.ApplicationEventPublisher;
@@ -25,7 +22,7 @@ public class DomainUserService implements UserService {
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
-    public User createUser(User user) {
+    public User create(User user) {
         user = userRepository.save(user);
 
         eventPublisher.publishEvent(new UserCreateEvent(user.getId()));
@@ -34,12 +31,12 @@ public class DomainUserService implements UserService {
     }
 
     @Override
-    public void activate(long id, String code) {
+    public void activate(long id, OffsetDateTime currentTime, CertCodeGenerator codeGenerator) {
         val user = userRepository.findById(id).orElseThrow();
 
-        validate(code.equals(user.getCertCode()), INVALID_CERT_CODE);
+        validate(codeGenerator.generate().equals(user.getCertCode()), INVALID_CERT_CODE);
 
-        user.activate(OffsetDateTime.now());
+        user.activate(currentTime);
 
         eventPublisher.publishEvent(new UserActiveEvent(user.getId()));
     }
