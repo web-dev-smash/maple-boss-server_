@@ -1,11 +1,12 @@
 package com.maple.api.controller;
 
+import com.maple.api.service.UserAppService;
 import com.maple.common.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.val;
+import org.springframework.web.bind.annotation.*;
+
+import static com.maple.api.controller.dto.UserCreateDto.*;
 
 @RestController
 @RequestMapping("/user")
@@ -13,6 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserApi {
 
     private final UserService userService;
+
+    private final UserAppService userAppService;
+
+    @PostMapping
+    public UserCreateResponse create(@RequestBody UserCreateRequest req) {
+        val user = userAppService.create(req.toDto());
+
+        return new UserCreateResponse(UserCreateData.create(user));
+    }
 
     /**
      * 회원 탈퇴 준비

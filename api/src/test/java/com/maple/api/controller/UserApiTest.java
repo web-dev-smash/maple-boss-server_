@@ -1,6 +1,5 @@
 package com.maple.api.controller;
 
-import com.maple.api.fixture.UserFixture;
 import com.maple.api.support.BaseApiTest;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
@@ -13,20 +12,43 @@ import org.springframework.http.MediaType;
 
 import java.time.OffsetDateTime;
 
+import static com.maple.api.controller.dto.UserCreateDto.UserCreateRequest;
+import static com.maple.api.fixture.UserFixture.createUser;
 import static com.maple.common.user.domain.User.CERTIFICATE_MINUTES;
+import static com.maple.common.user.domain.UserStatus.CREATED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserApiTest extends BaseApiTest {
 
     @Autowired
     private UserRepository userRepository;
+
     private User user;
 
     @BeforeEach
     void setUp() {
-        user = userRepository.save(UserFixture.createUser());
+        user = userRepository.save(createUser());
+    }
+
+    @Test
+    void 회원_가입() throws Exception {
+        val req = new UserCreateRequest("woogie", "1234", "우기", "woogie@gmail.com");
+
+        mockMvc.perform(post("/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(req)))
+                .andExpect(status().isOk())
+                .andExpectAll(
+                        jsonPath("$.user.id").isNotEmpty(),
+                        jsonPath("$.user.loginId").value(req.loginId()),
+                        jsonPath("$.user.nickname").value(req.nickname()),
+                        jsonPath("$.user.email").value(req.email()),
+                        jsonPath("$.user.status").value(CREATED.name()),
+                        jsonPath("$.user.createAt").isNotEmpty()
+                );
     }
 
     @Test

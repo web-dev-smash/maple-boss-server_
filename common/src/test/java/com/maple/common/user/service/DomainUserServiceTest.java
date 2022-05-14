@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.OffsetDateTime;
 
-import static com.maple.common.exception.ErrorCode.INVALID_CERT_CODE;
+import static com.maple.common.exception.ErrorCode.*;
 import static com.maple.common.fixture.UserFixture.createUser;
 import static com.maple.common.support.MapleBossExceptionTest.assertThatMapleBossException;
 import static com.maple.common.user.domain.User.CERTIFICATE_MINUTES;
@@ -73,5 +73,19 @@ class DomainUserServiceTest extends BaseServiceTest {
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
         assertThat(foundUser.getStatus()).isEqualTo(INACTIVATING);
+    }
+
+    @Test
+    void 이미_로그인아이디가_존재하면_실패() {
+        val fakeUser = new User(user.getLoginId(), "1", "FAKE_USER", "FAKE_USER@naver.com", new MockCertCodeGenerator());
+
+        assertThatMapleBossException(ALREADY_EXISTS_LOGIN_ID).isThrownBy(() -> userService.create(fakeUser));
+    }
+
+    @Test
+    void 이미_이메일이_존재하면_실패() {
+        val fakeUser = new User("FAKE_USER", "1", "FAKE_USER", user.getEmail(), new MockCertCodeGenerator());
+
+        assertThatMapleBossException(ALREADY_EXISTS_EMAIL).isThrownBy(() -> userService.create(fakeUser));
     }
 }

@@ -1,5 +1,6 @@
 package com.maple.common.user.service;
 
+import com.maple.common.exception.MapleBossException;
 import com.maple.common.user.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.OffsetDateTime;
 
-import static com.maple.common.exception.ErrorCode.INVALID_CERT_CODE;
+import static com.maple.common.exception.ErrorCode.*;
 import static com.maple.common.exception.MapleBossException.validate;
 
 @Service
@@ -23,6 +24,14 @@ public class DomainUserService implements UserService {
 
     @Override
     public User create(User user) {
+        if (userRepository.findByLoginId(user.getLoginId()).isPresent()) {
+            throw new MapleBossException(ALREADY_EXISTS_LOGIN_ID);
+        }
+
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new MapleBossException(ALREADY_EXISTS_EMAIL);
+        }
+
         user = userRepository.save(user);
 
         eventPublisher.publishEvent(new UserCreateEvent(user.getId()));
