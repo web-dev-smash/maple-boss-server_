@@ -1,5 +1,6 @@
 rootProject.name = 'maple-boss-server'
 
+include 'core'
 include 'common'
 include 'api'
 include 'admin'
