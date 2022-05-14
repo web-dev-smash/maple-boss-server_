@@ -81,7 +81,7 @@ class DomainBossItemServiceTest extends BaseServiceTest {
         assertThat(foundFixedBossItem.getBoss()).isEqualTo(boss);
         assertThat(foundFixedBossItem.getItem()).isEqualTo(item);
         assertThat(foundFixedBossItem.getAmount()).isEqualTo(amount);
-        assertThat(foundFixedBossItem.getPrice()).isEqualTo(10000L);
+        assertThat(foundFixedBossItem.getMeso()).isEqualTo(10000L);
     }
 
     @Test
