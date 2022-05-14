@@ -50,7 +50,7 @@ class DefaultBossItemAdminServiceTest extends BaseServiceTest {
         assertThat(fixedBossItem.getBoss()).isEqualTo(boss);
         assertThat(fixedBossItem.getItem()).isEqualTo(item);
         assertThat(fixedBossItem.getAmount()).isEqualTo(amount);
-        assertThat(fixedBossItem.getPrice()).isEqualTo(1000L);
+        assertThat(fixedBossItem.getMeso()).isEqualTo(1000L);
     }
 
     @Test
