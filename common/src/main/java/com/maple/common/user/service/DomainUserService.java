@@ -40,4 +40,11 @@ public class DomainUserService implements UserService {
 
         eventPublisher.publishEvent(new UserActiveEvent(user.getId()));
     }
+
+    @Override
+    public void prepareWithdrawal(long id) {
+        val user = userRepository.findById(id).orElseThrow();
+
+        user.prepareInactivate();
+    }
 }
