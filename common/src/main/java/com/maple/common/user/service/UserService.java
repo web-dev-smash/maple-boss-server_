@@ -10,7 +10,7 @@ public interface UserService {
     /**
      * 사용자 생성
      * <p>
-     * 회원가입 신청만 상태이고, 인증을 해야 사용 가능하다.
+     * 유저가입 신청만 상태이고, 인증을 해야 사용 가능하다.
      * status = CREATED
      */
     User create(User member);

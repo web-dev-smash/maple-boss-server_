@@ -16,7 +16,7 @@ import static com.maple.common.exception.MapleBossException.validate;
 import static com.maple.common.user.domain.UserStatus.*;
 
 /**
- * 회원
+ * 유저
  */
 @Getter
 @Entity
