@@ -20,13 +20,13 @@ class UserRepositoryTest extends BaseRepositoryTest {
     @BeforeEach
     void setUp() {
         user1 = new User("goyounha11", "1", "쩌로", "goyounha11@naver.com");
-        user1.setCertCode("code1");
+        user1.certCode = "code1";
 
         user2 = new User("wook11", "1", "욱", "wook11@naver.com");
-        user2.setCertCode("code2");
+        user2.certCode = "code2";
 
         user3 = new User("pabeul11", "1", "아아", "joon@naver.com");
-        user3.setCertCode("code3");
+        user3.certCode = "code3";
 
         user1 = userRepository.save(user1);
         user2 = userRepository.save(user2);
@@ -37,7 +37,7 @@ class UserRepositoryTest extends BaseRepositoryTest {
     void 유저_등록_성공() {
         var user = new User("goyounha13", "1", "쩌로1", "goyounha13@naver.com");
 
-        user.setCertCode("code");
+        user.certCode = "code";
 
         user = userRepository.save(user);
 

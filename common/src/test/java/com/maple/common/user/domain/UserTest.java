@@ -121,7 +121,7 @@ class UserTest {
     @ParameterizedTest
     @EnumSource(value = UserStatus.class, names = {"CREATED", "INACTIVATING"}, mode = EXCLUDE)
     void 활성화_실패__활성화_가능한_상태아님(UserStatus status) {
-        user.setStatus(status);
+        user.status = status;
 
         assertThatIllegalStateException()
                 .isThrownBy(() -> user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10)));
@@ -141,7 +141,7 @@ class UserTest {
 
     @Test
     void 비활성화_준비_성공() {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         user.prepareInactivate();
 
@@ -150,7 +150,7 @@ class UserTest {
 
     @Test
     void 재활성화_성공() {
-        user.setStatus(INACTIVATING);
+        user.status = INACTIVATING;
 
         user.prepareCertCode(() -> "REACTIVATE_CODE");
 
@@ -163,7 +163,7 @@ class UserTest {
     @ParameterizedTest
     @EnumSource(value = UserStatus.class, names = {"CREATED", "INACTIVATING"}, mode = EXCLUDE)
     void 재활성화_실패__재활성화_가능한_상태아님(UserStatus status) {
-        user.setStatus(status);
+        user.status = status;
 
         user.prepareCertCode(() -> "REACTIVATE_CODE");
 
@@ -172,7 +172,7 @@ class UserTest {
 
     @Test
     void 재활성화_실패__인증코드_불일치() {
-        user.setStatus(INACTIVATING);
+        user.status = INACTIVATING;
 
         user.prepareCertCode(() -> "REACTIVATE_CODE");
 
@@ -181,7 +181,7 @@ class UserTest {
 
     @Test
     void 비활성화_성공() {
-        user.setStatus(INACTIVATING);
+        user.status = INACTIVATING;
 
         user.inactivate();
 
@@ -191,14 +191,14 @@ class UserTest {
     @ParameterizedTest
     @EnumSource(value = UserStatus.class, names = {"INACTIVATING"}, mode = EXCLUDE)
     void 비활성화_실패__비활성화_가능한_상태아님(UserStatus status) {
-        user.setStatus(status);
+        user.status = status;
 
         assertThatIllegalStateException().isThrownBy(() -> user.inactivate());
     }
 
     @Test
     void 정보수정_성공() {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         user.update("2", "쩌로2", "goyounha12@naver.com");
 
@@ -210,14 +210,14 @@ class UserTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 정보수정_실패__비밀번호가_null_이거나_빈값(String password) {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatIllegalArgumentException().isThrownBy(() -> user.update(password, "쩌로2", "goyounha12@naver.com"));
     }
 
     @Test
     void 정보수정_실패__비밀번호_공백() {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatIllegalArgumentException().isThrownBy(() -> user.update(" ", "쩌로2", "goyounha12@naver.com"));
     }
@@ -225,14 +225,14 @@ class UserTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 정보수정_실패__닉네임이_null_이거나_빈값(String nickname) {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatIllegalArgumentException().isThrownBy(() -> user.update("2", nickname, "goyounha12@naver.com"));
     }
 
     @Test
     void 정보수정_실패__닉네임_공백() {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatIllegalArgumentException().isThrownBy(() -> user.update("2", " ", "goyounha12@naver.com"));
     }
@@ -240,14 +240,14 @@ class UserTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 정보수정_실패__이메일이_null_이거나_빈값(String email) {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatIllegalArgumentException().isThrownBy(() -> user.update("2", "쩌로2", email));
     }
 
     @Test
     void 정보수정_실패__이메일_공백() {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatIllegalArgumentException().isThrownBy(() -> user.update("2", "쩌로2", " "));
     }
@@ -255,14 +255,14 @@ class UserTest {
     @ParameterizedTest
     @EnumSource(value = UserStatus.class, names = {"ACTIVATED"}, mode = EXCLUDE)
     void 정보수정_실패__정보수정_가능한_상태아님(UserStatus status) {
-        user.setStatus(status);
+        user.status = status;
 
         assertThatIllegalStateException().isThrownBy(() -> user.update("2", "쩌로2", "goyounha12@naver.com"));
     }
 
     @Test
     void 비밀번호_수정_성공() {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         user.changePassword("2");
 
@@ -272,7 +272,7 @@ class UserTest {
     @ParameterizedTest
     @NullAndEmptySource
     void 비밀번호_수정_실패__비밀번호가_null_이거나_빈값(String password) {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatIllegalArgumentException().isThrownBy(() -> user.changePassword(password));
     }
@@ -280,14 +280,14 @@ class UserTest {
     @ParameterizedTest
     @EnumSource(value = UserStatus.class, names = {"ACTIVATED"}, mode = EXCLUDE)
     void 비밀번호_수정_실패__비밀번호_수정_가능한_상태아님(UserStatus status) {
-        user.setStatus(status);
+        user.status = status;
 
         assertThatIllegalStateException().isThrownBy(() -> user.changePassword("2"));
     }
 
     @Test
     void 비밀번호_수정_실패__새로운_비밀번호가_기존_비밀번호와_같음() {
-        user.setStatus(ACTIVATED);
+        user.status = ACTIVATED;
 
         assertThatMapleBossException(ALREADY_USED_PASSWORD).isThrownBy(() -> user.changePassword("1"));
     }
