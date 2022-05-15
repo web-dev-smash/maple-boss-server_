@@ -13,7 +13,7 @@ public interface UserService {
      * 유저가입 신청만 상태이고, 인증을 해야 사용 가능하다.
      * status = CREATED
      */
-    User create(User member, CertCodeGenerator codeGenerator);
+    User create(User member, CertCodeGenerator certCodeGenerator);
 
     /**
      * 사용자 활성화

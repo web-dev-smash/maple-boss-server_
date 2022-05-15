@@ -1,11 +1,11 @@
 package com.maple.admin.controller;
 
-import com.maple.admin.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.admin.support.BaseApiTest;
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.domain.PartyRepository;
+import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
-import com.maple.common.user.domain.UserRepository;
+import com.maple.common.user.service.UserService;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +27,10 @@ class PartyApiTest extends BaseApiTest {
     private PartyRepository partyRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
-    private MockCertCodeGenerator codeGenerator;
+    @Autowired
+    private CertCodeGenerator mockCertCodeGenerator;
 
     private User user1;
     private User user2;
@@ -43,15 +44,8 @@ class PartyApiTest extends BaseApiTest {
 
     @BeforeEach
     void setUp() {
-        codeGenerator = new MockCertCodeGenerator();
-
-        user1 = createUser();
-        user1.prepareCertCode(codeGenerator);
-        user1 = userRepository.save(user1);
-
-        user2 = new User("user2", "1234", "user2", "user2");
-        user2.prepareCertCode(codeGenerator);
-        user2 = userRepository.save(user2);
+        user1 = userService.create(createUser(), mockCertCodeGenerator);
+        user2 = userService.create(new User("user2", "1234", "user2", "user2"), mockCertCodeGenerator);
 
         party1 = partyRepository.save(createParty(user1));
         party2 = partyRepository.save(createParty(user1));

@@ -20,15 +20,15 @@ import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 
 class UserTest {
 
-    private MockCertCodeGenerator codeGenerator;
+    private CertCodeGenerator mockCertCodeGenerator;
     private User user;
 
     @BeforeEach
     void setUp() {
-        codeGenerator = new MockCertCodeGenerator();
+        mockCertCodeGenerator = new MockCertCodeGenerator();
 
         user = createUser();
-        user.prepareCertCode(codeGenerator);
+        user.prepareCertCode(mockCertCodeGenerator);
     }
 
     @Test
@@ -94,7 +94,7 @@ class UserTest {
 
     @Test
     void 인증코드_준비_성공() {
-        user.prepareCertCode(codeGenerator);
+        user.prepareCertCode(mockCertCodeGenerator);
 
         assertThat(user.getCertCode()).isEqualTo("code");
     }

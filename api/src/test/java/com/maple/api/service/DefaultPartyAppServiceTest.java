@@ -1,11 +1,11 @@
 package com.maple.api.service;
 
-import com.maple.api.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.api.service.dto.PartyCreateDto;
 import com.maple.api.support.BaseServiceTest;
 import com.maple.common.party.service.PartyService;
+import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
-import com.maple.common.user.domain.UserRepository;
+import com.maple.common.user.service.UserService;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,24 +25,18 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     private PartyService partyService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
-    private MockCertCodeGenerator codeGenerator;
+    @Autowired
+    private CertCodeGenerator certCodeGenerator;
 
     private User leader;
     private User otherLeader;
 
     @BeforeEach
     void setUp() {
-        codeGenerator = new MockCertCodeGenerator();
-
-        leader = createUser();
-        leader.prepareCertCode(codeGenerator);
-        leader = userRepository.save(leader);
-
-        otherLeader = new User("member", "1234", "member", "member");
-        otherLeader.prepareCertCode(codeGenerator);
-        otherLeader = userRepository.save(otherLeader);
+        leader = userService.create(createUser(), certCodeGenerator);
+        otherLeader = userService.create(new User("member", "1234", "member", "member"), certCodeGenerator);
     }
 
     @Test

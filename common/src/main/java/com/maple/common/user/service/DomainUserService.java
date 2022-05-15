@@ -23,11 +23,11 @@ public class DomainUserService implements UserService {
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
-    public User create(User user, CertCodeGenerator codeGenerator) {
+    public User create(User user, CertCodeGenerator certCodeGenerator) {
         validate(userRepository.findByLoginId(user.getLoginId()).isEmpty(), ALREADY_EXISTS_LOGIN_ID);
         validate(userRepository.findByEmail(user.getEmail()).isEmpty(), ALREADY_EXISTS_EMAIL);
 
-        user.prepareCertCode(codeGenerator);
+        user.prepareCertCode(certCodeGenerator);
         user = userRepository.save(user);
 
         eventPublisher.publishEvent(new UserCreateEvent(user.getId()));
