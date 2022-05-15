@@ -52,7 +52,7 @@ class DomainPartyServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 파티가_null_이면_생성_실패() {
+    void 파티_생성_실패__파티가_null() {
         assertThatNullPointerException().isThrownBy(() -> partyService.create(null));
     }
 }

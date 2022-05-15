@@ -39,7 +39,7 @@ class BossItemApiTest extends BaseApiTest {
     private BossItemService bossItemService;
 
     @Test
-    void 고정_보스아이템_생성() throws Exception {
+    void 고정_보스_아이템_생성() throws Exception {
         val boss = bossService.create(createBoss());
         val item = itemService.create(createItem());
 
@@ -59,7 +59,7 @@ class BossItemApiTest extends BaseApiTest {
     }
 
     @Test
-    void 랜덤_보스아이템_생성() throws Exception {
+    void 랜덤_보스_아이템_생성() throws Exception {
         val boss = bossService.create(createBoss());
         val item = itemService.create(createItem());
 
@@ -78,7 +78,7 @@ class BossItemApiTest extends BaseApiTest {
     }
 
     @Test
-    void 보스아이템_목록_조회() throws Exception {
+    void 보스_아이템_목록_조회() throws Exception {
         val boss = bossService.create(createBoss());
         val item1 = itemService.create(createItem());
         val item2 = itemService.create(createItem());

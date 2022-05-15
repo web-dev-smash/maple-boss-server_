@@ -43,7 +43,7 @@ class PartySettlementTest {
     }
 
     @Test
-    void 파티보스정산_생성_성공() {
+    void 파티보스정산_생성() {
         val partyBossItem = new PartySettlementItem(randomBossItem, 1, 3000);
 
         val leaderDividend = new PartySettlementDividend(leader, BigDecimal.valueOf(60));

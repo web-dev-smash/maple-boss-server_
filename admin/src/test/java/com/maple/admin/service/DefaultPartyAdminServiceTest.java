@@ -54,7 +54,7 @@ class DefaultPartyAdminServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 파티_전체_목록_조회_성공() {
+    void 파티_전체_목록_조회() {
         val page1Parties = partyAdminService.getAllParties(PageRequest.of(0, 4));
         val page2Parties = partyAdminService.getAllParties(PageRequest.of(1, 4));
 

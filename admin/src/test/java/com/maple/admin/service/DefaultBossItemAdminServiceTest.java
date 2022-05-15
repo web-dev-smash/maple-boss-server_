@@ -54,7 +54,7 @@ class DefaultBossItemAdminServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 고정_보스_아이템_dto가_null_이면_생성_실패() {
+    void 고정_보스_아이템_생성_실패__dto가_null() {
         assertThatNullPointerException().isThrownBy(() -> bossItemAdminService.createFixedBossItem(null));
     }
 
@@ -71,7 +71,7 @@ class DefaultBossItemAdminServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 랜덤_보스_아이템_dto가_null_이면_생성_실패() {
+    void 랜덤_보스_아이템_생성_실패__dto가_null() {
         assertThatNullPointerException().isThrownBy(() -> bossItemAdminService.createRandomBossItem(null));
     }
 }
