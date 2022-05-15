@@ -1,18 +1,18 @@
 package com.maple.api.service;
 
-import com.maple.api.fixture.UserFixture;
-import com.maple.api.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.api.service.dto.PartyCreateDto;
 import com.maple.api.support.BaseServiceTest;
 import com.maple.common.party.service.PartyService;
+import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
-import com.maple.common.user.domain.UserRepository;
+import com.maple.common.user.service.UserService;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.maple.api.fixture.PartyFixture.createParty;
+import static com.maple.api.fixture.UserFixture.createUser;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
@@ -25,15 +25,18 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     private PartyService partyService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
+    @Autowired
+    private CertCodeGenerator certCodeGenerator;
 
     private User leader;
     private User otherLeader;
 
     @BeforeEach
     void setUp() {
-        leader = userRepository.save(UserFixture.createUser());
-        otherLeader = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
+        leader = userService.create(createUser(), certCodeGenerator);
+        otherLeader = userService.create(new User("member", "1234", "member", "member"), certCodeGenerator);
     }
 
     @Test

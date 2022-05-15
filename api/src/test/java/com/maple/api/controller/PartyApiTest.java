@@ -2,12 +2,12 @@ package com.maple.api.controller;
 
 import com.maple.api.controller.dto.PartyCreateDto.PartyCreateRequest;
 import com.maple.api.fixture.PartyFixture;
-import com.maple.api.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.api.support.BaseApiTest;
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.service.PartyService;
+import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
-import com.maple.common.user.domain.UserRepository;
+import com.maple.common.user.service.UserService;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,18 +26,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PartyApiTest extends BaseApiTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private PartyService partyService;
 
     @Autowired
-    private PartyService partyService;
+    private UserService userService;
+
+    @Autowired
+    private CertCodeGenerator certCodeGenerator;
 
     private User user;
     private User member;
 
     @BeforeEach
     void setUp() {
-        user = userRepository.save(createUser());
-        member = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
+        user = userService.create(createUser(), certCodeGenerator);
+        member = userService.create(new User("member", "1234", "member", "member"), certCodeGenerator);
     }
 
     @Test

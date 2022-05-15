@@ -13,7 +13,7 @@ public interface UserService {
      * 유저가입 신청만 상태이고, 인증을 해야 사용 가능하다.
      * status = CREATED
      */
-    User create(User member);
+    User create(User member, CertCodeGenerator certCodeGenerator);
 
     /**
      * 사용자 활성화
@@ -24,7 +24,7 @@ public interface UserService {
      * 인증코드가 다르면,
      * INVALID_CERT_CODE
      */
-    void activate(long id, OffsetDateTime currentTime, CertCodeGenerator codeGenerator);
+    void activate(long id, String certCode, OffsetDateTime currentTime);
 
     /**
      * 사용자 비활성화 준비

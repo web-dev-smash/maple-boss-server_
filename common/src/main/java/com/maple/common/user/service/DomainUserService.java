@@ -1,6 +1,5 @@
 package com.maple.common.user.service;
 
-import com.maple.common.exception.MapleBossException;
 import com.maple.common.user.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -10,8 +9,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.OffsetDateTime;
 
-import static com.maple.common.exception.ErrorCode.*;
-import static com.maple.common.exception.MapleBossException.validate;
+import static com.maple.core.exception.ErrorCode.ALREADY_EXISTS_EMAIL;
+import static com.maple.core.exception.ErrorCode.ALREADY_EXISTS_LOGIN_ID;
+import static com.maple.core.exception.MapleBossException.validate;
 
 @Service
 @Transactional
@@ -23,15 +23,11 @@ public class DomainUserService implements UserService {
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
-    public User create(User user) {
-        if (userRepository.findByLoginId(user.getLoginId()).isPresent()) {
-            throw new MapleBossException(ALREADY_EXISTS_LOGIN_ID);
-        }
+    public User create(User user, CertCodeGenerator certCodeGenerator) {
+        validate(userRepository.findByLoginId(user.getLoginId()).isEmpty(), ALREADY_EXISTS_LOGIN_ID);
+        validate(userRepository.findByEmail(user.getEmail()).isEmpty(), ALREADY_EXISTS_EMAIL);
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new MapleBossException(ALREADY_EXISTS_EMAIL);
-        }
-
+        user.prepareCertCode(certCodeGenerator);
         user = userRepository.save(user);
 
         eventPublisher.publishEvent(new UserCreateEvent(user.getId()));
@@ -40,12 +36,10 @@ public class DomainUserService implements UserService {
     }
 
     @Override
-    public void activate(long id, OffsetDateTime currentTime, CertCodeGenerator codeGenerator) {
+    public void activate(long id, String certCode, OffsetDateTime currentTime) {
         val user = userRepository.findById(id).orElseThrow();
 
-        validate(codeGenerator.generate().equals(user.getCertCode()), INVALID_CERT_CODE);
-
-        user.activate(currentTime);
+        user.activate(certCode, currentTime);
 
         eventPublisher.publishEvent(new UserActiveEvent(user.getId()));
     }
