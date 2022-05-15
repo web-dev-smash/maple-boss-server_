@@ -3,22 +3,26 @@ package com.maple.common.user.service;
 import com.maple.common.support.BaseServiceTest;
 import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
+import com.maple.common.user.domain.UserCertCodeRequestEvent;
 import com.maple.common.user.domain.UserRepository;
-import com.maple.common.user.domain.UserStatus;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.event.ApplicationEvents;
+import org.springframework.test.context.event.RecordApplicationEvents;
 
 import java.time.OffsetDateTime;
 
 import static com.maple.common.fixture.UserFixture.createUser;
 import static com.maple.common.user.domain.User.CERTIFICATE_MINUTES;
+import static com.maple.common.user.domain.UserStatus.ACTIVATED;
 import static com.maple.common.user.domain.UserStatus.INACTIVATING;
 import static com.maple.core.exception.ErrorCode.*;
 import static com.maple.core.support.MapleBossExceptionTest.assertThatMapleBossException;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RecordApplicationEvents
 class DomainUserServiceTest extends BaseServiceTest {
 
     @Autowired
@@ -29,6 +33,9 @@ class DomainUserServiceTest extends BaseServiceTest {
 
     @Autowired
     private CertCodeGenerator mockCertCodeGenerator;
+
+    @Autowired
+    private ApplicationEvents applicationEvents;
 
     private User user;
 
@@ -49,18 +56,34 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 활성화_처리() {
+    void 유저_생성_실패__이미_로그인_아이디_존재() {
+        var fakeUser = new User(user.getLoginId(), "1", "FAKE_USER", "FAKE_USER@naver.com");
+
+        assertThatMapleBossException(ALREADY_EXISTS_LOGIN_ID)
+                .isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
+    }
+
+    @Test
+    void 유저_생성_실패__이미_이메일_존재() {
+        var fakeUser = new User("peubel", "1", "FAKE_USER", user.getEmail());
+
+        assertThatMapleBossException(ALREADY_EXISTS_EMAIL)
+                .isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
+    }
+
+    @Test
+    void 활성화_성공() {
         val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
 
         userService.activate(user.getId(), "code", currentTime);
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
-        assertThat(foundUser.getStatus()).isEqualTo(UserStatus.ACTIVATED);
+        assertThat(foundUser.getStatus()).isEqualTo(ACTIVATED);
     }
 
     @Test
-    void 인증코드가_다르면_활성화_실패() {
+    void 활성화_실패__인증코드_불일치() {
         val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
 
         assertThatMapleBossException(INVALID_CERT_CODE)
@@ -68,7 +91,7 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 탈퇴_준비() {
+    void 탈퇴_준비_성공() {
         user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
 
         userService.prepareWithdrawal(user.getId());
@@ -79,16 +102,41 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 이미_로그인아이디가_존재하면_실패() {
+    void 탈퇴_준비_실패__이미_로그인아이디_존재() {
         val fakeUser = new User(user.getLoginId(), "1", "FAKE_USER", "FAKE_USER@naver.com");
 
         assertThatMapleBossException(ALREADY_EXISTS_LOGIN_ID).isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
     }
 
     @Test
-    void 이미_이메일이_존재하면_실패() {
+    void 탈퇴_준비_실패__이미_이메일_존재() {
         val fakeUser = new User("FAKE_USER", "1", "FAKE_USER", user.getEmail());
 
         assertThatMapleBossException(ALREADY_EXISTS_EMAIL).isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
+    }
+
+    @Test
+    void 인증코드_요청() {
+        userService.activate(user.getId(), "code", OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10));
+        userService.prepareWithdrawal(user.getId());
+
+        userService.requestCertCode(user.getId(), () -> "REACTIVE_CODE");
+
+        val foundUser = userRepository.findById(this.user.getId()).orElseThrow();
+
+        assertThat(foundUser.getCertCode()).isEqualTo("REACTIVE_CODE");
+        assertThat(applicationEvents.stream(UserCertCodeRequestEvent.class).findFirst().orElseThrow().id()).isEqualTo(user.getId());
+    }
+
+    @Test
+    void 재활성화() {
+        user.status = INACTIVATING;
+        user.certCode = "REACTIVE_CODE";
+
+        userService.reActivate(user.getId(), "REACTIVE_CODE");
+
+        val foundUser = userRepository.findById(user.getId()).orElseThrow();
+
+        assertThat(foundUser.getStatus()).isEqualTo(ACTIVATED);
     }
 }

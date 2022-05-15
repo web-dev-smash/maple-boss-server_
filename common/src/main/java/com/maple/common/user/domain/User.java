@@ -4,7 +4,6 @@ import com.maple.common.support.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.apache.logging.log4j.util.Strings;
 
 import javax.persistence.*;
@@ -47,15 +46,13 @@ public class User extends BaseEntity {
     private String email;
 
     /* 인증코드 */
-    @Setter(AccessLevel.PACKAGE)
     @Column(length = 30, nullable = false)
-    private String certCode;
+    public String certCode;
 
     /* 상태 */
-    @Setter(AccessLevel.PACKAGE)
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    private UserStatus status = UserStatus.CREATED;
+    public UserStatus status = UserStatus.CREATED;
 
     /* 생성일 */
     private OffsetDateTime createAt = OffsetDateTime.now();

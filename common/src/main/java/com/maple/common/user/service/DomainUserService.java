@@ -50,4 +50,20 @@ public class DomainUserService implements UserService {
 
         user.prepareInactivate();
     }
+
+    @Override
+    public void requestCertCode(long id, CertCodeGenerator certCodeGenerator) {
+        val user = userRepository.findById(id).orElseThrow();
+
+        user.prepareCertCode(certCodeGenerator);
+
+        eventPublisher.publishEvent(new UserCertCodeRequestEvent(user.getId()));
+    }
+
+    @Override
+    public void reActivate(long id, String certCode) {
+        val user = userRepository.findById(id).orElseThrow();
+
+        user.reActivate(certCode);
+    }
 }
