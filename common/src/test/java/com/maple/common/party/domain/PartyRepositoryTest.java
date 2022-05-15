@@ -58,7 +58,7 @@ class PartyRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 나의_파티목록_조회__파티원() {
+    void 나의_파티_목록_조회_성공__파티원() {
         val party1 = partyRepository.save(createParty(leader));
         val party2 = partyRepository.save(createParty(leader));
         val party3 = partyRepository.save(createParty(leader));
@@ -76,7 +76,7 @@ class PartyRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 나의_파티목록_조회__파티장() {
+    void 나의_파티_목록_조회_성공__파티장() {
         val party1 = partyRepository.save(createParty(leader));
         val party2 = partyRepository.save(createParty(leader));
         val party3 = partyRepository.save(createParty(leader));
@@ -94,7 +94,7 @@ class PartyRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 나의_파티목록_조회__파티장이면서_다른_파티에_참여() {
+    void 나의_파티_목록_조회_성공__파티장이면서_다른_파티에_참여() {
         val party1 = partyRepository.save(createParty(leader));
         val party2 = partyRepository.save(createParty(leader));
         val party3 = partyRepository.save(createParty(leader));

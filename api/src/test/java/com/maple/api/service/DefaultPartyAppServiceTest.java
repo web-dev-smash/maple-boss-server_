@@ -49,12 +49,12 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void dto가_null_이면_파티_생성_실패() {
+    void 파티_생성_실패__파티_dto가_null() {
         assertThatNullPointerException().isThrownBy(() -> partyAppService.create(null));
     }
 
     @Test
-    void 내_파티_목록_조회() {
+    void 내_파티_목록_조회_성공() {
         val party1 = partyService.create(createParty(leader));
         val party2 = partyService.create(createParty(leader));
         val party3 = partyService.create(createParty(leader));

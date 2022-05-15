@@ -45,19 +45,19 @@ class PartyTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 파티_이름이_null_이거나_빈값이면_실패(String name) {
+    void 파티_생성_실패__파티_이름이_null_이거나_빈값(String name) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Party(leader, name, "파티부가설명"));
     }
 
     @Test
-    void 파티_이름이_공백이면_실패() {
+    void 파티_생성_실패__파티_이름이_공백() {
         val emptyPartyName = "  ";
 
         assertThatIllegalArgumentException().isThrownBy(() -> new Party(leader, emptyPartyName, "파티부가설명"));
     }
 
     @Test
-    void 파티장이_null_이면_실패() {
+    void 파티_생성_실패__파티장이_null() {
         assertThatNullPointerException().isThrownBy(() -> new Party(null, "파티", "파티부가설명"));
     }
 
@@ -76,7 +76,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원_추가() {
+    void 파티원_추가_성공() {
         val otherMember = mock(User.class);
 
         given(member.getId()).willReturn(1L);
@@ -93,21 +93,21 @@ class PartyTest {
     }
 
     @Test
-    void 파티장을_추가하려고_하면_실패() {
+    void 파티원_추가_실패__파티장을_추가() {
         val party = createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.addMember(leader));
     }
 
     @Test
-    void 파티원이_null_이면_파티원_추가_실패() {
+    void 파티원_추가_실패__파티원이_null() {
         val party = createParty(leader);
 
         assertThatNullPointerException().isThrownBy(() -> party.addMember(null));
     }
 
     @Test
-    void 최대_파티인원_보다_많이_추가하려고_하면_파티원_추가_실패() {
+    void 파티원_추가_실패__최대_파티_인원_보다_많이_추가() {
         val party = createParty(leader);
 
         for (long id = 1L; id < MAXIMUM_MEMBER; id++) {
@@ -126,7 +126,7 @@ class PartyTest {
     }
 
     @Test
-    void 이미_추가된_파티원이면_파티원_추가_실패() {
+    void 파티원_추가_실패__이미_추가된_파티원() {
         given(member.getId()).willReturn(1L);
 
         val party = createParty(leader);
@@ -137,7 +137,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원_제거() {
+    void 파티원_제거_성공() {
         given(member.getId()).willReturn(1L);
 
         val party = createParty(leader);
@@ -152,21 +152,21 @@ class PartyTest {
     }
 
     @Test
-    void 파티장을_제거하려고_하면_실패() {
+    void 파티원_제거_실패__파티장을_제거() {
         val party = createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.removeMember(leader));
     }
 
     @Test
-    void 파티원이_null_이면_파티원_제거_실패() {
+    void 파티원_제거_실패__파티원이_null() {
         val party = createParty(leader);
 
         assertThatNullPointerException().isThrownBy(() -> party.removeMember(null));
     }
 
     @Test
-    void 없는_파티원을_제거하려고하면_파티원_제거_실패() {
+    void 파티원_제거_실패__없는_파티원을_제거() {
         val party = createParty(leader);
 
         party.addMember(member);
@@ -179,7 +179,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티_수정() {
+    void 파티_수정_성공() {
         val party = new Party(leader, "name", "description");
 
         party.update("updated name", "updated description");
@@ -190,21 +190,21 @@ class PartyTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 파티_이름이_null_이거나_빈값이면_파티_수정_실패(String name) {
+    void 파티_수정_실패__파티_이름이_null_이거나_빈값(String name) {
         val party = createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.update(name, "updated description"));
     }
 
     @Test
-    void 파티_이름이_공백이면_파티_수정_실패() {
+    void 파티_수정_실패__파티_이름이_공백() {
         val party = createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.update(" ", "updated description"));
     }
 
     @Test
-    void 파티장_변경() {
+    void 파티장_변경_성공() {
         val party = createParty(leader);
 
         val member1 = mock(User.class);
@@ -226,14 +226,14 @@ class PartyTest {
     }
 
     @Test
-    void 파티원이_null_이면_파티장_변경_실패() {
+    void 파티장_변경_실패__파티원이_null() {
         val party = createParty(leader);
 
         assertThatNullPointerException().isThrownBy(() -> party.changeLeader(null));
     }
 
     @Test
-    void 파티에_없는_사용자면_파티장_변경_실패() {
+    void 파티장_변경_실패__파티에_없는_사용자() {
         val party = createParty(leader);
         val fakeMember = mock(User.class);
 

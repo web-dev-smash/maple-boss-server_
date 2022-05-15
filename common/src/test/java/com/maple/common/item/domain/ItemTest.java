@@ -20,18 +20,18 @@ class ItemTest {
     }
 
     @Test
-    void 아이템_타입이_null_이면_생성_불가() {
+    void 아이템_생성_실패__아이템_타입이_null() {
         assertThatNullPointerException().isThrownBy(() -> new Item("태초의정수", null));
     }
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 아이템_이름이_없으면_생성_불가(String name) {
+    void 아이템_생성_실패__아이템_이름이_null(String name) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Item(name, ItemType.EXTRA));
     }
 
     @Test
-    void 아이템_이름을_공백으로_생성_불가() {
+    void 아이템_생성_실패__아이템_이름이_공백() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Item(" ", ItemType.EXTRA));
     }
 }

@@ -25,7 +25,7 @@ class BossApiTest extends BaseApiTest {
     BossRepository bossRepository;
 
     @Test
-    void 보스_생성() throws Exception {
+    void 보스_생성_성공() throws Exception {
         val req = new BossCreateRequest(
                 "윌", 100, BossClass.EASY, 30, 50,
                 100L, 200L, 300L, 400L,
@@ -54,7 +54,7 @@ class BossApiTest extends BaseApiTest {
     }
 
     @Test
-    void 보스_상세_조회() throws Exception {
+    void 보스_상세_조회_성공() throws Exception {
         val boss = bossRepository.save(BossFixture.createBoss());
 
         mockMvc.perform(get("/boss/{id}", boss.getId()))
@@ -76,7 +76,7 @@ class BossApiTest extends BaseApiTest {
     }
 
     @Test
-    void 보스_목록_조회() throws Exception {
+    void 보스_목록_조회_성공() throws Exception {
         val boss1 = bossRepository.save(new Boss("A", 1, BossClass.EASY, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
         val boss2 = bossRepository.save(new Boss("A", 1, BossClass.NORMAL, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
         val boss3 = bossRepository.save(new Boss("A", 1, BossClass.HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));

@@ -26,17 +26,17 @@ class RandomBossItemTest {
     }
 
     @Test
-    void 보스가_null_이면_생성_실패() {
+    void 랜덤_보스_아이템_생성_실패__보스가_null() {
         assertThatNullPointerException().isThrownBy(() -> new RandomBossItem(null, createItem(), createRandomBossItemAmount()));
     }
 
     @Test
-    void 아이템이_null_이면_생성_실패() {
+    void 랜덤_보스_아이템_생성_실패__아이템이_null() {
         assertThatNullPointerException().isThrownBy(() -> new RandomBossItem(createBoss(), null, createRandomBossItemAmount()));
     }
 
     @Test
-    void 수량이_null_이면_생성_실패() {
+    void 랜덤_보스_아이템_생성_실패__수량이_null() {
         assertThatNullPointerException().isThrownBy(() -> new RandomBossItem(createBoss(), createItem(), null));
     }
 }

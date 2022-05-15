@@ -47,12 +47,12 @@ class DomainItemServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 아이템이_null_이면_생성_실패() {
+    void 아이템_생성_실패__아이템이_null() {
         assertThatNullPointerException().isThrownBy(() -> itemService.create(null));
     }
 
     @Test
-    void 아이템_목록_조회() {
+    void 아이템_목록_조회_성공() {
         val items = itemService.getItems();
 
         assertThat(items).containsExactly(item1, item2, item3);

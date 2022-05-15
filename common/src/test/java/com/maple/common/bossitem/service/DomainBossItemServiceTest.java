@@ -85,7 +85,7 @@ class DomainBossItemServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 고정_보스_아이템이_null_이면_생성_실패() {
+    void 고정_보스_아이템_생성_실패__고정_보스_아이템이_null() {
         assertThatNullPointerException().isThrownBy(() -> bossItemService.createFixedBossItem(null));
     }
 
@@ -106,12 +106,12 @@ class DomainBossItemServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 랜덤_보스_아이템이_null_이면_생성_실패() {
+    void 랜덤_보스_아이템_생성_실패__랜덤_보스_아이템이_null() {
         assertThatNullPointerException().isThrownBy(() -> bossItemService.createRandomBossItem(null));
     }
 
     @Test
-    void 보스_아이템_목록_조회() {
+    void 보스_아이템_목록_조회_성공() {
         val bossItems = bossItemService.getBossItems(boss.getId());
 
         assertThat(bossItems).containsExactly(fixedBossItem1, fixedBossItem2, fixedBossItem3, randomBossItem1, randomBossItem2);
