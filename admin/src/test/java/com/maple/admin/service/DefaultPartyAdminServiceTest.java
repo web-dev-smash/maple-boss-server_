@@ -5,7 +5,7 @@ import com.maple.admin.support.BaseServiceTest;
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.domain.PartyRepository;
 import com.maple.common.user.domain.User;
-import com.maple.common.user.domain.UserRepository;
+import com.maple.common.user.service.UserService;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,9 @@ class DefaultPartyAdminServiceTest extends BaseServiceTest {
     private PartyRepository partyRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
+    private MockCertCodeGenerator codeGenerator;
 
     private User user1;
     private User user2;
@@ -39,15 +41,17 @@ class DefaultPartyAdminServiceTest extends BaseServiceTest {
 
     @BeforeEach
     void setUp() {
-        user1 = userRepository.save(createUser());
-        user2 = userRepository.save(new User("user2", "1234", "user2", "user2", new MockCertCodeGenerator()));
+        codeGenerator = new MockCertCodeGenerator();
+
+        user1 = userService.create(createUser(), codeGenerator);
+        user2 = userService.create(new User("user2", "1234", "user2", "user2"), codeGenerator);
 
         party1 = partyRepository.save(createParty(user1));
         party2 = partyRepository.save(createParty(user1));
         party3 = partyRepository.save(createParty(user1));
-        party4 = partyRepository.save(createParty(user2));
-        party5 = partyRepository.save(createParty(user2));
-        party6 = partyRepository.save(createParty(user2));
+        party4 = partyRepository.save(createParty(this.user2));
+        party5 = partyRepository.save(createParty(this.user2));
+        party6 = partyRepository.save(createParty(this.user2));
     }
 
     @Test

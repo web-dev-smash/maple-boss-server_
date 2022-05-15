@@ -20,8 +20,8 @@ public class DefaultUserAppService implements UserAppService {
 
     @Override
     public User create(UserCreateDto dto) {
-        val user = new User(dto.loginId(), dto.password(), dto.nickname(), dto.email(), certCodeGenerator);
+        val user = new User(dto.loginId(), dto.password(), dto.nickname(), dto.email());
 
-        return userService.create(user);
+        return userService.create(user, certCodeGenerator);
     }
 }

@@ -1,7 +1,7 @@
 package com.maple.common.user.service;
 
 import com.maple.common.support.BaseServiceTest;
-import com.maple.common.user.domain.MockCertCodeGenerator;
+import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
 import com.maple.common.user.domain.UserStatus;
@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.OffsetDateTime;
 
-import static com.maple.common.exception.ErrorCode.*;
 import static com.maple.common.fixture.UserFixture.createUser;
-import static com.maple.common.support.MapleBossExceptionTest.assertThatMapleBossException;
 import static com.maple.common.user.domain.User.CERTIFICATE_MINUTES;
 import static com.maple.common.user.domain.UserStatus.INACTIVATING;
+import static com.maple.core.exception.ErrorCode.*;
+import static com.maple.core.support.MapleBossExceptionTest.assertThatMapleBossException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DomainUserServiceTest extends BaseServiceTest {
@@ -27,18 +27,21 @@ class DomainUserServiceTest extends BaseServiceTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CertCodeGenerator mockCertCodeGenerator;
+
     private User user;
 
     @BeforeEach
     void setUp() {
-        user = userService.create(createUser());
+        user = userService.create(createUser(), mockCertCodeGenerator);
     }
 
     @Test
     void 유저_생성_성공() {
-        var user = new User("peubel", "1", "아아", "peubel@naver.com", new MockCertCodeGenerator());
+        var user = new User("peubel", "1", "아아", "peubel@naver.com");
 
-        user = userService.create(user);
+        user = userService.create(user, mockCertCodeGenerator);
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
@@ -49,7 +52,7 @@ class DomainUserServiceTest extends BaseServiceTest {
     void 활성화_처리() {
         val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
 
-        userService.activate(user.getId(), currentTime, new MockCertCodeGenerator());
+        userService.activate(user.getId(), "code", currentTime);
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
@@ -61,12 +64,12 @@ class DomainUserServiceTest extends BaseServiceTest {
         val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
 
         assertThatMapleBossException(INVALID_CERT_CODE)
-                .isThrownBy(() -> userService.activate(user.getId(), currentTime, () -> "FAKE_CODE"));
+                .isThrownBy(() -> userService.activate(user.getId(), "FAKE_CODE", currentTime));
     }
 
     @Test
     void 탈퇴_준비() {
-        user.activate(OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
+        user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
 
         userService.prepareWithdrawal(user.getId());
 
@@ -77,15 +80,15 @@ class DomainUserServiceTest extends BaseServiceTest {
 
     @Test
     void 이미_로그인아이디가_존재하면_실패() {
-        val fakeUser = new User(user.getLoginId(), "1", "FAKE_USER", "FAKE_USER@naver.com", new MockCertCodeGenerator());
+        val fakeUser = new User(user.getLoginId(), "1", "FAKE_USER", "FAKE_USER@naver.com");
 
-        assertThatMapleBossException(ALREADY_EXISTS_LOGIN_ID).isThrownBy(() -> userService.create(fakeUser));
+        assertThatMapleBossException(ALREADY_EXISTS_LOGIN_ID).isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
     }
 
     @Test
     void 이미_이메일이_존재하면_실패() {
-        val fakeUser = new User("FAKE_USER", "1", "FAKE_USER", user.getEmail(), new MockCertCodeGenerator());
+        val fakeUser = new User("FAKE_USER", "1", "FAKE_USER", user.getEmail());
 
-        assertThatMapleBossException(ALREADY_EXISTS_EMAIL).isThrownBy(() -> userService.create(fakeUser));
+        assertThatMapleBossException(ALREADY_EXISTS_EMAIL).isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
     }
 }

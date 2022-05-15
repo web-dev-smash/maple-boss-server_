@@ -1,6 +1,7 @@
 package com.maple.common.party.domain;
 
 import com.maple.common.support.BaseRepositoryTest;
+import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.MockCertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
@@ -8,11 +9,13 @@ import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
 
 import static com.maple.common.fixture.PartyFixture.createParty;
 import static com.maple.common.fixture.UserFixture.createUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Import(MockCertCodeGenerator.class)
 class PartyRepositoryTest extends BaseRepositoryTest {
 
     @Autowired
@@ -21,16 +24,26 @@ class PartyRepositoryTest extends BaseRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CertCodeGenerator mockCertCodeGenerator;
+
     private User leader;
     private User otherLeader;
     private User member;
 
     @BeforeEach
     void setUp() {
-        leader = userRepository.save(createUser());
-        otherLeader = userRepository.save(new User("otherLeader", "1234", "다른리더", "다른리더", new MockCertCodeGenerator()));
+        leader = createUser();
+        leader.prepareCertCode(mockCertCodeGenerator);
+        leader = userRepository.save(leader);
 
-        member = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
+        otherLeader = new User("otherLeader", "1234", "다른리더", "다른리더");
+        otherLeader.prepareCertCode(mockCertCodeGenerator);
+        otherLeader = userRepository.save(otherLeader);
+
+        member = new User("member", "1234", "member", "member");
+        member.prepareCertCode(mockCertCodeGenerator);
+        member = userRepository.save(member);
     }
 
     @Test

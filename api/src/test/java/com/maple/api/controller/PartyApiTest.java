@@ -31,13 +31,22 @@ class PartyApiTest extends BaseApiTest {
     @Autowired
     private PartyService partyService;
 
+    private MockCertCodeGenerator codeGenerator;
+
     private User user;
     private User member;
 
     @BeforeEach
     void setUp() {
-        user = userRepository.save(createUser());
-        member = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
+        codeGenerator = new MockCertCodeGenerator();
+
+        user = createUser();
+        user.prepareCertCode(codeGenerator);
+        user = userRepository.save(user);
+
+        member = new User("member", "1234", "member", "member");
+        member.prepareCertCode(codeGenerator);
+        member = userRepository.save(member);
     }
 
     @Test

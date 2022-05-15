@@ -4,16 +4,17 @@ import com.maple.common.support.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.logging.log4j.util.Strings;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
-import static com.maple.common.exception.ErrorCode.ALREADY_USED_PASSWORD;
-import static com.maple.common.exception.MapleBossException.validate;
 import static com.maple.common.user.domain.UserStatus.*;
+import static com.maple.core.exception.ErrorCode.ALREADY_USED_PASSWORD;
+import static com.maple.core.exception.ErrorCode.INVALID_CERT_CODE;
+import static com.maple.core.exception.MapleBossException.validate;
+import static com.maple.core.exception.Preconditions.*;
 
 /**
  * 유저
@@ -46,10 +47,12 @@ public class User extends BaseEntity {
     private String email;
 
     /* 인증코드 */
+    @Setter(AccessLevel.PACKAGE)
     @Column(length = 30, nullable = false)
     private String certCode;
 
     /* 상태 */
+    @Setter(AccessLevel.PACKAGE)
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private UserStatus status = UserStatus.CREATED;
@@ -59,50 +62,62 @@ public class User extends BaseEntity {
 
     public static final int CERTIFICATE_MINUTES = 5;
 
-    public User(String loginId, String password, String nickname, String email, CertCodeGenerator codeGenerator) {
-        checkArgument(Strings.isNotBlank(loginId));
-        checkArgument(Strings.isNotBlank(password));
-        checkArgument(Strings.isNotBlank(nickname));
-        checkArgument(Strings.isNotBlank(email));
+    public User(String loginId, String password, String nickname, String email) {
+        require(Strings.isNotBlank(loginId));
+        require(Strings.isNotBlank(password));
+        require(Strings.isNotBlank(nickname));
+        require(Strings.isNotBlank(email));
 
         this.loginId = loginId;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
-        this.certCode = codeGenerator.generate();
     }
 
-    public void activate(OffsetDateTime currentTime) {
-        checkArgument(this.createAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(currentTime));
+    public String prepareCertCode(CertCodeGenerator codeGenerator) {
+        this.certCode = codeGenerator.generate();
 
-        checkState(CAN_MOVE_TO_ACTIVATED.contains(this.status));
+        return this.certCode;
+    }
+
+    public void activate(String certCode, OffsetDateTime currentTime) {
+        notNull(certCode);
+
+        require(this.createAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(currentTime));
+
+        check(CAN_MOVE_TO_ACTIVATED.contains(this.status));
+
+        validate(this.certCode.equals(certCode), INVALID_CERT_CODE);
 
         this.status = ACTIVATED;
     }
 
     public void prepareInactivate() {
-        checkState(CAN_MOVE_TO_INACTIVATING.contains(this.status));
+        check(CAN_MOVE_TO_INACTIVATING.contains(this.status));
 
         this.status = INACTIVATING;
     }
 
-    public void reActivate(CertCodeGenerator codeGenerator) {
-        checkState(CAN_MOVE_TO_ACTIVATED.contains(this.status));
+    public void reActivate(String certCode) {
+        check(CAN_MOVE_TO_ACTIVATED.contains(this.status));
+
+        validate(certCode.equals(this.certCode), INVALID_CERT_CODE);
 
         this.status = ACTIVATED;
-        this.certCode = codeGenerator.generate();
     }
 
     public void inactivate() {
-        checkState(CAN_MOVE_TO_INACTIVATED.contains(this.status));
+        check(CAN_MOVE_TO_INACTIVATED.contains(this.status));
 
         this.status = INACTIVATED;
     }
 
     public void update(String password, String nickname, String email) {
-        checkArgument(Strings.isNotBlank(password));
-        checkArgument(Strings.isNotBlank(nickname));
-        checkArgument(Strings.isNotBlank(email));
+        require(Strings.isNotBlank(password));
+        require(Strings.isNotBlank(nickname));
+        require(Strings.isNotBlank(email));
+
+        check(this.status == ACTIVATED);
 
         this.password = password;
         this.nickname = nickname;
@@ -110,7 +125,9 @@ public class User extends BaseEntity {
     }
 
     public void changePassword(String password) {
-        checkArgument(Strings.isNotBlank(password));
+        require(Strings.isNotBlank(password));
+
+        check(this.status == ACTIVATED);
 
         validate(!this.password.equals(password), ALREADY_USED_PASSWORD);
 

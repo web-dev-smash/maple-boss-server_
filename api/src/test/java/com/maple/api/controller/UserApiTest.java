@@ -1,5 +1,6 @@
 package com.maple.api.controller;
 
+import com.maple.api.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.api.support.BaseApiTest;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
@@ -30,7 +31,10 @@ class UserApiTest extends BaseApiTest {
 
     @BeforeEach
     void setUp() {
-        user = userRepository.save(createUser());
+        user = createUser();
+        user.prepareCertCode(new MockCertCodeGenerator());
+
+        user = userRepository.save(user);
     }
 
     @Test
@@ -53,7 +57,7 @@ class UserApiTest extends BaseApiTest {
 
     @Test
     void 유저_탈퇴_준비() throws Exception {
-        user.activate(OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
+        user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
 
         mockMvc.perform(post("/user/{id}/prepare-withdrawal", user.getId())
                         .contentType(MediaType.APPLICATION_JSON))

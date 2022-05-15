@@ -1,6 +1,5 @@
 package com.maple.api.service;
 
-import com.maple.api.fixture.UserFixture;
 import com.maple.api.fixture.UserFixture.MockCertCodeGenerator;
 import com.maple.api.service.dto.PartyCreateDto;
 import com.maple.api.support.BaseServiceTest;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.maple.api.fixture.PartyFixture.createParty;
+import static com.maple.api.fixture.UserFixture.createUser;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
@@ -27,13 +27,22 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     @Autowired
     private UserRepository userRepository;
 
+    private MockCertCodeGenerator codeGenerator;
+
     private User leader;
     private User otherLeader;
 
     @BeforeEach
     void setUp() {
-        leader = userRepository.save(UserFixture.createUser());
-        otherLeader = userRepository.save(new User("member", "1234", "member", "member", new MockCertCodeGenerator()));
+        codeGenerator = new MockCertCodeGenerator();
+
+        leader = createUser();
+        leader.prepareCertCode(codeGenerator);
+        leader = userRepository.save(leader);
+
+        otherLeader = new User("member", "1234", "member", "member");
+        otherLeader.prepareCertCode(codeGenerator);
+        otherLeader = userRepository.save(otherLeader);
     }
 
     @Test

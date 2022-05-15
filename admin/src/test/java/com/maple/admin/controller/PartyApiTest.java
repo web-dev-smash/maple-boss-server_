@@ -29,6 +29,8 @@ class PartyApiTest extends BaseApiTest {
     @Autowired
     private UserRepository userRepository;
 
+    private MockCertCodeGenerator codeGenerator;
+
     private User user1;
     private User user2;
 
@@ -41,8 +43,15 @@ class PartyApiTest extends BaseApiTest {
 
     @BeforeEach
     void setUp() {
-        user1 = userRepository.save(createUser());
-        user2 = userRepository.save(new User("user2", "1234", "user2", "user2", new MockCertCodeGenerator()));
+        codeGenerator = new MockCertCodeGenerator();
+
+        user1 = createUser();
+        user1.prepareCertCode(codeGenerator);
+        user1 = userRepository.save(user1);
+
+        user2 = new User("user2", "1234", "user2", "user2");
+        user2.prepareCertCode(codeGenerator);
+        user2 = userRepository.save(user2);
 
         party1 = partyRepository.save(createParty(user1));
         party2 = partyRepository.save(createParty(user1));
