@@ -50,14 +50,14 @@ class BossTest {
     }
 
     @Test
-    void 보스_생성_실패__보스_입장레벨이_사용자_최대레벨_보다_크면() {
+    void 보스_생성_실패__보스_입장_레벨이_사용자_최대레벨_보다_크면() {
         val wrongMaxLevel = Boss.MAX_LEVEL + 1;
 
         assertThatIllegalArgumentException().isThrownBy(() -> new Boss("윌", 1, BossClass.EASY, 1, wrongMaxLevel, 100L, 200L, 300L, 0L, 100, 5));
     }
 
     @Test
-    void 보스_생성_실패__보스_입장레벨이_사용자_최소레벨_보다_작으면() {
+    void 보스_생성_실패__보스_입장_레벨이_사용자_최소레벨_보다_작으면() {
         val wrongMinLevel = Boss.MIN_LEVEL - 1;
 
         assertThatIllegalArgumentException().isThrownBy(() -> new Boss("윌", 1, BossClass.EASY, wrongMinLevel, 2, 100L, 200L, 300L, 0L, 100, 5));
