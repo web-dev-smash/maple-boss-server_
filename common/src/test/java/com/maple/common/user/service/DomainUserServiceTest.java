@@ -91,7 +91,7 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 탈퇴_준비_성공() {
+    void 탈퇴_준비() {
         user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
 
         userService.prepareWithdrawal(user.getId());
@@ -99,20 +99,6 @@ class DomainUserServiceTest extends BaseServiceTest {
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
         assertThat(foundUser.getStatus()).isEqualTo(INACTIVATING);
-    }
-
-    @Test
-    void 탈퇴_준비_실패__이미_로그인아이디_존재() {
-        val fakeUser = new User(user.getLoginId(), "1", "FAKE_USER", "FAKE_USER@naver.com");
-
-        assertThatMapleBossException(ALREADY_EXISTS_LOGIN_ID).isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
-    }
-
-    @Test
-    void 탈퇴_준비_실패__이미_이메일_존재() {
-        val fakeUser = new User("FAKE_USER", "1", "FAKE_USER", user.getEmail());
-
-        assertThatMapleBossException(ALREADY_EXISTS_EMAIL).isThrownBy(() -> userService.create(fakeUser, mockCertCodeGenerator));
     }
 
     @Test
