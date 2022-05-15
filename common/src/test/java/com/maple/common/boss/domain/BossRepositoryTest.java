@@ -14,7 +14,7 @@ class BossRepositoryTest extends BaseRepositoryTest {
     private BossRepository bossRepository;
 
     @Test
-    void 보스_생성_성공() {
+    void 보스_생성() {
         val boss = bossRepository.save(BossFixture.createBoss());
 
         assertThat(boss.getId()).isNotNull();

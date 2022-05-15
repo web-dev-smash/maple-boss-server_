@@ -111,7 +111,7 @@ class DomainBossItemServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 보스_아이템_목록_조회_성공() {
+    void 보스_아이템_목록_조회() {
         val bossItems = bossItemService.getBossItems(boss.getId());
 
         assertThat(bossItems).containsExactly(fixedBossItem1, fixedBossItem2, fixedBossItem3, randomBossItem1, randomBossItem2);

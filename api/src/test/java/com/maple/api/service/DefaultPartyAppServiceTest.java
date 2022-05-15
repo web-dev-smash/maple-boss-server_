@@ -54,7 +54,7 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 내_파티_목록_조회_성공() {
+    void 내_파티_목록_조회() {
         val party1 = partyService.create(createParty(leader));
         val party2 = partyService.create(createParty(leader));
         val party3 = partyService.create(createParty(leader));

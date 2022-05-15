@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ItemApiTest extends BaseApiTest {
 
     @Test
-    void 아이템_생성_성공() throws Exception {
+    void 아이템_생성() throws Exception {
         val req = new ItemCreateRequest("태초의정수", ItemType.EXTRA);
 
         mockMvc.perform(post("/item")

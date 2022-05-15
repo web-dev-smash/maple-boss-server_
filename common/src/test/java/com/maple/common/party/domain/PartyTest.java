@@ -107,7 +107,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원_추가_실패__최대_파티_인원_보다_많이_추가() {
+    void 파티원_추가_실패__최대_파티_인원_초과() {
         val party = createParty(leader);
 
         for (long id = 1L; id < MAXIMUM_MEMBER; id++) {

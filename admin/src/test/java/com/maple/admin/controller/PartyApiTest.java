@@ -56,7 +56,7 @@ class PartyApiTest extends BaseApiTest {
     }
 
     @Test
-    void 파티_전체_목록_조회_성공() throws Exception {
+    void 파티_전체_목록_조회() throws Exception {
         mockMvc.perform(get("/party")
                         .param("page", "0")
                         .param("size", "3"))

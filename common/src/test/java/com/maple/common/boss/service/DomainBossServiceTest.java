@@ -23,7 +23,7 @@ class DomainBossServiceTest extends BaseServiceTest {
     private BossService bossService;
 
     @Test
-    void 보스_생성_성공() {
+    void 보스_생성() {
         var boss = new Boss("윌", 1, EASY, 1, 2, 100L, 200L, 300L, 400L, 100, 5);
 
         boss = bossService.create(boss);
@@ -60,7 +60,7 @@ class DomainBossServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 보스_전체_조회_성공() {
+    void 보스_전체_조회() {
         val boss1 = bossService.create(new Boss("A", 1, EASY, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
         val boss2 = bossService.create(new Boss("A", 1, HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
         val boss3 = bossService.create(new Boss("A", 1, NORMAL, 1, 2, 100L, 200L, 300L, 400L, 100, 5));

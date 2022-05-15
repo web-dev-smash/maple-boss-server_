@@ -14,7 +14,7 @@ class ItemRepositoryTest extends BaseRepositoryTest {
     private ItemRepository itemRepository;
 
     @Test
-    void 아이템_생성_성공() {
+    void 아이템_생성() {
         val item = itemRepository.save(ItemFixture.createItem());
 
         assertThat(item.getId()).isNotNull();

@@ -44,7 +44,7 @@ class PartyApiTest extends BaseApiTest {
     }
 
     @Test
-    void 파티_생성_성공() throws Exception {
+    void 파티_생성() throws Exception {
         val req = new PartyCreateRequest(user.getId(), "파티명", "파티 설명");
 
         mockMvc.perform(post("/party")
@@ -62,7 +62,7 @@ class PartyApiTest extends BaseApiTest {
     }
 
     @Test
-    void 내_파티_목록_조회_성공() throws Exception {
+    void 내_파티_목록_조회() throws Exception {
         val party1 = partyService.create(PartyFixture.createParty(user));
         val party2 = partyService.create(PartyFixture.createParty(user));
         val party3 = partyService.create(PartyFixture.createParty(user));

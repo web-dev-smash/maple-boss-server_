@@ -60,7 +60,7 @@ class BossItemRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 보스_아이템_등록_성공() {
+    void 보스_아이템_등록() {
         val randomBossItem = bossItemRepository.save(createRandomBossItem(boss, randomItem));
         val fixedBossItem = bossItemRepository.save(createFixedBossItem(boss, fixedItem));
 
@@ -70,7 +70,7 @@ class BossItemRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 보스_아이템_전체_조회_성공() {
+    void 보스_아이템_전체_조회() {
         보스_아이팀_세팅();
 
         val bossItems = bossItemRepository.findAll(boss);
@@ -80,7 +80,7 @@ class BossItemRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 고정_보스_아이템_목록_조회_성공() {
+    void 고정_보스_아이템_목록_조회() {
         보스_아이팀_세팅();
 
         val foundFixedBossItems = bossItemRepository.findAllFixedBossItem(boss);
@@ -89,7 +89,7 @@ class BossItemRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 랜덤_보스_아이템_목록_조회_성공() {
+    void 랜덤_보스_아이템_목록_조회() {
         보스_아이팀_세팅();
 
         val foundRandomBossItems = bossItemRepository.findAllRandomBossItem(boss);
@@ -117,7 +117,7 @@ class BossItemRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 고정_보스_아이템_조회_성공() {
+    void 고정_보스_아이템_조회() {
         val randomBossItem = bossItemRepository.save(createRandomBossItem(boss, randomItem));
         val fixedBossItem = bossItemRepository.save(createFixedBossItem(boss, fixedItem));
 
@@ -129,7 +129,7 @@ class BossItemRepositoryTest extends BaseRepositoryTest {
     }
 
     @Test
-    void 랜덤_보스_아이템_조회_성공() {
+    void 랜덤_보스_아이템_조회() {
         val randomBossItem = bossItemRepository.save(createRandomBossItem(boss, randomItem));
         val fixedBossItem = bossItemRepository.save(createFixedBossItem(boss, fixedItem));
 

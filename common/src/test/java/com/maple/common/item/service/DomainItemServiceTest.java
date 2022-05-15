@@ -52,7 +52,7 @@ class DomainItemServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 아이템_목록_조회_성공() {
+    void 아이템_목록_조회() {
         val items = itemService.getItems();
 
         assertThat(items).containsExactly(item1, item2, item3);
