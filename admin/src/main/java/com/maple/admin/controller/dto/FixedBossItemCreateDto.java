@@ -36,7 +36,7 @@ public class FixedBossItemCreateDto {
         public static FixedBossItemCreateData create(FixedBossItem fixedBossItem) {
             val amount = fixedBossItem.getAmount();
 
-            return new FixedBossItemCreateData(fixedBossItem.getId(), amount.getMinimum(), amount.getMaximum(), fixedBossItem.getPrice(), fixedBossItem.getCreateAt());
+            return new FixedBossItemCreateData(fixedBossItem.getId(), amount.getMinimum(), amount.getMaximum(), fixedBossItem.getMeso(), fixedBossItem.getCreateAt());
         }
     }
 }

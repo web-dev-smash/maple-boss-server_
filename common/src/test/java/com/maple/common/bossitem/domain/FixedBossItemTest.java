@@ -21,7 +21,7 @@ class FixedBossItemTest {
         assertThat(fixedBossItem.getBoss()).isEqualTo(boss);
         assertThat(fixedBossItem.getItem()).isEqualTo(item);
         assertThat(fixedBossItem.getAmount()).isEqualTo(amount);
-        assertThat(fixedBossItem.getPrice()).isEqualTo(1000);
+        assertThat(fixedBossItem.getMeso()).isEqualTo(1000);
     }
 
     @Test

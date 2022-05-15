@@ -23,18 +23,18 @@ public class FixedBossItem extends BossItem {
     private FixedBossItemAmount amount;
 
     /* 아이템 가격 */
-    private long price;
+    private long meso;
 
-    public FixedBossItem(Boss boss, Item item, FixedBossItemAmount amount, long price) {
+    public FixedBossItem(Boss boss, Item item, FixedBossItemAmount amount, long meso) {
         checkNotNull(boss, "보스 필수입니다.");
         checkNotNull(item, "아이템은 필수입니다.");
         checkNotNull(amount, "아이템 수량은 필수입니다.");
 
-        checkArgument(price > -1, "아이템 가격은 음수일 수 없습니다.");
+        checkArgument(meso > -1, "아이템 가격은 음수일 수 없습니다.");
 
         this.boss = boss;
         this.item = item;
         this.amount = amount;
-        this.price = price;
+        this.meso = meso;
     }
 }
