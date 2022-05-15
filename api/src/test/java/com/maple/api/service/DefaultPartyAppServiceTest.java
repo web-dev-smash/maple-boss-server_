@@ -49,7 +49,7 @@ class DefaultPartyAppServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 파티_생성_실패__파티_dto가_null() {
+    void 파티_생성_실패__dto가_null() {
         assertThatNullPointerException().isThrownBy(() -> partyAppService.create(null));
     }
 

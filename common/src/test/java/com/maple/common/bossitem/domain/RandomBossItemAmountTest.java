@@ -19,12 +19,12 @@ class RandomBossItemAmountTest {
     }
 
     @Test
-    void 랜덤_보스_아이템_수량_생성_실패__랜덤_보스_아이템_수량이_허용된_최소수량_미만() {
+    void 랜덤_보스_아이템_수량_생성_실패__허용된_최소수량_미만() {
         assertThatIllegalArgumentException().isThrownBy(() -> new RandomBossItemAmount(ALLOWED_MINIMUM_AMOUNT - 1, ALLOWED_MINIMUM_AMOUNT));
     }
 
     @Test
-    void 랜덤_보스_아이템_수량_생성_실패__랜덤_보스_아이템_수량이_허용된_최대수량_초과() {
+    void 랜덤_보스_아이템_수량_생성_실패__허용된_최대수량_초과() {
         assertThatIllegalArgumentException().isThrownBy(() -> new RandomBossItemAmount(ALLOWED_MINIMUM_AMOUNT, ALLOWED_MAXIMUM_AMOUNT + 1));
     }
 }

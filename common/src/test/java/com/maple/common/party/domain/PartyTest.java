@@ -45,12 +45,12 @@ class PartyTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 파티_생성_실패__파티_이름이_null_이거나_빈값(String name) {
+    void 파티_생성_실패__이름이_null_이거나_빈값(String name) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Party(leader, name, "파티부가설명"));
     }
 
     @Test
-    void 파티_생성_실패__파티_이름이_공백() {
+    void 파티_생성_실패__이름이_공백() {
         val emptyPartyName = "  ";
 
         assertThatIllegalArgumentException().isThrownBy(() -> new Party(leader, emptyPartyName, "파티부가설명"));
@@ -126,7 +126,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원_추가_실패__이미_추가된_파티원() {
+    void 파티원_추가_실패__이미_추가되어_있으면() {
         given(member.getId()).willReturn(1L);
 
         val party = createParty(leader);
@@ -166,7 +166,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원_제거_실패__없는_파티원을_제거() {
+    void 파티원_제거_실패__존재하지_않으면() {
         val party = createParty(leader);
 
         party.addMember(member);
@@ -190,14 +190,14 @@ class PartyTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void 파티_수정_실패__파티_이름이_null_이거나_빈값(String name) {
+    void 파티_수정_실패__이름이_null_이거나_빈값(String name) {
         val party = createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.update(name, "updated description"));
     }
 
     @Test
-    void 파티_수정_실패__파티_이름이_공백() {
+    void 파티_수정_실패__이름이_공백() {
         val party = createParty(leader);
 
         assertThatIllegalArgumentException().isThrownBy(() -> party.update(" ", "updated description"));

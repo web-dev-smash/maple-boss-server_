@@ -18,13 +18,13 @@ class FixedBossItemAmountTest {
     }
 
     @Test
-    void 고정_보스_아이템_수량_생성_실패__고정_보스_아이템_수량이_허용된_최소수량_미만() {
+    void 고정_보스_아이템_수량_생성_실패__허용된_최소수량_미만() {
         assertThatIllegalArgumentException().isThrownBy(() -> new FixedBossItemAmount(ALLOWED_MINIMUM_AMOUNT - 1, ALLOWED_MINIMUM_AMOUNT));
         assertThatIllegalArgumentException().isThrownBy(() -> new FixedBossItemAmount(ALLOWED_MINIMUM_AMOUNT, ALLOWED_MINIMUM_AMOUNT - 1));
     }
 
     @Test
-    void 고정_보스_아이템_수량_생성_실패__고정_보스_아이템_최대수량이_최소수량보다_적으면() {
+    void 고정_보스_아이템_수량_생성_실패__최대수량이_최소수량보다_적으면() {
         assertThatIllegalArgumentException().isThrownBy(() -> new FixedBossItemAmount(ALLOWED_MINIMUM_AMOUNT + 1, ALLOWED_MINIMUM_AMOUNT));
     }
 }
