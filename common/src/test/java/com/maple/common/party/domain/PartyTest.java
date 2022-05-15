@@ -166,7 +166,7 @@ class PartyTest {
     }
 
     @Test
-    void 파티원_제거_실패__존재하지_않으면() {
+    void 파티원_제거_실패__파티원이_존재하지_않으면() {
         val party = createParty(leader);
 
         party.addMember(member);

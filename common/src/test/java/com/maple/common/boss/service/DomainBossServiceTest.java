@@ -46,7 +46,7 @@ class DomainBossServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 보스_상세_조회_성공() {
+    void 보스_상세_조회() {
         final Boss boss = bossRepository.save(BossFixture.createBoss());
 
         val foundBoss = bossService.getBoss(boss.getId());

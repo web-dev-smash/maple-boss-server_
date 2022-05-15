@@ -30,7 +30,7 @@ class FixedBossItemTest {
     }
 
     @Test
-    void 고정_보스_아이템_생성_실패__가격이_음수() {
+    void 고정_보스_아이템_생성_실패__메소가_음수() {
         assertThatIllegalArgumentException().isThrownBy(() -> new FixedBossItem(createBoss(), createItem(), createFixedBossAmount(), -1));
     }
 }
