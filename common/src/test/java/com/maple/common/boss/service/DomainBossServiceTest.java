@@ -55,11 +55,6 @@ class DomainBossServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 보스_상세_조회_실패__존재하지_않음() {
-        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> bossService.getBoss(1L));
-    }
-
-    @Test
     void 보스_전체_조회() {
         val boss1 = bossService.create(new Boss("A", 1, EASY, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
         val boss2 = bossService.create(new Boss("A", 1, HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
