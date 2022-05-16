@@ -1,6 +1,5 @@
 package com.maple.api.eventlistener;
 
-import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserCertCodeRequestEvent;
 import com.maple.common.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
