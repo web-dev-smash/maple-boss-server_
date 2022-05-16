@@ -1,6 +1,5 @@
 package com.maple.common.boss.domain;
 
-import com.google.common.primitives.Longs;
 import com.maple.common.support.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,6 +9,9 @@ import org.apache.logging.log4j.util.Strings;
 import javax.persistence.*;
 
 import static com.maple.core.exception.Preconditions.require;
+import static java.util.Collections.max;
+import static java.util.Collections.min;
+import static java.util.List.of;
 
 /**
  * 보스
@@ -68,10 +70,11 @@ public class Boss extends BaseEntity {
                 final Long hpPhaseOne, final Long hpPhaseTwo, final Long hpPhaseThree, final Long hpPhaseFour,
                 final int arcaneForce, final int deathLimit) {
         require(Strings.isNotBlank(name), "이름은 필수입니다.");
-        require(Longs.max(entryMinLevel, entryMaxLevel) <= MAX_LEVEL, "최대 입장 가능 레벨을 초과 할 수 없습니다.");
-        require(Longs.min(entryMinLevel, entryMaxLevel) >= MIN_LEVEL, "최소 입장 가능 레벨 미만일 수 없습니다.");
+        require(max(of(entryMinLevel, entryMaxLevel)) <= MAX_LEVEL, "최대 입장 가능 레벨을 초과 할 수 없습니다.");
+        require(min(of(entryMinLevel, entryMaxLevel)) >= MIN_LEVEL, "최소 입장 가능 레벨 미만일 수 없습니다.");
         require(entryMinLevel < entryMaxLevel, "입장 최소는 최대보다 작아야 합니다.");
-        require(Longs.min(level, entryMinLevel, entryMaxLevel, hpPhaseOne, hpPhaseTwo, hpPhaseThree, hpPhaseFour, arcaneForce, deathLimit) > -1, "음수는 올 수 없습니다.");
+        require(min(of(level, entryMinLevel, entryMaxLevel, arcaneForce, deathLimit)) > -1, "음수는 올 수 없습니다.");
+        require(min(of(hpPhaseOne, hpPhaseTwo, hpPhaseThree, hpPhaseFour)) > -1, "음수는 올 수 없습니다.");
 
         this.name = name;
         this.level = level;
