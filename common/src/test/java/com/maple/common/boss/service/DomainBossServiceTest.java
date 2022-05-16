@@ -3,16 +3,13 @@ package com.maple.common.boss.service;
 import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.fixture.BossFixture;
-import com.maple.common.support.BaseServiceTest;
+import com.maple.core.support.BaseServiceTest;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.NoSuchElementException;
-
 import static com.maple.common.boss.domain.BossClass.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class DomainBossServiceTest extends BaseServiceTest {
 

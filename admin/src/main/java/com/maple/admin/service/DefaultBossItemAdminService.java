@@ -12,7 +12,7 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.maple.core.exception.Preconditions.notNull;
 
 @Service
 @Transactional
@@ -27,7 +27,7 @@ public class DefaultBossItemAdminService implements BossItemAdminService {
 
     @Override
     public FixedBossItem createFixedBossItem(FixedBossItemCreateDto dto) {
-        checkNotNull(dto, "고정 보스 아이템 dto 필수입니다.");
+        notNull(dto);
 
         val boss = bossRepository.findById(dto.bossId()).orElseThrow();
         val item = itemRepository.findById(dto.itemId()).orElseThrow();
@@ -39,7 +39,7 @@ public class DefaultBossItemAdminService implements BossItemAdminService {
 
     @Override
     public RandomBossItem createRandomBossItem(RandomBossItemCreateDto dto) {
-        checkNotNull(dto, "랜덤 보스 아이템 dto 필수입니다.");
+        notNull(dto);
 
         val boss = bossRepository.findById(dto.bossId()).orElseThrow();
         val item = itemRepository.findById(dto.itemId()).orElseThrow();

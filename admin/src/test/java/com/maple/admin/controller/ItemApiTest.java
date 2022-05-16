@@ -1,8 +1,8 @@
 package com.maple.admin.controller;
 
 import com.maple.admin.controller.dto.ItemCreateDto.ItemCreateRequest;
-import com.maple.admin.support.BaseApiTest;
 import com.maple.common.item.domain.ItemType;
+import com.maple.core.support.BaseApiTest;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

@@ -1,7 +1,7 @@
 package com.maple.common.item.domain;
 
 import com.maple.common.fixture.ItemFixture;
-import com.maple.common.support.BaseRepositoryTest;
+import com.maple.core.support.BaseRepositoryTest;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.maple.core.exception.Preconditions.notNull;
 
 @Service
 @Transactional
@@ -25,14 +25,14 @@ public class DomainBossItemService implements BossItemService {
 
     @Override
     public FixedBossItem createFixedBossItem(FixedBossItem fixedBossItem) {
-        checkNotNull(fixedBossItem, "고정 보스 아이템은 필수입니다");
+        notNull(fixedBossItem);
 
         return bossItemRepository.save(fixedBossItem);
     }
 
     @Override
     public RandomBossItem createRandomBossItem(RandomBossItem randomBossItem) {
-        checkNotNull(randomBossItem, "랜덤 보스 아이템은 필수입니다.");
+        notNull(randomBossItem);
 
         return bossItemRepository.save(randomBossItem);
     }

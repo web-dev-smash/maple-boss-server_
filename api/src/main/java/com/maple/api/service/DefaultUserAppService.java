@@ -9,6 +9,8 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.maple.core.exception.Preconditions.notNull;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,6 +22,8 @@ public class DefaultUserAppService implements UserAppService {
 
     @Override
     public User create(UserCreateDto dto) {
+        notNull(dto);
+
         val user = new User(dto.loginId(), dto.password(), dto.nickname(), dto.email());
 
         return userService.create(user, certCodeGenerator);

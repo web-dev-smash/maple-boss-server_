@@ -2,7 +2,6 @@ package com.maple.admin.controller;
 
 import com.maple.admin.controller.dto.FixedBossItemCreateDto.FixedBossItemCreateRequest;
 import com.maple.admin.controller.dto.RandomBossItemCreateDto.RandomBossItemCreateRequest;
-import com.maple.admin.support.BaseApiTest;
 import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.service.BossService;
 import com.maple.common.bossitem.domain.FixedBossItem;
@@ -12,6 +11,7 @@ import com.maple.common.bossitem.domain.RandomBossItemAmount;
 import com.maple.common.bossitem.service.BossItemService;
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.service.ItemService;
+import com.maple.core.support.BaseApiTest;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

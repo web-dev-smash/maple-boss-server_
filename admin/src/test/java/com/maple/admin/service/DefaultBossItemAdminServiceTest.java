@@ -2,11 +2,11 @@ package com.maple.admin.service;
 
 import com.maple.admin.service.dto.FixedBossItemCreateDto;
 import com.maple.admin.service.dto.RandomBossItemCreateDto;
-import com.maple.admin.support.BaseServiceTest;
 import com.maple.common.boss.domain.Boss;
 import com.maple.common.boss.service.BossService;
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.service.ItemService;
+import com.maple.core.support.BaseServiceTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

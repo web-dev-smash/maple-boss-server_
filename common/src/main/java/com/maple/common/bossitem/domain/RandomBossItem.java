@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.maple.core.exception.Preconditions.notNull;
 
 @Getter
 @Entity
@@ -18,9 +18,9 @@ public class RandomBossItem extends BossItem {
     private RandomBossItemAmount amount;
 
     public RandomBossItem(Boss boss, Item item, RandomBossItemAmount amount) {
-        checkNotNull(boss, "보스 필수입니다.");
-        checkNotNull(item, "아이템은 필수입니다.");
-        checkNotNull(amount, "아이템 수량은 필수입니다.");
+        notNull(boss);
+        notNull(item);
+        notNull(amount);
 
         this.boss = boss;
         this.item = item;

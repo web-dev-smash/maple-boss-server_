@@ -1,7 +1,7 @@
 package com.maple.admin.controller;
 
-import com.maple.common.exception.MapleBossException;
 import com.maple.common.notification.event.UnhandledExceptionEvent;
+import com.maple.core.exception.MapleBossException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

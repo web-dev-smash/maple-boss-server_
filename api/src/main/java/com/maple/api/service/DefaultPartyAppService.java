@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.maple.core.exception.Preconditions.notNull;
 
 @Service
 @Transactional
@@ -26,7 +26,7 @@ public class DefaultPartyAppService implements PartyAppService {
 
     @Override
     public Party create(PartyCreateDto dto) {
-        checkNotNull(dto);
+        notNull(dto);
 
         val leader = userRepository.getById(dto.leaderId());
 

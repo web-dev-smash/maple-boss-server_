@@ -1,11 +1,11 @@
 package com.maple.api.service;
 
 import com.maple.api.service.dto.PartyCreateDto;
-import com.maple.api.support.BaseServiceTest;
 import com.maple.common.party.service.PartyService;
 import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.service.UserService;
+import com.maple.core.support.BaseServiceTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

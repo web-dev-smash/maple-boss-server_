@@ -5,7 +5,7 @@ import com.maple.common.boss.domain.BossClass;
 import com.maple.common.boss.domain.BossRepository;
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.domain.ItemRepository;
-import com.maple.common.support.BaseRepositoryTest;
+import com.maple.core.support.BaseRepositoryTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
