@@ -1,1 +1,2 @@
-alter table user drop column name;
+alter table user
+    drop column name;
