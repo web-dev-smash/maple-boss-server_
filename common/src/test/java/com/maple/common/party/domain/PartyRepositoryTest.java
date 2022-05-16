@@ -1,10 +1,10 @@
 package com.maple.common.party.domain;
 
-import com.maple.common.support.BaseRepositoryTest;
 import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.MockCertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
+import com.maple.core.support.BaseRepositoryTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

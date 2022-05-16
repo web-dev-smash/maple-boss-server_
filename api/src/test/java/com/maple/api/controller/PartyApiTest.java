@@ -2,12 +2,12 @@ package com.maple.api.controller;
 
 import com.maple.api.controller.dto.PartyCreateDto.PartyCreateRequest;
 import com.maple.api.fixture.PartyFixture;
-import com.maple.api.support.BaseApiTest;
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.service.PartyService;
 import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.service.UserService;
+import com.maple.core.support.BaseApiTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -12,8 +12,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.OffsetDateTime;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.maple.core.exception.Preconditions.notNull;
+import static com.maple.core.exception.Preconditions.require;
 
 
 /**
@@ -42,9 +42,9 @@ public class Item extends BaseEntity {
     private final OffsetDateTime createAt = OffsetDateTime.now();
 
     public Item(String name, ItemType type) {
-        checkNotNull(type, "타입 필수입니다.");
+        notNull(type);
 
-        checkArgument(Strings.isNotBlank(name), "이름 필수입니다.");
+        require(Strings.isNotBlank(name), "이름 필수입니다.");
 
         this.name = name;
         this.type = type;

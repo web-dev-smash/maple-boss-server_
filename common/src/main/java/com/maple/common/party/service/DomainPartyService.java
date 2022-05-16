@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.maple.core.exception.Preconditions.notNull;
 
 @Service
 @Transactional
@@ -22,13 +22,15 @@ public class DomainPartyService implements PartyService {
 
     @Override
     public Party create(Party party) {
-        checkNotNull(party);
+        notNull(party);
 
         return partyRepository.save(party);
     }
 
     @Override
     public List<Party> getParties(User user) {
+        notNull(user);
+
         return partyRepository.findAllParty(user);
     }
 }

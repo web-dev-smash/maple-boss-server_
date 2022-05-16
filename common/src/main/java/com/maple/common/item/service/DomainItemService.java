@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.maple.core.exception.Preconditions.notNull;
 
 @Service
 @Transactional
@@ -19,7 +19,7 @@ public class DomainItemService implements ItemService {
 
     @Override
     public Item create(Item item) {
-        checkNotNull(item, "아이템은 필수입니다.");
+        notNull(item);
 
         return itemRepository.save(item);
     }

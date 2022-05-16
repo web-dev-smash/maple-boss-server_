@@ -12,11 +12,9 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.maple.common.exception.ErrorCode.*;
-import static com.maple.common.exception.MapleBossException.validate;
 import static com.maple.common.party.domain.PartyStatus.CREATED;
+import static com.maple.core.exception.ErrorCode.*;
+import static com.maple.core.exception.Preconditions.*;
 
 /**
  * 파티
@@ -53,8 +51,9 @@ public class Party extends BaseEntity {
     public static final int MAXIMUM_MEMBER = 6;
 
     public Party(User leader, String name, String description) {
-        checkNotNull(leader);
-        checkArgument(Strings.isNotBlank(name));
+        notNull(leader);
+
+        require(Strings.isNotBlank(name));
 
         this.leader = leader;
         this.name = name;
@@ -75,15 +74,16 @@ public class Party extends BaseEntity {
     }
 
     public void update(String name, String description) {
-        checkArgument(name != null && !name.isEmpty() && !name.isBlank());
+        require(Strings.isNotBlank(name));
 
         this.name = name;
         this.description = description;
     }
 
     public void addMember(User member) {
-        checkNotNull(member);
-        checkArgument(!isLeader(member));
+        notNull(member);
+
+        require(!isLeader(member));
 
         validate((members.size() < MAXIMUM_MEMBER), ALREADY_MAXIMUM_PARTY_MEMBER);
         validate(!members.contains(member), ALREADY_EXISTS_PARTY_MEMBER);
@@ -92,8 +92,9 @@ public class Party extends BaseEntity {
     }
 
     public void removeMember(User member) {
-        checkNotNull(member);
-        checkArgument(!isLeader(member));
+        notNull(member);
+
+        require(!isLeader(member));
 
         validate(members.contains(member), NOT_EXISTS_PARTY_MEMBER);
 
@@ -101,8 +102,9 @@ public class Party extends BaseEntity {
     }
 
     public void changeLeader(User member) {
-        checkNotNull(member);
-        checkArgument(members.contains(member));
+        notNull(member);
+
+        require(members.contains(member));
 
         this.leader = member;
     }

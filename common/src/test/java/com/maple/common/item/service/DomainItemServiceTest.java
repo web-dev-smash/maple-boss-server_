@@ -4,7 +4,7 @@ import com.maple.common.fixture.ItemFixture;
 import com.maple.common.item.domain.Item;
 import com.maple.common.item.domain.ItemRepository;
 import com.maple.common.item.domain.ItemType;
-import com.maple.common.support.BaseServiceTest;
+import com.maple.core.support.BaseServiceTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

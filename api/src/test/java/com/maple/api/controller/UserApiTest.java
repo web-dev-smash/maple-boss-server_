@@ -1,10 +1,10 @@
 package com.maple.api.controller;
 
-import com.maple.api.support.BaseApiTest;
 import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.domain.UserRepository;
 import com.maple.common.user.service.UserService;
+import com.maple.core.support.BaseApiTest;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

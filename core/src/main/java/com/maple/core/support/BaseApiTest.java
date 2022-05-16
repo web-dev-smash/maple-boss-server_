@@ -1,4 +1,4 @@
-package com.maple.admin.support;
+package com.maple.core.support;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

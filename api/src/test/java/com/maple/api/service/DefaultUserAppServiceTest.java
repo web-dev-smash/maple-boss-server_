@@ -1,8 +1,8 @@
 package com.maple.api.service;
 
 import com.maple.api.service.dto.UserCreateDto;
-import com.maple.api.support.BaseServiceTest;
 import com.maple.common.user.domain.UserRepository;
+import com.maple.core.support.BaseServiceTest;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

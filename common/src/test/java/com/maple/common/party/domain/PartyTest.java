@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static com.maple.common.exception.ErrorCode.*;
 import static com.maple.common.fixture.PartyFixture.createParty;
 import static com.maple.common.party.domain.Party.MAXIMUM_MEMBER;
-import static com.maple.common.support.MapleBossExceptionTest.assertThatMapleBossException;
+import static com.maple.core.exception.ErrorCode.*;
+import static com.maple.core.support.MapleBossExceptionTest.assertThatMapleBossException;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
