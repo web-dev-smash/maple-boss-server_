@@ -28,4 +28,9 @@ public class DefaultUserAppService implements UserAppService {
 
         return userService.create(user, certCodeGenerator);
     }
+
+    @Override
+    public void requestCertCode(long id) {
+        userService.requestCertCode(id, certCodeGenerator);
+    }
 }

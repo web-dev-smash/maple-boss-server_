@@ -71,10 +71,8 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public String prepareCertCode(CertCodeGenerator certCodeGenerator) {
+    public void prepareCertCode(CertCodeGenerator certCodeGenerator) {
         this.certCode = certCodeGenerator.generate();
-
-        return this.certCode;
     }
 
     public void activate(String certCode, OffsetDateTime currentTime) {

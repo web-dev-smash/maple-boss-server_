@@ -9,4 +9,9 @@ public interface UserAppService {
      * 유저 생성
      */
     User create(UserCreateDto dto);
+
+    /**
+     * 인증코드 요청
+     */
+    void requestCertCode(long id);
 }
