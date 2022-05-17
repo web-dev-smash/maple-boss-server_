@@ -29,10 +29,10 @@ public class DefaultBossItemAdminService implements BossItemAdminService {
     public FixedBossItem createFixedBossItem(FixedBossItemCreateDto dto) {
         notNull(dto);
 
-        val boss = bossRepository.findById(dto.bossId()).orElseThrow();
-        val item = itemRepository.findById(dto.itemId()).orElseThrow();
+        val boss = bossRepository.findById(dto.getBossId()).orElseThrow();
+        val item = itemRepository.findById(dto.getItemId()).orElseThrow();
 
-        val fixedBossItem = new FixedBossItem(boss, item, dto.amount(), dto.price());
+        val fixedBossItem = new FixedBossItem(boss, item, dto.getAmount(), dto.getPrice());
 
         return bossItemService.createFixedBossItem(fixedBossItem);
     }
@@ -41,10 +41,10 @@ public class DefaultBossItemAdminService implements BossItemAdminService {
     public RandomBossItem createRandomBossItem(RandomBossItemCreateDto dto) {
         notNull(dto);
 
-        val boss = bossRepository.findById(dto.bossId()).orElseThrow();
-        val item = itemRepository.findById(dto.itemId()).orElseThrow();
+        val boss = bossRepository.findById(dto.getBossId()).orElseThrow();
+        val item = itemRepository.findById(dto.getItemId()).orElseThrow();
 
-        val randomBossItem = new RandomBossItem(boss, item, dto.amount());
+        val randomBossItem = new RandomBossItem(boss, item, dto.getAmount());
 
         return bossItemService.createRandomBossItem(randomBossItem);
     }

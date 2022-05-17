@@ -66,9 +66,9 @@ public class Boss extends BaseEntity {
     // TODO: 2022/04/09 정확한 최소 레벨 확인 후 변경 필요
     public static final int MIN_LEVEL = 0;
 
-    public Boss(final String name, final int level, final BossClass clazz, final int entryMinLevel, final int entryMaxLevel,
-                final Long hpPhaseOne, final Long hpPhaseTwo, final Long hpPhaseThree, final Long hpPhaseFour,
-                final int arcaneForce, final int deathLimit) {
+    public Boss(String name, int level, BossClass clazz, int entryMinLevel, int entryMaxLevel,
+                Long hpPhaseOne, Long hpPhaseTwo, Long hpPhaseThree, Long hpPhaseFour,
+                int arcaneForce, int deathLimit) {
         require(Strings.isNotBlank(name), "이름은 필수입니다.");
         require(max(List.of(entryMinLevel, entryMaxLevel)) <= MAX_LEVEL, "최대 입장 가능 레벨을 초과 할 수 없습니다.");
         require(min(List.of(entryMinLevel, entryMaxLevel)) >= MIN_LEVEL, "최소 입장 가능 레벨 미만일 수 없습니다.");
@@ -88,6 +88,9 @@ public class Boss extends BaseEntity {
         this.arcaneForce = arcaneForce;
         this.deathLimit = deathLimit;
     }
+
+
+
 
     public long totalHpPhase() {
         return hpPhaseOne + hpPhaseTwo + hpPhaseThree + hpPhaseFour;

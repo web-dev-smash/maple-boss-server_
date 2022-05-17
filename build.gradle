@@ -7,8 +7,8 @@ plugins {
 subprojects {
     group = 'com.maple'
     version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'

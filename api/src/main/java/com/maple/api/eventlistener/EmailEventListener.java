@@ -15,7 +15,7 @@ public class EmailEventListener {
 
     @EventListener(UserCertCodeRequestEvent.class)
     public void onUserCertCodeRequest(UserCertCodeRequestEvent event) {
-        val user = userRepository.findById(event.id()).orElseThrow();
+        val user = userRepository.findById(event.getId()).orElseThrow();
 
         // TODO: 2022/05/16 이메일 서비스 연결 필요
     }

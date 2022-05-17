@@ -1,9 +1,14 @@
 package com.maple.api.service.dto;
 
-public record UserCreateDto(
-        String loginId,
-        String password,
-        String nickname,
-        String email
-) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class UserCreateDto {
+    private String loginId;
+    private String password;
+    private String nickname;
+    private String email;
 }
+

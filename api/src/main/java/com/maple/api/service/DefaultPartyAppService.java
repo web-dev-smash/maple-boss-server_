@@ -28,9 +28,9 @@ public class DefaultPartyAppService implements PartyAppService {
     public Party create(PartyCreateDto dto) {
         notNull(dto);
 
-        val leader = userRepository.getById(dto.leaderId());
+        val leader = userRepository.getById(dto.getLeaderId());
 
-        val party = new Party(leader, dto.name(), dto.description());
+        val party = new Party(leader, dto.getName(), dto.getDescription());
 
         return partyService.create(party);
     }

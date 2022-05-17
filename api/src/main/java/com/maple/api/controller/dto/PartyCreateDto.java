@@ -1,33 +1,40 @@
 package com.maple.api.controller.dto;
 
 import com.maple.common.party.domain.Party;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.time.OffsetDateTime;
 
 public class PartyCreateDto {
 
-    public record PartyCreateRequest(
-            long leaderId,
-            String name,
-            String description
-    ) {
+    @Getter
+    @AllArgsConstructor
+    public static class PartyCreateRequest {
+        private long leaderId;
+        private String name;
+        private String description;
 
         public com.maple.api.service.dto.PartyCreateDto toDto() {
             return new com.maple.api.service.dto.PartyCreateDto(this.leaderId, this.name, this.description);
         }
     }
 
-    public record PartyCreateResponse(PartyCreateData party) {
+    @Getter
+    @AllArgsConstructor
+    public static class PartyCreateResponse {
+        private PartyCreateData party;
     }
 
-    public record PartyCreateData(
-            long id,
-            long leaderId,
-            String leaderNickname,
-            String name,
-            String description,
-            OffsetDateTime createAt
-    ) {
+    @Getter
+    @AllArgsConstructor
+    public static class PartyCreateData {
+        private long id;
+        private long leaderId;
+        private String leaderNickname;
+        private String name;
+        private String description;
+        private OffsetDateTime createAt;
 
         public static PartyCreateData create(Party party) {
             return new PartyCreateData(
