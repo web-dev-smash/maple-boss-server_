@@ -24,7 +24,7 @@ public class DefaultUserAppService implements UserAppService {
     public User create(UserCreateDto dto) {
         notNull(dto);
 
-        val user = new User(dto.loginId(), dto.password(), dto.nickname(), dto.email());
+        val user = new User(dto.getLoginId(), dto.getPassword(), dto.getNickname(), dto.getEmail());
 
         return userService.create(user, certCodeGenerator);
     }

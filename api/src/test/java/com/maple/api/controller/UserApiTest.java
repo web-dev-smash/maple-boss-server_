@@ -51,9 +51,9 @@ class UserApiTest extends BaseApiTest {
                 .andExpect(status().isOk())
                 .andExpectAll(
                         jsonPath("$.user.id").isNotEmpty(),
-                        jsonPath("$.user.loginId").value(req.loginId()),
-                        jsonPath("$.user.nickname").value(req.nickname()),
-                        jsonPath("$.user.email").value(req.email()),
+                        jsonPath("$.user.loginId").value(req.getLoginId()),
+                        jsonPath("$.user.nickname").value(req.getNickname()),
+                        jsonPath("$.user.email").value(req.getEmail()),
                         jsonPath("$.user.status").value(CREATED.name()),
                         jsonPath("$.user.createAt").isNotEmpty()
                 );

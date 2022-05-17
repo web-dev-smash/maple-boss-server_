@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface PartyRepository extends JpaRepository<Party, Long> {
 
-    @Query("""
-            select p
-            from Party p
-            join fetch p.members m
-            where m = :user
-            """)
+    @Query(
+            "select p "+
+            "from Party p "+
+            "join fetch p.members m "+
+            "where m = :user"
+            )
     List<Party> findAllParty(User user);
 }

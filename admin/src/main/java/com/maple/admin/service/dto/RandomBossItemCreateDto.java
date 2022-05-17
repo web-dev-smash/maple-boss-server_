@@ -1,10 +1,13 @@
 package com.maple.admin.service.dto;
 
 import com.maple.common.bossitem.domain.RandomBossItemAmount;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public record RandomBossItemCreateDto(
-        long bossId,
-        long itemId,
-        RandomBossItemAmount amount
-) {
+@Getter
+@AllArgsConstructor
+public class RandomBossItemCreateDto {
+    private long bossId;
+    private long itemId;
+    private RandomBossItemAmount amount;
 }

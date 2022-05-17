@@ -2,6 +2,8 @@ package com.maple.admin.controller;
 
 import com.maple.common.notification.event.UnhandledExceptionEvent;
 import com.maple.core.exception.MapleBossException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -42,9 +44,15 @@ public class ApiAdvice {
         return new ErrorResponse(new ErrorData(message));
     }
 
-    public record ErrorResponse(ErrorData error) {
+    @Getter
+    @AllArgsConstructor
+    public static class ErrorResponse {
+        private ErrorData error;
     }
 
-    public record ErrorData(String message) {
+    @Getter
+    @AllArgsConstructor
+    public static class ErrorData {
+        private String message;
     }
 }
