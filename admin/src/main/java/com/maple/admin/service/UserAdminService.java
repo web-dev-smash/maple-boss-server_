@@ -9,5 +9,5 @@ public interface UserAdminService {
     /**
      * 전체 유저 목록 조회
      */
-    Page<User> getAllUser(Pageable pageable);
+    Page<User> getAllUsers(Pageable pageable);
 }

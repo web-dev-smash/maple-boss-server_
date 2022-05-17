@@ -17,7 +17,7 @@ public class DefaultUserAdminService implements UserAdminService{
     private final UserRepository userRepository;
 
     @Override
-    public Page<User> getAllUser(Pageable pageable) {
+    public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 }

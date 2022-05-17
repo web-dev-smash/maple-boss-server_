@@ -42,8 +42,8 @@ class DefaultUserAdminServiceTest extends BaseServiceTest {
 
     @Test
     void 전체_유저_조회_성공() {
-        Page<User> page1Users = userAdminService.getAllUser(PageRequest.of(0, 4));
-        Page<User> page2Users = userAdminService.getAllUser(PageRequest.of(1, 4));
+        Page<User> page1Users = userAdminService.getAllUsers(PageRequest.of(0, 4));
+        Page<User> page2Users = userAdminService.getAllUsers(PageRequest.of(1, 4));
 
         assertThat(page1Users).containsExactly(user1, user2, user3, user4);
         assertThat(page2Users).containsExactly(user5, user6);
