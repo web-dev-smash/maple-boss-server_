@@ -2,6 +2,8 @@ package com.maple.admin.controller.dto;
 
 import com.maple.common.party.domain.Party;
 import com.maple.common.party.domain.PartyStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.time.OffsetDateTime;
@@ -9,12 +11,13 @@ import java.util.List;
 
 public class PartyGetAllDto {
 
-    public record PartyGetAllResponse(
-            List<PartyGetAllData> parties,
-            int totalPages,
-            long totalElements,
-            boolean last
-    ) {
+    @Getter
+    @AllArgsConstructor
+    public static class PartyGetAllResponse {
+        private List<PartyGetAllData> parties;
+        private int totalPages;
+        private long totalElements;
+        private boolean last;
 
         public static PartyGetAllResponse create(Page<Party> parties) {
             return new PartyGetAllResponse(
@@ -23,15 +26,16 @@ public class PartyGetAllDto {
         }
     }
 
-    public record PartyGetAllData(
-            long id,
-            long leaderId,
-            String leaderNickname,
-            String name,
-            String description,
-            PartyStatus status,
-            OffsetDateTime createAt
-    ) {
+    @Getter
+    @AllArgsConstructor
+    public static class PartyGetAllData {
+        private long id;
+        private long leaderId;
+        private String leaderNickname;
+        private String name;
+        private String description;
+        private PartyStatus status;
+        private OffsetDateTime createAt;
 
         private PartyGetAllData(Party party) {
             this(

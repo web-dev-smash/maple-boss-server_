@@ -111,7 +111,7 @@ class DomainUserServiceTest extends BaseServiceTest {
         val foundUser = userRepository.findById(this.user.getId()).orElseThrow();
 
         assertThat(foundUser.getCertCode()).isEqualTo("REACTIVE_CODE");
-        assertThat(applicationEvents.stream(UserCertCodeRequestEvent.class).findFirst().orElseThrow().id()).isEqualTo(user.getId());
+        assertThat(applicationEvents.stream(UserCertCodeRequestEvent.class).findFirst().orElseThrow().getId()).isEqualTo(user.getId());
     }
 
     @Test

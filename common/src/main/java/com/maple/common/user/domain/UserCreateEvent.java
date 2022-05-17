@@ -1,4 +1,10 @@
 package com.maple.common.user.domain;
 
-public record UserCreateEvent(long userId) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class UserCreateEvent{
+    private long userId;
 }

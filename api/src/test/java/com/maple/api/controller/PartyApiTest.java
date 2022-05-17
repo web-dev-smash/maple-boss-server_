@@ -55,8 +55,8 @@ class PartyApiTest extends BaseApiTest {
                         jsonPath("$.party.id").isNotEmpty(),
                         jsonPath("$.party.leaderId").value(user.getId()),
                         jsonPath("$.party.leaderNickname").value(user.getNickname()),
-                        jsonPath("$.party.name").value(req.name()),
-                        jsonPath("$.party.description").value(req.description()),
+                        jsonPath("$.party.name").value(req.getName()),
+                        jsonPath("$.party.description").value(req.getDescription()),
                         jsonPath("$.party.createAt").isNotEmpty()
                 );
     }
@@ -95,7 +95,7 @@ class PartyApiTest extends BaseApiTest {
                 jsonPath("$.parties[{index}].leaderNickname".replace("{index}", indexString)).value(leader.getNickname()),
                 jsonPath("$.parties[{index}].name".replace("{index}", indexString)).value(party.getName()),
                 jsonPath("$.parties[{index}].description".replace("{index}", indexString)).value(party.getDescription()),
-                jsonPath("$.parties[{index}].isLeader".replace("{index}", indexString)).value(party.isLeader(member)),
+                jsonPath("$.parties[{index}].leader".replace("{index}", indexString)).value(party.isLeader(member)),
                 jsonPath("$.parties[{index}].createAt".replace("{index}", indexString)).isNotEmpty()
         ).toArray(ResultMatcher[]::new);
     }
