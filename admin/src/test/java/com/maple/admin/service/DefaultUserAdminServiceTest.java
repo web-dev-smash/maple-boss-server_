@@ -4,10 +4,10 @@ import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.service.UserService;
 import com.maple.core.support.BaseServiceTest;
+import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,8 +42,8 @@ class DefaultUserAdminServiceTest extends BaseServiceTest {
 
     @Test
     void 전체_유저_조회_성공() {
-        Page<User> page1Users = userAdminService.getAllUsers(PageRequest.of(0, 4));
-        Page<User> page2Users = userAdminService.getAllUsers(PageRequest.of(1, 4));
+        val page1Users = userAdminService.getAllUsers(PageRequest.of(0, 4));
+        val page2Users = userAdminService.getAllUsers(PageRequest.of(1, 4));
 
         assertThat(page1Users).containsExactly(user1, user2, user3, user4);
         assertThat(page2Users).containsExactly(user5, user6);
