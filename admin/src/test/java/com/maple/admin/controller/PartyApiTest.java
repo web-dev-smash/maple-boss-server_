@@ -17,7 +17,6 @@ import java.util.List;
 import static com.maple.admin.fixture.PartyFixture.createParty;
 import static com.maple.admin.fixture.UserFixture.createUser;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -60,7 +59,6 @@ class PartyApiTest extends BaseApiTest {
         mockMvc.perform(get("/party")
                         .param("page", "0")
                         .param("size", "3"))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(파티_목록_조회_검증(0, party1))
                 .andExpectAll(파티_목록_조회_검증(1, party2))
@@ -80,6 +78,4 @@ class PartyApiTest extends BaseApiTest {
                 jsonPath("$.parties[{index}].createAt".replace("{index}", indexString)).isNotEmpty()
         ).toArray(ResultMatcher[]::new);
     }
-
-
 }
