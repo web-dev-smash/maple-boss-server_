@@ -6,7 +6,7 @@ import com.maple.common.user.domain.User;
 public interface UserAppService {
 
     /**
-     * 유저 생성
+     * 생성
      */
     User create(UserCreateDto dto);
 
@@ -14,4 +14,9 @@ public interface UserAppService {
      * 인증코드 요청
      */
     void requestCertCode(long id);
+
+    /**
+     * 비활성화 준비
+     */
+    void prepareWithdrawal(long id, String certCode);
 }

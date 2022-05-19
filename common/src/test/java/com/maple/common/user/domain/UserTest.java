@@ -142,10 +142,40 @@ class UserTest {
     @Test
     void 비활성화_준비_성공() {
         user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
 
-        user.prepareInactivate();
+        user.prepareInactivate(user.getCertCode());
 
         assertThat(user.getStatus()).isEqualTo(INACTIVATING);
+    }
+
+    @Test
+    void 비활성화_준비_실패__인증코드_null() {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        assertThatNullPointerException()
+                .isThrownBy(() -> user.prepareInactivate(null));
+    }
+
+    @Test
+    void 비활성화_준비_실패__인증코드_공백() {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        String blankCode = "    ";
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> user.prepareInactivate(blankCode));
+    }
+
+    @Test
+    void 비활성화_준비_실패__인증코드_불일치() {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        assertThatMapleBossException(INVALID_CERT_CODE)
+                .isThrownBy(() -> user.prepareInactivate("FAKE_INACTIVATING_CODE"));
     }
 
     @Test

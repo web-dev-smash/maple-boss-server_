@@ -38,7 +38,7 @@ public interface UserService {
      * <p>
      * status = INACTIVATING
      */
-    void prepareWithdrawal(long id);
+    void prepareWithdrawal(long id, String certCode);
 
     /**
      * 인증코드 요청

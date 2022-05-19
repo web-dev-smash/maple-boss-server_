@@ -33,4 +33,9 @@ public class DefaultUserAppService implements UserAppService {
     public void requestCertCode(long id) {
         userService.requestCertCode(id, certCodeGenerator);
     }
+
+    @Override
+    public void prepareWithdrawal(long id, String certCode) {
+        userService.prepareWithdrawal(id, certCode);
+    }
 }

@@ -91,20 +91,11 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 탈퇴_준비() {
-        user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
-
-        userService.prepareWithdrawal(user.getId());
-
-        val foundUser = userRepository.findById(user.getId()).orElseThrow();
-
-        assertThat(foundUser.getStatus()).isEqualTo(INACTIVATING);
-    }
-
-    @Test
     void 인증코드_요청() {
-        userService.activate(user.getId(), "code", OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10));
-        userService.prepareWithdrawal(user.getId());
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        userService.prepareWithdrawal(user.getId(), "INACTIVATING_CODE");
 
         userService.requestCertCode(user.getId(), () -> "REACTIVE_CODE");
 
@@ -112,6 +103,27 @@ class DomainUserServiceTest extends BaseServiceTest {
 
         assertThat(foundUser.getCertCode()).isEqualTo("REACTIVE_CODE");
         assertThat(applicationEvents.stream(UserCertCodeRequestEvent.class).findFirst().orElseThrow().getId()).isEqualTo(user.getId());
+    }
+
+    @Test
+    void 탈퇴_준비() {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        userService.prepareWithdrawal(user.getId(), "INACTIVATING_CODE");
+
+        val foundUser = userRepository.findById(user.getId()).orElseThrow();
+
+        assertThat(foundUser.getStatus()).isEqualTo(INACTIVATING);
+    }
+
+    @Test
+    void 탈퇴_준비_실패__인증코드_불일치() {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        assertThatMapleBossException(INVALID_CERT_CODE)
+                .isThrownBy(() -> userService.prepareWithdrawal(user.getId(),"FAKE_INACTIVATING_CODE"));
     }
 
     @Test
