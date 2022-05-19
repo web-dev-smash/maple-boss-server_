@@ -1,6 +1,7 @@
 package com.maple.api.service;
 
 import com.maple.api.service.dto.UserCreateDto;
+import com.maple.api.service.dto.UserPrepareWithdrawalDto;
 import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 import com.maple.common.user.service.UserService;
@@ -35,7 +36,7 @@ public class DefaultUserAppService implements UserAppService {
     }
 
     @Override
-    public void prepareWithdrawal(long id, String certCode) {
-        userService.prepareWithdrawal(id, certCode);
+    public void prepareWithdrawal(UserPrepareWithdrawalDto dto) {
+        userService.prepareInactivate(dto.getId(), dto.getCertCode());
     }
 }

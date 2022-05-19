@@ -95,7 +95,7 @@ class DomainUserServiceTest extends BaseServiceTest {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
 
-        userService.prepareWithdrawal(user.getId(), "INACTIVATING_CODE");
+        userService.prepareInactivate(user.getId(), "INACTIVATING_CODE");
 
         userService.requestCertCode(user.getId(), () -> "REACTIVE_CODE");
 
@@ -106,11 +106,11 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 탈퇴_준비() {
+    void 탈퇴_준비_성공() {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
 
-        userService.prepareWithdrawal(user.getId(), "INACTIVATING_CODE");
+        userService.prepareInactivate(user.getId(), "INACTIVATING_CODE");
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
@@ -123,7 +123,7 @@ class DomainUserServiceTest extends BaseServiceTest {
         user.certCode = "INACTIVATING_CODE";
 
         assertThatMapleBossException(INVALID_CERT_CODE)
-                .isThrownBy(() -> userService.prepareWithdrawal(user.getId(),"FAKE_INACTIVATING_CODE"));
+                .isThrownBy(() -> userService.prepareInactivate(user.getId(),"FAKE_INACTIVATING_CODE"));
     }
 
     @Test

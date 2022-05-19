@@ -45,7 +45,7 @@ public class DomainUserService implements UserService {
     }
 
     @Override
-    public void prepareWithdrawal(long id, String certCode) {
+    public void prepareInactivate(long id, String certCode) {
         val user = userRepository.findById(id).orElseThrow();
 
         user.prepareInactivate(certCode);
