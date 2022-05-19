@@ -100,6 +100,19 @@ project(':api') {
     tasks.named('test') {
         useJUnitPlatform()
     }
+
+    tasks.named("bootJar") {
+        archiveFileName.set("maple-boss-api.jar")
+    }
+
+    tasks.register("zip", Zip.class) {
+        dependsOn("bootJar")
+        archiveFileName.set("maple-boss-api.zip")
+
+        from("build/libs/maple-boss-api.jar") { into("") }
+        from("../.platform") { into(".platform") }
+        from("../procfiles/api/Procfile") { into("") }
+    }
 }
 
 project(':admin') {
