@@ -18,7 +18,7 @@ public class UserApi {
     private final UserAppService userAppService;
 
     /**
-     * 유저 가입.
+     * 유저 가입
      */
     @PostMapping
     public UserCreateResponse create(@RequestBody UserCreateRequest req) {
