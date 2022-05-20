@@ -45,10 +45,10 @@ public class DomainUserService implements UserService {
     }
 
     @Override
-    public void prepareInactivate(long id, String certCode) {
+    public void prepareInactivate(long id, String certCode, OffsetDateTime currentTime) {
         val user = userRepository.findById(id).orElseThrow();
 
-        user.prepareInactivate(certCode);
+        user.prepareInactivate(certCode, currentTime);
     }
 
     @Override

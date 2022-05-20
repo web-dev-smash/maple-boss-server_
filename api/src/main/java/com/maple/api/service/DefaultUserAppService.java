@@ -10,6 +10,9 @@ import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
+
+import static com.maple.common.user.domain.User.CERTIFICATE_MINUTES;
 import static com.maple.core.exception.Preconditions.notNull;
 
 @Service
@@ -37,6 +40,6 @@ public class DefaultUserAppService implements UserAppService {
 
     @Override
     public void prepareWithdrawal(UserPrepareWithdrawalDto dto) {
-        userService.prepareInactivate(dto.getId(), dto.getCertCode());
+        userService.prepareInactivate(dto.getId(), dto.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10));
     }
 }

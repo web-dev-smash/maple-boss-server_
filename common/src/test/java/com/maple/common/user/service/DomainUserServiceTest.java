@@ -95,7 +95,9 @@ class DomainUserServiceTest extends BaseServiceTest {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
 
-        userService.prepareInactivate(user.getId(), "INACTIVATING_CODE");
+        val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
+
+        userService.prepareInactivate(user.getId(), "INACTIVATING_CODE", currentTime);
 
         userService.requestCertCode(user.getId(), () -> "REACTIVE_CODE");
 
@@ -110,7 +112,9 @@ class DomainUserServiceTest extends BaseServiceTest {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
 
-        userService.prepareInactivate(user.getId(), "INACTIVATING_CODE");
+        val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
+
+        userService.prepareInactivate(user.getId(), "INACTIVATING_CODE", currentTime);
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
@@ -122,8 +126,10 @@ class DomainUserServiceTest extends BaseServiceTest {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
 
+        val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
+
         assertThatMapleBossException(INVALID_CERT_CODE)
-                .isThrownBy(() -> userService.prepareInactivate(user.getId(),"FAKE_INACTIVATING_CODE"));
+                .isThrownBy(() -> userService.prepareInactivate(user.getId(),"FAKE_INACTIVATING_CODE", currentTime));
     }
 
     @Test

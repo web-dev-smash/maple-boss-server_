@@ -41,7 +41,7 @@ class UserTest {
         assertThat(user.getEmail()).isEqualTo("goyounha11@naver.com");
         assertThat(user.getCertCode()).isNull();
         assertThat(user.getStatus()).isEqualTo(CREATED);
-        assertThat(user.getCreateAt()).isNotNull();
+        assertThat(user.getCreatedAt()).isNotNull();
     }
 
     @ParameterizedTest
@@ -144,7 +144,7 @@ class UserTest {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
 
-        user.prepareInactivate(user.getCertCode());
+        user.prepareInactivate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10));
 
         assertThat(user.getStatus()).isEqualTo(INACTIVATING);
     }
@@ -156,7 +156,7 @@ class UserTest {
         user.certCode = "INACTIVATING_CODE";
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> user.prepareInactivate((certCode)));
+                .isThrownBy(() -> user.prepareInactivate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES - 1)));
     }
 
     @Test
@@ -167,7 +167,7 @@ class UserTest {
         val blankCode = " ";
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> user.prepareInactivate(blankCode));
+                .isThrownBy(() -> user.prepareInactivate(blankCode, OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10)));
     }
 
     @Test
@@ -176,7 +176,13 @@ class UserTest {
         user.certCode = "INACTIVATING_CODE";
 
         assertThatMapleBossException(INVALID_CERT_CODE)
-                .isThrownBy(() -> user.prepareInactivate("FAKE_INACTIVATING_CODE"));
+                .isThrownBy(() -> user.prepareInactivate("FAKE_INACTIVATING_CODE",OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10)));
+    }
+
+    @Test
+    void 비활성화_실패__이메일_인증_시간_초과() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> user.prepareInactivate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES - 1)));
     }
 
     @Test

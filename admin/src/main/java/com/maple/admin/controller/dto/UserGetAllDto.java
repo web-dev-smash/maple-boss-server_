@@ -34,11 +34,11 @@ public class UserGetAllDto {
         private String nickname;
         private String email;
         private UserStatus status;
-        private OffsetDateTime createAt;
+        private OffsetDateTime createdAt;
 
         private UserGetAllData(User user) {
             this(user.getId(), user.getLoginId(), user.getNickname(),
-                    user.getEmail(), user.getStatus(), user.getCreateAt());
+                    user.getEmail(), user.getStatus(), user.getCreatedAt());
         }
 
         private static List<UserGetAllData> create(Page<User> users) {

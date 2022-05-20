@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import java.time.OffsetDateTime;
+
 import static com.maple.api.controller.dto.UserCreateDto.UserCreateRequest;
 import static com.maple.api.controller.dto.UserPrepareWithdrawalDto.UserPrepareWithdrawalRequest;
 import static com.maple.api.fixture.UserFixture.createUser;
@@ -52,7 +54,7 @@ class UserApiTest extends BaseApiTest {
                         jsonPath("$.user.nickname").value(req.getNickname()),
                         jsonPath("$.user.email").value(req.getEmail()),
                         jsonPath("$.user.status").value(CREATED.name()),
-                        jsonPath("$.user.createAt").isNotEmpty()
+                        jsonPath("$.user.createdAt").isNotEmpty()
                 );
     }
 
@@ -60,6 +62,8 @@ class UserApiTest extends BaseApiTest {
     void 유저_탈퇴_준비() throws Exception {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
+        user.certCodeSentAt = OffsetDateTime.now();
+
         val req = new UserPrepareWithdrawalRequest(user.getId(), user.getCertCode());
 
         mockMvc.perform(post("/user/prepare-withdrawal")

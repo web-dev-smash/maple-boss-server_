@@ -38,7 +38,7 @@ public interface UserService {
      * <p>
      * status = INACTIVATING
      */
-    void prepareInactivate(long id, String certCode);
+    void prepareInactivate(long id, String certCode, OffsetDateTime currentTime);
 
     /**
      * 인증코드 요청
