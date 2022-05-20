@@ -11,4 +11,3 @@ public class UserCreateDto {
     private String nickname;
     private String email;
 }
-

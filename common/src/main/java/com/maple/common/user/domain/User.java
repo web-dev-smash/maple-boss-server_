@@ -87,8 +87,12 @@ public class User extends BaseEntity {
         this.status = ACTIVATED;
     }
 
-    public void prepareInactivate() {
+    public void prepareInactivate(String certCode) {
+        require(Strings.isNotBlank(certCode));
+
         check(CAN_MOVE_TO_INACTIVATING.contains(this.status));
+
+        validate(this.certCode.equals(certCode), INVALID_CERT_CODE);
 
         this.status = INACTIVATING;
     }

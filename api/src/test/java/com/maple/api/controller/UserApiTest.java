@@ -11,13 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import java.time.OffsetDateTime;
-
 import static com.maple.api.controller.dto.UserCreateDto.UserCreateRequest;
+import static com.maple.api.controller.dto.UserPrepareWithdrawalDto.UserPrepareWithdrawalRequest;
 import static com.maple.api.fixture.UserFixture.createUser;
-import static com.maple.common.user.domain.User.CERTIFICATE_MINUTES;
-import static com.maple.common.user.domain.UserStatus.CREATED;
-import static com.maple.common.user.domain.UserStatus.INACTIVATING;
+import static com.maple.common.user.domain.UserStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -61,10 +58,13 @@ class UserApiTest extends BaseApiTest {
 
     @Test
     void 유저_탈퇴_준비() throws Exception {
-        user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1));
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+        val req = new UserPrepareWithdrawalRequest(user.getId(), user.getCertCode());
 
-        mockMvc.perform(post("/user/{id}/prepare-withdrawal", user.getId())
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post("/user/prepare-withdrawal")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(req)))
                 .andExpect(status().isOk());
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();

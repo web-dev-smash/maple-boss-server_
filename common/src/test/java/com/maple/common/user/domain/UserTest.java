@@ -52,7 +52,7 @@ class UserTest {
 
     @Test
     void 유저_생성_실패__로그인아이디_공백() {
-        val loginId = "     ";
+        val loginId = " ";
         assertThatIllegalArgumentException().isThrownBy(() -> new User(loginId, "1", "쩌로", "goyounha11@naver.com"));
     }
 
@@ -64,7 +64,7 @@ class UserTest {
 
     @Test
     void 유저_생성_실패__비밀번호가_공백() {
-        val password = "     ";
+        val password = " ";
         assertThatIllegalArgumentException().isThrownBy(() -> new User("goyounha11", password, "쩌로", "goyounha11@naver.com"));
     }
 
@@ -76,7 +76,7 @@ class UserTest {
 
     @Test
     void 유저_생성_실패__유저_닉네임이_공백() {
-        val nickname = "     ";
+        val nickname = " ";
         assertThatIllegalArgumentException().isThrownBy(() -> new User("goyounha11", "1", nickname, "goyounha11@naver.com"));
     }
 
@@ -88,7 +88,7 @@ class UserTest {
 
     @Test
     void 유저_이메일이_공백이면_실패() {
-        val email = "     ";
+        val email = " ";
         assertThatIllegalArgumentException().isThrownBy(() -> new User("goyounha11", "1", "쩌로", email));
     }
 
@@ -142,10 +142,41 @@ class UserTest {
     @Test
     void 비활성화_준비_성공() {
         user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
 
-        user.prepareInactivate();
+        user.prepareInactivate(user.getCertCode());
 
         assertThat(user.getStatus()).isEqualTo(INACTIVATING);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 비활성화_준비_실패__인증코드가_null_이거나_빈값(String certCode) {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> user.prepareInactivate((certCode)));
+    }
+
+    @Test
+    void 비활성화_준비_실패__인증코드_공백() {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        val blankCode = " ";
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> user.prepareInactivate(blankCode));
+    }
+
+    @Test
+    void 비활성화_준비_실패__인증코드_불일치() {
+        user.status = ACTIVATED;
+        user.certCode = "INACTIVATING_CODE";
+
+        assertThatMapleBossException(INVALID_CERT_CODE)
+                .isThrownBy(() -> user.prepareInactivate("FAKE_INACTIVATING_CODE"));
     }
 
     @Test

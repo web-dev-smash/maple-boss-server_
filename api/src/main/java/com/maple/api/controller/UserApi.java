@@ -7,6 +7,7 @@ import lombok.val;
 import org.springframework.web.bind.annotation.*;
 
 import static com.maple.api.controller.dto.UserCreateDto.*;
+import static com.maple.api.controller.dto.UserPrepareWithdrawalDto.UserPrepareWithdrawalRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -28,20 +29,20 @@ public class UserApi {
     }
 
     /**
-     * 유저 탈퇴 준비
-     * TODO: Security 이후 로그인한 유저 ID가 leader ID로 대체
-     */
-    @PostMapping("/{id}/prepare-withdrawal")
-    public void prepareWithdrawal(@PathVariable Long id) {
-        userService.prepareWithdrawal(id);
-    }
-
-    /**
      * 인증코드 요청
      * TODO: Security 이후 로그인한 유저 ID가 leader ID로 대체
      */
     @PostMapping("/{id}/request-certcode")
     public void requestCertCode(@PathVariable Long id) {
         userAppService.requestCertCode(id);
+    }
+
+    /**
+     * 유저 탈퇴 준비
+     * TODO: Security 이후 로그인한 유저 ID가 leader ID로 대체
+     */
+    @PostMapping("/prepare-withdrawal")
+    public void prepareWithdrawal(@RequestBody UserPrepareWithdrawalRequest req) {
+        userAppService.prepareWithdrawal(req.toDto());
     }
 }
