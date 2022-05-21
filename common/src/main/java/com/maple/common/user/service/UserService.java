@@ -3,8 +3,6 @@ package com.maple.common.user.service;
 import com.maple.common.user.domain.CertCodeGenerator;
 import com.maple.common.user.domain.User;
 
-import java.time.OffsetDateTime;
-
 public interface UserService {
 
     /**
@@ -29,7 +27,7 @@ public interface UserService {
      * <p>
      * 인증코드가 다르면, INVALID_CERT_CODE
      */
-    void activate(long id, String certCode, OffsetDateTime currentTime);
+    void activate(long id, String certCode);
 
     /**
      * 사용자 비활성화 준비
@@ -38,7 +36,7 @@ public interface UserService {
      * <p>
      * status = INACTIVATING
      */
-    void prepareInactivate(long id, String certCode, OffsetDateTime currentTime);
+    void prepareInactivate(long id, String certCode);
 
     /**
      * 인증코드 요청

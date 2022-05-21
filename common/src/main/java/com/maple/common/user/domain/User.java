@@ -79,11 +79,10 @@ public class User extends BaseEntity {
         this.certCode = certCodeGenerator.generate();
     }
 
-    public void activate(String certCode, OffsetDateTime currentTime) {
+    public void activate(String certCode) {
         notNull(certCode);
 
-        require(this.certCodeSentAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(currentTime));
-
+        check(this.certCodeSentAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(OffsetDateTime.now()));
         check(CAN_MOVE_TO_ACTIVATED.contains(this.status));
 
         validate(this.certCode.equals(certCode), INVALID_CERT_CODE);
@@ -91,10 +90,10 @@ public class User extends BaseEntity {
         this.status = ACTIVATED;
     }
 
-    public void prepareInactivate(String certCode, OffsetDateTime currentTime) {
+    public void prepareInactivate(String certCode) {
         require(Strings.isNotBlank(certCode));
-        require(this.certCodeSentAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(currentTime));
 
+        check(this.certCodeSentAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(OffsetDateTime.now()));
         check(CAN_MOVE_TO_INACTIVATING.contains(this.status));
 
         validate(this.certCode.equals(certCode), INVALID_CERT_CODE);
