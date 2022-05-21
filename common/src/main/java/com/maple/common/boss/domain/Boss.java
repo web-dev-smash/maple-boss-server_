@@ -14,7 +14,7 @@ import static java.util.Collections.max;
 import static java.util.Collections.min;
 
 /**
- * 보스.
+ * 보스
  */
 @Getter
 @Entity
