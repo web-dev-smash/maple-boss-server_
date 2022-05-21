@@ -66,7 +66,7 @@ class DefaultUserAppServiceTest extends BaseServiceTest {
 
         user = userRepository.save(user);
 
-        val dto =  new UserPrepareWithdrawalDto(user.getId(), "INACTIVATING_CODE");
+        val dto = new UserPrepareWithdrawalDto(user.getId(), "INACTIVATING_CODE");
 
         userAppService.prepareWithdrawal(dto);
 

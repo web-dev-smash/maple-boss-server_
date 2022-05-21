@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class UserCertCodeRequestEvent{
+public class UserCertCodeRequestEvent {
     private Long id;
 }

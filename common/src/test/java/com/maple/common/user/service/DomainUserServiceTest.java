@@ -126,7 +126,7 @@ class DomainUserServiceTest extends BaseServiceTest {
         user.certCodeSentAt = OffsetDateTime.now().minusMinutes(CERTIFICATE_MINUTES).minusSeconds(10);
 
         assertThatMapleBossException(INVALID_CERT_CODE)
-                .isThrownBy(() -> userService.prepareInactivate(user.getId(),"FAKE_INACTIVATING_CODE"));
+                .isThrownBy(() -> userService.prepareInactivate(user.getId(), "FAKE_INACTIVATING_CODE"));
     }
 
     @Test

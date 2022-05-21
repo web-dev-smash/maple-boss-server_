@@ -89,9 +89,6 @@ public class Boss extends BaseEntity {
         this.deathLimit = deathLimit;
     }
 
-
-
-
     public long totalHpPhase() {
         return hpPhaseOne + hpPhaseTwo + hpPhaseThree + hpPhaseFour;
     }

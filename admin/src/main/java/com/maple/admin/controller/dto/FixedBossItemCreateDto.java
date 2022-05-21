@@ -13,7 +13,7 @@ public class FixedBossItemCreateDto {
 
     @Getter
     @AllArgsConstructor
-    public static class FixedBossItemCreateRequest{
+    public static class FixedBossItemCreateRequest {
         private long bossId;
         private long itemId;
         private int minimumAmount;

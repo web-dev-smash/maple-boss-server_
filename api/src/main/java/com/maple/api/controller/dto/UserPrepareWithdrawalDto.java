@@ -11,7 +11,7 @@ public class UserPrepareWithdrawalDto {
         private long id;
         private String certCode;
 
-        public com.maple.api.service.dto.UserPrepareWithdrawalDto toDto(){
+        public com.maple.api.service.dto.UserPrepareWithdrawalDto toDto() {
             return new com.maple.api.service.dto.UserPrepareWithdrawalDto(this.id, this.certCode);
         }
     }

@@ -22,7 +22,7 @@ public class BossCreateDto {
         private int arcaneForce;
         private int deathLimit;
 
-        public Boss toEntity(){
+        public Boss toEntity() {
             return new Boss(name, level, clazz, entryMinLevel, entryMaxLevel,
                     hpPhaseOne, hpPhaseTwo, hpPhaseThree, hpPhaseFour,
                     arcaneForce, deathLimit);
@@ -53,7 +53,7 @@ public class BossCreateDto {
         private int arcaneForce;
         private int deathLimit;
 
-        public static BossCreateData create(Boss boss){
+        public static BossCreateData create(Boss boss) {
             return new BossCreateData(
                     boss.getId(), boss.getName(), boss.getLevel(), boss.getClazz(), boss.getEntryMinLevel(),
                     boss.getEntryMaxLevel(), boss.getHpPhaseOne(), boss.getHpPhaseTwo(), boss.getHpPhaseThree(),
