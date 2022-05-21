@@ -16,7 +16,6 @@ import org.springframework.context.event.EventListener;
 public class MapleBossApiApplication {
 
     private final SlackProperties slackProperties;
-
     private final ApplicationEventPublisher eventPublisher;
 
     @EventListener(ApplicationReadyEvent.class)
