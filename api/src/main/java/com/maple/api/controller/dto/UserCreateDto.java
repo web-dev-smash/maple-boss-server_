@@ -36,11 +36,11 @@ public class UserCreateDto {
         private String nickname;
         private String email;
         private UserStatus status;
-        private OffsetDateTime createAt;
+        private OffsetDateTime createdAt;
 
         public static UserCreateData create(User user) {
             return new UserCreateData(
-                    user.getId(), user.getLoginId(), user.getNickname(), user.getEmail(), user.getStatus(), user.getCreateAt()
+                    user.getId(), user.getLoginId(), user.getNickname(), user.getEmail(), user.getStatus(), user.getCreatedAt()
             );
         }
     }

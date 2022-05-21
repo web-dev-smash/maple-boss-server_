@@ -17,7 +17,7 @@ public interface UserAppService {
     void requestCertCode(long id);
 
     /**
-     * 비활성화 준비
+     * 탈퇴 준비
      */
     void prepareWithdrawal(UserPrepareWithdrawalDto dto);
 }

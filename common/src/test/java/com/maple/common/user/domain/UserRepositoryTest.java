@@ -48,6 +48,6 @@ class UserRepositoryTest extends BaseRepositoryTest {
         assertThat(foundUser.getPassword()).isEqualTo(user.getPassword());
         assertThat(foundUser.getNickname()).isEqualTo(user.getNickname());
         assertThat(foundUser.getStatus()).isEqualTo(user.getStatus());
-        assertThat(foundUser.getCreateAt()).isNotNull();
+        assertThat(foundUser.getCreatedAt()).isNotNull();
     }
 }

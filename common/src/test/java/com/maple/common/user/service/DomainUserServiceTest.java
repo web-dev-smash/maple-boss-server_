@@ -73,9 +73,9 @@ class DomainUserServiceTest extends BaseServiceTest {
 
     @Test
     void 활성화_성공() {
-        val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
+        user.certCodeSentAt = OffsetDateTime.now().minusMinutes(CERTIFICATE_MINUTES).minusSeconds(10);
 
-        userService.activate(user.getId(), "code", currentTime);
+        userService.activate(user.getId(), "code");
 
         val foundUser = userRepository.findById(user.getId()).orElseThrow();
 
@@ -84,16 +84,17 @@ class DomainUserServiceTest extends BaseServiceTest {
 
     @Test
     void 활성화_실패__인증코드_불일치() {
-        val currentTime = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES + 1);
+        user.certCodeSentAt = OffsetDateTime.now().minusMinutes(CERTIFICATE_MINUTES).minusSeconds(10);
 
         assertThatMapleBossException(INVALID_CERT_CODE)
-                .isThrownBy(() -> userService.activate(user.getId(), "FAKE_CODE", currentTime));
+                .isThrownBy(() -> userService.activate(user.getId(), "FAKE_CODE"));
     }
 
     @Test
     void 인증코드_요청() {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
+        user.certCodeSentAt = OffsetDateTime.now().minusMinutes(CERTIFICATE_MINUTES).minusSeconds(10);
 
         userService.prepareInactivate(user.getId(), "INACTIVATING_CODE");
 
@@ -106,9 +107,10 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 탈퇴_준비_성공() {
+    void 비활성화_준비_성공() {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
+        user.certCodeSentAt = OffsetDateTime.now().minusMinutes(CERTIFICATE_MINUTES).minusSeconds(10);
 
         userService.prepareInactivate(user.getId(), "INACTIVATING_CODE");
 
@@ -118,9 +120,10 @@ class DomainUserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    void 탈퇴_준비_실패__인증코드_불일치() {
+    void 비활성화_준비_실패__인증코드_불일치() {
         user.status = ACTIVATED;
         user.certCode = "INACTIVATING_CODE";
+        user.certCodeSentAt = OffsetDateTime.now().minusMinutes(CERTIFICATE_MINUTES).minusSeconds(10);
 
         assertThatMapleBossException(INVALID_CERT_CODE)
                 .isThrownBy(() -> userService.prepareInactivate(user.getId(),"FAKE_INACTIVATING_CODE"));

@@ -29,6 +29,7 @@ class UserTest {
 
         user = createUser();
         user.prepareCertCode(mockCertCodeGenerator);
+        user.certCodeSentAt = OffsetDateTime.now().minusMinutes(CERTIFICATE_MINUTES).minusSeconds(10);
     }
 
     @Test
@@ -41,7 +42,7 @@ class UserTest {
         assertThat(user.getEmail()).isEqualTo("goyounha11@naver.com");
         assertThat(user.getCertCode()).isNull();
         assertThat(user.getStatus()).isEqualTo(CREATED);
-        assertThat(user.getCreateAt()).isNotNull();
+        assertThat(user.getCreatedAt()).isNotNull();
     }
 
     @ParameterizedTest
@@ -96,12 +97,13 @@ class UserTest {
     void 인증코드_준비_성공() {
         user.prepareCertCode(mockCertCodeGenerator);
 
+        assertThat(user.getCertCodeSentAt()).isNotNull();
         assertThat(user.getCertCode()).isEqualTo("code");
     }
 
     @Test
     void 활성화_성공() {
-        user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10));
+        user.activate(user.getCertCode());
 
         assertThat(user.getStatus()).isEqualTo(ACTIVATED);
     }
@@ -109,13 +111,15 @@ class UserTest {
     @Test
     void 활성화_실패__인증코드_null() {
         assertThatNullPointerException()
-                .isThrownBy(() -> user.activate(null, OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10)));
+                .isThrownBy(() -> user.activate(null));
     }
 
     @Test
     void 활성화_실패__인증코드_시간_만료() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).minusSeconds(10)));
+        user.certCodeSentAt = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES);
+
+        assertThatIllegalStateException()
+                .isThrownBy(() -> user.activate(user.getCertCode()));
     }
 
     @ParameterizedTest
@@ -124,19 +128,20 @@ class UserTest {
         user.status = status;
 
         assertThatIllegalStateException()
-                .isThrownBy(() -> user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10)));
+                .isThrownBy(() -> user.activate(user.getCertCode()));
     }
 
     @Test
     void 활성화_실패__이메일_인증_시간_초과() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> user.activate(user.getCertCode(), OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES - 1)));
+        user.certCodeSentAt = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES);
+        assertThatIllegalStateException()
+                .isThrownBy(() -> user.activate(user.getCertCode()));
     }
 
     @Test
     void 활성화_실패__인증코드_불일치() {
         assertThatMapleBossException(INVALID_CERT_CODE)
-                .isThrownBy(() -> user.activate("FAKE_CODE", OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES).plusSeconds(10)));
+                .isThrownBy(() -> user.activate("FAKE_CODE"));
     }
 
     @Test
@@ -156,7 +161,7 @@ class UserTest {
         user.certCode = "INACTIVATING_CODE";
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> user.prepareInactivate((certCode)));
+                .isThrownBy(() -> user.prepareInactivate(certCode));
     }
 
     @Test
@@ -177,6 +182,14 @@ class UserTest {
 
         assertThatMapleBossException(INVALID_CERT_CODE)
                 .isThrownBy(() -> user.prepareInactivate("FAKE_INACTIVATING_CODE"));
+    }
+
+    @Test
+    void 비활성화_실패__이메일_인증_시간_초과() {
+        user.certCodeSentAt = OffsetDateTime.now().plusMinutes(CERTIFICATE_MINUTES);
+
+        assertThatIllegalStateException()
+                .isThrownBy(() -> user.prepareInactivate(user.getCertCode()));
     }
 
     @Test

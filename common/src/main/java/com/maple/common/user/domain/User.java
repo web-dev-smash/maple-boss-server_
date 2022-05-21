@@ -54,8 +54,11 @@ public class User extends BaseEntity {
     @Column(length = 20)
     public UserStatus status = UserStatus.CREATED;
 
+    /* 인증코드 전송일 */
+    public OffsetDateTime certCodeSentAt;
+
     /* 생성일 */
-    private OffsetDateTime createAt = OffsetDateTime.now();
+    private OffsetDateTime createdAt = OffsetDateTime.now();
 
     public static final int CERTIFICATE_MINUTES = 5;
 
@@ -72,14 +75,14 @@ public class User extends BaseEntity {
     }
 
     public void prepareCertCode(CertCodeGenerator certCodeGenerator) {
+        this.certCodeSentAt = OffsetDateTime.now();
         this.certCode = certCodeGenerator.generate();
     }
 
-    public void activate(String certCode, OffsetDateTime currentTime) {
+    public void activate(String certCode) {
         notNull(certCode);
 
-        require(this.createAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(currentTime));
-
+        check(this.certCodeSentAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(OffsetDateTime.now()));
         check(CAN_MOVE_TO_ACTIVATED.contains(this.status));
 
         validate(this.certCode.equals(certCode), INVALID_CERT_CODE);
@@ -90,6 +93,7 @@ public class User extends BaseEntity {
     public void prepareInactivate(String certCode) {
         require(Strings.isNotBlank(certCode));
 
+        check(this.certCodeSentAt.plusMinutes(CERTIFICATE_MINUTES).isBefore(OffsetDateTime.now()));
         check(CAN_MOVE_TO_INACTIVATING.contains(this.status));
 
         validate(this.certCode.equals(certCode), INVALID_CERT_CODE);

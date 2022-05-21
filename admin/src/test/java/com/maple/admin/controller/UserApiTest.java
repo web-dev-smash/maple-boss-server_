@@ -64,7 +64,7 @@ class UserApiTest extends BaseApiTest {
                 jsonPath("$.users[{index}].nickname".replace("{index}", indexString)).value(user.getNickname()),
                 jsonPath("$.users[{index}].email".replace("{index}", indexString)).value(user.getEmail()),
                 jsonPath("$.users[{index}].status".replace("{index}", indexString)).value(user.getStatus().name()),
-                jsonPath("$.users[{index}].createAt".replace("{index}", indexString)).isNotEmpty()
+                jsonPath("$.users[{index}].createdAt".replace("{index}", indexString)).isNotEmpty()
         ).toArray(ResultMatcher[]::new);
     }
 }

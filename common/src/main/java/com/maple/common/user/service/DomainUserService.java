@@ -7,7 +7,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.OffsetDateTime;
 
 import static com.maple.core.exception.ErrorCode.ALREADY_EXISTS_EMAIL;
 import static com.maple.core.exception.ErrorCode.ALREADY_EXISTS_LOGIN_ID;
@@ -36,10 +35,10 @@ public class DomainUserService implements UserService {
     }
 
     @Override
-    public void activate(long id, String certCode, OffsetDateTime currentTime) {
+    public void activate(long id, String certCode) {
         val user = userRepository.findById(id).orElseThrow();
 
-        user.activate(certCode, currentTime);
+        user.activate(certCode);
 
         eventPublisher.publishEvent(new UserActiveEvent(user.getId()));
     }

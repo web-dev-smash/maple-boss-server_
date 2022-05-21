@@ -37,6 +37,8 @@ public class DefaultUserAppService implements UserAppService {
 
     @Override
     public void prepareWithdrawal(UserPrepareWithdrawalDto dto) {
+        notNull(dto);
+
         userService.prepareInactivate(dto.getId(), dto.getCertCode());
     }
 }
