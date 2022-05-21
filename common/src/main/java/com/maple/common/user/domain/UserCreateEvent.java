@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class UserCreateEvent{
+public class UserCreateEvent {
     private long userId;
 }

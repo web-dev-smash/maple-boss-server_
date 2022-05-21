@@ -45,8 +45,8 @@ class UserApiTest extends BaseApiTest {
     @Test
     void 전체_유저_목록_조회() throws Exception {
         mockMvc.perform(get("/user")
-            .param("page", "0")
-            .param("size", "4"))
+                        .param("page", "0")
+                        .param("size", "4"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpectAll(유저_목록_조회_검증(0, user1))

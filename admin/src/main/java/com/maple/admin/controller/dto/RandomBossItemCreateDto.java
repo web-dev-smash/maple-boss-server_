@@ -31,7 +31,7 @@ public class RandomBossItemCreateDto {
 
     @Getter
     @AllArgsConstructor
-   public static class RandomBossItemCreateData {
+    public static class RandomBossItemCreateData {
         private long id;
         private int minimumAmount;
         private int maximumAmount;
@@ -42,5 +42,5 @@ public class RandomBossItemCreateDto {
 
             return new RandomBossItemCreateData(randomBossItem.getId(), amount.getMinimum(), amount.getMaximum(), randomBossItem.getCreateAt());
         }
-   }
+    }
 }

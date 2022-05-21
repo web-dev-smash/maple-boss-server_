@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class DefaultUserAdminService implements UserAdminService{
+public class DefaultUserAdminService implements UserAdminService {
 
     private final UserRepository userRepository;
 

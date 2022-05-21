@@ -9,13 +9,13 @@ public class BossGetDto {
 
     @Getter
     @AllArgsConstructor
-    public static class BossGetResponse{
+    public static class BossGetResponse {
         private BossGetData boss;
     }
 
     @Getter
     @AllArgsConstructor
-    public static class BossGetData{
+    public static class BossGetData {
         private long id;
         private String name;
         private int level;
