@@ -8,4 +8,5 @@ import lombok.Setter;
 public class SlackProperties {
 
     private String botToken;
+    private String logChannel;
 }

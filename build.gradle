@@ -85,6 +85,7 @@ project(':api') {
     dependencies {
         implementation(project(':core'))
         implementation(project(':common'))
+        implementation(project(':integration'))
 
         implementation('org.flywaydb:flyway-core')
     }
