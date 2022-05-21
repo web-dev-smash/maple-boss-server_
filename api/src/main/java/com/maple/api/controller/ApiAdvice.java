@@ -2,6 +2,7 @@ package com.maple.api.controller;
 
 import com.maple.common.notification.event.UnhandledExceptionEvent;
 import com.maple.core.exception.MapleBossException;
+import com.maple.integration.slack.SlackProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +22,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ApiAdvice {
 
     private final MessageSource messageSource;
+    private final SlackProperties slackProperties;
     private final ApplicationEventPublisher eventPublisher;
-
-    public static final String LOG_CHANNEL = "C03BKF0CYL8";
-    public static final String BOT_NAME = "Maple Boss Api";
 
     @ExceptionHandler(Exception.class)
     public ErrorResponse exception(Exception ex) {
         log.error(ex.getMessage(), ex);
 
-        eventPublisher.publishEvent(new UnhandledExceptionEvent(BOT_NAME, LOG_CHANNEL, ex));
+        eventPublisher.publishEvent(new UnhandledExceptionEvent(slackProperties.getBotToken(), slackProperties.getLogChannel(), ex));
 
         return new ErrorResponse(new ErrorData("예상치 못한 에러가 발생했습니다."));
     }
