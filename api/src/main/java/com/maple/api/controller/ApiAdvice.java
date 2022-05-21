@@ -29,7 +29,7 @@ public class ApiAdvice {
     public ErrorResponse exception(Exception ex) {
         log.error(ex.getMessage(), ex);
 
-        eventPublisher.publishEvent(new UnhandledExceptionEvent(slackProperties.getBotToken(), slackProperties.getLogChannel(), ex));
+        eventPublisher.publishEvent(new UnhandledExceptionEvent("Maple Boss", slackProperties.getLogChannel(), ex));
 
         return new ErrorResponse(new ErrorData("예상치 못한 에러가 발생했습니다."));
     }
