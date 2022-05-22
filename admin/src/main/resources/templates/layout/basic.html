@@ -1,0 +1,18 @@
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link href="/images/favicon.png" rel="shortcut icon">
+        <div th:replace="component/config :: main-config" />
+    </head>
+
+    <body class="mobile">
+        <th:block th:replace="component/header :: main-header" />
+        <th:block th:replace="component/aside :: main-aside" />
+        <th:block layout:fragment="content"/>
+        <th:block th:replace="component/footer :: main-footer" />
+    </body>
+
+    <th:block layout:fragment="js"/>
+
+</html>
