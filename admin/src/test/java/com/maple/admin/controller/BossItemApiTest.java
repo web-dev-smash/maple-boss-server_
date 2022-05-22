@@ -46,16 +46,16 @@ class BossItemApiTest extends BaseApiTest {
         val req = new FixedBossItemCreateRequest(boss.getId(), item.getId(), 1, 1, 10000L);
 
         mockMvc.perform(post("/boss-item/fixed")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(req)))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.fixedBossItem.id").isNotEmpty(),
-                        jsonPath("$.fixedBossItem.minimumAmount").value(1),
-                        jsonPath("$.fixedBossItem.maximumAmount").value(1),
-                        jsonPath("$.fixedBossItem.price").value(10000L),
-                        jsonPath("$.fixedBossItem.createAt").isNotEmpty()
-                );
+                       .contentType(MediaType.APPLICATION_JSON)
+                       .content(objectMapper.writeValueAsString(req)))
+               .andExpectAll(
+                       status().isOk(),
+                       jsonPath("$.fixedBossItem.id").isNotEmpty(),
+                       jsonPath("$.fixedBossItem.minimumAmount").value(1),
+                       jsonPath("$.fixedBossItem.maximumAmount").value(1),
+                       jsonPath("$.fixedBossItem.price").value(10000L),
+                       jsonPath("$.fixedBossItem.createAt").isNotEmpty()
+               );
     }
 
     @Test
@@ -66,15 +66,15 @@ class BossItemApiTest extends BaseApiTest {
         val req = new RandomBossItemCreateRequest(boss.getId(), item.getId(), 1, 1);
 
         mockMvc.perform(post("/boss-item/random")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(req)))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.randomBossItem.id").isNotEmpty(),
-                        jsonPath("$.randomBossItem.minimumAmount").value(1),
-                        jsonPath("$.randomBossItem.maximumAmount").value(1),
-                        jsonPath("$.randomBossItem.createAt").isNotEmpty()
-                );
+                       .contentType(MediaType.APPLICATION_JSON)
+                       .content(objectMapper.writeValueAsString(req)))
+               .andExpectAll(
+                       status().isOk(),
+                       jsonPath("$.randomBossItem.id").isNotEmpty(),
+                       jsonPath("$.randomBossItem.minimumAmount").value(1),
+                       jsonPath("$.randomBossItem.maximumAmount").value(1),
+                       jsonPath("$.randomBossItem.createAt").isNotEmpty()
+               );
     }
 
     @Test
@@ -87,9 +87,9 @@ class BossItemApiTest extends BaseApiTest {
         bossItemService.createRandomBossItem(new RandomBossItem(boss, item2, new RandomBossItemAmount(1, 1)));
 
         mockMvc.perform(get("/boss-item/{bossId}", boss.getId()))
-                .andExpect(status().isOk())
-                .andExpectAll(보스아이템_목록_조회_검증(0, boss, item1))
-                .andExpectAll(보스아이템_목록_조회_검증(1, boss, item2));
+               .andExpect(status().isOk())
+               .andExpectAll(보스아이템_목록_조회_검증(0, boss, item1))
+               .andExpectAll(보스아이템_목록_조회_검증(1, boss, item2));
     }
 
     private ResultMatcher[] 보스아이템_목록_조회_검증(int index, Boss boss, Item item) {

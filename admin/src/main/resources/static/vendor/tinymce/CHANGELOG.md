@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -9,11 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.10.2 - 2021-11-17
 
 ### Fixed
+
 - Internal selectors were appearing in the style list when using the `importcss` plugin #TINY-8238
 
 ## 5.10.1 - 2021-11-03
 
 ### Fixed
+
 - The iframe aria help text was not read by some screen readers #TINY-8171
 - Clicking the `forecolor` or `backcolor` toolbar buttons would do nothing until selecting a color #TINY-7836
 - Crop functionality did not work in the `imagetools` plugin when the editor was rendered in a shadow root #TINY-6387
@@ -28,66 +31,93 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.10.0 - 2021-10-11
 
 ### Added
+
 - Added a new `URI.isDomSafe(uri)` API to check if a URI is considered safe to be inserted into the DOM #TINY-7998
 - Added the `ESC` key code constant to the `VK` API #TINY-7917
 - Added a new `deprecation_warnings` setting for turning off deprecation console warning messages #TINY-8049
 
 ### Improved
-- The `element` argument of the `editor.selection.scrollIntoView()` API is now optional, and if it is not provided the current selection will be scrolled into view #TINY-7291
+
+- The `element` argument of the `editor.selection.scrollIntoView()` API is now optional, and if it is not provided the
+  current selection will be scrolled into view #TINY-7291
 
 ### Changed
+
 - The deprecated `scope` attribute is no longer added to `td` cells when converting a row to a header row #TINY-7731
 - The number of `col` elements is normalized to match the number of columns in a table after a table action #TINY-8011
 
 ### Fixed
-- Fixed a regression that caused block wrapper formats to apply and remove incorrectly when using a collapsed selection with multiple words #TINY-8036
+
+- Fixed a regression that caused block wrapper formats to apply and remove incorrectly when using a collapsed selection
+  with multiple words #TINY-8036
 - Resizing table columns in some scenarios would resize the column to an incorrect position #TINY-7731
 - Inserting a table where the parent element had padding would cause the table width to be incorrect #TINY-7991
-- The resize backdrop element did not have the `data-mce-bogus="all"` attribute set to prevent it being included in output #TINY-7854
+- The resize backdrop element did not have the `data-mce-bogus="all"` attribute set to prevent it being included in
+  output #TINY-7854
 - Resize handles appeared on top of dialogs and menus when using an inline editor #TINY-3263
-- Fixed the `autoresize` plugin incorrectly scrolling to the top of the editor content in some cases when changing content #TINY-7291
-- Fixed the `editor.selection.scrollIntoView()` type signature, as it incorrectly required an `Element` instead of `HTMLElement` #TINY-7291
-- Table cells that were both row and column headers did not retain the correct state when converting back to a regular row or column #TINY-7709
-- Clicking beside a non-editable element could cause the editor to incorrectly scroll to the top of the content #TINY-7062
-- Clicking in a table cell, with a non-editable element in an adjacent cell, incorrectly caused the non-editable element to be selected #TINY-7736
+- Fixed the `autoresize` plugin incorrectly scrolling to the top of the editor content in some cases when changing
+  content #TINY-7291
+- Fixed the `editor.selection.scrollIntoView()` type signature, as it incorrectly required an `Element` instead
+  of `HTMLElement` #TINY-7291
+- Table cells that were both row and column headers did not retain the correct state when converting back to a regular
+  row or column #TINY-7709
+- Clicking beside a non-editable element could cause the editor to incorrectly scroll to the top of the content
+  #TINY-7062
+- Clicking in a table cell, with a non-editable element in an adjacent cell, incorrectly caused the non-editable element
+  to be selected #TINY-7736
 - Split toolbar buttons incorrectly had nested `tabindex="-1"` attributes #TINY-7879
 - Fixed notifications rendering in the wrong place initially and when the page was scrolled #TINY-7894
-- Fixed an exception getting thrown when the number of `col` elements didn't match the number of columns in a table #TINY-7041 #TINY-8011
+- Fixed an exception getting thrown when the number of `col` elements didn't match the number of columns in a table
+  #TINY-7041 #TINY-8011
 - The table selection state could become incorrect after selecting a noneditable table cell #TINY-8053
-- As of Mozilla Firefox 91, toggling fullscreen mode with `toolbar_sticky` enabled would cause the toolbar to disappear #TINY-7873
+- As of Mozilla Firefox 91, toggling fullscreen mode with `toolbar_sticky` enabled would cause the toolbar to disappear
+  #TINY-7873
 - Fixed URLs not cleaned correctly in some cases in the `link` and `image` plugins #TINY-7998
-- Fixed the `image` and `media` toolbar buttons incorrectly appearing to be in an inactive state in some cases #TINY-3463
-- Fixed the `editor.selection.selectorChanged` API not firing if the selector matched the current selection when registered in some cases #TINY-3463
-- Inserting content into a `contenteditable="true"` element that was contained within a `contenteditable="false"` element would move the selection to an incorrect location #TINY-7842
-- Dragging and dropping `contenteditable="false"` elements could result in the element being placed in an unexpected location #TINY-7917
-- Pressing the Escape key would not cancel a drag action that started on a `contenteditable="false"` element within the editor #TINY-7917
-- `video` and `audio` elements were unable to be played when the `media` plugin live embeds were enabled in some cases #TINY-7674
-- Pasting images would throw an exception if the clipboard `items` were not files (for example, screenshots taken from gnome-software). Patch contributed by cedric-anne #TINY-8079
+- Fixed the `image` and `media` toolbar buttons incorrectly appearing to be in an inactive state in some cases
+  #TINY-3463
+- Fixed the `editor.selection.selectorChanged` API not firing if the selector matched the current selection when
+  registered in some cases #TINY-3463
+- Inserting content into a `contenteditable="true"` element that was contained within a `contenteditable="false"`
+  element would move the selection to an incorrect location #TINY-7842
+- Dragging and dropping `contenteditable="false"` elements could result in the element being placed in an unexpected
+  location #TINY-7917
+- Pressing the Escape key would not cancel a drag action that started on a `contenteditable="false"` element within the
+  editor #TINY-7917
+- `video` and `audio` elements were unable to be played when the `media` plugin live embeds were enabled in some cases
+  #TINY-7674
+- Pasting images would throw an exception if the clipboard `items` were not files (for example, screenshots taken from
+  gnome-software). Patch contributed by cedric-anne #TINY-8079
 
 ### Deprecated
+
 - Several APIs have been deprecated. See the release notes section for information #TINY-8023 #TINY-8063
 - Several Editor settings have been deprecated. See the release notes section for information #TINY-8086
-- The Table of Contents and Image Tools plugins will be classified as Premium plugins in the next major release #TINY-8087
+- The Table of Contents and Image Tools plugins will be classified as Premium plugins in the next major release
+  #TINY-8087
 - Word support in the `paste` plugin has been deprecated and will be removed in the next major release #TINY-8087
 
 ## 5.9.2 - 2021-09-08
 
 ### Fixed
+
 - Fixed an exception getting thrown when disabling events and setting content #TINY-7956
 - Delete operations could behave incorrectly if the selection crossed a table boundary #TINY-7596
 
 ## 5.9.1 - 2021-08-27
 
 ### Fixed
+
 - Published TinyMCE types failed to compile in strict mode #TINY-7915
 - The `TableModified` event sometimes didn't fire when performing certain table actions #TINY-7916
 
 ## 5.9.0 - 2021-08-26
 
 ### Added
+
 - Added a new `mceFocus` command that focuses the editor. Equivalent to using `editor.focus()` #TINY-7373
 - Added a new `mceTableToggleClass` command which toggles the provided class on the currently selected table #TINY-7476
-- Added a new `mceTableCellToggleClass` command which toggles the provided class on the currently selected table cells #TINY-7476
+- Added a new `mceTableCellToggleClass` command which toggles the provided class on the currently selected table cells
+  #TINY-7476
 - Added a new `tablecellvalign` toolbar button and menu item for vertical table cell alignment #TINY-7477
 - Added a new `tablecellborderwidth` toolbar button and menu item to change table cell border width #TINY-7478
 - Added a new `tablecellborderstyle` toolbar button and menu item to change table cell border style #TINY-7478
@@ -95,39 +125,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a new `mceTableToggleCaption` command that toggles captions on a selected table #TINY-7479
 - Added a new `tablerowheader` toolbar button and menu item to toggle the header state of row cells #TINY-7478
 - Added a new `tablecolheader` toolbar button and menu item to toggle the header state of column cells #TINY-7482
-- Added a new `tablecellbordercolor` toolbar button and menu item to select table cell border colors, with an accompanying setting `table_border_color_map` to customize the available values #TINY-7480
-- Added a new `tablecellbackgroundcolor` toolbar button and menu item to select table cell background colors, with an accompanying setting `table_background_color_map` to customize the available values #TINY-7480
-- Added a new `language` menu item and toolbar button to add `lang` attributes to content, with an accompanying `content_langs` setting to specify the languages available #TINY-6149
-- A new `lang` format is now available that can be used with `editor.formatter`, or applied with the `Lang` editor command #TINY-6149
+- Added a new `tablecellbordercolor` toolbar button and menu item to select table cell border colors, with an
+  accompanying setting `table_border_color_map` to customize the available values #TINY-7480
+- Added a new `tablecellbackgroundcolor` toolbar button and menu item to select table cell background colors, with an
+  accompanying setting `table_background_color_map` to customize the available values #TINY-7480
+- Added a new `language` menu item and toolbar button to add `lang` attributes to content, with an
+  accompanying `content_langs` setting to specify the languages available #TINY-6149
+- A new `lang` format is now available that can be used with `editor.formatter`, or applied with the `Lang` editor
+  command #TINY-6149
 - Added a new `language` icon for the `language` toolbar button #TINY-7670
 - Added a new `table-row-numbering` icon #TINY-7327
-- Added new plugin commands: `mceEmoticons` (Emoticons), `mceWordCount` (Word Count), and `mceTemplate` (Template) #TINY-7619
+- Added new plugin commands: `mceEmoticons` (Emoticons), `mceWordCount` (Word Count), and `mceTemplate` (Template)
+  #TINY-7619
 - Added a new `iframe_aria_text` setting to set the iframe title attribute #TINY-1264
 - Added a new DomParser `Node.children()` API to return all the children of a `Node` #TINY-7756
 
 ### Improved
+
 - Sticky toolbars can now be offset from the top of the page using the new `toolbar_sticky_offset` setting #TINY-7337
 - Fancy menu items now accept an `initData` property to allow custom initialization data #TINY-7480
-- Improved the load time of the `fullpage` plugin by using the existing editor schema rather than creating a new one #TINY-6504
+- Improved the load time of the `fullpage` plugin by using the existing editor schema rather than creating a new one
+  #TINY-6504
 - Improved the performance when UI components are rendered #TINY-7572
 - The context toolbar no longer unnecessarily repositions to the top of large elements when scrolling #TINY-7545
-- The context toolbar will now move out of the way when it overlaps with the selection, such as in table cells #TINY-7192
+- The context toolbar will now move out of the way when it overlaps with the selection, such as in table cells
+  #TINY-7192
 - The context toolbar now uses a short animation when transitioning between different locations #TINY-7740
 - `Env.browser` now uses the User-Agent Client Hints API where it is available #TINY-7785
-- Icons with a `-rtl` suffix in their name will now automatically be used when the UI is rendered in right-to-left mode #TINY-7782
-- The `formatter.match` API now accepts an optional `similar` parameter to check if the format partially matches #TINY-7712
+- Icons with a `-rtl` suffix in their name will now automatically be used when the UI is rendered in right-to-left mode
+  #TINY-7782
+- The `formatter.match` API now accepts an optional `similar` parameter to check if the format partially matches
+  #TINY-7712
 - The `formatter.formatChanged` API now supports providing format variables when listening for changes #TINY-7713
 - The formatter will now fire `FormatApply` and `FormatRemove` events for the relevant actions #TINY-7713
 - The `autolink` plugin link detection now permits custom protocols #TINY-7714
 - The `autolink` plugin valid link detection has been improved #TINY-7714
 
 ### Changed
+
 - Changed the load order so content CSS is loaded before the editor is populated with content #TINY-7249
-- Changed the `emoticons`, `wordcount`, `code`, `codesample`, and `template` plugins to open dialogs using commands #TINY-7619
+- Changed the `emoticons`, `wordcount`, `code`, `codesample`, and `template` plugins to open dialogs using commands
+  #TINY-7619
 - The context toolbar will no longer show an arrow when it overlaps the content, such as in table cells #TINY-7665
 - The context toolbar will no longer overlap the statusbar for toolbars using `node` or `selection` positions #TINY-7666
 
 ### Fixed
+
 - The `editor.fire` API was incorrectly mutating the original `args` provided #TINY-3254
 - Unbinding an event handler did not take effect immediately while the event was firing #TINY-7436
 - Binding an event handler incorrectly took effect immediately while the event was firing #TINY-7436
@@ -135,14 +178,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `SetContent` event contained the incorrect `content` when using the `editor.selection.setContent()` API #TINY-3254
 - The editor content could be edited after calling `setProgressState(true)` in iframe mode #TINY-7373
 - Tabbing out of the editor after calling `setProgressState(true)` behaved inconsistently in iframe mode #TINY-7373
-- Flash of unstyled content while loading the editor because the content CSS was loaded after the editor content was rendered #TINY-7249
+- Flash of unstyled content while loading the editor because the content CSS was loaded after the editor content was
+  rendered #TINY-7249
 - Partially transparent RGBA values provided in the `color_map` setting were given the wrong hex value #TINY-7163
 - HTML comments with mismatched quotes were parsed incorrectly under certain circumstances #TINY-7589
 - The editor could crash when inserting certain HTML content #TINY-7756
 - Inserting certain HTML content into the editor could result in invalid HTML once parsed #TINY-7756
 - Links in notification text did not show the correct mouse pointer #TINY-7661
-- Using the Tab key to navigate into the editor on Microsoft Internet Explorer 11 would incorrectly focus the toolbar #TINY-3707
-- The editor selection could be placed in an incorrect location when undoing or redoing changes in a document containing `contenteditable="false"` elements #TINY-7663
+- Using the Tab key to navigate into the editor on Microsoft Internet Explorer 11 would incorrectly focus the toolbar
+  #TINY-3707
+- The editor selection could be placed in an incorrect location when undoing or redoing changes in a document
+  containing `contenteditable="false"` elements #TINY-7663
 - Menus and context menus were not closed when clicking into a different editor #TINY-7399
 - Context menus on Android were not displayed when more than one HTML element was selected #TINY-7688
 - Disabled nested menu items could still be opened #TINY-7700
@@ -155,32 +201,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clicking on a noneditable table cell did not show a visual selection like other noneditable elements #TINY-7724
 - Some table operations would incorrectly cause table row attributes and styles to be lost #TINY-6666
 - The selection was incorrectly lost when using the `mceTableCellType` and `mceTableRowType` commands #TINY-6666
-- The `mceTableRowType` was reversing the order of the rows when converting multiple header rows back to body rows #TINY-6666
+- The `mceTableRowType` was reversing the order of the rows when converting multiple header rows back to body rows
+  #TINY-6666
 - The table dialog did not always respect the `table_style_with_css` option #TINY-4926
-- Pasting into a table with multiple cells selected could cause the content to be pasted in the wrong location #TINY-7485
+- Pasting into a table with multiple cells selected could cause the content to be pasted in the wrong location
+  #TINY-7485
 - The `TableModified` event was not fired when pasting cells into a table #TINY-6939
 - The table paste column before and after icons were not flipped in RTL mode #TINY-7851
 - Fixed table corruption when deleting a `contenteditable="false"` cell #TINY-7891
 - The `dir` attribute was being incorrectly applied to list items #TINY-4589
 - Applying selector formats would sometimes not apply the format correctly to elements in a list #TINY-7393
-- For formats that specify an attribute or style that should be removed, the formatter `match` API incorrectly returned `false` #TINY-6149
-- The type signature on the `formatter.matchNode` API had the wrong return type (was `boolean` but should have been `Formatter | undefined`) #TINY-6149
-- The `formatter.formatChanged` API would ignore the `similar` parameter if another callback had already been registered for the same format #TINY-7713
-- The `formatter.formatChanged` API would sometimes not run the callback the first time the format was removed #TINY-7713
-- Base64 encoded images with spaces or line breaks in the data URI were not displayed correctly. Patch contributed by RoboBurned
+- For formats that specify an attribute or style that should be removed, the formatter `match` API incorrectly
+  returned `false` #TINY-6149
+- The type signature on the `formatter.matchNode` API had the wrong return type (was `boolean` but should have
+  been `Formatter | undefined`) #TINY-6149
+- The `formatter.formatChanged` API would ignore the `similar` parameter if another callback had already been registered
+  for the same format #TINY-7713
+- The `formatter.formatChanged` API would sometimes not run the callback the first time the format was removed
+  #TINY-7713
+- Base64 encoded images with spaces or line breaks in the data URI were not displayed correctly. Patch contributed by
+  RoboBurned
 
 ### Deprecated
-- The `bbcode`, `fullpage`, `legacyoutput`, and `spellchecker` plugins have been deprecated and marked for removal in the next major release #TINY-7260
+
+- The `bbcode`, `fullpage`, `legacyoutput`, and `spellchecker` plugins have been deprecated and marked for removal in
+  the next major release #TINY-7260
 
 ## 5.8.2 - 2021-06-23
 
 ### Fixed
+
 - Fixed an issue when pasting cells from tables containing `colgroup`s into tables without `colgroup`s #TINY-6675
-- Fixed an issue that could cause an invalid toolbar button state when multiple inline editors were on a single page #TINY-6297
+- Fixed an issue that could cause an invalid toolbar button state when multiple inline editors were on a single page
+  #TINY-6297
 
 ## 5.8.1 - 2021-05-20
 
 ### Fixed
+
 - An unexpected exception was thrown when switching to readonly mode and adjusting the editor width #TINY-6383
 - Content could be lost when the `pagebreak_split_block` setting was enabled #TINY-3388
 - The `list-style-type: none;` style on nested list items was incorrectly removed when clearing formatting #TINY-6264
@@ -190,34 +248,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.8.0 - 2021-05-06
 
 ### Added
+
 - Added the `PAGE_UP` and `PAGE_DOWN` key code constants to the `VK` API #TINY-4612
 - The editor resize handle can now be controlled using the keyboard #TINY-4823
-- Added a new `fixed_toolbar_container_target` setting which renders the toolbar in the specified `HTMLElement`. Patch contributed by pvrobays
+- Added a new `fixed_toolbar_container_target` setting which renders the toolbar in the specified `HTMLElement`. Patch
+  contributed by pvrobays
 
 ### Improved
+
 - The `inline_boundaries` feature now supports the `home`, `end`, `pageup`, and `pagedown` keys #TINY-4612
-- Updated the `formatter.matchFormat` API to support matching formats with variables in the `classes` property #TINY-7227
+- Updated the `formatter.matchFormat` API to support matching formats with variables in the `classes` property
+  #TINY-7227
 - Added HTML5 `audio` and `video` elements to the default alignment formats #TINY-6633
 - Added support for alpha list numbering to the list properties dialog #TINY-6891
 
 ### Changed
-- Updated the `image` dialog to display the class list dropdown as full-width if the caption checkbox is not present #TINY-6400
-- Renamed the "H Align" and "V Align" input labels in the Table Cell Properties dialog to "Horizontal align" and "Vertical align" respectively #TINY-7285
+
+- Updated the `image` dialog to display the class list dropdown as full-width if the caption checkbox is not present
+  #TINY-6400
+- Renamed the "H Align" and "V Align" input labels in the Table Cell Properties dialog to "Horizontal align" and "
+  Vertical align" respectively #TINY-7285
 
 ### Deprecated
-- The undocumented `setIconStroke` Split Toolbar Button API has been deprecated and will be removed in a future release #TINY-3551
+
+- The undocumented `setIconStroke` Split Toolbar Button API has been deprecated and will be removed in a future release
+  #TINY-3551
 
 ### Fixed
+
 - Fixed a bug where it wasn't possible to align nested list items #TINY-6567
 - The RGB fields in the color picker dialog were not staying in sync with the color palette and hue slider #TINY-6952
-- The color preview box in the color picker dialog was not correctly displaying the saturation and value of the chosen color #TINY-6952
+- The color preview box in the color picker dialog was not correctly displaying the saturation and value of the chosen
+  color #TINY-6952
 - The color picker dialog will now show an alert if it is submitted with an invalid hex color code #TINY-2814
 - Fixed a bug where the `TableModified` event was not fired when adding a table row with the Tab key #TINY-7006
 - Added missing `images_file_types` setting to the exported TypeScript types #GH-6607
-- Fixed a bug where lists pasted from Word with Roman numeral markers were not displayed correctly. Patch contributed by aautio #GH-6620
+- Fixed a bug where lists pasted from Word with Roman numeral markers were not displayed correctly. Patch contributed by
+  aautio #GH-6620
 - The `editor.insertContent` API was incorrectly handling nested `span` elements with matching styles #TINY-6263
 - The HTML5 `small` element could not be removed when clearing text formatting #TINY-6633
-- The Oxide button text transform variable was incorrectly using `capitalize` instead of `none`. Patch contributed by dakur #GH-6341
+- The Oxide button text transform variable was incorrectly using `capitalize` instead of `none`. Patch contributed by
+  dakur #GH-6341
 - Fix dialog button text that was using title-style capitalization #TINY-6816
 - Table plugin could perform operations on tables containing the inline editor #TINY-6625
 - Fixed Tab key navigation inside table cells with a ranged selection #TINY-6638
@@ -228,28 +299,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.7.1 - 2021-03-17
 
 ### Fixed
+
 - Fixed the `help` dialog incorrectly linking to the changelog of TinyMCE 4 instead of TinyMCE 5 #TINY-7031
 - Fixed a bug where error messages were displayed incorrectly in the image dialog #TINY-7099
 - Fixed an issue where URLs were not correctly filtered in some cases #TINY-7025
 - Fixed a bug where context menu items with names that contained uppercase characters were not displayed #TINY-7072
 - Fixed context menu items lacking support for the `disabled` and `shortcut` properties #TINY-7073
-- Fixed a regression where the width and height were incorrectly set when embedding content using the `media` dialog #TINY-7074
+- Fixed a regression where the width and height were incorrectly set when embedding content using the `media` dialog
+  #TINY-7074
 
 ## 5.7.0 - 2021-02-10
 
 ### Added
+
 - Added IPv6 address support to the URI API. Patch contributed by dev7355608 #GH-4409
-- Added new `structure` and `style` properties to the `TableModified` event to indicate what kinds of modifications were made #TINY-6643
+- Added new `structure` and `style` properties to the `TableModified` event to indicate what kinds of modifications were
+  made #TINY-6643
 - Added `video` and `audio` live embed support for the `media` plugin #TINY-6229
 - Added the ability to resize `video` and `iframe` media elements #TINY-6229
 - Added a new `font_css` setting for adding fonts to both the editor and the parent document #TINY-6199
-- Added a new `ImageUploader` API to simplify uploading image data to the configured `images_upload_url` or `images_upload_handler` #TINY-4601
+- Added a new `ImageUploader` API to simplify uploading image data to the configured `images_upload_url`
+  or `images_upload_handler` #TINY-4601
 - Added an Oxide variable to define the container background color in fullscreen mode #TINY-6903
 - Added Oxide variables for setting the toolbar background colors for inline and sticky toolbars #TINY-6009
 - Added a new `AfterProgressState` event that is fired after `editor.setProgressState` calls complete #TINY-6686
 - Added support for `table_column_resizing` when inserting or deleting columns #TINY-6711
 
 ### Changed
+
 - Changed table and table column copy behavior to retain an appropriate width when pasted #TINY-6664
 - Changed the `lists` plugin to apply list styles to all text blocks within a selection #TINY-3755
 - Changed the `advlist` plugin to log a console error message when the `list` plugin isn't enabled #TINY-6585
@@ -259,24 +336,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed `editor.setProgressState(true)` to close any open popups #TINY-6686
 
 ### Fixed
+
 - Fixed `codesample` highlighting performance issues for some languages #TINY-6996
 - Fixed an issue where cell widths were lost when merging table cells #TINY-6901
 - Fixed `col` elements incorrectly transformed to `th` elements when converting columns to header columns #TINY-6715
 - Fixed a number of table operations not working when selecting 2 table cells on Mozilla Firefox #TINY-3897
 - Fixed a memory leak by backporting an upstream Sizzle fix #TINY-6859
 - Fixed table `width` style was removed when copying #TINY-6664
-- Fixed focus lost while typing in the `charmap` or `emoticons` dialogs when the editor is rendered in a shadow root #TINY-6904
+- Fixed focus lost while typing in the `charmap` or `emoticons` dialogs when the editor is rendered in a shadow root
+  #TINY-6904
 - Fixed corruption of base64 URLs used in style attributes when parsing HTML #TINY-6828
-- Fixed the order of CSS precedence of `content_style` and `content_css` in the `preview` and `template` plugins. `content_style` now has precedence #TINY-6529
+- Fixed the order of CSS precedence of `content_style` and `content_css` in the `preview` and `template`
+  plugins. `content_style` now has precedence #TINY-6529
 - Fixed an issue where the image dialog tried to calculate image dimensions for an empty image URL #TINY-6611
-- Fixed an issue where `scope` attributes on table cells would not change as expected when merging or unmerging cells #TINY-6486
+- Fixed an issue where `scope` attributes on table cells would not change as expected when merging or unmerging cells
+  #TINY-6486
 - Fixed the plugin documentation links in the `help` plugin #DOC-703
 - Fixed events bound using `DOMUtils` not returning the correct result for `isDefaultPrevented` in some cases #TINY-6834
 - Fixed the "Dropped file type is not supported" notification incorrectly showing when using an inline editor #TINY-6834
 - Fixed an issue with external styles bleeding into TinyMCE #TINY-6735
 - Fixed an issue where parsing malformed comments could cause an infinite loop #TINY-6864
 - Fixed incorrect return types on `editor.selection.moveToBookmark` #TINY-6504
-- Fixed the type signature for `editor.selection.setCursorLocation()` incorrectly allowing a node with no `offset` #TINY-6843
+- Fixed the type signature for `editor.selection.setCursorLocation()` incorrectly allowing a node with no `offset`
+  #TINY-6843
 - Fixed incorrect behavior when editor is destroyed while loading stylesheets #INT-2282
 - Fixed figure elements incorrectly splitting from a valid parent element when editing the image within #TINY-6592
 - Fixed inserting multiple rows or columns in a table cloning from the incorrect source row or column #TINY-6906
@@ -288,11 +370,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.6.2 - 2020-12-08
 
 ### Fixed
+
 - Fixed a UI rendering regression when the document body is using `display: flex` #TINY-6783
 
 ## 5.6.1 - 2020-11-25
 
 ### Fixed
+
 - Fixed the `mceTableRowType` and `mceTableCellType` commands were not firing the `newCell` event #TINY-6692
 - Fixed the HTML5 `s` element was not recognized when editing or clearing text formatting #TINY-6681
 - Fixed an issue where copying and pasting table columns resulted in invalid HTML when using colgroups #TINY-6684
@@ -301,11 +385,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.6.0 - 2020-11-18
 
 ### Added
-- Added new `BeforeOpenNotification` and `OpenNotification` events which allow internal notifications to be captured and modified before display #TINY-6528
+
+- Added new `BeforeOpenNotification` and `OpenNotification` events which allow internal notifications to be captured and
+  modified before display #TINY-6528
 - Added support for `block` and `unblock` methods on inline dialogs #TINY-6487
 - Added new `TableModified` event which is fired whenever changes are made to a table #TINY-6629
-- Added new `images_file_types` setting to determine which image file formats will be automatically processed into `img` tags on paste when using the `paste` plugin #TINY-6306
-- Added support for `images_file_types` setting in the image file uploader to determine which image file extensions are valid for upload #TINY-6224
+- Added new `images_file_types` setting to determine which image file formats will be automatically processed into `img`
+  tags on paste when using the `paste` plugin #TINY-6306
+- Added support for `images_file_types` setting in the image file uploader to determine which image file extensions are
+  valid for upload #TINY-6224
 - Added new `format_empty_lines` setting to control if empty lines are formatted in a ranged selection #TINY-6483
 - Added template support to the `autocompleter` for customizing the autocompleter items #TINY-6505
 - Added new user interface `enable`, `disable`, and `isDisabled` methods #TINY-6397
@@ -315,16 +403,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new `name` field to the `style_formats` setting object to enable specifying a name for the format #TINY-4239
 
 ### Changed
+
 - Changed `readonly` mode to allow hyperlinks to be clickable #TINY-6248
 
 ### Fixed
+
 - Fixed the `change` event not firing after a successful image upload #TINY-6586
 - Fixed the type signature for the `entity_encoding` setting not accepting delimited lists #TINY-6648
 - Fixed layout issues when empty `tr` elements were incorrectly removed from tables #TINY-4679
 - Fixed image file extensions lost when uploading an image with an alternative extension, such as `.jfif` #TINY-6622
 - Fixed a security issue where URLs in attributes weren't correctly sanitized #TINY-6518
 - Fixed `DOMUtils.getParents` incorrectly including the shadow root in the array of elements returned #TINY-6540
-- Fixed an issue where the root document could be scrolled while an editor dialog was open inside a shadow root #TINY-6363
+- Fixed an issue where the root document could be scrolled while an editor dialog was open inside a shadow root
+  #TINY-6363
 - Fixed `getContent` with text format returning a new line when the editor is empty #TINY-6281
 - Fixed table column and row resizers not respecting the `data-mce-resize` attribute #TINY-6600
 - Fixed inserting a table via the `mceInsertTable` command incorrectly creating 2 undo levels #TINY-6656
@@ -337,7 +428,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed incorrectly removing formatting on adjacent spaces when removing formatting on a ranged selection #TINY-6268
 - Fixed the `Cut` menu item not working in the latest version of Mozilla Firefox #TINY-6615
 - Fixed some incorrect types in the new TypeScript declaration file #TINY-6413
-- Fixed a regression where a fake offscreen selection element was incorrectly created for the editor root node #TINY-6555
+- Fixed a regression where a fake offscreen selection element was incorrectly created for the editor root node
+  #TINY-6555
 - Fixed an issue where menus would incorrectly collapse in small containers #TINY-3321
 - Fixed an issue where only one table column at a time could be converted to a header #TINY-6326
 - Fixed some minor memory leaks that prevented garbage collection for editor instances #TINY-6570
@@ -345,50 +437,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed incorrectly calculating table `col` widths when resizing responsive tables #TINY-6646
 - Fixed an issue where spaces were not preserved in pre-blocks when getting text content #TINY-6448
 - Fixed a regression that caused the selection to be difficult to see in tables with backgrounds #TINY-6495
-- Fixed content pasted multiple times in the editor when using Microsoft Internet Explorer 11. Patch contributed by mattford #GH-4905
+- Fixed content pasted multiple times in the editor when using Microsoft Internet Explorer 11. Patch contributed by
+  mattford #GH-4905
 
 ## 5.5.1 - 2020-10-01
 
 ### Fixed
+
 - Fixed pressing the down key near the end of a document incorrectly raising an exception #TINY-6471
 - Fixed incorrect Typescript types for the `Tools` API #TINY-6475
 
 ## 5.5.0 - 2020-09-29
 
 ### Added
+
 - Added a TypeScript declaration file to the bundle output for TinyMCE core #TINY-3785
-- Added new `table_column_resizing` setting to control how table columns are resized when using the resize bars #TINY-6001
+- Added new `table_column_resizing` setting to control how table columns are resized when using the resize bars
+  #TINY-6001
 - Added the ability to remove images on a failed upload using the `images_upload_handler` failure callback #TINY-6011
 - Added `hasPlugin` function to the editor API to determine if a plugin exists or not #TINY-766
-- Added new `ToggleToolbarDrawer` command and query state handler to allow the toolbar drawer to be programmatically toggled and the toggle state to be checked #TINY-6032
+- Added new `ToggleToolbarDrawer` command and query state handler to allow the toolbar drawer to be programmatically
+  toggled and the toggle state to be checked #TINY-6032
 - Added the ability to use `colgroup` elements in tables #TINY-6050
 - Added a new setting `table_use_colgroups` for toggling whether colgroups are used in new tables #TINY-6050
 - Added the ability to delete and navigate HTML media elements without the `media` plugin #TINY-4211
 - Added `fullscreen_native` setting to the `fullscreen` plugin to enable use of the entire monitor #TINY-6284
-- Added table related oxide variables to the Style API for more granular control over table cell selection appearance #TINY-6311
+- Added table related oxide variables to the Style API for more granular control over table cell selection appearance
+  #TINY-6311
 - Added new `toolbar_persist` setting to control the visibility of the inline toolbar #TINY-4847
 - Added new APIs to allow for programmatic control of the inline toolbar visibility #TINY-4847
-- Added the `origin` property to the `ObjectResized` and `ObjectResizeStart` events, to specify which handle the resize was performed on #TINY-6242
+- Added the `origin` property to the `ObjectResized` and `ObjectResizeStart` events, to specify which handle the resize
+  was performed on #TINY-6242
 - Added new StyleSheetLoader `unload` and `unloadAll` APIs to allow loaded stylesheets to be removed #TINY-3926
 - Added the `LineHeight` query command and action to the editor #TINY-4843
 - Added the `lineheight` toolbar and menu items, and added `lineheight` to the default format menu #TINY-4843
 - Added a new `contextmenu_avoid_overlap` setting to allow context menus to avoid overlapping matched nodes #TINY-6036
 - Added new listbox dialog UI component for rendering a dropdown that allows nested options #TINY-2236
-- Added back the ability to use nested items in the `image_class_list`, `link_class_list`, `link_list`, `table_class_list`, `table_cell_class_list`, and `table_row_class_list` settings #TINY-2236
+- Added back the ability to use nested items in the `image_class_list`, `link_class_list`, `link_list`
+  , `table_class_list`, `table_cell_class_list`, and `table_row_class_list` settings #TINY-2236
 
 ### Changed
-- Changed how CSS manipulates table cells when selecting multiple cells to achieve a semi-transparent selection #TINY-6311
-- Changed the `target` property on fired events to use the native event target. The original target for an open shadow root can be obtained using `event.getComposedPath()` #TINY-6128
-- Changed the editor to clean-up loaded CSS stylesheets when all editors using the stylesheet have been removed #TINY-3926
+
+- Changed how CSS manipulates table cells when selecting multiple cells to achieve a semi-transparent selection
+  #TINY-6311
+- Changed the `target` property on fired events to use the native event target. The original target for an open shadow
+  root can be obtained using `event.getComposedPath()` #TINY-6128
+- Changed the editor to clean-up loaded CSS stylesheets when all editors using the stylesheet have been removed
+  #TINY-3926
 - Changed `imagetools` context menu icon for accessing the `image` dialog to use the `image` icon #TINY-4141
-- Changed the `editor.insertContent()` and `editor.selection.setContent()` APIs to retain leading and trailing whitespace #TINY-5966
+- Changed the `editor.insertContent()` and `editor.selection.setContent()` APIs to retain leading and trailing
+  whitespace #TINY-5966
 - Changed the `table` plugin `Column` menu to include the cut, copy and paste column menu items #TINY-6374
-- Changed the default table styles in the content CSS files to better support the styling options available in the `table` dialog #TINY-6179
+- Changed the default table styles in the content CSS files to better support the styling options available in
+  the `table` dialog #TINY-6179
 
 ### Deprecated
+
 - Deprecated the `Env.experimentalShadowDom` flag #TINY-6128
 
 ### Fixed
+
 - Fixed tables with no borders displaying with the default border styles in the `preview` dialog #TINY-6179
 - Fixed loss of whitespace when inserting content after a non-breaking space #TINY-5966
 - Fixed the `event.getComposedPath()` function throwing an exception for events fired from the editor #TINY-6128
@@ -396,7 +504,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed focus issues with inline dialogs when the editor is within a ShadowRoot #TINY-6360
 - Fixed the `template` plugin previews missing some content styles #TINY-6115
 - Fixed the `media` plugin not saving the alternative source url in some situations #TINY-4113
-- Fixed an issue where column resizing using the resize bars was inconsistent between fixed and relative table widths #TINY-6001
+- Fixed an issue where column resizing using the resize bars was inconsistent between fixed and relative table widths
+  #TINY-6001
 - Fixed an issue where dragging and dropping within a table would select table cells #TINY-5950
 - Fixed up and down keyboard navigation not working for inline `contenteditable="false"` elements #TINY-6226
 - Fixed dialog not retrieving `close` icon from icon pack #TINY-6445
@@ -405,12 +514,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the `DOMUtils.split()` API incorrectly removing some content #TINY-6294
 - Fixed pressing the escape key not focusing the editor when using multiple toolbars #TINY-6230
 - Fixed the `dirty` flag not being correctly set during an `AddUndo` event #TINY-4707
-- Fixed `editor.selection.setCursorLocation` incorrectly placing the cursor outside `pre` elements in some circumstances #TINY-4058
-- Fixed an exception being thrown when pressing the enter key inside pre elements while `br_in_pre` setting is false #TINY-4058
+- Fixed `editor.selection.setCursorLocation` incorrectly placing the cursor outside `pre` elements in some circumstances
+  #TINY-4058
+- Fixed an exception being thrown when pressing the enter key inside pre elements while `br_in_pre` setting is false
+  #TINY-4058
 
 ## 5.4.2 - 2020-08-17
 
 ### Fixed
+
 - Fixed the editor not resizing when resizing the browser window in fullscreen mode #TINY-3511
 - Fixed clicking on notifications causing inline editors to hide #TINY-6058
 - Fixed an issue where link URLs could not be deleted or edited in the link dialog in some cases #TINY-4706
@@ -421,13 +533,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed inline formats not removed when more than one `removeformat` format rule existed #TINY-6216
 - Fixed an issue where spaces were sometimes removed when removing formating on nearby text #TINY-6251
 - Fixed the list toolbar buttons not showing as active when a list is selected #TINY-6286
-- Fixed an issue where the UI would sometimes not be shown or hidden when calling the show or hide API methods on the editor #TINY-6048
+- Fixed an issue where the UI would sometimes not be shown or hidden when calling the show or hide API methods on the
+  editor #TINY-6048
 - Fixed the list type style not retained when copying list items #TINY-6289
-- Fixed the Paste plugin converting tabs in plain text to a single space character. A `paste_tab_spaces` option has been included for setting the number of spaces used to replace a tab character #TINY-6237
+- Fixed the Paste plugin converting tabs in plain text to a single space character. A `paste_tab_spaces` option has been
+  included for setting the number of spaces used to replace a tab character #TINY-6237
 
 ## 5.4.1 - 2020-07-08
 
 ### Fixed
+
 - Fixed the Search and Replace plugin incorrectly including zero-width caret characters in search results #TINY-4599
 - Fixed dragging and dropping unsupported files navigating the browser away from the editor #TINY-6027
 - Fixed undo levels not created on browser handled drop or paste events #TINY-6027
@@ -438,9 +553,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.4.0 - 2020-06-30
 
 ### Added
+
 - Added keyboard navigation support to menus and toolbars when the editor is in a ShadowRoot #TINY-6152
 - Added the ability for menus to be clicked when the editor is in an open shadow root #TINY-6091
-- Added the `Editor.ui.styleSheetLoader` API for loading stylesheets within the Document or ShadowRoot containing the editor UI #TINY-6089
+- Added the `Editor.ui.styleSheetLoader` API for loading stylesheets within the Document or ShadowRoot containing the
+  editor UI #TINY-6089
 - Added the `StyleSheetLoader` module to the public API #TINY-6100
 - Added Oxide variables for styling the `select` element and headings in dialog content #TINY-6070
 - Added icons for `table` column and row cut, copy, and paste toolbar buttons #TINY-6062
@@ -449,30 +566,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new `table` cut, copy, and paste column editor commands and menu items #TINY-6006
 - Added font related Oxide variables for secondary buttons, allowing for custom styling #TINY-6061
 - Added new `table_header_type` setting to control how table header rows are structured #TINY-6007
-- Added new `table_sizing_mode` setting to replace the `table_responsive_width` setting, which has now been deprecated #TINY-6051
+- Added new `table_sizing_mode` setting to replace the `table_responsive_width` setting, which has now been deprecated
+  #TINY-6051
 - Added new `mceTableSizingMode` command for changing the sizing mode of a table #TINY-6000
 - Added new `mceTableRowType`, `mceTableColType`, and `mceTableCellType` commands and value queries #TINY-6150
 
 ### Changed
+
 - Changed `advlist` toolbar buttons to only show a dropdown list if there is more than one option #TINY-3194
-- Changed `mceInsertTable` command and `insertTable` API method to take optional header rows and columns arguments #TINY-6012
+- Changed `mceInsertTable` command and `insertTable` API method to take optional header rows and columns arguments
+  #TINY-6012
 - Changed stylesheet loading, so that UI skin stylesheets can load in a ShadowRoot if required #TINY-6089
 - Changed the DOM location of menus so that they display correctly when the editor is in a ShadowRoot #TINY-6093
 - Changed the table plugin to correctly detect all valid header row structures #TINY-6007
 
 ### Fixed
+
 - Fixed tables with no defined width being converted to a `fixed` width table when modifying the table #TINY-6051
 - Fixed the `autosave` `isEmpty` API incorrectly detecting non-empty content as empty #TINY-5953
-- Fixed table `Paste row after` and `Paste row before` menu items not disabled when nothing was available to paste #TINY-6006
+- Fixed table `Paste row after` and `Paste row before` menu items not disabled when nothing was available to paste
+  #TINY-6006
 - Fixed a selection performance issue with large tables on Microsoft Internet Explorer and Edge #TINY-6057
 - Fixed filters for screening commands from the undo stack to be case-insensitive #TINY-5946
 - Fixed `fullscreen` plugin now removes all classes when the editor is closed #TINY-4048
 - Fixed handling of mixed-case icon identifiers (names) for UI elements #TINY-3854
 - Fixed leading and trailing spaces lost when using `editor.selection.getContent({ format: 'text' })` #TINY-5986
 - Fixed an issue where changing the URL with the quicklink toolbar caused unexpected undo behavior #TINY-5952
-- Fixed an issue where removing formatting within a table cell would cause Internet Explorer 11 to scroll to the end of the table #TINY-6049
+- Fixed an issue where removing formatting within a table cell would cause Internet Explorer 11 to scroll to the end of
+  the table #TINY-6049
 - Fixed an issue where the `allow_html_data_urls` setting was not correctly applied #TINY-5951
-- Fixed the `autolink` feature so that it no longer treats a string with multiple "@" characters as an email address #TINY-4773
+- Fixed the `autolink` feature so that it no longer treats a string with multiple "@" characters as an email address
+  #TINY-4773
 - Fixed an issue where removing the editor would leave unexpected attributes on the target element #TINY-4001
 - Fixed the `link` plugin now suggest `mailto:` when the text contains an '@' and no slashes (`/`) #TINY-5941
 - Fixed the `valid_children` check of custom elements now allows a wider range of characters in names #TINY-5971
@@ -480,35 +604,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.3.2 - 2020-06-10
 
 ### Fixed
+
 - Fixed a regression introduced in 5.3.0, where `images_dataimg_filter` was no-longer called #TINY-6086
 
 ## 5.3.1 - 2020-05-27
 
 ### Fixed
+
 - Fixed the image upload error alert also incorrectly closing the image dialog #TINY-6020
-- Fixed editor content scrolling incorrectly on focus in Firefox by reverting default content CSS html and body heights added in 5.3.0 #TINY-6019
+- Fixed editor content scrolling incorrectly on focus in Firefox by reverting default content CSS html and body heights
+  added in 5.3.0 #TINY-6019
 
 ## 5.3.0 - 2020-05-21
 
 ### Added
+
 - Added html and body height styles to the default oxide content CSS #TINY-5978
 - Added `uploadUri` and `blobInfo` to the data returned by `editor.uploadImages()` #TINY-4579
 - Added a new function to the `BlobCache` API to lookup a blob based on the base64 data and mime type #TINY-5988
 - Added the ability to search and replace within a selection #TINY-4549
 - Added the ability to set the list start position for ordered lists and added new `lists` context menu item #TINY-3915
 - Added `icon` as an optional config option to the toggle menu item API #TINY-3345
-- Added `auto` mode for `toolbar_location` which positions the toolbar and menu bar at the bottom if there is no space at the top #TINY-3161
+- Added `auto` mode for `toolbar_location` which positions the toolbar and menu bar at the bottom if there is no space
+  at the top #TINY-3161
 
 ### Changed
+
 - Changed the default `toolbar_location` to `auto` #TINY-3161
-- Changed toggle menu items and choice menu items to have a dedicated icon with the checkmark displayed on the far right side of the menu item #TINY-3345
+- Changed toggle menu items and choice menu items to have a dedicated icon with the checkmark displayed on the far right
+  side of the menu item #TINY-3345
 - Changed the `link`, `image`, and `paste` plugins to use Promises to reduce the bundle size #TINY-4710
 - Changed the default icons to be lazy loaded during initialization #TINY-4729
 - Changed the parsing of content so base64 encoded urls are converted to blob urls #TINY-4727
 - Changed context toolbars so they concatenate when more than one is suitable for the current selection #TINY-4495
-- Changed inline style element formats (strong, b, em, i, u, strike) to convert to a span on format removal if a `style` or `class` attribute is present #TINY-4741
+- Changed inline style element formats (strong, b, em, i, u, strike) to convert to a span on format removal if a `style`
+  or `class` attribute is present #TINY-4741
 
 ### Fixed
+
 - Fixed the `selection.setContent()` API not running parser filters #TINY-4002
 - Fixed formats incorrectly applied or removed when table cells were selected #TINY-4709
 - Fixed the `quickimage` button not restricting the file types to images #TINY-4715
@@ -516,38 +649,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed resize handlers displaying in the wrong location sometimes for remote images #TINY-4732
 - Fixed table picker breaking in Firefox on low zoom levels #TINY-4728
 - Fixed issue with loading or pasting contents with large base64 encoded images on Safari #TINY-4715
-- Fixed supplementary special characters being truncated when inserted into the editor. Patch contributed by mlitwin. #TINY-4791
+- Fixed supplementary special characters being truncated when inserted into the editor. Patch contributed by mlitwin.
+  #TINY-4791
 - Fixed toolbar buttons not set to disabled when the editor is in readonly mode #TINY-4592
 - Fixed the editor selection incorrectly changing when removing caret format containers #TINY-3438
-- Fixed bug where title, width, and height would be set to empty string values when updating an image and removing those attributes using the image dialog #TINY-4786
+- Fixed bug where title, width, and height would be set to empty string values when updating an image and removing those
+  attributes using the image dialog #TINY-4786
 - Fixed `ObjectResized` event firing when an object wasn't resized #TINY-4161
-- Fixed `ObjectResized` and `ObjectResizeStart` events incorrectly fired when adding or removing table rows and columns #TINY-4829
+- Fixed `ObjectResized` and `ObjectResizeStart` events incorrectly fired when adding or removing table rows and columns
+  #TINY-4829
 - Fixed the placeholder not hiding when pasting content into the editor #TINY-4828
 - Fixed an issue where the editor would fail to load if local storage was disabled #TINY-5935
 - Fixed an issue where an uploaded image would reuse a cached image with a different mime type #TINY-5988
-- Fixed bug where toolbars and dialogs would not show if the body element was replaced (e.g. with Turbolinks). Patch contributed by spohlenz #GH-5653
-- Fixed an issue where multiple formats would be removed when removing a single format at the end of lines or on empty lines #TINY-1170
+- Fixed bug where toolbars and dialogs would not show if the body element was replaced (e.g. with Turbolinks). Patch
+  contributed by spohlenz #GH-5653
+- Fixed an issue where multiple formats would be removed when removing a single format at the end of lines or on empty
+  lines #TINY-1170
 - Fixed zero-width spaces incorrectly included in the `wordcount` plugin character count #TINY-5991
-- Fixed a regression introduced in 5.2.0 whereby the desktop `toolbar_mode` setting would incorrectly override the mobile default setting #TINY-5998
+- Fixed a regression introduced in 5.2.0 whereby the desktop `toolbar_mode` setting would incorrectly override the
+  mobile default setting #TINY-5998
 - Fixed an issue where deleting all content in a single cell table would delete the entire table #TINY-1044
 
 ## 5.2.2 - 2020-04-23
 
 ### Fixed
+
 - Fixed an issue where anchors could not be inserted on empty lines #TINY-2788
 - Fixed text decorations (underline, strikethrough) not consistently inheriting the text color #TINY-4757
 - Fixed `format` menu alignment buttons inconsistently applying to images #TINY-4057
-- Fixed the floating toolbar drawer height collapsing when the editor is rendered in modal dialogs or floating containers #TINY-4837
+- Fixed the floating toolbar drawer height collapsing when the editor is rendered in modal dialogs or floating
+  containers #TINY-4837
 - Fixed `media` embed content not processing safely in some cases #TINY-4857
 
 ## 5.2.1 - 2020-03-25
 
 ### Fixed
+
 - Fixed the "is decorative" checkbox in the image dialog clearing after certain dialog events #FOAM-11
-- Fixed possible uncaught exception when a `style` attribute is removed using a content filter on `setContent` #TINY-4742
+- Fixed possible uncaught exception when a `style` attribute is removed using a content filter on `setContent`
+  #TINY-4742
 - Fixed the table selection not functioning correctly in Microsoft Edge 44 or higher #TINY-3862
 - Fixed the table resize handles not functioning correctly in Microsoft Edge 44 or higher #TINY-4160
-- Fixed the floating toolbar drawer disconnecting from the toolbar when adding content in inline mode #TINY-4725 #TINY-4765
+- Fixed the floating toolbar drawer disconnecting from the toolbar when adding content in inline mode #TINY-4725
+  #TINY-4765
 - Fixed `readonly` mode not returning the appropriate boolean value #TINY-3948
 - Fixed the `forced_root_block_attrs` setting not applying attributes to new blocks consistently #TINY-4564
 - Fixed the editor incorrectly stealing focus during initialization in Microsoft Internet Explorer #TINY-4697
@@ -565,22 +709,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.2.0 - 2020-02-13
 
 ### Added
+
 - Added the ability to apply formats to spaces #TINY-4200
-- Added new `toolbar_location` setting to allow for positioning the menu and toolbar at the bottom of the editor #TINY-4210
-- Added new `toolbar_groups` setting to allow a custom floating toolbar group to be added to the toolbar when using `floating` toolbar mode #TINY-4229
-- Added new `link_default_protocol` setting to `link` and `autolink` plugin to allow a protocol to be used by default #TINY-3328
+- Added new `toolbar_location` setting to allow for positioning the menu and toolbar at the bottom of the editor
+  #TINY-4210
+- Added new `toolbar_groups` setting to allow a custom floating toolbar group to be added to the toolbar when
+  using `floating` toolbar mode #TINY-4229
+- Added new `link_default_protocol` setting to `link` and `autolink` plugin to allow a protocol to be used by default
+  #TINY-3328
 - Added new `placeholder` setting to allow a placeholder to be shown when the editor is empty #TINY-3917
 - Added new `tinymce.dom.TextSeeker` API to allow searching text across different DOM nodes #TINY-4200
-- Added a drop shadow below the toolbar while in sticky mode and introduced Oxide variables to customize it when creating a custom skin #TINY-4343
+- Added a drop shadow below the toolbar while in sticky mode and introduced Oxide variables to customize it when
+  creating a custom skin #TINY-4343
 - Added `quickbars_image_toolbar` setting to allow for the image quickbar to be turned off #TINY-4398
 - Added iframe and img `loading` attribute to the default schema. Patch contributed by ataylor32. #GH-5112
 - Added new `getNodeFilters`/`getAttributeFilters` functions to the `editor.serializer` instance #TINY-4344
 - Added new `a11y_advanced_options` setting to allow additional accessibility options to be added #FOAM-11
 - Added new accessibility options and behaviours to the image dialog using `a11y_advanced_options` #FOAM-11
-- Added the ability to use the window `PrismJS` instance for the `codesample` plugin instead of the bundled version to allow for styling custom languages #TINY-4504
+- Added the ability to use the window `PrismJS` instance for the `codesample` plugin instead of the bundled version to
+  allow for styling custom languages #TINY-4504
 - Added error message events that fire when a resource loading error occurs #TINY-4509
 
 ### Changed
+
 - Changed the default schema to disallow `onchange` for select elements #TINY-4614
 - Changed default `toolbar_mode` value from false to `wrap`. The value false has been deprecated #TINY-4617
 - Changed `toolbar_drawer` setting to `toolbar_mode`. `toolbar_drawer` has been deprecated #TINY-4416
@@ -589,16 +740,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed and improved the visual appearance of the color input field #TINY-2917
 - Changed fake caret container to use `forced_root_block` when possible #TINY-4190
 - Changed the `requireLangPack` API to wait until the plugin has been loaded before loading the language pack #TINY-3716
-- Changed the formatter so `style_formats` are registered before the initial content is loaded into the editor #TINY-4238
+- Changed the formatter so `style_formats` are registered before the initial content is loaded into the editor
+  #TINY-4238
 - Changed media plugin to use https protocol for media urls by default #TINY-4577
-- Changed the parser to treat CDATA nodes as bogus HTML comments to match the HTML parsing spec. A new `preserve_cdata` setting has been added to preserve CDATA nodes if required #TINY-4625
+- Changed the parser to treat CDATA nodes as bogus HTML comments to match the HTML parsing spec. A new `preserve_cdata`
+  setting has been added to preserve CDATA nodes if required #TINY-4625
 
 ### Fixed
+
 - Fixed incorrect parsing of malformed/bogus HTML comments #TINY-4625
 - Fixed `quickbars` selection toolbar appearing on non-editable elements #TINY-4359
 - Fixed bug with alignment toolbar buttons sometimes not changing state correctly #TINY-4139
 - Fixed the `codesample` toolbar button not toggling when selecting code samples other than HTML #TINY-4504
-- Fixed content incorrectly scrolling to the top or bottom when pressing enter if when the content was already in view #TINY-4162
+- Fixed content incorrectly scrolling to the top or bottom when pressing enter if when the content was already in view
+  #TINY-4162
 - Fixed `scrollIntoView` potentially hiding elements behind the toolbar #TINY-4162
 - Fixed editor not respecting the `resize_img_proportional` setting due to legacy code #TINY-4236
 - Fixed flickering floating toolbar drawer in inline mode #TINY-4210
@@ -606,15 +761,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the `mscontrolselect` event not being unbound on IE/Edge #TINY-4196
 - Fixed Confirm dialog footer buttons so only the "Yes" button is highlighted #TINY-4310
 - Fixed `file_picker_callback` functionality for Image, Link and Media plugins #TINY-4163
-- Fixed issue where floating toolbar drawer sometimes would break if the editor is resized while the drawer is open #TINY-4439
+- Fixed issue where floating toolbar drawer sometimes would break if the editor is resized while the drawer is open
+  #TINY-4439
 - Fixed incorrect `external_plugins` loading error message #TINY-4503
 - Fixed resize handler was not hidden for ARIA purposes. Patch contributed by Parent5446. #GH-5195
 - Fixed an issue where content could be lost if a misspelled word was selected and spellchecking was disabled #TINY-3899
 - Fixed validation errors in the CSS where certain properties had the wrong default value #TINY-4491
 - Fixed an issue where forced root block attributes were not applied when removing a list #TINY-4272
 - Fixed an issue where the element path isn't being cleared when there are no parents #TINY-4412
-- Fixed an issue where width and height in svg icons containing `rect` elements were overridden by the CSS reset #TINY-4408
-- Fixed an issue where uploading images with `images_reuse_filename` enabled and that included a query parameter would generate an invalid URL #TINY-4638
+- Fixed an issue where width and height in svg icons containing `rect` elements were overridden by the CSS reset
+  #TINY-4408
+- Fixed an issue where uploading images with `images_reuse_filename` enabled and that included a query parameter would
+  generate an invalid URL #TINY-4638
 - Fixed the `closeButton` property not working when opening notifications #TINY-4674
 - Fixed keyboard flicker when opening a context menu on mobile #TINY-4540
 - Fixed issue where plus icon svg contained strokes #TINY-4681
@@ -622,6 +780,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.1.6 - 2020-01-28
 
 ### Fixed
+
 - Fixed `readonly` mode not blocking all clicked links #TINY-4572
 - Fixed legacy font sizes being calculated inconsistently for the `FontSize` query command value #TINY-4555
 - Fixed changing a tables row from `Header` to `Body` incorrectly moving the row to the bottom of the table #TINY-4593
@@ -633,16 +792,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.1.5 - 2019-12-19
 
 ### Fixed
+
 - Fixed the UI not working with hybrid devices that accept both touch and mouse events #TNY-4521
 - Fixed the `charmap` dialog initially focusing the first tab of the dialog instead of the search input field #TINY-4342
-- Fixed an exception being raised when inserting content if the caret was directly before or after a `contenteditable="false"` element #TINY-4528
+- Fixed an exception being raised when inserting content if the caret was directly before or after
+  a `contenteditable="false"` element #TINY-4528
 - Fixed a bug with pasting image URLs when paste as text is enabled #TINY-4523
 
 ## 5.1.4 - 2019-12-11
 
 ### Fixed
+
 - Fixed dialog contents disappearing when clicking a checkbox for right-to-left languages #TINY-4518
-- Fixed the `legacyoutput` plugin registering legacy formats after editor initialization, causing legacy content to be stripped on the initial load #TINY-4447
+- Fixed the `legacyoutput` plugin registering legacy formats after editor initialization, causing legacy content to be
+  stripped on the initial load #TINY-4447
 - Fixed search and replace not cycling through results when searching using special characters #TINY-4506
 - Fixed the `visualchars` plugin converting HTML-like text to DOM elements in certain cases #TINY-4507
 - Fixed an issue with the `paste` plugin not sanitizing content in some cases #TINY-4510
@@ -651,6 +814,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.1.3 - 2019-12-04
 
 ### Fixed
+
 - Fixed sticky toolbar not undocking when fullscreen mode is activated #TINY-4390
 - Fixed the "Current Window" target not applying when updating links using the link dialog #TINY-4063
 - Fixed disabled menu items not highlighting when focused #TINY-4339
@@ -662,6 +826,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.1.2 - 2019-11-19
 
 ### Fixed
+
 - Fixed desktop touch devices using `mobile` configuration overrides #TINY-4345
 - Fixed unable to disable the new scrolling toolbar feature #TINY-4345
 - Fixed touch events passing through any pop-up items to the content underneath on Android devices #TINY-4367
@@ -674,7 +839,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed mobile table selectors moving when moving outside the editor #TINY-4366
 - Fixed inline toolbars collapsing when using sliding toolbars #TINY-4389
 - Fixed block textpatterns not treating NBSPs as spaces #TINY-4378
-- Fixed backspace not merging blocks when the last element in the preceding block was a `contenteditable="false"` element #TINY-4235
+- Fixed backspace not merging blocks when the last element in the preceding block was a `contenteditable="false"`
+  element #TINY-4235
 - Fixed toolbar buttons that only contain text labels overlapping on mobile devices #TINY-4395
 - Fixed quickbars quickimage picker not working on mobile #TINY-4377
 - Fixed fullscreen not resizing in an iOS WKWebView component #TINY-4413
@@ -682,6 +848,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.1.1 - 2019-10-28
 
 ### Fixed
+
 - Fixed font formats containing spaces being wrapped in `&quot;` entities instead of single quotes #TINY-4275
 - Fixed alert and confirm dialogs losing focus when clicked #TINY-4248
 - Fixed clicking outside a modal dialog focusing on the document body #TINY-4249
@@ -690,6 +857,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.1.0 - 2019-10-17
 
 ### Added
+
 - Added touch selector handles for table selections on touch devices #TINY-4097
 - Added border width field to Table Cell dialog #TINY-4028
 - Added touch event listener to media plugin to make embeds playable #TINY-4093
@@ -698,16 +866,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new platform detection functions to `Env` and deprecated older detection properties #TINY-4184
 - Added `inputMode` config field to specify inputmode attribute of `input` dialog components #TINY-4062
 - Added new `inputMode` property to relevant plugins/dialogs #TINY-4102
-- Added new `toolbar_sticky` setting to allow the iframe menubar/toolbar to stick to the top of the window when scrolling #TINY-3982
+- Added new `toolbar_sticky` setting to allow the iframe menubar/toolbar to stick to the top of the window when
+  scrolling #TINY-3982
 
 ### Changed
+
 - Changed default setting for `toolbar_drawer` to `floating` #TINY-3634
 - Changed mobile phones to use the `silver` theme by default #TINY-3634
 - Changed some editor settings to default to `false` on touch devices:
-  - `menubar`(phones only) #TINY-4077
-  - `table_grid` #TINY-4075
-  - `resize` #TINY-4157
-  - `object_resizing` #TINY-4157
+    - `menubar`(phones only) #TINY-4077
+    - `table_grid` #TINY-4075
+    - `resize` #TINY-4157
+    - `object_resizing` #TINY-4157
 - Changed toolbars and context toolbars to sidescroll on mobile #TINY-3894 #TINY-4107
 - Changed context menus to render as horizontal menus on touch devices #TINY-4107
 - Changed the editor to use the `VisualViewport` API of the browser where possible #TINY-4078
@@ -716,6 +886,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed the `urlinput` dialog component to use the `url` type attribute #TINY-4102
 
 ### Fixed
+
 - Fixed Safari desktop visual viewport fires resize on fullscreen breaking the restore function #TINY-3976
 - Fixed scroll issues on mobile devices #TINY-3976
 - Fixed context toolbar unable to refresh position on iOS12 #TINY-4107
@@ -741,10 +912,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.16 - 2019-09-24
 
 ### Added
-- Added new `referrer_policy` setting to add the `referrerpolicy` attribute when loading scripts or stylesheets #TINY-3978
+
+- Added new `referrer_policy` setting to add the `referrerpolicy` attribute when loading scripts or stylesheets
+  #TINY-3978
 - Added a slight background color to dialog tab links when focused to aid keyboard navigation #TINY-3877
 
 ### Fixed
+
 - Fixed media poster value not updating on change #TINY-4013
 - Fixed openlink was not registered as a toolbar button #TINY-4024
 - Fixed failing to initialize if a script tag was used inside a SVG #TINY-4087
@@ -756,12 +930,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.15 - 2019-09-02
 
 ### Added
+
 - Added a dark `content_css` skin to go with the dark UI skin #TINY-3743
 
 ### Changed
+
 - Changed the enabled state on toolbar buttons so they don't get the hover effect #TINY-3974
 
 ### Fixed
+
 - Fixed missing CSS active state on toolbar buttons #TINY-3966
 - Fixed `onChange` callback not firing for the colorinput dialog component #TINY-3968
 - Fixed context toolbars not showing in fullscreen mode #TINY-4023
@@ -769,27 +946,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.14 - 2019-08-19
 
 ### Added
+
 - Added an API to reload the autocompleter menu with additional fetch metadata #MENTIONS-17
 
 ### Fixed
+
 - Fixed missing toolbar button border styling options #TINY-3965
 - Fixed image upload progress notification closing before the upload is complete #TINY-3963
 - Fixed inline dialogs not closing on escape when no dialog component is in focus #TINY-3936
 - Fixed plugins not being filtered when defaulting to mobile on phones #TINY-3537
 - Fixed toolbar more drawer showing the content behind it when transitioning between opened and closed states #TINY-3878
-- Fixed focus not returning to the dialog after pressing the "Replace all" button in the search and replace dialog #TINY-3961
+- Fixed focus not returning to the dialog after pressing the "Replace all" button in the search and replace dialog
+  #TINY-3961
 
 ### Removed
-- Removed Oxide variable `@menubar-select-disabled-border-color` and replaced it with `@menubar-select-disabled-border` #TINY-3965
+
+- Removed Oxide variable `@menubar-select-disabled-border-color` and replaced it with `@menubar-select-disabled-border`
+  #TINY-3965
 
 ## 5.0.13 - 2019-08-06
 
 ### Changed
-- Changed modal dialogs to prevent dragging by default and added new `draggable_modal` setting to restore dragging #TINY-3873
-- Changed the nonbreaking plugin to insert nbsp characters wrapped in spans to aid in filtering. This can be disabled using the `nonbreaking_wrap` setting #TINY-3647
-- Changed backspace behaviour in lists to outdent nested list items when the cursor is at the start of the list item #TINY-3651
+
+- Changed modal dialogs to prevent dragging by default and added new `draggable_modal` setting to restore dragging
+  #TINY-3873
+- Changed the nonbreaking plugin to insert nbsp characters wrapped in spans to aid in filtering. This can be disabled
+  using the `nonbreaking_wrap` setting #TINY-3647
+- Changed backspace behaviour in lists to outdent nested list items when the cursor is at the start of the list item
+  #TINY-3651
 
 ### Fixed
+
 - Fixed sidebar growing beyond editor bounds in IE 11 #TINY-3937
 - Fixed issue with being unable to keyboard navigate disabled toolbar buttons #TINY-3350
 - Fixed issues with backspace and delete in nested contenteditable true and false elements #TINY-3868
@@ -806,19 +993,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.12 - 2019-07-18
 
 ### Added
+
 - Added ability to utilize UI dialog panels inside other panels #TINY-3305
 - Added help dialog tab explaining keyboard navigation of the editor #TINY-3603
 
 ### Changed
+
 - Changed the "Find and Replace" design to an inline dialog #TINY-3054
 
 ### Fixed
+
 - Fixed issue where autolink spacebar event was not being fired on Edge #TINY-3891
 - Fixed table selection missing the background color #TINY-3892
 - Fixed removing shortcuts not working for function keys #TINY-3871
 - Fixed non-descriptive UI component type names #TINY-3349
 - Fixed UI registry components rendering as the wrong type when manually specifying a different type #TINY-3385
-- Fixed an issue where dialog checkbox, input, selectbox, textarea and urlinput components couldn't be disabled #TINY-3708
+- Fixed an issue where dialog checkbox, input, selectbox, textarea and urlinput components couldn't be disabled
+  #TINY-3708
 - Fixed the context toolbar not using viable screen space in inline/distraction free mode #TINY-3717
 - Fixed the context toolbar overlapping the toolbar in various conditions #TINY-3205
 - Fixed IE11 edge case where items were being inserted into the wrong location #TINY-3884
@@ -826,6 +1017,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.11 - 2019-07-04
 
 ### Fixed
+
 - Fixed packaging errors caused by a rollup treeshaking bug (https://github.com/rollup/rollup/issues/2970) #TINY-3866
 - Fixed the customeditor component not able to get data from the dialog api #TINY-3866
 - Fixed collection component tooltips not being translated #TINY-3855
@@ -833,16 +1025,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.10 - 2019-07-02
 
 ### Added
+
 - Added support for all HTML color formats in `color_map` setting #TINY-3837
 
 ### Changed
+
 - Changed backspace key handling to outdent content in appropriate circumstances #TINY-3685
 - Changed default palette for forecolor and backcolor to include some lighter colors suitable for highlights #TINY-2865
 - Changed the search and replace plugin to cycle through results #TINY-3800
 
 ### Fixed
+
 - Fixed inconsistent types causing some properties to be unable to be used in dialog components #TINY-3778
-- Fixed an issue in the Oxide skin where dialog content like outlines and shadows were clipped because of overflow hidden #TINY-3566
+- Fixed an issue in the Oxide skin where dialog content like outlines and shadows were clipped because of overflow
+  hidden #TINY-3566
 - Fixed the search and replace plugin not resetting state when changing the search query #TINY-3800
 - Fixed backspace in lists not creating an undo level #TINY-3814
 - Fixed the editor to cancel loading in quirks mode where the UI is not supported #TINY-3391
@@ -861,18 +1057,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.9 - 2019-06-26
 
 ### Fixed
+
 - Fixed print plugin not working in Firefox #TINY-3834
 
 ## 5.0.8 - 2019-06-18
 
 ### Added
+
 - Added back support for multiple toolbars #TINY-2195
 - Added support for .m4a files to the media plugin #TINY-3750
 - Added new base_url and suffix editor init options #TINY-3681
 
 ### Fixed
+
 - Fixed incorrect padding for select boxes with visible values #TINY-3780
-- Fixed selection incorrectly changing when programmatically setting selection on contenteditable false elements #TINY-3766
+- Fixed selection incorrectly changing when programmatically setting selection on contenteditable false elements
+  #TINY-3766
 - Fixed sidebar background being transparent #TINY-3727
 - Fixed the build to remove duplicate iife wrappers #TINY-3689
 - Fixed bogus autocompleter span appearing in content when the autocompleter menu is shown #TINY-3752
@@ -892,22 +1092,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.7 - 2019-06-05
 
 ### Added
+
 - Added new toolbar button and menu item for inserting tables via dialog #TINY-3636
 - Added new API for adding/removing/changing tabs in the Help dialog #TINY-3535
 - Added highlighting of matched text in autocompleter items #TINY-3687
 - Added the ability for autocompleters to work with matches that include spaces #TINY-3704
 - Added new `imagetools_fetch_image` callback to allow custom implementations for cors loading of images #TINY-3658
-- Added `'http'` and `https` options to `link_assume_external_targets` to prepend `http://` or `https://` prefixes when URL does not contain a protocol prefix. Patch contributed by francoisfreitag. #GH-4335
+- Added `'http'` and `https` options to `link_assume_external_targets` to prepend `http://` or `https://` prefixes when
+  URL does not contain a protocol prefix. Patch contributed by francoisfreitag. #GH-4335
 
 ### Changed
+
 - Changed annotations navigation to work the same as inline boundaries #TINY-3396
 - Changed tabpanel API by adding a `name` field and changing relevant methods to use it #TINY-3535
 
 ### Fixed
+
 - Fixed text color not updating all color buttons when choosing a color #TINY-3602
 - Fixed the autocompleter not working with fragmented text #TINY-3459
 - Fixed the autosave plugin no longer overwrites window.onbeforeunload #TINY-3688
-- Fixed infinite loop in the paste plugin when IE11 takes a long time to process paste events. Patch contributed by lRawd. #GH-4987
+- Fixed infinite loop in the paste plugin when IE11 takes a long time to process paste events. Patch contributed by
+  lRawd. #GH-4987
 - Fixed image handle locations when using `fixed_toolbar_container`. Patch contributed by t00. #GH-4966
 - Fixed the autoresize plugin not firing `ResizeEditor` events #TINY-3587
 - Fixed editor in fullscreen mode not extending to the bottom of the screen #TINY-3701
@@ -915,19 +1120,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed autocomplete not triggering from compositionend events #TINY-3711
 - Fixed `file_picker_callback` could not set the caption field on the insert image dialog #TINY-3172
 - Fixed the autocompleter menu showing up after a selection had been made #TINY-3718
-- Fixed an exception being thrown when a file or number input has focus during initialization. Patch contributed by t00 #GH-2194
+- Fixed an exception being thrown when a file or number input has focus during initialization. Patch contributed by t00
+  #GH-2194
 
 ## 5.0.6 - 2019-05-22
 
 ### Added
+
 - Added `icons_url` editor settings to enable icon packs to be loaded from a custom url #TINY-3585
 - Added `image_uploadtab` editor setting to control the visibility of the upload tab in the image dialog #TINY-3606
 - Added new api endpoints to the wordcount plugin and improved character count logic #TINY-3578
 
 ### Changed
+
 - Changed plugin, language and icon loading errors to log in the console instead of a notification #TINY-3585
 
 ### Fixed
+
 - Fixed the textpattern plugin not working with fragmented text #TINY-3089
 - Fixed various toolbar drawer accessibility issues and added an animation #TINY-3554
 - Fixed issues with selection and ui components when toggling readonly mode #TINY-3592
@@ -941,21 +1150,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.5 - 2019-05-09
 
 ### Added
+
 - Added menu items to match the forecolor/backcolor toolbar buttons #TINY-2878
 - Added default directionality based on the configured language #TINY-2621
 - Added styles, icons and tests for rtl mode #TINY-2621
 
 ### Fixed
+
 - Fixed autoresize not working with floating elements or when media elements finished loading #TINY-3545
 - Fixed incorrect vertical caret positioning in IE 11 #TINY-3188
 - Fixed submenu anchoring hiding overflowed content #TINY-3564
 
 ### Removed
+
 - Removed unused and hidden validation icons to avoid displaying phantom tooltips #TINY-2329
 
 ## 5.0.4 - 2019-04-23
 
 ### Added
+
 - Added back URL dialog functionality, which is now available via `editor.windowManager.openUrl()` #TINY-3382
 - Added the missing throbber functionality when calling `editor.setProgressState(true)` #TINY-3453
 - Added function to reset the editor content and undo/dirty state via `editor.resetContent()` #TINY-3435
@@ -966,8 +1179,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the linkchecker context menu items to the default configuration #TINY-3543
 
 ### Fixed
+
 - Fixed image context menu items showing on placeholder images #TINY-3280
-- Fixed dialog labels and text color contrast within notifications/alert banners to satisfy WCAG 4.5:1 contrast ratio for accessibility #TINY-3351
+- Fixed dialog labels and text color contrast within notifications/alert banners to satisfy WCAG 4.5:1 contrast ratio
+  for accessibility #TINY-3351
 - Fixed selectbox and colorpicker items not being translated #TINY-3546
 - Fixed toolbar drawer sliding mode to correctly focus the editor when tabbing via keyboard navigation #TINY-3533
 - Fixed positioning of the styleselect menu in iOS while using the mobile theme #TINY-3505
@@ -977,25 +1192,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed disabled menu items displaying as active when hovered #TINY-3027
 
 ### Removed
+
 - Removed redundant mobile wrapper #TINY-3480
 
 ## 5.0.3 - 2019-03-19
 
 ### Changed
-- Changed empty nested-menu items within the style formats menu to be disabled or hidden if the value of `style_formats_autohide` is `true` #TINY-3310
+
+- Changed empty nested-menu items within the style formats menu to be disabled or hidden if the value
+  of `style_formats_autohide` is `true` #TINY-3310
 - Changed the entire phrase 'Powered by Tiny' in the status bar to be a link instead of just the word 'Tiny' #TINY-3366
 - Changed `formatselect`, `styleselect` and `align` menus to use the `mceToggleFormat` command internally #TINY-3428
 
 ### Fixed
+
 - Fixed toolbar keyboard navigation to work as expected when `toolbar_drawer` is configured #TINY-3432
-- Fixed text direction buttons to display the correct pressed state in selections that have no explicit `dir` property #TINY-3138
+- Fixed text direction buttons to display the correct pressed state in selections that have no explicit `dir` property
+  #TINY-3138
 - Fixed the mobile editor to clean up properly when removed #TINY-3445
 - Fixed quickbar toolbars to add an empty box to the screen when it is set to `false` #TINY-3439
-- Fixed an issue where pressing the **Delete/Backspace** key at the edge of tables was creating incorrect selections #TINY-3371
-- Fixed an issue where dialog collection items (emoticon and special character dialogs) couldn't be selected with touch devices #TINY-3444
-- Fixed a type error introduced in TinyMCE version 5.0.2 when calling `editor.getContent()` with nested bookmarks #TINY-3400
+- Fixed an issue where pressing the **Delete/Backspace** key at the edge of tables was creating incorrect selections
+  #TINY-3371
+- Fixed an issue where dialog collection items (emoticon and special character dialogs) couldn't be selected with touch
+  devices #TINY-3444
+- Fixed a type error introduced in TinyMCE version 5.0.2 when calling `editor.getContent()` with nested bookmarks
+  #TINY-3400
 - Fixed an issue that prevented default icons from being overridden #TINY-3449
-- Fixed an issue where **Home/End** keys wouldn't move the caret correctly before or after `contenteditable=false` inline elements #TINY-2995
+- Fixed an issue where **Home/End** keys wouldn't move the caret correctly before or after `contenteditable=false`
+  inline elements #TINY-2995
 - Fixed styles to be preserved in IE 11 when editing via the `fullpage` plugin #TINY-3464
 - Fixed the `link` plugin context toolbar missing the open link button #TINY-3461
 - Fixed inconsistent dialog component spacing #TINY-3436
@@ -1003,14 +1227,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.2 - 2019-03-05
 
 ### Added
+
 - Added presentation and document presets to `htmlpanel` dialog component #TINY-2694
 - Added missing fixed_toolbar_container setting has been reimplemented in the Silver theme #TINY-2712
-- Added a new toolbar setting `toolbar_drawer` that moves toolbar groups which overflow the editor width into either a `sliding` or `floating` toolbar section #TINY-2874
+- Added a new toolbar setting `toolbar_drawer` that moves toolbar groups which overflow the editor width into either
+  a `sliding` or `floating` toolbar section #TINY-2874
 
 ### Changed
+
 - Updated the build process to include package lock files in the dev distribution archive #TINY-2870
 
 ### Fixed
+
 - Fixed inline dialogs did not have aria attributes #TINY-2694
 - Fixed default icons are now available in the UI registry, allowing use outside of toolbar buttons #TINY-3307
 - Fixed a memory leak related to select toolbar items #TINY-2874
@@ -1018,12 +1246,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue where content may have been lost when using permanent bookmarks #TINY-3400
 - Fixed the quicklink toolbar button not rendering in the quickbars plugin #TINY-3125
 - Fixed an issue where menus were generating invalid HTML in some cases #TINY-3323
-- Fixed an issue that could cause the mobile theme to show a blank white screen when the editor was inside an `overflow:hidden` element #TINY-3407
+- Fixed an issue that could cause the mobile theme to show a blank white screen when the editor was inside
+  an `overflow:hidden` element #TINY-3407
 - Fixed mobile theme using a transparent background and not taking up the full width on iOS #TINY-3414
 - Fixed the template plugin dialog missing the description field #TINY-3337
 - Fixed input dialog components using an invalid default type attribute #TINY-3424
 - Fixed an issue where backspace/delete keys after/before pagebreak elements wouldn't move the caret #TINY-3097
-- Fixed an issue in the table plugin where menu items and toolbar buttons weren't showing correctly based on the selection #TINY-3423
+- Fixed an issue in the table plugin where menu items and toolbar buttons weren't showing correctly based on the
+  selection #TINY-3423
 - Fixed inconsistent button focus styles in Firefox #TINY-3377
 - Fixed the resize icon floating left when all status bar elements were disabled #TINY-3340
 - Fixed the resize handle to not show in fullscreen mode #TINY-3404
@@ -1031,15 +1261,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 5.0.1 - 2019-02-21
 
 ### Added
+
 - Added H1-H6 toggle button registration to the silver theme #TINY-3070
 - Added code sample toolbar button will now toggle on when the cursor is in a code section #TINY-3040
 - Added new settings to the emoticons plugin to allow additional emoticons to be added #TINY-3088
 
 ### Fixed
+
 - Fixed an issue where adding links to images would replace the image with text #TINY-3356
 - Fixed an issue where the inline editor could use fractional pixels for positioning #TINY-3202
 - Fixed an issue where uploading non-image files in the Image Plugin upload tab threw an error. #TINY-3244
-- Fixed an issue in the media plugin that was causing the source url and height/width to be lost in certain circumstances #TINY-2858
+- Fixed an issue in the media plugin that was causing the source url and height/width to be lost in certain
+  circumstances #TINY-2858
 - Fixed an issue with the Context Toolbar not being removed when clicking outside of the editor #TINY-2804
 - Fixed an issue where clicking 'Remove link' wouldn't remove the link in certain circumstances #TINY-3199
 - Fixed an issue where the media plugin would fail when parsing dialog data #TINY-3218
@@ -1055,6 +1288,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed an issue that caused the inline editor to fail to render when the target element already had focus #TINY-3353
 
 ### Removed
+
 - Removed paste as text notification banner and paste_plaintext_inform setting #POW-102
 
 ## 5.0.0 - 2019-02-04
@@ -1062,14 +1296,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Full documentation for the version 5 features and changes is available at https://www.tiny.cloud/docs/release-notes/
 
 ### Added
+
 - Added links and registered names with * to denote premium plugins in Plugins tab of Help dialog #TINY-3223
 
 ### Changed
+
 - Changed Tiny 5 mobile skin to look more uniform with desktop #TINY-2650
 - Blacklisted table, th and td as inline editor target #TINY-717
 
 ### Fixed
-- Fixed an issue where tab panel heights weren't sizing properly on smaller screens and weren't updating on resize #TINY-3242
+
+- Fixed an issue where tab panel heights weren't sizing properly on smaller screens and weren't updating on resize
+  #TINY-3242
 - Fixed image tools not having any padding between the label and slider #TINY-3220
 - Fixed context toolbar toggle buttons not showing the correct state #TINY-3022
 - Fixed missing separators in the spellchecker context menu between the suggestions and actions #TINY-3217
@@ -1081,15 +1319,20 @@ Full documentation for the version 5 features and changes is available at https:
 ## 5.0.0-rc-2 - 2019-01-22
 
 ### Added
+
 - Added screen reader accessibility for sidebar and statusbar #TINY-2699
 
 ### Changed
-- Changed formatting menus so they are registered and made the align toolbar button use an icon instead of text #TINY-2880
+
+- Changed formatting menus so they are registered and made the align toolbar button use an icon instead of text
+  #TINY-2880
 - Changed checkboxes to use a boolean for its state, instead of a string #TINY-2848
-- Updated the textpattern plugin to properly support nested patterns and to allow running a command with a value for a pattern with a start and an end #TINY-2991
+- Updated the textpattern plugin to properly support nested patterns and to allow running a command with a value for a
+  pattern with a start and an end #TINY-2991
 - Updated Emoticons and Charmap dialogs to be screen reader accessible #TINY-2693
 
 ### Fixed
+
 - Fixed the link dialog such that it will now retain class attributes when updating links #TINY-2825
 - Fixed "Find and replace" not showing in the "Edit" menu by default #TINY-3061
 - Fixed dropdown buttons missing the 'type' attribute, which could cause forms to be incorrectly submitted #TINY-2826
@@ -1097,11 +1340,13 @@ Full documentation for the version 5 features and changes is available at https:
 - Fixed blank rel_list values throwing an exception in the link plugin #TINY-3149
 
 ### Removed
+
 - Removed unnecessary 'flex' and unused 'colspan' properties from the new dialog APIs #TINY-2973
 
 ## 5.0.0-rc-1 - 2019-01-08
 
 ### Added
+
 - Added editor settings functionality to specify title attributes for toolbar groups #TINY-2690
 - Added icons instead of button text to improve Search and Replace dialog footer appearance #TINY-2654
 - Added `tox-dialog__table` instead of `mce-table-striped` class to enhance Help dialog appearance #TINY-2360
@@ -1109,14 +1354,18 @@ Full documentation for the version 5 features and changes is available at https:
 - Added a wordcount menu item, that defaults to appearing in the tools menu #TINY-2877
 
 ### Changed
-- Updated the font select dropdown logic to try to detect the system font stack and show "System Font" as the font name #TINY-2710
+
+- Updated the font select dropdown logic to try to detect the system font stack and show "System Font" as the font name
+  #TINY-2710
 - Updated the autocompleter to only show when it has matched items #TINY-2350
 - Updated SizeInput labels to "Height" and "Width" instead of Dimensions #TINY-2833
 - Updated the build process to minify and generate ASCII only output for the emoticons database #TINY-2744
 
 ### Fixed
+
 - Fixed readonly mode not fully disabling editing content #TINY-2287
-- Fixed accessibility issues with the font select, font size, style select and format select toolbar dropdowns #TINY-2713
+- Fixed accessibility issues with the font select, font size, style select and format select toolbar dropdowns
+  #TINY-2713
 - Fixed accessibility issues with split dropdowns #TINY-2697
 - Fixed the legacyoutput plugin to be compatible with TinyMCE 5.0 #TINY-2301
 - Fixed icons not showing correctly in the autocompleter popup #TINY-3029
@@ -1126,41 +1375,52 @@ Full documentation for the version 5 features and changes is available at https:
 ## 5.0.0-beta-1 - 2018-11-30
 
 ### Added
-- Added a new `addNestedMenuItem()` UI registry function and changed all nested menu items to use the new registry functions #TINY-2230
+
+- Added a new `addNestedMenuItem()` UI registry function and changed all nested menu items to use the new registry
+  functions #TINY-2230
 - Added title attribute to color swatch colors #TINY-2669
 - Added anchorbar component to anchor inline toolbar dialogs to instead of the toolbar #TINY-2040
-- Added support for toolbar<n> and toolbar array config options to be squashed into a single toolbar and not create multiple toolbars #TINY-2195
+- Added support for toolbar<n> and toolbar array config options to be squashed into a single toolbar and not create
+  multiple toolbars #TINY-2195
 - Added error handling for when forced_root_block config option is set to true #TINY-2261
 - Added functionality for the removed_menuitems config option #TINY-2184
 - Added the ability to use a string to reference menu items in menu buttons and submenu items #TINY-2253
 
 ### Changed
+
 - Changed the name of the "inlite" plugin to "quickbars" #TINY-2831
 - Changed the background color icon to highlight background icon #TINY-2258
 - Changed Help dialog to be accessible to screen readers #TINY-2687
 - Changed the color swatch to save selected custom colors to local storage for use across sessions #TINY-2722
-- Changed `WindowManager` API - methods `getParams`, `setParams` and `getWindows`, and the legacy `windows` property, have been removed. `alert` and `confirm` dialogs are no longer tracked in the window list. #TINY-2603
+- Changed `WindowManager` API - methods `getParams`, `setParams` and `getWindows`, and the legacy `windows` property,
+  have been removed. `alert` and `confirm` dialogs are no longer tracked in the window list. #TINY-2603
 
 ### Fixed
+
 - Fixed an inline mode issue where the save plugin upon saving can cause content loss #TINY-2659
-- Fixed an issue in IE 11 where calling selection.getContent() would return an empty string when the editor didn't have focus #TINY-2325
+- Fixed an issue in IE 11 where calling selection.getContent() would return an empty string when the editor didn't have
+  focus #TINY-2325
 
 ### Removed
+
 - Removed compat3x plugin #TINY-2815
 
 ## 5.0.0-preview-4 - 2018-11-12
 
 ### Added
+
 - Added width and height placeholder text to image and media dialog dimensions input #AP-296
 - Added the ability to keyboard navigate through menus, toolbars, sidebar and the status bar sequentially #AP-381
 - Added translation capability back to the editor's UI #AP-282
 - Added `label` component type for dialogs to group components under a label
 
 ### Changed
+
 - Changed the editor resize handle so that it should be disabled when the autoresize plugin is turned on #AP-424
 - Changed UI text for microcopy improvements #TINY-2281
 
 ### Fixed
+
 - Fixed distraction free plugin #AP-470
 - Fixed contents of the input field being selected on focus instead of just recieving an outline highlight #AP-464
 - Fixed styling issues with dialogs and menus in IE 11 #AP-456
@@ -1170,7 +1430,8 @@ Full documentation for the version 5 features and changes is available at https:
 - Fixed page responsiveness with multiple inline editors #AP-430
 - Fixed empty toolbar groups appearing through invalid configuration of the `toolbar` property #AP-450
 - Fixed text not being retained when updating links through the link dialog #AP-293
-- Fixed edit image context menu, context toolbar and toolbar items being incorrectly enabled when selecting invalid images #AP-323
+- Fixed edit image context menu, context toolbar and toolbar items being incorrectly enabled when selecting invalid
+  images #AP-323
 - Fixed emoji type ahead being shown when typing URLs #AP-366
 - Fixed toolbar configuration properties incorrectly expecting string arrays instead of strings #AP-342
 - Fixed the block formatting toolbar item not showing a "Formatting" title when there is no selection #AP-321
@@ -1186,16 +1447,19 @@ Full documentation for the version 5 features and changes is available at https:
 - Fixed the editor not displaying as fullscreen when toggled #TINY-2237
 
 ### Removed
+
 - Removed the tox-custom-editor class that was added to the wrapping element of codemirror #TINY-2211
 
 ## 5.0.0-preview-3 - 2018-10-18
 
 ### Changed
+
 - Changed editor layout to use modern CSS properties over manually calculating dimensions #AP-324
 - Changed `autoresize_min_height` and `autoresize_max_height` configurations to `min_height` and `max_height` #AP-324
 - Changed `Whole word` label in Search and Replace dialog to `Find whole words only` #AP-387
 
 ### Fixed
+
 - Fixed bugs with editor width jumping when resizing and the iframe not resizing to smaller than 150px in height #AP-324
 - Fixed mobile theme bug that prevented the editor from loading #AP-404
 - Fixed long toolbar groups extending outside of the editor instead of wrapping
@@ -1208,14 +1472,18 @@ Full documentation for the version 5 features and changes is available at https:
 ## 5.0.0-preview-2 - 2018-10-10
 
 ### Added
+
 - Added swatch is now shown for colorinput fields, instead of the colorpicker directly #AP-328
 - Added fontformats and fontsizes menu items #AP-390
 
 ### Changed
+
 - Changed configuration of color options has been simplified to `color_map`, `color_cols`, and `custom_colors` #AP-328
-- Changed `height` configuration to apply to the editor frame (including menubar, toolbar, status bar) instead of the content area #AP-324
+- Changed `height` configuration to apply to the editor frame (including menubar, toolbar, status bar) instead of the
+  content area #AP-324
 
 ### Fixed
+
 - Fixed styleselect not updating the displayed item as the cursor moved #AP-388
 - Fixed preview iframe not expanding to the dialog size #AP-252
 - Fixed 'meta' shortcuts not translated into platform-specific text #AP-270
@@ -1225,6 +1493,7 @@ Full documentation for the version 5 features and changes is available at https:
 - Fixed editor flashing unstyled during load (still in progress). #AP-349
 
 ### Removed
+
 - Removed `colorpicker` plugin, it is now in the theme #AP-328
 - Removed `textcolor` plugin, it is now in the theme #AP-328
 
@@ -1237,6 +1506,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.11 - 2020-07-13
 
 ### Fixed
+
 - Fixed the `selection.setContent()` API not running parser filters #TINY-4002
 - Fixed content in an iframe element parsing as DOM elements instead of text content #TINY-5943
 - Fixed up and down keyboard navigation not working for inline `contenteditable="false"` elements #TINY-6226
@@ -1244,6 +1514,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.10 - 2020-04-23
 
 ### Fixed
+
 - Fixed an issue where the editor selection could end up inside a short ended element (eg br) #TINY-3999
 - Fixed a security issue related to CDATA sanitization during parsing #TINY-4669
 - Fixed `media` embed content not processing safely in some cases #TINY-4857
@@ -1251,6 +1522,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.9 - 2020-03-25
 
 ### Fixed
+
 - Fixed the table selection not functioning correctly in Microsoft Edge 44 or higher #TINY-3862
 - Fixed the table resize handles not functioning correctly in Microsoft Edge 44 or higher #TINY-4160
 - Fixed the `forced_root_block_attrs` setting not applying attributes to new blocks consistently #TINY-4564
@@ -1259,12 +1531,14 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.8 - 2020-01-28
 
 ### Fixed
+
 - Fixed the `mobile` theme failing to load due to a bundling issue #TINY-4613
 - Fixed security issue related to parsing HTML comments and CDATA #TINY-4544
 
 ## 4.9.7 - 2019-12-19
 
 ### Fixed
+
 - Fixed the `visualchars` plugin converting HTML-like text to DOM elements in certain cases #TINY-4507
 - Fixed an issue with the `paste` plugin not sanitizing content in some cases #TINY-4510
 - Fixed HTML comments incorrectly being parsed in certain cases #TINY-4511
@@ -1272,28 +1546,36 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.6 - 2019-09-02
 
 ### Fixed
+
 - Fixed image browse button sometimes displaying the browse window twice #TINY-3959
 
 ## 4.9.5 - 2019-07-02
 
 ### Changed
+
 - Changed annotations navigation to work the same as inline boundaries #TINY-3396
 
 ### Fixed
+
 - Fixed the print plugin printing from the wrong window in IE11 #TINY-3762
-- Fixed an exception being thrown when a file or number input has focus during initialization. Patch contributed by t00 #GH-2194
+- Fixed an exception being thrown when a file or number input has focus during initialization. Patch contributed by t00
+  #GH-2194
 - Fixed positioning of the styleselect menu in iOS while using the mobile theme #TINY-3505
 - Fixed native context menu not showing with images in IE11 #TINY-3392
-- Fixed selection incorrectly changing when programmatically setting selection on contenteditable false elements #TINY-3766
+- Fixed selection incorrectly changing when programmatically setting selection on contenteditable false elements
+  #TINY-3766
 - Fixed image browse button not working on touch devices #TINY-3751
 - Fixed so that nbsp entities aren't trimmed in white-space: pre-line elements #TINY-3642
 - Fixed space key properly inserts a nbsp before/after block elements #TINY-3745
-- Fixed infinite loop in the paste plugin when IE11 takes a long time to process paste events. Patch contributed by lRawd. #GH-4987
+- Fixed infinite loop in the paste plugin when IE11 takes a long time to process paste events. Patch contributed by
+  lRawd. #GH-4987
 
 ## 4.9.4 - 2019-03-20
 
 ### Fixed
-- Fixed an issue where **Home/End** keys wouldn't move the caret correctly before or after `contenteditable=false` inline elements #TINY-2995
+
+- Fixed an issue where **Home/End** keys wouldn't move the caret correctly before or after `contenteditable=false`
+  inline elements #TINY-2995
 - Fixed an issue where content may have been lost when using permanent bookmarks #TINY-3400
 - Fixed the mobile editor to clean up properly when removed #TINY-3445
 - Fixed an issue where retrieving the selected content as text didn't create newlines #TINY-3197
@@ -1302,12 +1584,15 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.3 - 2019-01-31
 
 ### Added
+
 - Added a visualchars_default_state setting to the Visualchars Plugin. Patch contributed by mat3e.
 
 ### Fixed
+
 - Fixed a bug where scrolling on a page with more than one editor would cause a ResizeWindow event to fire. #TINY-3247
 - Fixed a bug where if a plugin threw an error during initialisation the whole editor would fail to load. #TINY-3243
-- Fixed a bug where getContent would include bogus elements when valid_elements setting was set up in a specific way. #TINY-3213
+- Fixed a bug where getContent would include bogus elements when valid_elements setting was set up in a specific way.
+  #TINY-3213
 - Fixed a bug where only a few function key names could be used when creating keyboard shortcuts. #TINY-3146
 - Fixed a bug where it wasn't possible to enter spaces into an editor after pressing shift+enter. #TINY-3099
 - Fixed a bug where no caret would be rendered after backspacing to a contenteditable false element. #TINY-2998
@@ -1316,8 +1601,11 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.2 - 2018-12-17
 
 ### Fixed
-- Fixed a bug with pressing the space key on IE 11 would result in nbsp characters being inserted between words at the end of a block. #TINY-2996
-- Fixed a bug where character composition using quote and space on US International keyboards would produce a space instead of a quote. #TINY-2999
+
+- Fixed a bug with pressing the space key on IE 11 would result in nbsp characters being inserted between words at the
+  end of a block. #TINY-2996
+- Fixed a bug where character composition using quote and space on US International keyboards would produce a space
+  instead of a quote. #TINY-2999
 - Fixed a bug where remove format wouldn't remove the inner most inline element in some situations. #TINY-2982
 - Fixed a bug where outdenting an list item would affect attributes on other list items within the same list. #TINY-2971
 - Fixed a bug where the DomParser filters wouldn't be applied for elements created when parsing invalid html. #TINY-2978
@@ -1328,31 +1616,43 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.9.1 - 2018-12-04
 
 ### Added
+
 - Added functionality to insert html to the replacement feature of the Textpattern Plugin. #TINY-2839
 
 ### Fixed
-- Fixed a bug where `editor.selection.getContent({format: 'text'})` didn't work as expected in IE11 on an unfocused editor. #TINY-2862
-- Fixed a bug in the Textpattern Plugin where the editor would get an incorrect selection after inserting a text pattern on Safari. #TINY-2838
-- Fixed a bug where the space bar didn't work correctly in editors with the forced_root_block setting set to false. #TINY-2816
+
+- Fixed a bug where `editor.selection.getContent({format: 'text'})` didn't work as expected in IE11 on an unfocused
+  editor. #TINY-2862
+- Fixed a bug in the Textpattern Plugin where the editor would get an incorrect selection after inserting a text pattern
+  on Safari. #TINY-2838
+- Fixed a bug where the space bar didn't work correctly in editors with the forced_root_block setting set to false.
+  #TINY-2816
 
 ## 4.9.0 - 2018-11-27
 
 ### Added
+
 - Added a replace feature to the Textpattern Plugin. #TINY-1908
 - Added functionality to the Lists Plugin that improves the indentation logic. #TINY-1790
 
 ### Fixed
-- Fixed a bug where it wasn't possible to delete/backspace when the caret was between a contentEditable=false element and a BR. #TINY-2372
+
+- Fixed a bug where it wasn't possible to delete/backspace when the caret was between a contentEditable=false element
+  and a BR. #TINY-2372
 - Fixed a bug where copying table cells without a text selection would fail to copy anything. #TINY-1789
-- Implemented missing `autosave_restore_when_empty` functionality in the Autosave Plugin. Patch contributed by gzzo. #GH-4447
+- Implemented missing `autosave_restore_when_empty` functionality in the Autosave Plugin. Patch contributed by gzzo.
+  #GH-4447
 - Reduced insertion of unnecessary nonbreaking spaces in the editor. #TINY-1879
 
 ## 4.8.5 - 2018-10-30
 
 ### Added
-- Added a content_css_cors setting to the editor that adds the crossorigin="anonymous" attribute to link tags added by the StyleSheetLoader. #TINY-1909
+
+- Added a content_css_cors setting to the editor that adds the crossorigin="anonymous" attribute to link tags added by
+  the StyleSheetLoader. #TINY-1909
 
 ### Fixed
+
 - Fixed a bug where trying to remove formatting with a collapsed selection range would throw an exception. #GH-4636
 - Fixed a bug in the image plugin that caused updating figures to split contenteditable elements. #GH-4563
 - Fixed a bug that was causing incorrect viewport calculations for fixed position UI elements. #TINY-1897
@@ -1361,20 +1661,26 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.8.4 - 2018-10-23
 
 ### Added
+
 - Added support for the HTML5 `main` element. #TINY-1877
 
 ### Changed
+
 - Changed the keyboard shortcut to move focus to contextual toolbars to Ctrl+F9. #TINY-1812
 
 ### Fixed
+
 - Fixed a bug where content css could not be loaded from another domain. #TINY-1891
-- Fixed a bug on FireFox where the cursor would get stuck between two contenteditable false inline elements located inside of the same block element divided by a BR. #TINY-1878
+- Fixed a bug on FireFox where the cursor would get stuck between two contenteditable false inline elements located
+  inside of the same block element divided by a BR. #TINY-1878
 - Fixed a bug with the insertContent method where nonbreaking spaces would be inserted incorrectly. #TINY-1868
 - Fixed a bug where the toolbar of the inline editor would not be visible in some scenarios. #TINY-1862
 - Fixed a bug where removing the editor while more than one notification was open would throw an error. #TINY-1845
-- Fixed a bug where the menubutton would be rendered on top of the menu if the viewport didn't have enough height. #TINY-1678
+- Fixed a bug where the menubutton would be rendered on top of the menu if the viewport didn't have enough height.
+  #TINY-1678
 - Fixed a bug with the annotations api where annotating collapsed selections caused problems. #TBS-2449
-- Fixed a bug where wbr elements were being transformed into whitespace when using the Paste Plugin's paste as text setting. #GH-4638
+- Fixed a bug where wbr elements were being transformed into whitespace when using the Paste Plugin's paste as text
+  setting. #GH-4638
 - Fixed a bug where the Search and Replace didn't replace spaces correctly. #GH-4632
 - Fixed a bug with sublist items not persisting selection. #GH-4628
 - Fixed a bug with mceInsertRawHTML command not working as expected. #GH-4625
@@ -1382,51 +1688,66 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.8.3 - 2018-09-13
 
 ### Fixed
+
 - Fixed a bug where the Wordcount Plugin didn't correctly count words within tables on IE11. #TINY-1770
 - Fixed a bug where it wasn't possible to move the caret out of a table on IE11 and Firefox. #TINY-1682
 - Fixed a bug where merging empty blocks didn't work as expected, sometimes causing content to be deleted. #TINY-1781
 - Fixed a bug where the Textcolor Plugin didn't show the correct current color. #TINY-1810
-- Fixed a bug where clear formatting with a collapsed selection would sometimes clear formatting from more content than expected. #TINY-1813 #TINY-1821
+- Fixed a bug where clear formatting with a collapsed selection would sometimes clear formatting from more content than
+  expected. #TINY-1813 #TINY-1821
 - Fixed a bug with the Table Plugin where it wasn't possible to keyboard navigate to the caption. #TINY-1818
 
 ## 4.8.2 - 2018-08-09
 
 ### Changed
+
 - Moved annotator from "experimental" to "annotator" object on editor. #TBS-2398
 - Improved the multiclick normalization across browsers. #TINY-1788
 
 ### Fixed
-- Fixed a bug where running getSelectedBlocks with a collapsed selection between block elements would produce incorrect results. #TINY-1787
-- Fixed a bug where the ScriptLoaders loadScript method would not work as expected in FireFox when loaded on the same page as a ShadowDOM polyfill. #TINY-1786
+
+- Fixed a bug where running getSelectedBlocks with a collapsed selection between block elements would produce incorrect
+  results. #TINY-1787
+- Fixed a bug where the ScriptLoaders loadScript method would not work as expected in FireFox when loaded on the same
+  page as a ShadowDOM polyfill. #TINY-1786
 - Removed reference to ShadowDOM event.path as Blink based browsers now support event.composedPath. #TINY-1785
-- Fixed a bug where a reference to localStorage would throw an "access denied" error in IE11 with strict security settings. #TINY-1782
-- Fixed a bug where pasting using the toolbar button on an inline editor in IE11 would cause a looping behaviour. #TINY-1768
+- Fixed a bug where a reference to localStorage would throw an "access denied" error in IE11 with strict security
+  settings. #TINY-1782
+- Fixed a bug where pasting using the toolbar button on an inline editor in IE11 would cause a looping behaviour.
+  #TINY-1768
 
 ## 4.8.1 - 2018-07-26
 
 ### Fixed
+
 - Fixed a bug where the content of inline editors was being cleaned on every call of `editor.save()`. #TINY-1783
 - Fixed a bug where the arrow of the Inlite Theme toolbar was being rendered incorrectly in RTL mode. #TINY-1776
-- Fixed a bug with the Paste Plugin where pasting after inline contenteditable false elements moved the caret to the end of the line. #TINY-1758
+- Fixed a bug with the Paste Plugin where pasting after inline contenteditable false elements moved the caret to the end
+  of the line. #TINY-1758
 
 ## 4.8.0 - 2018-06-27
 
 ### Added
+
 - Added new "experimental" object in editor, with initial Annotator API. #TBS-2374
 
 ### Fixed
+
 - Fixed a bug where deleting paragraphs inside of table cells would delete the whole table cell. #TINY-1759
-- Fixed a bug in the Table Plugin where removing row height set on the row properties dialog did not update the table. #TINY-1730
+- Fixed a bug in the Table Plugin where removing row height set on the row properties dialog did not update the table.
+  #TINY-1730
 - Fixed a bug with the font select toolbar item didn't update correctly. #TINY-1683
 - Fixed a bug where all bogus elements would not be deleted when removing an inline editor. #TINY-1669
 
 ## 4.7.13 - 2018-05-16
 
 ### Added
+
 - Added missing code menu item from the default menu config. #TINY-1648
 - Added new align button for combining the separate align buttons into a menu button. #TINY-1652
 
 ### Fixed
+
 - Fixed a bug where Edge 17 wouldn't be able to select images or tables. #TINY-1679
 - Fixed issue where whitespace wasn't preserved when the editor was initialized on pre elements. #TINY-1649
 - Fixed a bug with the fontselect dropdowns throwing an error if the editor was hidden in Firefox. #TINY-1664
@@ -1438,35 +1759,44 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.7.12 - 2018-05-03
 
 ### Added
+
 - Added an option to filter out image svg data urls.
 - Added support for html5 details and summary elements.
 
 ### Changed
+
 - Changed so the mce-abs-layout-item css rule targets html instead of body. Patch contributed by nazar-pc.
 
 ### Fixed
+
 - Fixed a bug where the "read" step on the mobile theme was still present on android mobile browsers.
 - Fixed a bug where all images in the editor document would reload on any editor change.
 - Fixed a bug with the Table Plugin where ObjectResized event wasn't being triggered on column resize.
 - Fixed so the selection is set to the first suitable caret position after editor.setContent called.
 - Fixed so links with xlink:href attributes are filtered correctly to prevent XSS.
-- Fixed a bug on IE11 where pasting content into an inline editor initialized on a heading element would create new editable elements.
+- Fixed a bug on IE11 where pasting content into an inline editor initialized on a heading element would create new
+  editable elements.
 - Fixed a bug where readonly mode would not work as expected when the editor contained contentEditable=true elements.
-- Fixed a bug where the Link Plugin would throw an error when used together with the webcomponents polyfill. Patch contributed by 4esnog.
+- Fixed a bug where the Link Plugin would throw an error when used together with the webcomponents polyfill. Patch
+  contributed by 4esnog.
 - Fixed a bug where the "Powered by TinyMCE" branding link would break on XHTML pages. Patch contributed by tistre.
 - Fixed a bug where the same id would be used in the blobcache for all pasted images. Patch contributed by thorn0.
 
 ## 4.7.11 - 2018-04-11
 
 ### Added
+
 - Added a new imagetools_credentials_hosts option to the Imagetools Plugin.
 
 ### Fixed
+
 - Fixed a bug where toggling a list containing empty LIs would throw an error. Patch contributed by bradleyke.
-- Fixed a bug where applying block styles to a text with the caret at the end of the paragraph would select all text in the paragraph.
+- Fixed a bug where applying block styles to a text with the caret at the end of the paragraph would select all text in
+  the paragraph.
 - Fixed a bug where toggling on the Spellchecker Plugin would trigger isDirty on the editor.
 - Fixed a bug where it was possible to enter content into selection bookmark spans.
-- Fixed a bug where if a non paragraph block was configured in forced_root_block the editor.getContent method would return incorrect values with an empty editor.
+- Fixed a bug where if a non paragraph block was configured in forced_root_block the editor.getContent method would
+  return incorrect values with an empty editor.
 - Fixed a bug where dropdown menu panels stayed open and fixed in position when dragging dialog windows.
 - Fixed a bug where it wasn't possible to extend table cells with the space button in Safari.
 - Fixed a bug where the setupeditor event would thrown an error when using the Compat3x Plugin.
@@ -1475,44 +1805,55 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.7.10 - 2018-04-03
 
 ### Added
+
 - Added normalization of triple clicks across browsers in the editor.
 - Added a `hasFocus` method to the editor that checks if the editor has focus.
 - Added correct icon to the Nonbreaking Plugin menu item.
 
 ### Fixed
+
 - Fixed so the `getContent`/`setContent` methods work even if the editor is not initialized.
 - Fixed a bug with the Media Plugin where query strings were being stripped from youtube links.
 - Fixed a bug where image styles were changed/removed when opening and closing the Image Plugin dialog.
 - Fixed a bug in the Table Plugin where some table cell styles were not correctly added to the content html.
 - Fixed a bug in the Spellchecker Plugin where it wasn't possible to change the spellchecker language.
 - Fixed so the the unlink action in the Link Plugin has a menu item and can be added to the contextmenu.
-- Fixed a bug where it wasn't possible to keyboard navigate to the start of an inline element on a new line within the same block element.
-- Fixed a bug with the Text Color Plugin where if used with an inline editor located at the bottom of the screen the colorpicker could appear off screen.
+- Fixed a bug where it wasn't possible to keyboard navigate to the start of an inline element on a new line within the
+  same block element.
+- Fixed a bug with the Text Color Plugin where if used with an inline editor located at the bottom of the screen the
+  colorpicker could appear off screen.
 - Fixed a bug with the UndoManager where undo levels were being added for nbzwsp characters.
 - Fixed a bug with the Table Plugin where the caret would sometimes be lost when keyboard navigating up through a table.
 - Fixed a bug where FontInfo.getFontFamily would throw an error when called on a removed editor.
 - Fixed a bug in Firefox where undo levels were not being added correctly for some specific operations.
 - Fixed a bug where initializing an inline editor inside of a table would make the whole table resizeable.
-- Fixed a bug where the fake cursor that appears next to tables on Firefox was positioned incorrectly when switching to fullscreen.
+- Fixed a bug where the fake cursor that appears next to tables on Firefox was positioned incorrectly when switching to
+  fullscreen.
 - Fixed a bug where zwsp's weren't trimmed from the output from `editor.getContent({ format: 'text' })`.
-- Fixed a bug where the fontsizeselect/fontselect toolbar items showed the body info rather than the first possible caret position info on init.
+- Fixed a bug where the fontsizeselect/fontselect toolbar items showed the body info rather than the first possible
+  caret position info on init.
 - Fixed a bug where it wasn't possible to select all content if the editor only contained an inline boundary element.
 - Fixed a bug where `content_css` urls with query strings wasn't working.
-- Fixed a bug in the Table Plugin where some table row styles were removed when changing other styles in the row properties dialog.
+- Fixed a bug in the Table Plugin where some table row styles were removed when changing other styles in the row
+  properties dialog.
 
 ### Removed
+
 - Removed the "read" step from the mobile theme.
 
 ## 4.7.9 - 2018-02-27
 
 ### Fixed
+
 - Fixed a bug where the editor target element didn't get the correct style when removing the editor.
 
 ## 4.7.8 - 2018-02-26
 
 ### Fixed
+
 - Fixed an issue with the Help Plugin where the menuitem name wasn't lowercase.
-- Fixed an issue on MacOS where text and bold text did not have the same line-height in the autocomplete dropdown in the Link Plugin dialog.
+- Fixed an issue on MacOS where text and bold text did not have the same line-height in the autocomplete dropdown in the
+  Link Plugin dialog.
 - Fixed a bug where the "paste as text" option in the Paste Plugin didn't work.
 - Fixed a bug where dialog list boxes didn't get positioned correctly in documents with scroll.
 - Fixed a bug where the Inlite Theme didn't use the Table Plugin api to insert correct tables.
@@ -1527,28 +1868,35 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.7.7 - 2018-02-19
 
 ### Added
+
 - Added a border style selector to the advanced tab of the Image Plugin.
 - Added better controls for default table inserted by the Table Plugin.
 - Added new `table_responsive_width` option to the Table Plugin that controls whether to use pixel or percentage widths.
 
 ### Fixed
+
 - Fixed a bug where the Link Plugin text didn't update when a URL was pasted using the context menu.
 - Fixed a bug with the Spellchecker Plugin where using "Add to dictionary" in the context menu threw an error.
-- Fixed a bug in the Media Plugin where the preview node for iframes got default width and height attributes that interfered with width/height styles.
+- Fixed a bug in the Media Plugin where the preview node for iframes got default width and height attributes that
+  interfered with width/height styles.
 - Fixed a bug where backslashes were being added to some font family names in Firefox in the fontselect toolbar item.
 - Fixed a bug where errors would be thrown when trying to remove an editor that had not yet been fully initialized.
 - Fixed a bug where the Imagetools Plugin didn't update the images atomically.
 - Fixed a bug where the Fullscreen Plugin was throwing errors when being used on an inline editor.
 - Fixed a bug where drop down menus weren't positioned correctly in inline editors on scroll.
 - Fixed a bug with a semicolon missing at the end of the bundled javascript files.
-- Fixed a bug in the Table Plugin with cursor navigation inside of tables where the cursor would sometimes jump into an incorrect table cells.
-- Fixed a bug where indenting a table that is a list item using the "Increase indent" button would create a nested table.
+- Fixed a bug in the Table Plugin with cursor navigation inside of tables where the cursor would sometimes jump into an
+  incorrect table cells.
+- Fixed a bug where indenting a table that is a list item using the "Increase indent" button would create a nested
+  table.
 - Fixed a bug where text nodes containing only whitespace were being wrapped by paragraph elements.
 - Fixed a bug where whitespace was being inserted after br tags inside of paragraph tags.
 - Fixed a bug where converting an indented paragraph to a list item would cause the list item to have extra padding.
-- Fixed a bug where Copy/Paste in an editor with a lot of content would cause the editor to scroll to the top of the content in IE11.
+- Fixed a bug where Copy/Paste in an editor with a lot of content would cause the editor to scroll to the top of the
+  content in IE11.
 - Fixed a bug with a memory leak in the DragHelper. Path contributed by ben-mckernan.
-- Fixed a bug where the advanced tab in the Media Plugin was being shown even if it didn't contain anything. Patch contributed by gabrieeel.
+- Fixed a bug where the advanced tab in the Media Plugin was being shown even if it didn't contain anything. Patch
+  contributed by gabrieeel.
 - Fixed an outdated eventname in the EventUtils. Patch contributed by nazar-pc.
 - Fixed an issue where the Json.parse function would throw an error when being used on a page with strict CSP settings.
 - Fixed so you can place the curser before and after table elements within the editor in Firefox and Edge/IE.
@@ -1556,23 +1904,29 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.7.6 - 2018-01-29
 
 ### Fixed
+
 - Fixed a bug in the jquery integration where it threw an error saying that "global is not defined".
-- Fixed a bug where deleting a table cell whose previous sibling was set to contenteditable false would create a corrupted table.
+- Fixed a bug where deleting a table cell whose previous sibling was set to contenteditable false would create a
+  corrupted table.
 - Fixed a bug where highlighting text in an unfocused editor did not work correctly in IE11/Edge.
 - Fixed a bug where the table resize handles were not being repositioned when activating the Fullscreen Plugin.
 - Fixed a bug where the Imagetools Plugin dialog didn't honor editor RTL settings.
-- Fixed a bug where block elements weren't being merged correctly if you deleted from after a contenteditable false element to the beginning of another block element.
+- Fixed a bug where block elements weren't being merged correctly if you deleted from after a contenteditable false
+  element to the beginning of another block element.
 - Fixed a bug where TinyMCE didn't work with module loaders like webpack.
 
 ## 4.7.5 - 2018-01-22
 
 ### Fixed
+
 - Fixed bug with the Codesample Plugin where it wasn't possible to edit codesamples when the editor was in inline mode.
 - Fixed bug where focusing on the status bar broke the keyboard navigation functionality.
 - Fixed bug where an error would be thrown on Edge by the Table Plugin when pasting using the PowerPaste Plugin.
-- Fixed bug in the Table Plugin where selecting row border style from the dropdown menu in advanced row properties would throw an error.
+- Fixed bug in the Table Plugin where selecting row border style from the dropdown menu in advanced row properties would
+  throw an error.
 - Fixed bug with icons being rendered incorrectly on Chrome on Mac OS.
-- Fixed bug in the Textcolor Plugin where the font color and background color buttons wouldn't trigger an ExecCommand event.
+- Fixed bug in the Textcolor Plugin where the font color and background color buttons wouldn't trigger an ExecCommand
+  event.
 - Fixed bug in the Link Plugin where the url field wasn't forced LTR.
 - Fixed bug where the Nonbreaking Plugin incorrectly inserted spaces into tables.
 - Fixed bug with the inline theme where the toolbar wasn't repositioned on window resize.
@@ -1580,21 +1934,27 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.7.4 - 2017-12-05
 
 ### Fixed
+
 - Fixed bug in the Nonbreaking Plugin where the nonbreaking_force_tab setting was being ignored.
 - Fixed bug in the Table Plugin where changing row height incorrectly converted column widths to pixels.
-- Fixed bug in the Table Plugin on Edge and IE11 where resizing the last column after resizing the table would cause invalid column heights.
+- Fixed bug in the Table Plugin on Edge and IE11 where resizing the last column after resizing the table would cause
+  invalid column heights.
 - Fixed bug in the Table Plugin where keyboard navigation was not normalized between browsers.
 - Fixed bug in the Table Plugin where the colorpicker button would show even without defining the colorpicker_callback.
 - Fixed bug in the Table Plugin where it wasn't possible to set the cell background color.
-- Fixed bug where Firefox would throw an error when intialising an editor on an element that is hidden or not yet added to the DOM.
+- Fixed bug where Firefox would throw an error when intialising an editor on an element that is hidden or not yet added
+  to the DOM.
 - Fixed bug where Firefox would throw an error when intialising an editor inside of a hidden iframe.
 
 ## 4.7.3 - 2017-11-23
 
 ### Added
-- Added functionality to open the Codesample Plugin dialog when double clicking on a codesample. Patch contributed by dakuzen.
+
+- Added functionality to open the Codesample Plugin dialog when double clicking on a codesample. Patch contributed by
+  dakuzen.
 
 ### Fixed
+
 - Fixed bug where undo/redo didn't work correctly with some formats and caret positions.
 - Fixed bug where the color picker didn't show up in Table Plugin dialogs.
 - Fixed bug where it wasn't possible to change the width of a table through the Table Plugin dialog.
@@ -1603,15 +1963,19 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Fixed bug where deleting all content in a table cell made it impossible to place the caret into it.
 - Fixed bug where the vertical alignment field in the Table Plugin cell properties dialog didn't do anything.
 - Fixed bug where an image with a caption showed two sets of resize handles in IE11.
-- Fixed bug where pressing the enter button inside of an h1 with contenteditable set to true would sometimes produce a p tag.
+- Fixed bug where pressing the enter button inside of an h1 with contenteditable set to true would sometimes produce a p
+  tag.
 - Fixed bug with backspace not working as expected before a noneditable element.
 - Fixed bug where operating on tables with invalid rowspans would cause an error to be thrown.
-- Fixed so a real base64 representation of the image is available on the blobInfo that the images_upload_handler gets called with.
-- Fixed so the image upload tab is available when the images_upload_handler is defined (and not only when the images_upload_url is defined).
+- Fixed so a real base64 representation of the image is available on the blobInfo that the images_upload_handler gets
+  called with.
+- Fixed so the image upload tab is available when the images_upload_handler is defined (and not only when the
+  images_upload_url is defined).
 
 ## 4.7.2 - 2017-11-07
 
 ### Added
+
 - Added newly rewritten Table Plugin.
 - Added support for attributes with colon in valid_elements and addValidElements.
 - Added support for dailymotion short url in the Media Plugin. Patch contributed by maat8.
@@ -1620,31 +1984,39 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Added support for merging table cells when pasting a table into another table.
 
 ### Changed
+
 - Changed so the language packs are only loaded once. Patch contributed by 0xor1.
 - Simplified the css for inline boundaries selection by switching to an attribute selector.
 
 ### Fixed
+
 - Fixed bug where an error would be thrown on editor initialization if the window.getSelection() returned null.
-- Fixed bug where holding down control or alt keys made the keyboard navigation inside an inline boundary not work as expected.
+- Fixed bug where holding down control or alt keys made the keyboard navigation inside an inline boundary not work as
+  expected.
 - Fixed bug where applying formats in IE11 produced extra, empty paragraphs in the editor.
 - Fixed bug where the Word Count Plugin didn't count some mathematical operators correctly.
 - Fixed bug where removing an inline editor removed the element that the editor had been initialized on.
 - Fixed bug where setting the selection to the end of an editable container caused some formatting problems.
-- Fixed bug where an error would be thrown sometimes when an editor was removed because of the selection bookmark was being stored asynchronously.
+- Fixed bug where an error would be thrown sometimes when an editor was removed because of the selection bookmark was
+  being stored asynchronously.
 - Fixed a bug where an editor initialized on an empty list did not contain any valid cursor positions.
-- Fixed a bug with the Context Menu Plugin and webkit browsers on Mac where right-clicking inside a table would produce an incorrect selection.
+- Fixed a bug with the Context Menu Plugin and webkit browsers on Mac where right-clicking inside a table would produce
+  an incorrect selection.
 - Fixed bug where the Image Plugin constrain proportions setting wasn't working as expected.
 - Fixed bug where deleting the last character in a span with decorations produced an incorrect element when typing.
 - Fixed bug where focusing on inline editors made the toolbar flicker when moving between elements quickly.
-- Fixed bug where the selection would be stored incorrectly in inline editors when the mouseup event was fired outside the editor body.
+- Fixed bug where the selection would be stored incorrectly in inline editors when the mouseup event was fired outside
+  the editor body.
 - Fixed bug where toggling bold at the end of an inline boundary would toggle off the whole word.
 - Fixed bug where setting the skin to false would not stop the loading of some skin css files.
 - Fixed bug in mobile theme where pinch-to-zoom would break after exiting the editor.
 - Fixed bug where sublists of a fully selected list would not be switched correctly when changing list style.
 - Fixed bug where inserting media by source would break the UndoManager.
-- Fixed bug where inserting some content into the editor with a specific selection would replace some content incorrectly.
+- Fixed bug where inserting some content into the editor with a specific selection would replace some content
+  incorrectly.
 - Fixed bug where selecting all content with ctrl+a in IE11 caused problems with untoggling some formatting.
-- Fixed bug where the Search and Replace Plugin left some marker spans in the editor when undoing and redoing after replacing some content.
+- Fixed bug where the Search and Replace Plugin left some marker spans in the editor when undoing and redoing after
+  replacing some content.
 - Fixed bug where the editor would not get a scrollbar when using the Fullscreen and Autoresize plugins together.
 - Fixed bug where the font selector would stop working correctly after selecting fonts three times.
 - Fixed so pressing the enter key inside of an inline boundary inserts a br after the inline boundary element.
@@ -1658,6 +2030,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.7.1 - 2017-10-09
 
 ### Fixed
+
 - Fixed bug where theme set to false on an inline editor produced an extra div element after the target element.
 - Fixed bug where the editor drag icon was misaligned with the branding set to false.
 - Fixed bug where doubled menu items were not being removed as expected with the removed_menuitems setting.
@@ -1672,31 +2045,38 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.7.0 - 2017-10-03
 
 ### Added
+
 - Added new mobile ui that is specifically designed for mobile devices.
 
 ### Changed
+
 - Updated the default skin to be more modern and white since white is preferred by most implementations.
 - Restructured the default menus to be more similar to common office suites like Google Docs.
 
 ### Fixed
+
 - Fixed so theme can be set to false on both inline and iframe editor modes.
 - Fixed bug where inline editor would add/remove the visualblocks css multiple times.
 - Fixed bug where selection wouldn't be properly restored when editor lost focus and commands where invoked.
 - Fixed bug where toc plugin would generate id:s for headers even though a toc wasn't inserted into the content.
 - Fixed bug where is wasn't possible to drag/drop contents within the editor if paste_data_images where set to true.
-- Fixed bug where getParam and close in WindowManager would get the first opened window instead of the last opened window.
+- Fixed bug where getParam and close in WindowManager would get the first opened window instead of the last opened
+  window.
 - Fixed bug where delete would delete between cells inside a table in Firefox.
 
 ## 4.6.7 - 2017-09-18
 
 ### Added
+
 - Added some missing translations to Image, Link and Help plugins.
 
 ### Fixed
+
 - Fixed bug where paste wasn't working in IOS.
 - Fixed bug where the Word Count Plugin didn't count some mathematical operators correctly.
 - Fixed bug where inserting a list in a table caused the cell to expand in height.
-- Fixed bug where pressing enter in a list located inside of a table deleted list items instead of inserting new list item.
+- Fixed bug where pressing enter in a list located inside of a table deleted list items instead of inserting new list
+  item.
 - Fixed bug where copy and pasting table cells produced inconsistent results.
 - Fixed bug where initializing an editor with an ID of 'length' would throw an exception.
 - Fixed bug where it was possible to split a non merged table cell.
@@ -1710,6 +2090,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.6.6 - 2017-08-30
 
 ### Fixed
+
 - Fixed so that notifications wrap long text content instead of bleeding outside the notification element.
 - Fixed so the content_style css is added after the skin and custom stylesheets.
 - Fixed bug where it wasn't possible to remove a table with the Cut button.
@@ -1733,35 +2114,44 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.6.5 - 2017-08-02
 
 ### Added
+
 - Added new inline_boundaries_selector that allows you to specify the elements that should have boundaries.
 - Added new local upload feature this allows the user to upload images directly from the image dialog.
 - Added a new api for providing meta data for plugins. It will show up in the help dialog if it's provided.
 
 ### Fixed
+
 - Fixed so that the notifications created by the notification manager are more screen reader accessible.
 - Fixed bug where changing the list format on multiple selected lists didn't change all of the lists.
 - Fixed bug where the nonbreaking plugin would insert multiple undo levels when pressing the tab key.
 - Fixed bug where delete/backspace wouldn't render a caret when all editor contents where deleted.
-- Fixed bug where delete/backspace wouldn't render a caret if the deleted element was a single contentEditable false element.
+- Fixed bug where delete/backspace wouldn't render a caret if the deleted element was a single contentEditable false
+  element.
 - Fixed bug where the wordcount plugin wouldn't count words correctly if word where typed after applying a style format.
 - Fixed bug where the wordcount plugin would count mathematical formulas as multiple words for example 1+1=2.
-- Fixed bug where formatting of triple clicked blocks on Chrome/Safari would result in styles being added outside the visual selection.
+- Fixed bug where formatting of triple clicked blocks on Chrome/Safari would result in styles being added outside the
+  visual selection.
 - Fixed bug where paste would add the contents to the end of the editor area when inline mode was used.
 - Fixed bug where toggling off bold formatting on text entered in a new paragraph would add an extra line break.
 - Fixed bug where autolink plugin would only produce a link on every other consecutive link on Firefox.
 - Fixed bug where it wasn't possible to select all contents if the content only had one pre element.
 - Fixed bug where sizzle would produce lagging behavior on some sites due to repaints caused by feature detection.
-- Fixed bug where toggling off inline formats wouldn't include the space on selected contents with leading or trailing spaces.
+- Fixed bug where toggling off inline formats wouldn't include the space on selected contents with leading or trailing
+  spaces.
 - Fixed bug where the cut operation in UI wouldn't work in Chrome.
-- Fixed bug where some legacy editor initialization logic would throw exceptions about editor settings not being defined.
+- Fixed bug where some legacy editor initialization logic would throw exceptions about editor settings not being
+  defined.
 - Fixed bug where it wasn't possible to apply text color to links if they where part of a non collapsed selection.
-- Fixed bug where an exception would be thrown if the user selected a video element and then moved the focus outside the editor.
+- Fixed bug where an exception would be thrown if the user selected a video element and then moved the focus outside the
+  editor.
 - Fixed bug where list operations didn't work if there where block elements inside the list items.
-- Fixed bug where applying block formats to lists wrapped in block elements would apply to all elements in that wrapped block.
+- Fixed bug where applying block formats to lists wrapped in block elements would apply to all elements in that wrapped
+  block.
 
 ## 4.6.4 - 2017-06-13
 
 ### Fixed
+
 - Fixed bug where the editor would move the caret when clicking on the scrollbar next to a content editable false block.
 - Fixed bug where the text color select dropdowns wasn't placed correctly when they didn't fit the width of the screen.
 - Fixed bug where the default editor line height wasn't working for mixed font size contents.
@@ -1777,13 +2167,15 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Fixed bug where the link dialog would not display the right rel value if rel_list was configured.
 - Fixed bug where the context menu would select images on some platforms but not others.
 - Fixed bug where the filenames of images were not retained on dragged and drop into the editor from the desktop.
-- Fixed bug where the paste plugin would misrepresent newlines when pasting plain text and having forced_root_block configured.
+- Fixed bug where the paste plugin would misrepresent newlines when pasting plain text and having forced_root_block
+  configured.
 - Fixed so that the error messages for the imagetools plugin is more human readable.
 - Fixed so the internal validate setting for the parser/serializer can't be set from editor initialization settings.
 
 ## 4.6.3 - 2017-05-30
 
 ### Fixed
+
 - Fixed bug where the arrow keys didn't work correctly when navigating on nested inline boundary elements.
 - Fixed bug where delete/backspace didn't work correctly on nested inline boundary elements.
 - Fixed bug where image editing didn't work on subsequent edits of the same image.
@@ -1794,12 +2186,14 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.6.2 - 2017-05-23
 
 ### Fixed
+
 - Fixed bug where the SaxParser would run out of memory on very large documents.
 - Fixed bug with formatting like font size wasn't applied to del elements.
 - Fixed bug where various api calls would be throwing exceptions if they where invoked on a removed editor instance.
 - Fixed bug where the branding position would be incorrect if the editor was inside a hidden tab and then later showed.
 - Fixed bug where the color levels feature in the imagetools dialog wasn't working properly.
-- Fixed bug where imagetools dialog wouldn't pre-load images from CORS domains, before trying to prepare them for editing.
+- Fixed bug where imagetools dialog wouldn't pre-load images from CORS domains, before trying to prepare them for
+  editing.
 - Fixed bug where the tab key would move the caret to the next table cell if being pressed inside a list inside a table.
 - Fixed bug where the cut/copy operations would loose parent context like the current format etc.
 - Fixed bug with format preview not working on invalid elements excluded by valid_elements.
@@ -1814,16 +2208,20 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.6.1 - 2017-05-10
 
 ### Added
+
 - Added configuration option to list plugin to disable tab indentation.
 
 ### Fixed
+
 - Fixed bug where format change on very specific content could cause the selection to change.
 - Fixed bug where TinyMCE could not be lazyloaded through jquery integration.
 - Fixed bug where entities in style attributes weren't decoded correctly on paste in webkit.
 - Fixed bug where fontsize_formats option had been renamed incorrectly.
 - Fixed bug with broken backspace/delete behaviour between contenteditable=false blocks.
-- Fixed bug where it wasn't possible to backspace to the previous line with the inline boundaries functionality turned on.
-- Fixed bug where is wasn't possible to move caret left and right around a linked image with the inline boundaries functionality turned on.
+- Fixed bug where it wasn't possible to backspace to the previous line with the inline boundaries functionality turned
+  on.
+- Fixed bug where is wasn't possible to move caret left and right around a linked image with the inline boundaries
+  functionality turned on.
 - Fixed bug where pressing enter after/before hr element threw exception. Patch contributed bradleyke.
 - Fixed so the CSS in the visualblocks plugin doesn't overwrite background color. Patch contributed by Christian Rank.
 - Fixed bug where multibyte characters weren't encoded correctly. Patch contributed by James Tarkenton.
@@ -1832,21 +2230,27 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.6.0 - 2017-05-04
 
 ### Added
-- Added an inline boundary caret position feature that makes it easier to type at the beginning/end of links/code elements.
+
+- Added an inline boundary caret position feature that makes it easier to type at the beginning/end of links/code
+  elements.
 - Added a help plugin that adds a button and a dialog showing the editor shortcuts and loaded plugins.
 - Added an inline_boundaries option that allows you to disable the inline boundary feature if it's not desired.
 - Added a new ScrollIntoView event that allows you to override the default scroll to element behavior.
 - Added role and aria- attributes as valid elements in the default valid elements config.
-- Added new internal flag for PastePreProcess/PastePostProcess this is useful to know if the paste was coming from an external source.
-- Added new ignore function to UndoManager this works similar to transact except that it doesn't add an undo level by default.
+- Added new internal flag for PastePreProcess/PastePostProcess this is useful to know if the paste was coming from an
+  external source.
+- Added new ignore function to UndoManager this works similar to transact except that it doesn't add an undo level by
+  default.
 
 ### Fixed
+
 - Fixed so that urls gets retained for images when being edited. This url is then passed on to the upload handler.
 - Fixed so that the editors would be initialized on readyState interactive instead of complete.
 - Fixed so that the init event of the editor gets fired once all contentCSS files have been properly loaded.
 - Fixed so that width/height of the editor gets taken from the textarea element if it's explicitly specified in styles.
 - Fixed so that keep_styles set to false no longer clones class/style from the previous paragraph on enter.
-- Fixed so that the default line-height is 1.2em to avoid zwnbsp characters from producing text rendering glitches on Windows.
+- Fixed so that the default line-height is 1.2em to avoid zwnbsp characters from producing text rendering glitches on
+  Windows.
 - Fixed so that loading errors of content css gets presented by a notification message.
 - Fixed so figure image elements can be linked when selected this wraps the figure image in a anchor element.
 - Fixed bug where it wasn't possible to copy/paste rows with colspans by using the table copy/paste feature.
@@ -1858,43 +2262,53 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Fixed bug where the textpattern plugin wasn't dealing with trailing punctuations correctly.
 - Fixed bug where image editing would some times change the image format from jpg to png.
 - Fixed bug where some UI elements could be inserted into the toolbar even if they where not registered.
-- Fixed bug where it was possible to click the TD instead of the character in the character map and that caused an exception.
-- Fixed bug where the font size/font family dropdowns would sometimes show an incorrect value due to css not being loaded in time.
+- Fixed bug where it was possible to click the TD instead of the character in the character map and that caused an
+  exception.
+- Fixed bug where the font size/font family dropdowns would sometimes show an incorrect value due to css not being
+  loaded in time.
 - Fixed bug with the media plugin inserting undefined instead of retaining size when media_dimensions was set to false.
 - Fixed bug with deleting images when forced_root_blocks where set to false.
 - Fixed bug where input focus wasn't properly handled on nested content editable elements.
-- Fixed bug where Chrome/Firefox would throw an exception when selecting images due to recent change of setBaseAndExtent support.
+- Fixed bug where Chrome/Firefox would throw an exception when selecting images due to recent change of setBaseAndExtent
+  support.
 - Fixed bug where malformed blobs would throw exceptions now they are simply ignored.
 - Fixed bug where backspace/delete wouldn't work properly in some cases where all contents was selected in WebKit.
-- Fixed bug with Angular producing errors since it was expecting events objects to be patched with their custom properties.
+- Fixed bug with Angular producing errors since it was expecting events objects to be patched with their custom
+  properties.
 - Fixed bug where the formatter would apply formatting to spellchecker errors now all bogus elements are excluded.
 - Fixed bug with backspace/delete inside table caption elements wouldn't behave properly on IE 11.
 - Fixed bug where typing after a contenteditable false inline element could move the caret to the end of that element.
 - Fixed bug where backspace before/after contenteditable false blocks wouldn't properly remove the right element.
-- Fixed bug where backspace before/after contenteditable false inline elements wouldn't properly empty the current block element.
+- Fixed bug where backspace before/after contenteditable false inline elements wouldn't properly empty the current block
+  element.
 - Fixed bug where vertical caret navigation with a custom line-height would sometimes match incorrect positions.
 - Fixed bug with paste on Edge where character encoding wasn't handled properly due to a browser bug.
 - Fixed bug with paste on Edge where extra fragment data was inserted into the contents when pasting.
-- Fixed bug with pasting contents when having a whole block element selected on WebKit could cause WebKit spans to appear.
+- Fixed bug with pasting contents when having a whole block element selected on WebKit could cause WebKit spans to
+  appear.
 - Fixed bug where the visualchars plugin wasn't working correctly showing invisible nbsp characters.
 - Fixed bug where browsers would hang if you tried to load some malformed html contents.
 - Fixed bug where the init call promise wouldn't resolve if the specified selector didn't find any matching elements.
 - Fixed bug where the Schema isValidChild function was case sensitive.
 
 ### Removed
+
 - Dropped support for IE 8-10 due to market share and lack of support from Microsoft. See tinymce docs for details.
 
 ## 4.5.3 - 2017-02-01
 
 ### Added
+
 - Added keyboard navigation for menu buttons when the menu is in focus.
 - Added api to the list plugin for setting custom classes/attributes on lists.
 - Added validation for the anchor plugin input field according to W3C id naming specifications.
 
 ### Fixed
+
 - Fixed bug where media placeholders were removed after resize with the forced_root_block setting set to false.
 - Fixed bug where deleting selections with similar sibling nodes sometimes deleted the whole document.
-- Fixed bug with inlite theme where several toolbars would appear scrolling when more than one instance of the editor was in use.
+- Fixed bug with inlite theme where several toolbars would appear scrolling when more than one instance of the editor
+  was in use.
 - Fixed bug where the editor would throw error with the fontselect plugin on hidden editor instances in Firefox.
 - Fixed bug where the background color would not stretch to the font size.
 - Fixed bug where font size would be removed when changing background color.
@@ -1911,6 +2325,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.5.2 - 2017-01-04
 
 ### Fixed
+
 - Added missing keyboard shortcut description for the underline menu item in the format menu.
 - Fixed bug where external blob urls wasn't properly handled by editor upload logic. Patch contributed by David Oviedo.
 - Fixed bug where urls wasn't treated as a single word by the wordcount plugin.
@@ -1919,30 +2334,35 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Fixed bug where the fake caret wasn't hidden when you moved selection to a cE=false element.
 - Fixed bug where it wasn't possible to edit existing code sample blocks.
 - Fixed bug where it wasn't possible to delete editor contents if the selection included an empty block.
-- Fixed bug where the formatter wasn't expanding words on some international characters. Patch contributed by Martin Larochelle.
+- Fixed bug where the formatter wasn't expanding words on some international characters. Patch contributed by Martin
+  Larochelle.
 - Fixed bug where the open link feature wasn't working correctly on IE 11.
 - Fixed bug where enter before/after a cE=false block wouldn't properly padd the paragraph with an br element.
 - Fixed so font size and font family select boxes always displays a value by using the runtime style as a fallback.
 - Fixed so missing plugins will be logged to console as warnings rather than halting the initialization of the editor.
-- Fixed so splitbuttons become normal buttons in advlist plugin if styles are empty. Patch contributed by René Schleusner.
+- Fixed so splitbuttons become normal buttons in advlist plugin if styles are empty. Patch contributed by René
+  Schleusner.
 - Fixed so you can multi insert rows/cols by selecting table cells and using insert rows/columns.
 
 ## 4.5.1 - 2016-12-07
 
 ### Fixed
+
 - Fixed bug where the lists plugin wouldn't initialize without the advlist plugins if served from cdn.
 - Fixed bug where selectors with "*" would cause the style format preview to throw an error.
 - Fixed bug with toggling lists off on lists with empty list items would throw an error.
 - Fixed bug where editing images would produce non existing blob uris.
 - Fixed bug where the offscreen toc selection would be treated as the real toc element.
 - Fixed bug where the aria level attribute for element path would have an incorrect start index.
-- Fixed bug where the offscreen selection of cE=false that where very wide would be shown onscreen. Patch contributed by Steven Bufton.
+- Fixed bug where the offscreen selection of cE=false that where very wide would be shown onscreen. Patch contributed by
+  Steven Bufton.
 - Fixed so the default_link_target gets applied to links created by the autolink plugin.
 - Fixed so that the name attribute gets removed by the anchor plugin if editing anchors.
 
 ## 4.5.0 - 2016-11-23
 
 ### Added
+
 - Added new toc plugin allows you to insert table of contents based on editor headings.
 - Added new auto complete menu to all url fields. Adds history, link to anchors etc.
 - Added new sidebar api that allows you to add custom sidebar panels and buttons to toggle these.
@@ -1960,16 +2380,19 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Added new live previews for complex elements like table or lists.
 
 ### Fixed
+
 - Fixed bug where it wasn't possible to properly tab between controls in a dialog with a disabled form item control.
 - Fixed bug where firefox would generate a rectangle on elements produced after/before a cE=false elements.
 - Fixed bug with advlist plugin not switching list element format properly in some edge cases.
 - Fixed bug where col/rowspans wasn't correctly computed by the table plugin in some cases.
 - Fixed bug where the table plugin would thrown an error if object_resizing was disabled.
-- Fixed bug where some invalid markup would cause issues when running in XHTML mode. Patch contributed by Charles Bourasseau.
+- Fixed bug where some invalid markup would cause issues when running in XHTML mode. Patch contributed by Charles
+  Bourasseau.
 - Fixed bug where the fullscreen class wouldn't be removed properly when closing dialogs.
 - Fixed bug where the PastePlainTextToggle event wasn't fired by the paste plugin when the state changed.
 - Fixed bug where table the row type wasn't properly updated in table row dialog. Patch contributed by Matthias Balmer.
-- Fixed bug where select all and cut wouldn't place caret focus back to the editor in WebKit. Patch contributed by Daniel Jalkut.
+- Fixed bug where select all and cut wouldn't place caret focus back to the editor in WebKit. Patch contributed by
+  Daniel Jalkut.
 - Fixed bug where applying cell/row properties to multiple cells/rows would reset other unchanged properties.
 - Fixed bug where some elements in the schema would have redundant/incorrect children.
 - Fixed bug where selector and target options would cause issues if used together.
@@ -2005,6 +2428,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Fixed various api documentation issues and typos.
 
 ### Removed
+
 - Removed layer plugin since it wasn't really ported from 3.x and there doesn't seem to be much use for it.
 - Removed moxieplayer.swf from the media plugin since it wasn't used by the media plugin.
 - Removed format state from the advlist plugin to be more consistent with common word processors.
@@ -2012,6 +2436,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.4.3 - 2016-09-01
 
 ### Fixed
+
 - Fixed bug where copy would produce an exception on Chrome.
 - Fixed bug where deleting lists on IE 11 would merge in correct text nodes.
 - Fixed bug where deleting partial lists with indentation wouldn't cause proper normalization.
@@ -2019,12 +2444,14 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.4.2 - 2016-08-25
 
 ### Added
+
 - Added new importcss_exclusive option to disable unique selectors per group.
 - Added new group specific selector_converter option to importcss plugin.
 - Added new codesample_languages option to apply custom languages to codesample plugin.
 - Added new codesample_dialog_width/codesample_dialog_height options.
 
 ### Fixed
+
 - Fixed bug where fullscreen button had an incorrect keyboard shortcut.
 - Fixed bug where backspace/delete wouldn't work correctly from a block to a cE=false element.
 - Fixed bug where smartpaste wasn't detecting links with special characters in them like tilde.
@@ -2045,9 +2472,11 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.4.1 - 2016-07-26
 
 ### Added
+
 - Added smart_paste option to paste plugin to allow disabling the paste behavior if needed.
 
 ### Fixed
+
 - Fixed bug where png urls wasn't properly detected by the smart paste logic.
 - Fixed bug where the element path wasn't working properly when multiple editor instances where used.
 - Fixed bug with creating lists out of multiple paragraphs would just create one list item instead of multiple.
@@ -2061,26 +2490,31 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.4.0 - 2016-06-30
 
 ### Added
+
 - Added new inlite theme this is a more lightweight inline UI.
 - Added smarter paste logic that auto detects urls in the clipboard and inserts images/links based on that.
 - Added a better image resize algorithm for better image quality in the imagetools plugin.
 
 ### Fixed
+
 - Fixed bug where it wasn't possible to drag/dropping cE=false elements on FF.
 - Fixed bug where backspace/delete before/after a cE=false block would produce a new paragraph.
 - Fixed bug where list style type css property wasn't preserved when indenting lists.
 - Fixed bug where merging of lists where done even if the list style type was different.
 - Fixed bug where the image_dataimg_filter function wasn't used when pasting images.
 - Fixed bug where nested editable within a non editable element would cause scroll on focus in Chrome.
-- Fixed so invalid targets for inline mode is blocked on initialization. We only support elements that can have children.
+- Fixed so invalid targets for inline mode is blocked on initialization. We only support elements that can have
+  children.
 
 ## 4.3.13 - 2016-06-08
 
 ### Added
+
 - Added characters with a diacritical mark to charmap plugin. Patch contributed by Dominik Schilling.
 - Added better error handling if the image proxy service would produce errors.
 
 ### Fixed
+
 - Fixed issue with pasting list items into list items would produce nested list rather than a merged list.
 - Fixed bug where table selection could get stuck in selection mode for inline editors.
 - Fixed bug where it was possible to place the caret inside the resize grid elements.
@@ -2091,6 +2525,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.3.12 - 2016-05-10
 
 ### Fixed
+
 - Fixed bug where focus calls couldn't be made inside the editors PostRender event handler.
 - Fixed bug where some translations wouldn't work as expected due to a bug in editor.translate.
 - Fixed bug where the node change event could fire with a node out side the root of the editor.
@@ -2104,6 +2539,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.3.11 - 2016-04-25
 
 ### Fixed
+
 - Fixed bug where it wasn't possible to insert empty blocks though the API unless they where padded.
 - Fixed bug where you couldn't type the Euro character on Windows.
 - Fixed bug where backspace/delete from a cE=false element to a text block didn't work properly.
@@ -2114,11 +2550,13 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.3.10 - 2016-04-12
 
 ### Fixed
+
 - Fixed bug where the key "y" on WebKit couldn't be entered due to conflict with keycode for F10 on keypress.
 
 ## 4.3.9 - 2016-04-12
 
 ### Added
+
 - Added support for focusing the contextual toolbars using keyboard.
 - Added keyboard support for slider UI controls. You can no increase/decrease using arrow keys.
 - Added url pattern matching for Dailymotion to media plugin. Patch contributed by Bertrand Darbon.
@@ -2127,22 +2565,27 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 - Added visual arrows to inline contextual toolbars so that they point to the element being active.
 
 ### Changed
+
 - Changed the Meta+Shift+F shortcut to Ctrl+Shift+F since Czech, Slovak, Polish languages used the first one for input.
 
 ### Fixed
+
 - Fixed so toolbars for tables or other larger elements get better positioned below the scrollable viewport.
 - Fixed bug where it was possible to click links inside cE=false blocks.
 - Fixed bug where event targets wasn't properly handled in Safari Technical Preview.
 - Fixed bug where drag/drop text in FF 45 would make the editor caret invisible.
 - Fixed bug where the remove state wasn't properly set on editor instances when detected as clobbered.
-- Fixed bug where offscreen selection of some cE=false elements would render onscreen. Patch contributed by Steven Bufton
-- Fixed bug where enter would clone styles out side the root on editors inside a span. Patch contributed by ChristophKaser.
+- Fixed bug where offscreen selection of some cE=false elements would render onscreen. Patch contributed by Steven
+  Bufton
+- Fixed bug where enter would clone styles out side the root on editors inside a span. Patch contributed by
+  ChristophKaser.
 - Fixed bug where drag/drop of images into the editor didn't work correctly in FF.
 - Fixed so the first item in panels for the imagetools dialog gets proper keyboard focus.
 
 ## 4.3.8 - 2016-03-15
 
 ### Fixed
+
 - Fixed bug where inserting HR at the end of a block element would produce an extra empty block.
 - Fixed bug where links would be clickable when readonly mode was enabled.
 - Fixed bug where the formatter would normalize to the wrong node on very specific content.
@@ -2154,6 +2597,7 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.3.7 - 2016-03-02
 
 ### Fixed
+
 - Fixed bug where incorrect icons would be rendered for imagetools edit and color levels.
 - Fixed bug where navigation using arrow keys inside a SelectBox didn't move up/down.
 - Fixed bug where the visualblocks plugin would render borders round internal UI elements.
@@ -2161,12 +2605,15 @@ Initial list of features and changes is available at https://tiny.cloud/docs-pre
 ## 4.3.6 - 2016-03-01
 
 ### Added
+
 - Added new paste_remember_plaintext_info option to allow a global disable of the plain text mode notification.
 - Added new PastePlainTextToggle event that fires when plain text mode toggles on/off.
 
 ### Fixed
+
 - Fixed bug where it wasn't possible to select media elements since the drag logic would snap it to mouse cursor.
-- Fixed bug where it was hard to place the caret inside nested cE=true elements when the outer cE=false element was focused.
+- Fixed bug where it was hard to place the caret inside nested cE=true elements when the outer cE=false element was
+  focused.
 - Fixed bug where editors wouldn't properly initialize if both selector and mode where used.
 - Fixed bug where IME input inside table cells would switch the IME off.
 - Fixed bug where selection inside the first table cell would cause the whole table cell to get selected.
@@ -2187,11 +2634,13 @@ Npm version bump due to package not being fully updated.
 ## 4.3.4 - 2016-02-11
 
 ### Added
+
 - Added new OpenWindow/CloseWindow events that gets fired when windows open/close.
 - Added new NewCell/NewRow events that gets fired when table cells/rows are created.
 - Added new Promise return value to tinymce.init makes it easier to handle initialization.
 
 ### Fixed
+
 - Fixed various bugs with drag/drop of contentEditable:false elements.
 - Fixed bug where deleting of very specific nested list items would result in an odd list.
 - Fixed bug where lists would get merged with adjacent lists outside the editable inline root.
@@ -2208,20 +2657,25 @@ Npm version bump due to package not being fully updated.
 - Fixed so events gets properly dispatched in shadow dom. Patch provided by Nazar Mokrynskyi.
 
 ### Removed
+
 - Removed the jQuery version the jQuery plugin is now moved into the main package.
 - Removed jscs from build process since eslint can now handle code style checking.
 
 ## 4.3.3 - 2016-01-14
 
 ### Added
-- Added new table_resize_bars configuration setting.  This setting allows you to disable the table resize bars.
-- Added new beforeInitialize event to tinymce.util.XHR lets you modify XHR properties before open. Patch contributed by Brent Clintel.
-- Added new autolink_pattern setting to autolink plugin. Enables you to override the default autolink formats. Patch contributed by Ben Tiedt.
+
+- Added new table_resize_bars configuration setting. This setting allows you to disable the table resize bars.
+- Added new beforeInitialize event to tinymce.util.XHR lets you modify XHR properties before open. Patch contributed by
+  Brent Clintel.
+- Added new autolink_pattern setting to autolink plugin. Enables you to override the default autolink formats. Patch
+  contributed by Ben Tiedt.
 - Added new charmap option that lets you override the default charmap of the charmap plugin.
 - Added new charmap_append option that lets you add new characters to the default charmap of the charmap plugin.
 - Added new insertCustomChar event that gets fired when a character is inserted by the charmap plugin.
 
 ### Fixed
+
 - Fixed bug where table cells started with a superfluous &nbsp; in IE10+.
 - Fixed bug where table plugin would retain all BR tags when cells were merged.
 - Fixed bug where media plugin would strip underscores from youtube urls.
@@ -2234,8 +2688,10 @@ Npm version bump due to package not being fully updated.
 ## 4.3.2 - 2015-12-14
 
 ### Fixed
+
 - Fixed bug where the resize bars for table cells were not affected by the object_resizing property.
-- Fixed bug where the contextual table toolbar would appear incorrectly if TinyMCE was initialized inline inside a table.
+- Fixed bug where the contextual table toolbar would appear incorrectly if TinyMCE was initialized inline inside a
+  table.
 - Fixed bug where resizing table cells did not fire a node change event or add an undo level.
 - Fixed bug where double click selection of text on IE 11 wouldn't work properly.
 - Fixed bug where codesample plugin would incorrectly produce br elements inside code elements.
@@ -2246,6 +2702,7 @@ Npm version bump due to package not being fully updated.
 ## 4.3.1 - 2015-11-30
 
 ### Fixed
+
 - Fixed so it's possible to disable the table inline toolbar by setting it to false or an empty string.
 - Fixed bug where it wasn't possible to resize some tables using the drag handles.
 - Fixed bug where unique id:s would clash for multiple editor instances and cE=false selections.
@@ -2256,6 +2713,7 @@ Npm version bump due to package not being fully updated.
 ## 4.3.0 - 2015-11-23
 
 ### Added
+
 - Added new table column/row resize support. Makes it a lot more easy to resize the columns/rows in a table.
 - Added new table inline toolbar. Makes it easier to for example add new rows or columns to a table.
 - Added new notification API. Lets you display floating notifications to the end user.
@@ -2267,9 +2725,11 @@ Npm version bump due to package not being fully updated.
 - Added new core support for contentEditable=false elements within the editor overrides the browsers broken behavior.
 
 ### Changed
+
 - Rewrote the noneditable plugin to use the new contentEditable false core logic.
 
 ### Fixed
+
 - Fixed so the dirty state doesn't set to false automatically when the undo index is set to 0.
 - Fixed the Selection.placeCaretAt so it works better on IE when the coordinate is between paragraphs.
 - Fixed bug where data-mce-bogus="all" element contents where counted by the word count plugin.
@@ -2284,12 +2744,14 @@ Npm version bump due to package not being fully updated.
 ## 4.2.8 - 2015-11-13
 
 ### Fixed
+
 - Fixed bug where it was possible to delete tables as the inline root element if all columns where selected.
 - Fixed bug where the UI buttons active state wasn't properly updated due to recent refactoring of that logic.
 
 ## 4.2.7 - 2015-10-27
 
 ### Fixed
+
 - Fixed bug where backspace/delete would remove all formats on the last paragraph character in WebKit/Blink.
 - Fixed bug where backspace within a inline format element with a bogus caret container would move the caret.
 - Fixed bug where backspace/delete on selected table cells wouldn't add an undo level.
@@ -2305,12 +2767,14 @@ Npm version bump due to package not being fully updated.
 ## 4.2.6 - 2015-09-28
 
 ### Added
+
 - Added capability to set request headers when using XHRs.
 - Added capability to upload local images automatically default delay is set to 30 seconds after editing images.
 - Added commands ids mceEditImage, mceAchor and mceMedia to be avaiable from execCommand.
 - Added Edge browser to saucelabs grunt task. Patch contributed by John-David Dalton.
 
 ### Fixed
+
 - Fixed bug where blob uris not produced by tinymce would produce HTML invalid markup.
 - Fixed bug where selection of contents of a nearly empty editor in Edge would sometimes fail.
 - Fixed bug where color styles woudln't be retained on copy/paste in Blink/Webkit.
@@ -2331,9 +2795,11 @@ Npm version bump due to package not being fully updated.
 ## 4.2.5 - 2015-08-31
 
 ### Added
+
 - Added fullscreen capability to embedded youtube and vimeo videos.
 
 ### Fixed
+
 - Fixed bug where the uploadImages call didn't work on IE 10.
 - Fixed bug where image place holders would be uploaded by uploadImages call.
 - Fixed bug where images marked with bogus would be uploaded by the uploadImages call.
@@ -2349,9 +2815,11 @@ Npm version bump due to package not being fully updated.
 ## 4.2.4 - 2015-08-17
 
 ### Added
+
 - Added picture as a valid element to the HTML 5 schema. Patch contributed by Adam Taylor.
 
 ### Fixed
+
 - Fixed bug where contents would be duplicated on drag/drop within the same editor.
 - Fixed bug where floating/alignment of images on Edge wouldn't work properly.
 - Fixed bug where it wasn't possible to drag images on IE 11.
@@ -2367,6 +2835,7 @@ Npm version bump due to package not being fully updated.
 ## 4.2.3 - 2015-07-30
 
 ### Fixed
+
 - Fixed bug where image selection wasn't possible on Edge due to incompatible setBaseAndExtend API.
 - Fixed bug where image blobs urls where not properly destroyed by the imagetools plugin.
 - Fixed bug where keyboard shortcuts wasn't working correctly on IE 8.
@@ -2375,17 +2844,22 @@ Npm version bump due to package not being fully updated.
 ## 4.2.2 - 2015-07-22
 
 ### Fixed
-- Fixed bug where float panels were not being hidden on inline editor blur when fixed_toolbar_container config option was in use.
+
+- Fixed bug where float panels were not being hidden on inline editor blur when fixed_toolbar_container config option
+  was in use.
 - Fixed bug where combobox states wasn't properly updated if contents where updated without keyboard.
 - Fixed bug where pasting into textbox or combobox would move the caret to the end of text.
 - Fixed bug where removal of bogus span elements before block elements would remove whitespace between nodes.
-- Fixed bug where repositioning of inline toolbars where async and producing errors if the editor was removed from DOM to early. Patch by iseulde.
+- Fixed bug where repositioning of inline toolbars where async and producing errors if the editor was removed from DOM
+  to early. Patch by iseulde.
 - Fixed bug where element path wasn't working correctly. Patch contributed by iseulde.
-- Fixed bug where menus wasn't rendered correctly when custom images where added to a menu. Patch contributed by Naim Hammadi.
+- Fixed bug where menus wasn't rendered correctly when custom images where added to a menu. Patch contributed by Naim
+  Hammadi.
 
 ## 4.2.1 - 2015-06-29
 
 ### Fixed
+
 - Fixed bug where back/forward buttons in the browser would render blob images as broken images.
 - Fixed bug where Firefox would throw regexp to big error when replacing huge base64 chunks.
 - Fixed bug rendering issues with resize and context toolbars not being placed properly until next animation frame.
@@ -2394,7 +2868,8 @@ Npm version bump due to package not being fully updated.
 - Fixed bug where context menu where throwing an error when rendering.
 - Fixed bug where resize both option wasn't working due to resent addClass API change. Patch contributed by Jogai.
 - Fixed bug where a hideAll call for container rendered inline toolbars would throw an error.
-- Fixed bug where onclick event handler on combobox could cause issues if element.id was a function by some polluting libraries.
+- Fixed bug where onclick event handler on combobox could cause issues if element.id was a function by some polluting
+  libraries.
 - Fixed bug where listboxes wouldn't get proper selected sub menu item when using link_list or image_list.
 - Fixed so the UI controls are as wide as 4.1.x to avoid wrapping controls in toolbars.
 - Fixed so the imagetools dialog is adaptive for smaller screen sizes.
@@ -2402,6 +2877,7 @@ Npm version bump due to package not being fully updated.
 ## 4.2.0 - 2015-06-25
 
 ### Added
+
 - Added new flat default skin to make the UI more modern.
 - Added new imagetools plugin, lets you crop/resize and apply filters to images.
 - Added new contextual toolbars support to the API lets you add floating toolbars for specific CSS selectors.
@@ -2409,7 +2885,9 @@ Npm version bump due to package not being fully updated.
 - Added new built in image upload feature lets you upload any base64 encoded image within the editor as files.
 
 ### Fixed
-- Fixed bug where resize handles would appear in the right position in the wrong editor when switching between resizable content in different inline editors.
+
+- Fixed bug where resize handles would appear in the right position in the wrong editor when switching between resizable
+  content in different inline editors.
 - Fixed bug where tables would not be inserted in inline mode due to previous float panel fix.
 - Fixed bug where floating panels would remain open when focus was lost on inline editors.
 - Fixed bug where cut command on Chrome would thrown a browser security exception.
@@ -2430,6 +2908,7 @@ Npm version bump due to package not being fully updated.
 ## 4.1.10 - 2015-05-05
 
 ### Fixed
+
 - Fixed bug where plugins loaded with compat3x would sometimes throw errors when loading using the jQuery version.
 - Fixed bug where extra empty paragraphs would get deleted in WebKit/Blink due to recent Quriks fix.
 - Fixed bug where the editor wouldn't work properly on IE 12 due to some required browser sniffing.
@@ -2438,7 +2917,8 @@ Npm version bump due to package not being fully updated.
 - Fixed bug where it wasn't possible to remove formats from very specific nested contents.
 - Fixed bug where undo levels wasn't produced when typing letters using the shift or alt+ctrl modifiers.
 - Fixed bug where the dirty state wasn't properly updated when typing using the shift or alt+ctrl modifiers.
-- Fixed bug where an error would be thrown if an autofocused editor was destroyed quickly after its initialization. Patch provided by thorn0.
+- Fixed bug where an error would be thrown if an autofocused editor was destroyed quickly after its initialization.
+  Patch provided by thorn0.
 - Fixed issue with dirty state not being properly updated on redo operation.
 - Fixed issue with entity decoder not handling incorrectly written numeric entities.
 - Fixed issue where some PI element values wouldn't be properly encoded.
@@ -2446,6 +2926,7 @@ Npm version bump due to package not being fully updated.
 ## 4.1.9 - 2015-03-10
 
 ### Fixed
+
 - Fixed bug where indentation wouldn't work properly for non list elements.
 - Fixed bug with image plugin not pulling the image dimensions out correctly if a custom document_base_url was used.
 - Fixed bug where ctrl+alt+[1-9] would conflict with the AltGr+[1-9] on Windows. New shortcuts is ctrl+shift+[1-9].
@@ -2456,15 +2937,18 @@ Npm version bump due to package not being fully updated.
 ## 4.1.8 - 2015-03-05
 
 ### Added
+
 - Added new html5 sizes attribute to img elements used together with srcset.
 - Added new elementpath option that makes it possible to disable the element path but keep the statusbar.
 - Added new option table_style_by_css for the table plugin to set table styling with css rather than table attributes.
-- Added new link_assume_external_targets option to prompt the user to prepend http:// prefix if the supplied link does not contain a protocol prefix.
+- Added new link_assume_external_targets option to prompt the user to prepend http:// prefix if the supplied link does
+  not contain a protocol prefix.
 - Added new image_prepend_url option to allow a custom base path/url to be added to images.
 - Added new table_appearance_options option to make it possible to disable some options.
 - Added new image_title option to make it possible to alter the title of the image, disabled by default.
 
 ### Fixed
+
 - Fixed bug where selection starting from out side of the body wouldn't produce a proper selection range on IE 11.
 - Fixed bug where pressing enter twice before a table moves the cursor in the table and causes a javascript error.
 - Fixed bug where advanced image styles were not respected.
@@ -2480,7 +2964,8 @@ Npm version bump due to package not being fully updated.
 - Fixed bug where Command+Backspace didn't properly delete the whole line of text but the previous word.
 - Fixed bug where UI active states wheren't properly updated on IE if you placed caret within the current range.
 - Fixed bug where delete/backspace on WebKit/Blink would remove span elements created by the user.
-- Fixed bug where delete/backspace would produce incorrect results when deleting between two text blocks with br elements.
+- Fixed bug where delete/backspace would produce incorrect results when deleting between two text blocks with br
+  elements.
 - Fixed bug where captions where removed when pasting from MS Office.
 - Fixed bug where lists plugin wouldn't properly remove fully selected nested lists.
 - Fixed bug where the ttf font used for icons would throw an warning message on Gecko on Mac OS X.
@@ -2488,26 +2973,33 @@ Npm version bump due to package not being fully updated.
 - Fixed so shy entities gets displayed when using the visualchars plugin.
 - Fixed so removeformat removes ins/del by default since these might be used for strikethough.
 - Fixed so multiple language packs can be loaded and added to the global I18n data structure.
-- Fixed so transparent color selection gets treated as a normal color selection. Patch contributed by Alexander Hofbauer.
-- Fixed so it's possible to disable autoresize_overflow_padding, autoresize_bottom_margin options by setting them to false.
+- Fixed so transparent color selection gets treated as a normal color selection. Patch contributed by Alexander
+  Hofbauer.
+- Fixed so it's possible to disable autoresize_overflow_padding, autoresize_bottom_margin options by setting them to
+  false.
 - Fixed so the charmap plugin shows the description of the character in the dialog. Patch contributed by Jelle Hissink.
 - Removed address from the default list of block formats since it tends to be missused.
 - Fixed so the pre block format is called preformatted to make it more verbose.
 - Fixed so it's possible to context scope translation strings this isn't needed most of the time.
 - Fixed so the max length of the width/height input fields of the media dialog is 5 instead of 3.
-- Fixed so drag/dropped contents gets properly processed by paste plugin since it's basically a paste. Patch contributed by Greg Fairbanks.
-- Fixed so shortcut keys for headers is ctrl+alt+[1-9] instead of ctrl+[1-9] since these are for switching tabs in the browsers.
-- Fixed so "u" doesn't get converted into a span element by the legacy input filter. Since this is now a valid HTML5 element.
+- Fixed so drag/dropped contents gets properly processed by paste plugin since it's basically a paste. Patch contributed
+  by Greg Fairbanks.
+- Fixed so shortcut keys for headers is ctrl+alt+[1-9] instead of ctrl+[1-9] since these are for switching tabs in the
+  browsers.
+- Fixed so "u" doesn't get converted into a span element by the legacy input filter. Since this is now a valid HTML5
+  element.
 - Fixed font families in order to provide appropriate web-safe fonts.
 
 ## 4.1.7 - 2014-11-27
 
 ### Added
+
 - Added HTML5 schema support for srcset, source and picture. Patch contributed by mattheu.
 - Added new cache_suffix setting to enable cache busting by producing unique urls.
 - Added new paste_convert_word_fake_lists option to enable users to disable the fake lists convert logic.
 
 ### Fixed
+
 - Fixed so advlist style changes adds undo levels for each change.
 - Fixed bug where WebKit would sometimes produce an exception when the autolink plugin where looking for URLs.
 - Fixed bug where IE 7 wouldn't be rendered properly due to aggressive css compression.
@@ -2519,9 +3011,11 @@ Npm version bump due to package not being fully updated.
 ## 4.1.6 - 2014-10-08
 
 ### Changed
+
 - Replaced jake with grunt since it is more mainstream and has better plugin support.
 
 ### Fixed
+
 - Fixed bug with clicking on the scrollbar of the iframe would cause a JS error to be thrown.
 - Fixed bug where null would produce an exception if you passed it to selection.setRng.
 - Fixed bug where Ctrl/Cmd+Tab would indent the current list item if you switched tabs in the browser.
@@ -2529,10 +3023,10 @@ Npm version bump due to package not being fully updated.
 - Fixed bug where it wasn't possible to switch back to default list style type.
 - Fixed issue where the select all quirk fix would fire for other modifiers than Ctrl/Cmd combinations.
 
-
 ## 4.1.5 - 2014-09-09
 
 ### Fixed
+
 - Fixed bug where sometimes the resize rectangles wouldn't properly render on images on WebKit/Blink.
 - Fixed bug in list plugin where delete/backspace would merge empty LI elements in lists incorrectly.
 - Fixed bug where empty list elements would result in empty LI elements without it's parent container.
@@ -2551,23 +3045,29 @@ Npm version bump due to package not being fully updated.
 ## 4.1.4 - 2014-08-21
 
 ### Added
-- Added new media_filter_html option to media plugin that blocks any conditional comments, scripts etc within a video element.
-- Added new content_security_policy option allows you to set custom policy for iframe contents. Patch contributed by Francois Chagnon.
+
+- Added new media_filter_html option to media plugin that blocks any conditional comments, scripts etc within a video
+  element.
+- Added new content_security_policy option allows you to set custom policy for iframe contents. Patch contributed by
+  Francois Chagnon.
 
 ### Fixed
+
 - Fixed bug where activate/deactivate events wasn't firing properly when switching between editors.
 - Fixed bug where placing the caret on iOS was difficult due to a WebKit bug with touch events.
 - Fixed bug where the resize helper wouldn't render properly on older IE versions.
 - Fixed bug where resizing images inside tables on older IE versions would sometimes fail depending mouse position.
 - Fixed bug where editor.insertContent would produce an exception when inserting select/option elements.
 - Fixed bug where extra empty paragraphs would be produced if block elements where inserted inside span elements.
-- Fixed bug where the spellchecker menu item wouldn't be properly checked if spell checking was started before it was rendered.
+- Fixed bug where the spellchecker menu item wouldn't be properly checked if spell checking was started before it was
+  rendered.
 - Fixed bug where the DomQuery filter function wouldn't remove non elements from collection.
 - Fixed bug where document with custom document.domain wouldn't properly render the editor.
 - Fixed bug where IE 8 would throw exception when trying to enter invalid color values into colorboxes.
 - Fixed bug where undo manager could incorrectly add an extra undo level when custom resize handles was removed.
 - Fixed bug where it wouldn't be possible to alter cell properties properly on table cells on IE 8.
-- Fixed so the color picker button in table dialog isn't shown unless you include the colorpicker plugin or add your own custom color picker.
+- Fixed so the color picker button in table dialog isn't shown unless you include the colorpicker plugin or add your own
+  custom color picker.
 - Fixed so activate/deactivate events fire when windowManager opens a window since.
 - Fixed so the table advtab options isn't separated by an underscore to normalize naming with image_advtab option.
 - Fixed so the table cell dialog has proper padding when the advanced tab in disabled.
@@ -2575,61 +3075,85 @@ Npm version bump due to package not being fully updated.
 ## 4.1.3 - 2014-07-29
 
 ### Added
-- Added event binding logic to tinymce.util.XHR making it possible to override headers and settings before any request is made.
+
+- Added event binding logic to tinymce.util.XHR making it possible to override headers and settings before any request
+  is made.
 
 ### Fixed
-- Fixed bug where drag events wasn't fireing properly on older IE versions since the event handlers where bound to document.
-- Fixed bug where drag/dropping contents within the editor on IE would force the contents into plain text mode even if it was internal content.
+
+- Fixed bug where drag events wasn't fireing properly on older IE versions since the event handlers where bound to
+  document.
+- Fixed bug where drag/dropping contents within the editor on IE would force the contents into plain text mode even if
+  it was internal content.
 - Fixed bug where IE 7 wouldn't open menus properly due to a resize bug in the browser auto closing them immediately.
-- Fixed bug where the DOMUtils getPos logic wouldn't produce a valid coordinate inside the body if the body was positioned non static.
+- Fixed bug where the DOMUtils getPos logic wouldn't produce a valid coordinate inside the body if the body was
+  positioned non static.
 - Fixed bug where the element path and format state wasn't properly updated if you had the wordcount plugin enabled.
 - Fixed bug where a comment at the beginning of source would produce an exception in the formatter logic.
 - Fixed bug where setAttrib/getAttrib on null would throw exception together with any hooked attributes like style.
 - Fixed bug where table sizes wasn't properly retained when copy/pasting on WebKit/Blink.
-- Fixed bug where WebKit/Blink would produce colors in RGB format instead of the forced HEX format when deleting contents.
+- Fixed bug where WebKit/Blink would produce colors in RGB format instead of the forced HEX format when deleting
+  contents.
 - Fixed bug where the width attribute wasn't updated on tables if you changed the size inside the table dialog.
 - Fixed bug where control selection wasn't properly handled when the caret was placed directly after an image.
-- Fixed bug where selecting the contents of table cells using the selection.select method wouldn't place the caret properly.
-- Fixed bug where the selection state for images wasn't removed when placing the caret right after an image on WebKit/Blink.
-- Fixed bug where all events wasn't properly unbound when and editor instance was removed or destroyed by some external innerHTML call.
+- Fixed bug where selecting the contents of table cells using the selection.select method wouldn't place the caret
+  properly.
+- Fixed bug where the selection state for images wasn't removed when placing the caret right after an image on
+  WebKit/Blink.
+- Fixed bug where all events wasn't properly unbound when and editor instance was removed or destroyed by some external
+  innerHTML call.
 - Fixed bug where it wasn't possible or very hard to select images on iOS when the onscreen keyboard was visible.
-- Fixed so auto_focus can take a boolean argument this will auto focus the last initialized editor might be useful for single inits.
+- Fixed so auto_focus can take a boolean argument this will auto focus the last initialized editor might be useful for
+  single inits.
 - Fixed so word auto detect lists logic works better for faked lists that doesn't have specific markup.
 - Fixed so nodeChange gets fired on mouseup as it used to before 4.1.1 we optimized that event to fire less often.
 
 ### Removed
-- Removed the finish menu item from spellchecker menu since it's redundant you can stop spellchecking by toggling menu item or button.
+
+- Removed the finish menu item from spellchecker menu since it's redundant you can stop spellchecking by toggling menu
+  item or button.
 
 ## 4.1.2 - 2014-07-15
 
 ### Added
+
 - Added offset/grep to DomQuery class works basically the same as it's jQuery equivalent.
 
 ### Fixed
-- Fixed bug where backspace/delete or setContent with an empty string would remove header data when using the fullpage plugin.
+
+- Fixed bug where backspace/delete or setContent with an empty string would remove header data when using the fullpage
+  plugin.
 - Fixed bug where tinymce.remove with a selector not matching any editors would remove all editors.
 - Fixed bug where resizing of the editor didn't work since the theme was calling setStyles instead of setStyle.
 - Fixed bug where IE 7 would fail to append html fragments to iframe document when using DomQuery.
 - Fixed bug where the getStyle DOMUtils method would produce an exception if it was called with null as it's element.
-- Fixed bug where the paste plugin would remove the element if the none of the paste_webkit_styles rules matched the current style.
-- Fixed bug where contextmenu table items wouldn't work properly on IE since it would some times fire an incorrect selection change.
-- Fixed bug where the padding/border values wasn't used in the size calculation for the body size when using autoresize. Patch contributed by Matt Whelan.
+- Fixed bug where the paste plugin would remove the element if the none of the paste_webkit_styles rules matched the
+  current style.
+- Fixed bug where contextmenu table items wouldn't work properly on IE since it would some times fire an incorrect
+  selection change.
+- Fixed bug where the padding/border values wasn't used in the size calculation for the body size when using autoresize.
+  Patch contributed by Matt Whelan.
 - Fixed bug where conditional word comments wouldn't be properly removed when pasting plain text.
 - Fixed bug where resizing would sometime fail on IE 11 when the mouseup occurred inside the resizable element.
-- Fixed so the iframe gets initialized without any inline event handlers for better CSP support. Patch contributed by Matt Whelan.
+- Fixed so the iframe gets initialized without any inline event handlers for better CSP support. Patch contributed by
+  Matt Whelan.
 - Fixed so the tinymce.dom.Sizzle is the latest version of sizzle this resolves the document context bug.
 
 ## 4.1.1 - 2014-07-08
 
 ### Fixed
+
 - Fixed bug where pasting plain text on some WebKit versions would result in an empty line.
 - Fixed bug where resizing images inside tables on IE 11 wouldn't work properly.
-- Fixed bug where IE 11 would sometimes throw "Invalid argument" exception when editor contents was set to an empty string.
-- Fixed bug where document.activeElement would throw exceptions on IE 9 when that element was hidden or removed from dom.
+- Fixed bug where IE 11 would sometimes throw "Invalid argument" exception when editor contents was set to an empty
+  string.
+- Fixed bug where document.activeElement would throw exceptions on IE 9 when that element was hidden or removed from
+  dom.
 - Fixed bug where WebKit/Blink sometimes produced br elements with the Apple-interchange-newline class.
 - Fixed bug where table cell selection wasn't properly removed when copy/pasting table cells.
 - Fixed bug where pasting nested list items from Word wouldn't produce proper semantic nested lists.
-- Fixed bug where right clicking using the contextmenu plugin on WebKit/Blink on Mac OS X would select the target current word or line.
+- Fixed bug where right clicking using the contextmenu plugin on WebKit/Blink on Mac OS X would select the target
+  current word or line.
 - Fixed bug where it wasn't possible to alter table cell properties on IE 8 using the context menu.
 - Fixed bug where the resize helper wouldn't be correctly positioned on older IE versions.
 - Fixed bug where fullpage plugin would produce an error if you didn't specify a doctype encoding.
@@ -2641,7 +3165,8 @@ Npm version bump due to package not being fully updated.
 - Fixed bug where custom elements with underscores in the name wasn't properly parsed/serialized.
 - Fixed bug where applying inline formats to nested list elements would produce an incorrect formatting result.
 - Fixed so it's possible to hide items from elements path by using preventDefault/stopPropagation.
-- Fixed so inline mode toolbar gets rendered right aligned if the editable element positioned to the documents right edge.
+- Fixed so inline mode toolbar gets rendered right aligned if the editable element positioned to the documents right
+  edge.
 - Fixed so empty inline elements inside empty block elements doesn't get removed if configured to be kept intact.
 - Fixed so DomQuery parentsUntil/prevUntil/nextUntil supports selectors/elements/filters etc.
 - Fixed so legacyoutput plugin overrides fontselect and fontsizeselect controls and handles font elements properly.
@@ -2649,8 +3174,10 @@ Npm version bump due to package not being fully updated.
 ## 4.1.0 - 2014-06-18
 
 ### Added
+
 - Added new file_picker_callback option to replace the old file_browser_callback the latter will still work though.
-- Added new custom colors to textcolor plugin will be displayed if a color picker is provided also shows the latest colors.
+- Added new custom colors to textcolor plugin will be displayed if a color picker is provided also shows the latest
+  colors.
 - Added new color_picker_callback option to enable you to add custom color pickers to the editor.
 - Added new advanced tabs to table/cell/row dialogs to enable you to select colors for border/background.
 - Added new colorpicker plugin that lets you select colors from a hsv color picker.
@@ -2659,18 +3186,27 @@ Npm version bump due to package not being fully updated.
 - Added new textpattern plugin that allows you to use markdown like text patterns to format contents.
 - Added new resize helper element that shows the current width & height while resizing.
 - Added new "once" method to Editor and EventDispatcher enables since callback execution events.
-- Added new jQuery like class under tinymce.dom.DomQuery it's exposed on editor instances (editor.$) and globally under (tinymce.$).
+- Added new jQuery like class under tinymce.dom.DomQuery it's exposed on editor instances (editor.$) and globally
+  under (tinymce.$).
 
 ### Fixed
+
 - Fixed so the default resize method for images are proportional shift/ctrl can be used to make an unproportional size.
-- Fixed bug where the image_dimensions option of the image plugin would cause exceptions when it tried to update the size.
-- Fixed bug where table cell dialog class field wasn't properly updated when editing an a table cell with an existing class.
+- Fixed bug where the image_dimensions option of the image plugin would cause exceptions when it tried to update the
+  size.
+- Fixed bug where table cell dialog class field wasn't properly updated when editing an a table cell with an existing
+  class.
 - Fixed bug where Safari on Mac would produce webkit-fake-url for pasted images so these are now removed.
-- Fixed bug where the nodeChange event would get fired before the selection was changed when clicking inside the current selection range.
+- Fixed bug where the nodeChange event would get fired before the selection was changed when clicking inside the current
+  selection range.
 - Fixed bug where valid_classes option would cause exception when it removed internal prefixed classes like mce-item-.
-- Fixed bug where backspace would cause navigation in IE 8 on an inline element and after a caret formatting was applied.
+- Fixed bug where backspace would cause navigation in IE 8 on an inline element and after a caret formatting was
+  applied.
 - Fixed so placeholder images produced by the media plugin gets selected when inserted/edited.
-- Fixed so it's possible to drag in images when the paste_data_images option is enabled. Might be useful for mail clients.
-- Fixed so images doesn't get a width/height applied if the image_dimensions option is set to false useful for responsive contents.
-- Fixed so it's possible to pass in an optional arguments object for the nodeChanged function to be passed to all nodechange event listeners.
+- Fixed so it's possible to drag in images when the paste_data_images option is enabled. Might be useful for mail
+  clients.
+- Fixed so images doesn't get a width/height applied if the image_dimensions option is set to false useful for
+  responsive contents.
+- Fixed so it's possible to pass in an optional arguments object for the nodeChanged function to be passed to all
+  nodechange event listeners.
 - Fixed bug where media plugin embed code didn't update correctly.

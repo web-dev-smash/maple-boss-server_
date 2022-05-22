@@ -1,4 +1,3 @@
-
 /*
 * Licensed to the Apache Software Foundation (ASF) under one
 * or more contributor license agreements.  See the NOTICE file
@@ -20,9 +19,10 @@
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('echarts')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'echarts'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bmap = {}, global.echarts));
-}(this, (function (exports, echarts) { 'use strict';
+    typeof define === 'function' && define.amd ? define(['exports', 'echarts'], factory) :
+      (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bmap = {}, global.echarts));
+}(this, (function (exports, echarts) {
+  'use strict';
 
   function BMapCoordSys(bmap, api) {
     this._bmap = bmap;
@@ -143,7 +143,8 @@
      */
 
 
-    Overlay.prototype.draw = function () {};
+    Overlay.prototype.draw = function () {
+    };
 
     return Overlay;
   }
@@ -407,7 +408,7 @@
 
   exports.version = version;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
+  Object.defineProperty(exports, '__esModule', {value: true});
 
 })));
 //# sourceMappingURL=bmap.js.map

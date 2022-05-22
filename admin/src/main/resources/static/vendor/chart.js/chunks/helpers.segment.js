@@ -7,19 +7,21 @@
 function fontString(pixelSize, fontStyle, fontFamily) {
   return fontStyle + ' ' + pixelSize + 'px ' + fontFamily;
 }
-const requestAnimFrame = (function() {
+
+const requestAnimFrame = (function () {
   if (typeof window === 'undefined') {
-    return function(callback) {
+    return function (callback) {
       return callback();
     };
   }
   return window.requestAnimationFrame;
 }());
+
 function throttled(fn, thisArg, updateFn) {
   const updateArgs = updateFn || ((args) => Array.prototype.slice.call(args));
   let ticking = false;
   let args = [];
-  return function(...rest) {
+  return function (...rest) {
     args = updateArgs(rest);
     if (!ticking) {
       ticking = true;
@@ -30,9 +32,10 @@ function throttled(fn, thisArg, updateFn) {
     }
   };
 }
+
 function debounce(fn, delay) {
   let timeout;
-  return function(...args) {
+  return function (...args) {
     if (delay) {
       clearTimeout(timeout);
       timeout = setTimeout(fn, delay, args);
@@ -42,6 +45,7 @@ function debounce(fn, delay) {
     return delay;
   };
 }
+
 const _toLeftRightCenter = (align) => align === 'start' ? 'left' : align === 'end' ? 'right' : 'center';
 const _alignStartEnd = (align, start, end) => align === 'start' ? start : align === 'end' ? end : (start + end) / 2;
 const _textX = (align, left, right, rtl) => {
@@ -49,16 +53,20 @@ const _textX = (align, left, right, rtl) => {
   return align === check ? right : align === 'center' ? (left + right) / 2 : left;
 };
 
-function noop() {}
-const uid = (function() {
+function noop() {
+}
+
+const uid = (function () {
   let id = 0;
-  return function() {
+  return function () {
     return id++;
   };
 }());
+
 function isNullOrUndef(value) {
   return value === null || typeof value === 'undefined';
 }
+
 function isArray(value) {
   if (Array.isArray && Array.isArray(value)) {
     return true;
@@ -69,16 +77,21 @@ function isArray(value) {
   }
   return false;
 }
+
 function isObject(value) {
   return value !== null && Object.prototype.toString.call(value) === '[object Object]';
 }
+
 const isNumberFinite = (value) => (typeof value === 'number' || value instanceof Number) && isFinite(+value);
+
 function finiteOrDefault(value, defaultValue) {
   return isNumberFinite(value) ? value : defaultValue;
 }
+
 function valueOrDefault(value, defaultValue) {
   return typeof value === 'undefined' ? defaultValue : value;
 }
+
 const toPercentage = (value, dimension) =>
   typeof value === 'string' && value.endsWith('%') ?
     parseFloat(value) / 100
@@ -87,11 +100,13 @@ const toDimension = (value, dimension) =>
   typeof value === 'string' && value.endsWith('%') ?
     parseFloat(value) / 100 * dimension
     : +value;
+
 function callback(fn, args, thisArg) {
   if (fn && typeof fn.call === 'function') {
     return fn.apply(thisArg, args);
   }
 }
+
 function each(loopable, fn, thisArg, reverse) {
   let i, len, keys;
   if (isArray(loopable)) {
@@ -113,6 +128,7 @@ function each(loopable, fn, thisArg, reverse) {
     }
   }
 }
+
 function _elementsEqual(a0, a1) {
   let i, ilen, v0, v1;
   if (!a0 || !a1 || a0.length !== a1.length) {
@@ -127,6 +143,7 @@ function _elementsEqual(a0, a1) {
   }
   return true;
 }
+
 function clone$1(source) {
   if (isArray(source)) {
     return source.map(clone$1);
@@ -143,9 +160,11 @@ function clone$1(source) {
   }
   return source;
 }
+
 function isValidKey(key) {
   return ['__proto__', 'prototype', 'constructor'].indexOf(key) === -1;
 }
+
 function _merger(key, target, source, options) {
   if (!isValidKey(key)) {
     return;
@@ -158,6 +177,7 @@ function _merger(key, target, source, options) {
     target[key] = clone$1(sval);
   }
 }
+
 function merge(target, source, options) {
   const sources = isArray(source) ? source : [source];
   const ilen = sources.length;
@@ -178,9 +198,11 @@ function merge(target, source, options) {
   }
   return target;
 }
+
 function mergeIf(target, source) {
   return merge(target, source, {merger: _mergerIf});
 }
+
 function _mergerIf(key, target, source) {
   if (!isValidKey(key)) {
     return;
@@ -193,18 +215,22 @@ function _mergerIf(key, target, source) {
     target[key] = clone$1(sval);
   }
 }
+
 function _deprecated(scope, value, previous, current) {
   if (value !== undefined) {
     console.warn(scope + ': "' + previous +
-			'" is deprecated. Please use "' + current + '" instead');
+      '" is deprecated. Please use "' + current + '" instead');
   }
 }
+
 const emptyString = '';
 const dot = '.';
+
 function indexOfDotOrLength(key, start) {
   const idx = key.indexOf(dot, start);
   return idx === -1 ? key.length : idx;
 }
+
 function resolveObjectKey(obj, key) {
   if (key === emptyString) {
     return obj;
@@ -218,9 +244,11 @@ function resolveObjectKey(obj, key) {
   }
   return obj;
 }
+
 function _capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
 const defined = (value) => typeof value !== 'undefined';
 const isFunction = (value) => typeof value === 'function';
 const setsEqual = (a, b) => {
@@ -234,6 +262,7 @@ const setsEqual = (a, b) => {
   }
   return true;
 };
+
 function _isClickEvent(e) {
   return e.type === 'mouseup' || e.type === 'click' || e.type === 'contextmenu';
 }
@@ -248,6 +277,7 @@ const QUARTER_PI = PI / 4;
 const TWO_THIRDS_PI = PI * 2 / 3;
 const log10 = Math.log10;
 const sign = Math.sign;
+
 function niceNum(range) {
   const roundedRange = Math.round(range);
   range = almostEquals(range, roundedRange, range / 1000) ? roundedRange : range;
@@ -256,6 +286,7 @@ function niceNum(range) {
   const niceFraction = fraction <= 1 ? 1 : fraction <= 2 ? 2 : fraction <= 5 ? 5 : 10;
   return niceFraction * niceRange;
 }
+
 function _factorize(value) {
   const result = [];
   const sqrt = Math.sqrt(value);
@@ -272,16 +303,20 @@ function _factorize(value) {
   result.sort((a, b) => a - b).pop();
   return result;
 }
+
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
 function almostEquals(x, y, epsilon) {
   return Math.abs(x - y) < epsilon;
 }
+
 function almostWhole(x, epsilon) {
   const rounded = Math.round(x);
   return ((rounded - epsilon) <= x) && ((rounded + epsilon) >= x);
 }
+
 function _setMinAndMaxByKey(array, target, property) {
   let i, ilen, value;
   for (i = 0, ilen = array.length; i < ilen; i++) {
@@ -292,12 +327,15 @@ function _setMinAndMaxByKey(array, target, property) {
     }
   }
 }
+
 function toRadians(degrees) {
   return degrees * (PI / 180);
 }
+
 function toDegrees(radians) {
   return radians * (180 / PI);
 }
+
 function _decimalPlaces(x) {
   if (!isNumberFinite(x)) {
     return;
@@ -310,6 +348,7 @@ function _decimalPlaces(x) {
   }
   return p;
 }
+
 function getAngleFromPoint(centrePoint, anglePoint) {
   const distanceFromXCenter = anglePoint.x - centrePoint.x;
   const distanceFromYCenter = anglePoint.y - centrePoint.y;
@@ -323,15 +362,19 @@ function getAngleFromPoint(centrePoint, anglePoint) {
     distance: radialDistanceFromCenter
   };
 }
+
 function distanceBetweenPoints(pt1, pt2) {
   return Math.sqrt(Math.pow(pt2.x - pt1.x, 2) + Math.pow(pt2.y - pt1.y, 2));
 }
+
 function _angleDiff(a, b) {
   return (a - b + PITAU) % TAU - PI;
 }
+
 function _normalizeAngle(a) {
   return (a % TAU + TAU) % TAU;
 }
+
 function _angleBetween(angle, start, end, sameAngleIsFullCircle) {
   const a = _normalizeAngle(angle);
   const s = _normalizeAngle(start);
@@ -343,12 +386,15 @@ function _angleBetween(angle, start, end, sameAngleIsFullCircle) {
   return a === s || a === e || (sameAngleIsFullCircle && s === e)
     || (angleToStart > angleToEnd && startToAngle < endToAngle);
 }
+
 function _limitValue(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
+
 function _int16Range(value) {
   return _limitValue(value, -32768, 32767);
 }
+
 function _isBetween(value, start, end, epsilon = 1e-6) {
   return value >= Math.min(start, end) - epsilon && value <= Math.max(start, end) + epsilon;
 }
@@ -442,559 +488,637 @@ const effects = {
  * (c) 2020 Jukka Kurkela
  * Released under the MIT License
  */
-const map = {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, A: 10, B: 11, C: 12, D: 13, E: 14, F: 15, a: 10, b: 11, c: 12, d: 13, e: 14, f: 15};
+const map = {
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  A: 10,
+  B: 11,
+  C: 12,
+  D: 13,
+  E: 14,
+  F: 15,
+  a: 10,
+  b: 11,
+  c: 12,
+  d: 13,
+  e: 14,
+  f: 15
+};
 const hex = '0123456789ABCDEF';
 const h1 = (b) => hex[b & 0xF];
 const h2 = (b) => hex[(b & 0xF0) >> 4] + hex[b & 0xF];
 const eq = (b) => (((b & 0xF0) >> 4) === (b & 0xF));
+
 function isShort(v) {
-	return eq(v.r) && eq(v.g) && eq(v.b) && eq(v.a);
+  return eq(v.r) && eq(v.g) && eq(v.b) && eq(v.a);
 }
+
 function hexParse(str) {
-	var len = str.length;
-	var ret;
-	if (str[0] === '#') {
-		if (len === 4 || len === 5) {
-			ret = {
-				r: 255 & map[str[1]] * 17,
-				g: 255 & map[str[2]] * 17,
-				b: 255 & map[str[3]] * 17,
-				a: len === 5 ? map[str[4]] * 17 : 255
-			};
-		} else if (len === 7 || len === 9) {
-			ret = {
-				r: map[str[1]] << 4 | map[str[2]],
-				g: map[str[3]] << 4 | map[str[4]],
-				b: map[str[5]] << 4 | map[str[6]],
-				a: len === 9 ? (map[str[7]] << 4 | map[str[8]]) : 255
-			};
-		}
-	}
-	return ret;
+  var len = str.length;
+  var ret;
+  if (str[0] === '#') {
+    if (len === 4 || len === 5) {
+      ret = {
+        r: 255 & map[str[1]] * 17,
+        g: 255 & map[str[2]] * 17,
+        b: 255 & map[str[3]] * 17,
+        a: len === 5 ? map[str[4]] * 17 : 255
+      };
+    } else if (len === 7 || len === 9) {
+      ret = {
+        r: map[str[1]] << 4 | map[str[2]],
+        g: map[str[3]] << 4 | map[str[4]],
+        b: map[str[5]] << 4 | map[str[6]],
+        a: len === 9 ? (map[str[7]] << 4 | map[str[8]]) : 255
+      };
+    }
+  }
+  return ret;
 }
+
 function hexString(v) {
-	var f = isShort(v) ? h1 : h2;
-	return v
-		? '#' + f(v.r) + f(v.g) + f(v.b) + (v.a < 255 ? f(v.a) : '')
-		: v;
+  var f = isShort(v) ? h1 : h2;
+  return v
+    ? '#' + f(v.r) + f(v.g) + f(v.b) + (v.a < 255 ? f(v.a) : '')
+    : v;
 }
+
 function round(v) {
-	return v + 0.5 | 0;
+  return v + 0.5 | 0;
 }
+
 const lim = (v, l, h) => Math.max(Math.min(v, h), l);
+
 function p2b(v) {
-	return lim(round(v * 2.55), 0, 255);
+  return lim(round(v * 2.55), 0, 255);
 }
+
 function n2b(v) {
-	return lim(round(v * 255), 0, 255);
+  return lim(round(v * 255), 0, 255);
 }
+
 function b2n(v) {
-	return lim(round(v / 2.55) / 100, 0, 1);
+  return lim(round(v / 2.55) / 100, 0, 1);
 }
+
 function n2p(v) {
-	return lim(round(v * 100), 0, 100);
+  return lim(round(v * 100), 0, 100);
 }
+
 const RGB_RE = /^rgba?\(\s*([-+.\d]+)(%)?[\s,]+([-+.e\d]+)(%)?[\s,]+([-+.e\d]+)(%)?(?:[\s,/]+([-+.e\d]+)(%)?)?\s*\)$/;
+
 function rgbParse(str) {
-	const m = RGB_RE.exec(str);
-	let a = 255;
-	let r, g, b;
-	if (!m) {
-		return;
-	}
-	if (m[7] !== r) {
-		const v = +m[7];
-		a = 255 & (m[8] ? p2b(v) : v * 255);
-	}
-	r = +m[1];
-	g = +m[3];
-	b = +m[5];
-	r = 255 & (m[2] ? p2b(r) : r);
-	g = 255 & (m[4] ? p2b(g) : g);
-	b = 255 & (m[6] ? p2b(b) : b);
-	return {
-		r: r,
-		g: g,
-		b: b,
-		a: a
-	};
+  const m = RGB_RE.exec(str);
+  let a = 255;
+  let r, g, b;
+  if (!m) {
+    return;
+  }
+  if (m[7] !== r) {
+    const v = +m[7];
+    a = 255 & (m[8] ? p2b(v) : v * 255);
+  }
+  r = +m[1];
+  g = +m[3];
+  b = +m[5];
+  r = 255 & (m[2] ? p2b(r) : r);
+  g = 255 & (m[4] ? p2b(g) : g);
+  b = 255 & (m[6] ? p2b(b) : b);
+  return {
+    r: r,
+    g: g,
+    b: b,
+    a: a
+  };
 }
+
 function rgbString(v) {
-	return v && (
-		v.a < 255
-			? `rgba(${v.r}, ${v.g}, ${v.b}, ${b2n(v.a)})`
-			: `rgb(${v.r}, ${v.g}, ${v.b})`
-	);
+  return v && (
+    v.a < 255
+      ? `rgba(${v.r}, ${v.g}, ${v.b}, ${b2n(v.a)})`
+      : `rgb(${v.r}, ${v.g}, ${v.b})`
+  );
 }
+
 const HUE_RE = /^(hsla?|hwb|hsv)\(\s*([-+.e\d]+)(?:deg)?[\s,]+([-+.e\d]+)%[\s,]+([-+.e\d]+)%(?:[\s,]+([-+.e\d]+)(%)?)?\s*\)$/;
+
 function hsl2rgbn(h, s, l) {
-	const a = s * Math.min(l, 1 - l);
-	const f = (n, k = (n + h / 30) % 12) => l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-	return [f(0), f(8), f(4)];
+  const a = s * Math.min(l, 1 - l);
+  const f = (n, k = (n + h / 30) % 12) => l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+  return [f(0), f(8), f(4)];
 }
+
 function hsv2rgbn(h, s, v) {
-	const f = (n, k = (n + h / 60) % 6) => v - v * s * Math.max(Math.min(k, 4 - k, 1), 0);
-	return [f(5), f(3), f(1)];
+  const f = (n, k = (n + h / 60) % 6) => v - v * s * Math.max(Math.min(k, 4 - k, 1), 0);
+  return [f(5), f(3), f(1)];
 }
+
 function hwb2rgbn(h, w, b) {
-	const rgb = hsl2rgbn(h, 1, 0.5);
-	let i;
-	if (w + b > 1) {
-		i = 1 / (w + b);
-		w *= i;
-		b *= i;
-	}
-	for (i = 0; i < 3; i++) {
-		rgb[i] *= 1 - w - b;
-		rgb[i] += w;
-	}
-	return rgb;
+  const rgb = hsl2rgbn(h, 1, 0.5);
+  let i;
+  if (w + b > 1) {
+    i = 1 / (w + b);
+    w *= i;
+    b *= i;
+  }
+  for (i = 0; i < 3; i++) {
+    rgb[i] *= 1 - w - b;
+    rgb[i] += w;
+  }
+  return rgb;
 }
+
 function rgb2hsl(v) {
-	const range = 255;
-	const r = v.r / range;
-	const g = v.g / range;
-	const b = v.b / range;
-	const max = Math.max(r, g, b);
-	const min = Math.min(r, g, b);
-	const l = (max + min) / 2;
-	let h, s, d;
-	if (max !== min) {
-		d = max - min;
-		s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-		h = max === r
-			? ((g - b) / d) + (g < b ? 6 : 0)
-			: max === g
-				? (b - r) / d + 2
-				: (r - g) / d + 4;
-		h = h * 60 + 0.5;
-	}
-	return [h | 0, s || 0, l];
+  const range = 255;
+  const r = v.r / range;
+  const g = v.g / range;
+  const b = v.b / range;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  let h, s, d;
+  if (max !== min) {
+    d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    h = max === r
+      ? ((g - b) / d) + (g < b ? 6 : 0)
+      : max === g
+        ? (b - r) / d + 2
+        : (r - g) / d + 4;
+    h = h * 60 + 0.5;
+  }
+  return [h | 0, s || 0, l];
 }
+
 function calln(f, a, b, c) {
-	return (
-		Array.isArray(a)
-			? f(a[0], a[1], a[2])
-			: f(a, b, c)
-	).map(n2b);
+  return (
+    Array.isArray(a)
+      ? f(a[0], a[1], a[2])
+      : f(a, b, c)
+  ).map(n2b);
 }
+
 function hsl2rgb(h, s, l) {
-	return calln(hsl2rgbn, h, s, l);
+  return calln(hsl2rgbn, h, s, l);
 }
+
 function hwb2rgb(h, w, b) {
-	return calln(hwb2rgbn, h, w, b);
+  return calln(hwb2rgbn, h, w, b);
 }
+
 function hsv2rgb(h, s, v) {
-	return calln(hsv2rgbn, h, s, v);
+  return calln(hsv2rgbn, h, s, v);
 }
+
 function hue(h) {
-	return (h % 360 + 360) % 360;
+  return (h % 360 + 360) % 360;
 }
+
 function hueParse(str) {
-	const m = HUE_RE.exec(str);
-	let a = 255;
-	let v;
-	if (!m) {
-		return;
-	}
-	if (m[5] !== v) {
-		a = m[6] ? p2b(+m[5]) : n2b(+m[5]);
-	}
-	const h = hue(+m[2]);
-	const p1 = +m[3] / 100;
-	const p2 = +m[4] / 100;
-	if (m[1] === 'hwb') {
-		v = hwb2rgb(h, p1, p2);
-	} else if (m[1] === 'hsv') {
-		v = hsv2rgb(h, p1, p2);
-	} else {
-		v = hsl2rgb(h, p1, p2);
-	}
-	return {
-		r: v[0],
-		g: v[1],
-		b: v[2],
-		a: a
-	};
+  const m = HUE_RE.exec(str);
+  let a = 255;
+  let v;
+  if (!m) {
+    return;
+  }
+  if (m[5] !== v) {
+    a = m[6] ? p2b(+m[5]) : n2b(+m[5]);
+  }
+  const h = hue(+m[2]);
+  const p1 = +m[3] / 100;
+  const p2 = +m[4] / 100;
+  if (m[1] === 'hwb') {
+    v = hwb2rgb(h, p1, p2);
+  } else if (m[1] === 'hsv') {
+    v = hsv2rgb(h, p1, p2);
+  } else {
+    v = hsl2rgb(h, p1, p2);
+  }
+  return {
+    r: v[0],
+    g: v[1],
+    b: v[2],
+    a: a
+  };
 }
+
 function rotate(v, deg) {
-	var h = rgb2hsl(v);
-	h[0] = hue(h[0] + deg);
-	h = hsl2rgb(h);
-	v.r = h[0];
-	v.g = h[1];
-	v.b = h[2];
+  var h = rgb2hsl(v);
+  h[0] = hue(h[0] + deg);
+  h = hsl2rgb(h);
+  v.r = h[0];
+  v.g = h[1];
+  v.b = h[2];
 }
+
 function hslString(v) {
-	if (!v) {
-		return;
-	}
-	const a = rgb2hsl(v);
-	const h = a[0];
-	const s = n2p(a[1]);
-	const l = n2p(a[2]);
-	return v.a < 255
-		? `hsla(${h}, ${s}%, ${l}%, ${b2n(v.a)})`
-		: `hsl(${h}, ${s}%, ${l}%)`;
+  if (!v) {
+    return;
+  }
+  const a = rgb2hsl(v);
+  const h = a[0];
+  const s = n2p(a[1]);
+  const l = n2p(a[2]);
+  return v.a < 255
+    ? `hsla(${h}, ${s}%, ${l}%, ${b2n(v.a)})`
+    : `hsl(${h}, ${s}%, ${l}%)`;
 }
+
 const map$1 = {
-	x: 'dark',
-	Z: 'light',
-	Y: 're',
-	X: 'blu',
-	W: 'gr',
-	V: 'medium',
-	U: 'slate',
-	A: 'ee',
-	T: 'ol',
-	S: 'or',
-	B: 'ra',
-	C: 'lateg',
-	D: 'ights',
-	R: 'in',
-	Q: 'turquois',
-	E: 'hi',
-	P: 'ro',
-	O: 'al',
-	N: 'le',
-	M: 'de',
-	L: 'yello',
-	F: 'en',
-	K: 'ch',
-	G: 'arks',
-	H: 'ea',
-	I: 'ightg',
-	J: 'wh'
+  x: 'dark',
+  Z: 'light',
+  Y: 're',
+  X: 'blu',
+  W: 'gr',
+  V: 'medium',
+  U: 'slate',
+  A: 'ee',
+  T: 'ol',
+  S: 'or',
+  B: 'ra',
+  C: 'lateg',
+  D: 'ights',
+  R: 'in',
+  Q: 'turquois',
+  E: 'hi',
+  P: 'ro',
+  O: 'al',
+  N: 'le',
+  M: 'de',
+  L: 'yello',
+  F: 'en',
+  K: 'ch',
+  G: 'arks',
+  H: 'ea',
+  I: 'ightg',
+  J: 'wh'
 };
 const names = {
-	OiceXe: 'f0f8ff',
-	antiquewEte: 'faebd7',
-	aqua: 'ffff',
-	aquamarRe: '7fffd4',
-	azuY: 'f0ffff',
-	beige: 'f5f5dc',
-	bisque: 'ffe4c4',
-	black: '0',
-	blanKedOmond: 'ffebcd',
-	Xe: 'ff',
-	XeviTet: '8a2be2',
-	bPwn: 'a52a2a',
-	burlywood: 'deb887',
-	caMtXe: '5f9ea0',
-	KartYuse: '7fff00',
-	KocTate: 'd2691e',
-	cSO: 'ff7f50',
-	cSnflowerXe: '6495ed',
-	cSnsilk: 'fff8dc',
-	crimson: 'dc143c',
-	cyan: 'ffff',
-	xXe: '8b',
-	xcyan: '8b8b',
-	xgTMnPd: 'b8860b',
-	xWay: 'a9a9a9',
-	xgYF: '6400',
-	xgYy: 'a9a9a9',
-	xkhaki: 'bdb76b',
-	xmagFta: '8b008b',
-	xTivegYF: '556b2f',
-	xSange: 'ff8c00',
-	xScEd: '9932cc',
-	xYd: '8b0000',
-	xsOmon: 'e9967a',
-	xsHgYF: '8fbc8f',
-	xUXe: '483d8b',
-	xUWay: '2f4f4f',
-	xUgYy: '2f4f4f',
-	xQe: 'ced1',
-	xviTet: '9400d3',
-	dAppRk: 'ff1493',
-	dApskyXe: 'bfff',
-	dimWay: '696969',
-	dimgYy: '696969',
-	dodgerXe: '1e90ff',
-	fiYbrick: 'b22222',
-	flSOwEte: 'fffaf0',
-	foYstWAn: '228b22',
-	fuKsia: 'ff00ff',
-	gaRsbSo: 'dcdcdc',
-	ghostwEte: 'f8f8ff',
-	gTd: 'ffd700',
-	gTMnPd: 'daa520',
-	Way: '808080',
-	gYF: '8000',
-	gYFLw: 'adff2f',
-	gYy: '808080',
-	honeyMw: 'f0fff0',
-	hotpRk: 'ff69b4',
-	RdianYd: 'cd5c5c',
-	Rdigo: '4b0082',
-	ivSy: 'fffff0',
-	khaki: 'f0e68c',
-	lavFMr: 'e6e6fa',
-	lavFMrXsh: 'fff0f5',
-	lawngYF: '7cfc00',
-	NmoncEffon: 'fffacd',
-	ZXe: 'add8e6',
-	ZcSO: 'f08080',
-	Zcyan: 'e0ffff',
-	ZgTMnPdLw: 'fafad2',
-	ZWay: 'd3d3d3',
-	ZgYF: '90ee90',
-	ZgYy: 'd3d3d3',
-	ZpRk: 'ffb6c1',
-	ZsOmon: 'ffa07a',
-	ZsHgYF: '20b2aa',
-	ZskyXe: '87cefa',
-	ZUWay: '778899',
-	ZUgYy: '778899',
-	ZstAlXe: 'b0c4de',
-	ZLw: 'ffffe0',
-	lime: 'ff00',
-	limegYF: '32cd32',
-	lRF: 'faf0e6',
-	magFta: 'ff00ff',
-	maPon: '800000',
-	VaquamarRe: '66cdaa',
-	VXe: 'cd',
-	VScEd: 'ba55d3',
-	VpurpN: '9370db',
-	VsHgYF: '3cb371',
-	VUXe: '7b68ee',
-	VsprRggYF: 'fa9a',
-	VQe: '48d1cc',
-	VviTetYd: 'c71585',
-	midnightXe: '191970',
-	mRtcYam: 'f5fffa',
-	mistyPse: 'ffe4e1',
-	moccasR: 'ffe4b5',
-	navajowEte: 'ffdead',
-	navy: '80',
-	Tdlace: 'fdf5e6',
-	Tive: '808000',
-	TivedBb: '6b8e23',
-	Sange: 'ffa500',
-	SangeYd: 'ff4500',
-	ScEd: 'da70d6',
-	pOegTMnPd: 'eee8aa',
-	pOegYF: '98fb98',
-	pOeQe: 'afeeee',
-	pOeviTetYd: 'db7093',
-	papayawEp: 'ffefd5',
-	pHKpuff: 'ffdab9',
-	peru: 'cd853f',
-	pRk: 'ffc0cb',
-	plum: 'dda0dd',
-	powMrXe: 'b0e0e6',
-	purpN: '800080',
-	YbeccapurpN: '663399',
-	Yd: 'ff0000',
-	Psybrown: 'bc8f8f',
-	PyOXe: '4169e1',
-	saddNbPwn: '8b4513',
-	sOmon: 'fa8072',
-	sandybPwn: 'f4a460',
-	sHgYF: '2e8b57',
-	sHshell: 'fff5ee',
-	siFna: 'a0522d',
-	silver: 'c0c0c0',
-	skyXe: '87ceeb',
-	UXe: '6a5acd',
-	UWay: '708090',
-	UgYy: '708090',
-	snow: 'fffafa',
-	sprRggYF: 'ff7f',
-	stAlXe: '4682b4',
-	tan: 'd2b48c',
-	teO: '8080',
-	tEstN: 'd8bfd8',
-	tomato: 'ff6347',
-	Qe: '40e0d0',
-	viTet: 'ee82ee',
-	JHt: 'f5deb3',
-	wEte: 'ffffff',
-	wEtesmoke: 'f5f5f5',
-	Lw: 'ffff00',
-	LwgYF: '9acd32'
+  OiceXe: 'f0f8ff',
+  antiquewEte: 'faebd7',
+  aqua: 'ffff',
+  aquamarRe: '7fffd4',
+  azuY: 'f0ffff',
+  beige: 'f5f5dc',
+  bisque: 'ffe4c4',
+  black: '0',
+  blanKedOmond: 'ffebcd',
+  Xe: 'ff',
+  XeviTet: '8a2be2',
+  bPwn: 'a52a2a',
+  burlywood: 'deb887',
+  caMtXe: '5f9ea0',
+  KartYuse: '7fff00',
+  KocTate: 'd2691e',
+  cSO: 'ff7f50',
+  cSnflowerXe: '6495ed',
+  cSnsilk: 'fff8dc',
+  crimson: 'dc143c',
+  cyan: 'ffff',
+  xXe: '8b',
+  xcyan: '8b8b',
+  xgTMnPd: 'b8860b',
+  xWay: 'a9a9a9',
+  xgYF: '6400',
+  xgYy: 'a9a9a9',
+  xkhaki: 'bdb76b',
+  xmagFta: '8b008b',
+  xTivegYF: '556b2f',
+  xSange: 'ff8c00',
+  xScEd: '9932cc',
+  xYd: '8b0000',
+  xsOmon: 'e9967a',
+  xsHgYF: '8fbc8f',
+  xUXe: '483d8b',
+  xUWay: '2f4f4f',
+  xUgYy: '2f4f4f',
+  xQe: 'ced1',
+  xviTet: '9400d3',
+  dAppRk: 'ff1493',
+  dApskyXe: 'bfff',
+  dimWay: '696969',
+  dimgYy: '696969',
+  dodgerXe: '1e90ff',
+  fiYbrick: 'b22222',
+  flSOwEte: 'fffaf0',
+  foYstWAn: '228b22',
+  fuKsia: 'ff00ff',
+  gaRsbSo: 'dcdcdc',
+  ghostwEte: 'f8f8ff',
+  gTd: 'ffd700',
+  gTMnPd: 'daa520',
+  Way: '808080',
+  gYF: '8000',
+  gYFLw: 'adff2f',
+  gYy: '808080',
+  honeyMw: 'f0fff0',
+  hotpRk: 'ff69b4',
+  RdianYd: 'cd5c5c',
+  Rdigo: '4b0082',
+  ivSy: 'fffff0',
+  khaki: 'f0e68c',
+  lavFMr: 'e6e6fa',
+  lavFMrXsh: 'fff0f5',
+  lawngYF: '7cfc00',
+  NmoncEffon: 'fffacd',
+  ZXe: 'add8e6',
+  ZcSO: 'f08080',
+  Zcyan: 'e0ffff',
+  ZgTMnPdLw: 'fafad2',
+  ZWay: 'd3d3d3',
+  ZgYF: '90ee90',
+  ZgYy: 'd3d3d3',
+  ZpRk: 'ffb6c1',
+  ZsOmon: 'ffa07a',
+  ZsHgYF: '20b2aa',
+  ZskyXe: '87cefa',
+  ZUWay: '778899',
+  ZUgYy: '778899',
+  ZstAlXe: 'b0c4de',
+  ZLw: 'ffffe0',
+  lime: 'ff00',
+  limegYF: '32cd32',
+  lRF: 'faf0e6',
+  magFta: 'ff00ff',
+  maPon: '800000',
+  VaquamarRe: '66cdaa',
+  VXe: 'cd',
+  VScEd: 'ba55d3',
+  VpurpN: '9370db',
+  VsHgYF: '3cb371',
+  VUXe: '7b68ee',
+  VsprRggYF: 'fa9a',
+  VQe: '48d1cc',
+  VviTetYd: 'c71585',
+  midnightXe: '191970',
+  mRtcYam: 'f5fffa',
+  mistyPse: 'ffe4e1',
+  moccasR: 'ffe4b5',
+  navajowEte: 'ffdead',
+  navy: '80',
+  Tdlace: 'fdf5e6',
+  Tive: '808000',
+  TivedBb: '6b8e23',
+  Sange: 'ffa500',
+  SangeYd: 'ff4500',
+  ScEd: 'da70d6',
+  pOegTMnPd: 'eee8aa',
+  pOegYF: '98fb98',
+  pOeQe: 'afeeee',
+  pOeviTetYd: 'db7093',
+  papayawEp: 'ffefd5',
+  pHKpuff: 'ffdab9',
+  peru: 'cd853f',
+  pRk: 'ffc0cb',
+  plum: 'dda0dd',
+  powMrXe: 'b0e0e6',
+  purpN: '800080',
+  YbeccapurpN: '663399',
+  Yd: 'ff0000',
+  Psybrown: 'bc8f8f',
+  PyOXe: '4169e1',
+  saddNbPwn: '8b4513',
+  sOmon: 'fa8072',
+  sandybPwn: 'f4a460',
+  sHgYF: '2e8b57',
+  sHshell: 'fff5ee',
+  siFna: 'a0522d',
+  silver: 'c0c0c0',
+  skyXe: '87ceeb',
+  UXe: '6a5acd',
+  UWay: '708090',
+  UgYy: '708090',
+  snow: 'fffafa',
+  sprRggYF: 'ff7f',
+  stAlXe: '4682b4',
+  tan: 'd2b48c',
+  teO: '8080',
+  tEstN: 'd8bfd8',
+  tomato: 'ff6347',
+  Qe: '40e0d0',
+  viTet: 'ee82ee',
+  JHt: 'f5deb3',
+  wEte: 'ffffff',
+  wEtesmoke: 'f5f5f5',
+  Lw: 'ffff00',
+  LwgYF: '9acd32'
 };
+
 function unpack() {
-	const unpacked = {};
-	const keys = Object.keys(names);
-	const tkeys = Object.keys(map$1);
-	let i, j, k, ok, nk;
-	for (i = 0; i < keys.length; i++) {
-		ok = nk = keys[i];
-		for (j = 0; j < tkeys.length; j++) {
-			k = tkeys[j];
-			nk = nk.replace(k, map$1[k]);
-		}
-		k = parseInt(names[ok], 16);
-		unpacked[nk] = [k >> 16 & 0xFF, k >> 8 & 0xFF, k & 0xFF];
-	}
-	return unpacked;
+  const unpacked = {};
+  const keys = Object.keys(names);
+  const tkeys = Object.keys(map$1);
+  let i, j, k, ok, nk;
+  for (i = 0; i < keys.length; i++) {
+    ok = nk = keys[i];
+    for (j = 0; j < tkeys.length; j++) {
+      k = tkeys[j];
+      nk = nk.replace(k, map$1[k]);
+    }
+    k = parseInt(names[ok], 16);
+    unpacked[nk] = [k >> 16 & 0xFF, k >> 8 & 0xFF, k & 0xFF];
+  }
+  return unpacked;
 }
+
 let names$1;
+
 function nameParse(str) {
-	if (!names$1) {
-		names$1 = unpack();
-		names$1.transparent = [0, 0, 0, 0];
-	}
-	const a = names$1[str.toLowerCase()];
-	return a && {
-		r: a[0],
-		g: a[1],
-		b: a[2],
-		a: a.length === 4 ? a[3] : 255
-	};
+  if (!names$1) {
+    names$1 = unpack();
+    names$1.transparent = [0, 0, 0, 0];
+  }
+  const a = names$1[str.toLowerCase()];
+  return a && {
+    r: a[0],
+    g: a[1],
+    b: a[2],
+    a: a.length === 4 ? a[3] : 255
+  };
 }
+
 function modHSL(v, i, ratio) {
-	if (v) {
-		let tmp = rgb2hsl(v);
-		tmp[i] = Math.max(0, Math.min(tmp[i] + tmp[i] * ratio, i === 0 ? 360 : 1));
-		tmp = hsl2rgb(tmp);
-		v.r = tmp[0];
-		v.g = tmp[1];
-		v.b = tmp[2];
-	}
+  if (v) {
+    let tmp = rgb2hsl(v);
+    tmp[i] = Math.max(0, Math.min(tmp[i] + tmp[i] * ratio, i === 0 ? 360 : 1));
+    tmp = hsl2rgb(tmp);
+    v.r = tmp[0];
+    v.g = tmp[1];
+    v.b = tmp[2];
+  }
 }
+
 function clone(v, proto) {
-	return v ? Object.assign(proto || {}, v) : v;
+  return v ? Object.assign(proto || {}, v) : v;
 }
+
 function fromObject(input) {
-	var v = {r: 0, g: 0, b: 0, a: 255};
-	if (Array.isArray(input)) {
-		if (input.length >= 3) {
-			v = {r: input[0], g: input[1], b: input[2], a: 255};
-			if (input.length > 3) {
-				v.a = n2b(input[3]);
-			}
-		}
-	} else {
-		v = clone(input, {r: 0, g: 0, b: 0, a: 1});
-		v.a = n2b(v.a);
-	}
-	return v;
+  var v = {r: 0, g: 0, b: 0, a: 255};
+  if (Array.isArray(input)) {
+    if (input.length >= 3) {
+      v = {r: input[0], g: input[1], b: input[2], a: 255};
+      if (input.length > 3) {
+        v.a = n2b(input[3]);
+      }
+    }
+  } else {
+    v = clone(input, {r: 0, g: 0, b: 0, a: 1});
+    v.a = n2b(v.a);
+  }
+  return v;
 }
+
 function functionParse(str) {
-	if (str.charAt(0) === 'r') {
-		return rgbParse(str);
-	}
-	return hueParse(str);
+  if (str.charAt(0) === 'r') {
+    return rgbParse(str);
+  }
+  return hueParse(str);
 }
+
 class Color {
-	constructor(input) {
-		if (input instanceof Color) {
-			return input;
-		}
-		const type = typeof input;
-		let v;
-		if (type === 'object') {
-			v = fromObject(input);
-		} else if (type === 'string') {
-			v = hexParse(input) || nameParse(input) || functionParse(input);
-		}
-		this._rgb = v;
-		this._valid = !!v;
-	}
-	get valid() {
-		return this._valid;
-	}
-	get rgb() {
-		var v = clone(this._rgb);
-		if (v) {
-			v.a = b2n(v.a);
-		}
-		return v;
-	}
-	set rgb(obj) {
-		this._rgb = fromObject(obj);
-	}
-	rgbString() {
-		return this._valid ? rgbString(this._rgb) : this._rgb;
-	}
-	hexString() {
-		return this._valid ? hexString(this._rgb) : this._rgb;
-	}
-	hslString() {
-		return this._valid ? hslString(this._rgb) : this._rgb;
-	}
-	mix(color, weight) {
-		const me = this;
-		if (color) {
-			const c1 = me.rgb;
-			const c2 = color.rgb;
-			let w2;
-			const p = weight === w2 ? 0.5 : weight;
-			const w = 2 * p - 1;
-			const a = c1.a - c2.a;
-			const w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
-			w2 = 1 - w1;
-			c1.r = 0xFF & w1 * c1.r + w2 * c2.r + 0.5;
-			c1.g = 0xFF & w1 * c1.g + w2 * c2.g + 0.5;
-			c1.b = 0xFF & w1 * c1.b + w2 * c2.b + 0.5;
-			c1.a = p * c1.a + (1 - p) * c2.a;
-			me.rgb = c1;
-		}
-		return me;
-	}
-	clone() {
-		return new Color(this.rgb);
-	}
-	alpha(a) {
-		this._rgb.a = n2b(a);
-		return this;
-	}
-	clearer(ratio) {
-		const rgb = this._rgb;
-		rgb.a *= 1 - ratio;
-		return this;
-	}
-	greyscale() {
-		const rgb = this._rgb;
-		const val = round(rgb.r * 0.3 + rgb.g * 0.59 + rgb.b * 0.11);
-		rgb.r = rgb.g = rgb.b = val;
-		return this;
-	}
-	opaquer(ratio) {
-		const rgb = this._rgb;
-		rgb.a *= 1 + ratio;
-		return this;
-	}
-	negate() {
-		const v = this._rgb;
-		v.r = 255 - v.r;
-		v.g = 255 - v.g;
-		v.b = 255 - v.b;
-		return this;
-	}
-	lighten(ratio) {
-		modHSL(this._rgb, 2, ratio);
-		return this;
-	}
-	darken(ratio) {
-		modHSL(this._rgb, 2, -ratio);
-		return this;
-	}
-	saturate(ratio) {
-		modHSL(this._rgb, 1, ratio);
-		return this;
-	}
-	desaturate(ratio) {
-		modHSL(this._rgb, 1, -ratio);
-		return this;
-	}
-	rotate(deg) {
-		rotate(this._rgb, deg);
-		return this;
-	}
+  constructor(input) {
+    if (input instanceof Color) {
+      return input;
+    }
+    const type = typeof input;
+    let v;
+    if (type === 'object') {
+      v = fromObject(input);
+    } else if (type === 'string') {
+      v = hexParse(input) || nameParse(input) || functionParse(input);
+    }
+    this._rgb = v;
+    this._valid = !!v;
+  }
+
+  get valid() {
+    return this._valid;
+  }
+
+  get rgb() {
+    var v = clone(this._rgb);
+    if (v) {
+      v.a = b2n(v.a);
+    }
+    return v;
+  }
+
+  set rgb(obj) {
+    this._rgb = fromObject(obj);
+  }
+
+  rgbString() {
+    return this._valid ? rgbString(this._rgb) : this._rgb;
+  }
+
+  hexString() {
+    return this._valid ? hexString(this._rgb) : this._rgb;
+  }
+
+  hslString() {
+    return this._valid ? hslString(this._rgb) : this._rgb;
+  }
+
+  mix(color, weight) {
+    const me = this;
+    if (color) {
+      const c1 = me.rgb;
+      const c2 = color.rgb;
+      let w2;
+      const p = weight === w2 ? 0.5 : weight;
+      const w = 2 * p - 1;
+      const a = c1.a - c2.a;
+      const w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2.0;
+      w2 = 1 - w1;
+      c1.r = 0xFF & w1 * c1.r + w2 * c2.r + 0.5;
+      c1.g = 0xFF & w1 * c1.g + w2 * c2.g + 0.5;
+      c1.b = 0xFF & w1 * c1.b + w2 * c2.b + 0.5;
+      c1.a = p * c1.a + (1 - p) * c2.a;
+      me.rgb = c1;
+    }
+    return me;
+  }
+
+  clone() {
+    return new Color(this.rgb);
+  }
+
+  alpha(a) {
+    this._rgb.a = n2b(a);
+    return this;
+  }
+
+  clearer(ratio) {
+    const rgb = this._rgb;
+    rgb.a *= 1 - ratio;
+    return this;
+  }
+
+  greyscale() {
+    const rgb = this._rgb;
+    const val = round(rgb.r * 0.3 + rgb.g * 0.59 + rgb.b * 0.11);
+    rgb.r = rgb.g = rgb.b = val;
+    return this;
+  }
+
+  opaquer(ratio) {
+    const rgb = this._rgb;
+    rgb.a *= 1 + ratio;
+    return this;
+  }
+
+  negate() {
+    const v = this._rgb;
+    v.r = 255 - v.r;
+    v.g = 255 - v.g;
+    v.b = 255 - v.b;
+    return this;
+  }
+
+  lighten(ratio) {
+    modHSL(this._rgb, 2, ratio);
+    return this;
+  }
+
+  darken(ratio) {
+    modHSL(this._rgb, 2, -ratio);
+    return this;
+  }
+
+  saturate(ratio) {
+    modHSL(this._rgb, 1, ratio);
+    return this;
+  }
+
+  desaturate(ratio) {
+    modHSL(this._rgb, 1, -ratio);
+    return this;
+  }
+
+  rotate(deg) {
+    rotate(this._rgb, deg);
+    return this;
+  }
 }
+
 function index_esm(input) {
-	return new Color(input);
+  return new Color(input);
 }
 
 const isPatternOrGradient = (value) => value instanceof CanvasGradient || value instanceof CanvasPattern;
+
 function color(value) {
   return isPatternOrGradient(value) ? value : index_esm(value);
 }
+
 function getHoverColor(value) {
   return isPatternOrGradient(value)
     ? value
@@ -1003,6 +1127,7 @@ function getHoverColor(value) {
 
 const overrides = Object.create(null);
 const descriptors = Object.create(null);
+
 function getScope$1(node, key) {
   if (!key) {
     return node;
@@ -1014,12 +1139,14 @@ function getScope$1(node, key) {
   }
   return node;
 }
+
 function set(root, scope, values) {
   if (typeof scope === 'string') {
     return merge(getScope$1(root, scope), values);
   }
   return merge(getScope$1(root, ''), scope);
 }
+
 class Defaults {
   constructor(_descriptors) {
     this.animation = undefined;
@@ -1064,18 +1191,23 @@ class Defaults {
     this.drawActiveElementsOnTop = true;
     this.describe(_descriptors);
   }
+
   set(scope, values) {
     return set(this, scope, values);
   }
+
   get(scope) {
     return getScope$1(this, scope);
   }
+
   describe(scope, values) {
     return set(descriptors, scope, values);
   }
+
   override(scope, values) {
     return set(overrides, scope, values);
   }
+
   route(scope, name, targetScope, targetName) {
     const scopeObject = getScope$1(this, scope);
     const targetScopeObject = getScope$1(this, targetScope);
@@ -1102,6 +1234,7 @@ class Defaults {
     });
   }
 }
+
 var defaults = new Defaults({
   _scriptable: (name) => !name.startsWith('on'),
   _indexable: (name) => name !== 'events',
@@ -1119,10 +1252,11 @@ function toFontString(font) {
     return null;
   }
   return (font.style ? font.style + ' ' : '')
-		+ (font.weight ? font.weight + ' ' : '')
-		+ font.size + 'px '
-		+ font.family;
+    + (font.weight ? font.weight + ' ' : '')
+    + font.size + 'px '
+    + font.family;
 }
+
 function _measureText(ctx, data, gc, longest, string) {
   let textWidth = data[string];
   if (!textWidth) {
@@ -1134,6 +1268,7 @@ function _measureText(ctx, data, gc, longest, string) {
   }
   return longest;
 }
+
 function _longestText(ctx, font, arrayOfThings, cache) {
   cache = cache || {};
   let data = cache.data = cache.data || {};
@@ -1171,11 +1306,13 @@ function _longestText(ctx, font, arrayOfThings, cache) {
   }
   return longest;
 }
+
 function _alignPixel(chart, pixel, width) {
   const devicePixelRatio = chart.currentDevicePixelRatio;
   const halfWidth = width !== 0 ? Math.max(width / 2, 0.5) : 0;
   return Math.round((pixel - halfWidth) * devicePixelRatio) / devicePixelRatio + halfWidth;
 }
+
 function clearCanvas(canvas, ctx) {
   ctx = ctx || canvas.getContext('2d');
   ctx.save();
@@ -1183,6 +1320,7 @@ function clearCanvas(canvas, ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.restore();
 }
+
 function drawPoint(ctx, options, x, y) {
   let type, xOffset, yOffset, size, cornerRadius;
   const style = options.pointStyle;
@@ -1205,100 +1343,104 @@ function drawPoint(ctx, options, x, y) {
   }
   ctx.beginPath();
   switch (style) {
-  default:
-    ctx.arc(x, y, radius, 0, TAU);
-    ctx.closePath();
-    break;
-  case 'triangle':
-    ctx.moveTo(x + Math.sin(rad) * radius, y - Math.cos(rad) * radius);
-    rad += TWO_THIRDS_PI;
-    ctx.lineTo(x + Math.sin(rad) * radius, y - Math.cos(rad) * radius);
-    rad += TWO_THIRDS_PI;
-    ctx.lineTo(x + Math.sin(rad) * radius, y - Math.cos(rad) * radius);
-    ctx.closePath();
-    break;
-  case 'rectRounded':
-    cornerRadius = radius * 0.516;
-    size = radius - cornerRadius;
-    xOffset = Math.cos(rad + QUARTER_PI) * size;
-    yOffset = Math.sin(rad + QUARTER_PI) * size;
-    ctx.arc(x - xOffset, y - yOffset, cornerRadius, rad - PI, rad - HALF_PI);
-    ctx.arc(x + yOffset, y - xOffset, cornerRadius, rad - HALF_PI, rad);
-    ctx.arc(x + xOffset, y + yOffset, cornerRadius, rad, rad + HALF_PI);
-    ctx.arc(x - yOffset, y + xOffset, cornerRadius, rad + HALF_PI, rad + PI);
-    ctx.closePath();
-    break;
-  case 'rect':
-    if (!rotation) {
-      size = Math.SQRT1_2 * radius;
-      ctx.rect(x - size, y - size, 2 * size, 2 * size);
+    default:
+      ctx.arc(x, y, radius, 0, TAU);
+      ctx.closePath();
       break;
-    }
-    rad += QUARTER_PI;
-  case 'rectRot':
-    xOffset = Math.cos(rad) * radius;
-    yOffset = Math.sin(rad) * radius;
-    ctx.moveTo(x - xOffset, y - yOffset);
-    ctx.lineTo(x + yOffset, y - xOffset);
-    ctx.lineTo(x + xOffset, y + yOffset);
-    ctx.lineTo(x - yOffset, y + xOffset);
-    ctx.closePath();
-    break;
-  case 'crossRot':
-    rad += QUARTER_PI;
-  case 'cross':
-    xOffset = Math.cos(rad) * radius;
-    yOffset = Math.sin(rad) * radius;
-    ctx.moveTo(x - xOffset, y - yOffset);
-    ctx.lineTo(x + xOffset, y + yOffset);
-    ctx.moveTo(x + yOffset, y - xOffset);
-    ctx.lineTo(x - yOffset, y + xOffset);
-    break;
-  case 'star':
-    xOffset = Math.cos(rad) * radius;
-    yOffset = Math.sin(rad) * radius;
-    ctx.moveTo(x - xOffset, y - yOffset);
-    ctx.lineTo(x + xOffset, y + yOffset);
-    ctx.moveTo(x + yOffset, y - xOffset);
-    ctx.lineTo(x - yOffset, y + xOffset);
-    rad += QUARTER_PI;
-    xOffset = Math.cos(rad) * radius;
-    yOffset = Math.sin(rad) * radius;
-    ctx.moveTo(x - xOffset, y - yOffset);
-    ctx.lineTo(x + xOffset, y + yOffset);
-    ctx.moveTo(x + yOffset, y - xOffset);
-    ctx.lineTo(x - yOffset, y + xOffset);
-    break;
-  case 'line':
-    xOffset = Math.cos(rad) * radius;
-    yOffset = Math.sin(rad) * radius;
-    ctx.moveTo(x - xOffset, y - yOffset);
-    ctx.lineTo(x + xOffset, y + yOffset);
-    break;
-  case 'dash':
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
-    break;
+    case 'triangle':
+      ctx.moveTo(x + Math.sin(rad) * radius, y - Math.cos(rad) * radius);
+      rad += TWO_THIRDS_PI;
+      ctx.lineTo(x + Math.sin(rad) * radius, y - Math.cos(rad) * radius);
+      rad += TWO_THIRDS_PI;
+      ctx.lineTo(x + Math.sin(rad) * radius, y - Math.cos(rad) * radius);
+      ctx.closePath();
+      break;
+    case 'rectRounded':
+      cornerRadius = radius * 0.516;
+      size = radius - cornerRadius;
+      xOffset = Math.cos(rad + QUARTER_PI) * size;
+      yOffset = Math.sin(rad + QUARTER_PI) * size;
+      ctx.arc(x - xOffset, y - yOffset, cornerRadius, rad - PI, rad - HALF_PI);
+      ctx.arc(x + yOffset, y - xOffset, cornerRadius, rad - HALF_PI, rad);
+      ctx.arc(x + xOffset, y + yOffset, cornerRadius, rad, rad + HALF_PI);
+      ctx.arc(x - yOffset, y + xOffset, cornerRadius, rad + HALF_PI, rad + PI);
+      ctx.closePath();
+      break;
+    case 'rect':
+      if (!rotation) {
+        size = Math.SQRT1_2 * radius;
+        ctx.rect(x - size, y - size, 2 * size, 2 * size);
+        break;
+      }
+      rad += QUARTER_PI;
+    case 'rectRot':
+      xOffset = Math.cos(rad) * radius;
+      yOffset = Math.sin(rad) * radius;
+      ctx.moveTo(x - xOffset, y - yOffset);
+      ctx.lineTo(x + yOffset, y - xOffset);
+      ctx.lineTo(x + xOffset, y + yOffset);
+      ctx.lineTo(x - yOffset, y + xOffset);
+      ctx.closePath();
+      break;
+    case 'crossRot':
+      rad += QUARTER_PI;
+    case 'cross':
+      xOffset = Math.cos(rad) * radius;
+      yOffset = Math.sin(rad) * radius;
+      ctx.moveTo(x - xOffset, y - yOffset);
+      ctx.lineTo(x + xOffset, y + yOffset);
+      ctx.moveTo(x + yOffset, y - xOffset);
+      ctx.lineTo(x - yOffset, y + xOffset);
+      break;
+    case 'star':
+      xOffset = Math.cos(rad) * radius;
+      yOffset = Math.sin(rad) * radius;
+      ctx.moveTo(x - xOffset, y - yOffset);
+      ctx.lineTo(x + xOffset, y + yOffset);
+      ctx.moveTo(x + yOffset, y - xOffset);
+      ctx.lineTo(x - yOffset, y + xOffset);
+      rad += QUARTER_PI;
+      xOffset = Math.cos(rad) * radius;
+      yOffset = Math.sin(rad) * radius;
+      ctx.moveTo(x - xOffset, y - yOffset);
+      ctx.lineTo(x + xOffset, y + yOffset);
+      ctx.moveTo(x + yOffset, y - xOffset);
+      ctx.lineTo(x - yOffset, y + xOffset);
+      break;
+    case 'line':
+      xOffset = Math.cos(rad) * radius;
+      yOffset = Math.sin(rad) * radius;
+      ctx.moveTo(x - xOffset, y - yOffset);
+      ctx.lineTo(x + xOffset, y + yOffset);
+      break;
+    case 'dash':
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(rad) * radius, y + Math.sin(rad) * radius);
+      break;
   }
   ctx.fill();
   if (options.borderWidth > 0) {
     ctx.stroke();
   }
 }
+
 function _isPointInArea(point, area, margin) {
   margin = margin || 0.5;
   return !area || (point && point.x > area.left - margin && point.x < area.right + margin &&
-		point.y > area.top - margin && point.y < area.bottom + margin);
+    point.y > area.top - margin && point.y < area.bottom + margin);
 }
+
 function clipArea(ctx, area) {
   ctx.save();
   ctx.beginPath();
   ctx.rect(area.left, area.top, area.right - area.left, area.bottom - area.top);
   ctx.clip();
 }
+
 function unclipArea(ctx) {
   ctx.restore();
 }
+
 function _steppedLineTo(ctx, previous, target, flip, mode) {
   if (!previous) {
     return ctx.lineTo(target.x, target.y);
@@ -1314,6 +1456,7 @@ function _steppedLineTo(ctx, previous, target, flip, mode) {
   }
   ctx.lineTo(target.x, target.y);
 }
+
 function _bezierCurveTo(ctx, previous, target, flip) {
   if (!previous) {
     return ctx.lineTo(target.x, target.y);
@@ -1326,6 +1469,7 @@ function _bezierCurveTo(ctx, previous, target, flip) {
     target.x,
     target.y);
 }
+
 function renderText(ctx, text, x, y, font, opts = {}) {
   const lines = isArray(text) ? text : [text];
   const stroke = opts.strokeWidth > 0 && opts.strokeColor !== '';
@@ -1350,6 +1494,7 @@ function renderText(ctx, text, x, y, font, opts = {}) {
   }
   ctx.restore();
 }
+
 function setRenderOpts(ctx, opts) {
   if (opts.translation) {
     ctx.translate(opts.translation[0], opts.translation[1]);
@@ -1367,6 +1512,7 @@ function setRenderOpts(ctx, opts) {
     ctx.textBaseline = opts.textBaseline;
   }
 }
+
 function decorateText(ctx, x, y, line, opts) {
   if (opts.strikethrough || opts.underline) {
     const metrics = ctx.measureText(line);
@@ -1383,6 +1529,7 @@ function decorateText(ctx, x, y, line, opts) {
     ctx.stroke();
   }
 }
+
 function addRoundedRectPath(ctx, rect) {
   const {x, y, w, h, radius} = rect;
   ctx.arc(x + radius.topLeft, y + radius.topLeft, radius.topLeft, -HALF_PI, PI, true);
@@ -1397,6 +1544,7 @@ function addRoundedRectPath(ctx, rect) {
 
 const LINE_HEIGHT = new RegExp(/^(normal|(\d+(?:\.\d+)?)(px|em|%)?)$/);
 const FONT_STYLE = new RegExp(/^(normal|italic|initial|inherit|unset|(oblique( -?[0-9]?[0-9]deg)?))$/);
+
 function toLineHeight(value, size) {
   const matches = ('' + value).match(LINE_HEIGHT);
   if (!matches || matches[1] === 'normal') {
@@ -1404,15 +1552,17 @@ function toLineHeight(value, size) {
   }
   value = +matches[2];
   switch (matches[3]) {
-  case 'px':
-    return value;
-  case '%':
-    value /= 100;
-    break;
+    case 'px':
+      return value;
+    case '%':
+      value /= 100;
+      break;
   }
   return size * value;
 }
+
 const numberOrZero = v => +v || 0;
+
 function _readValueToProps(value, props) {
   const ret = {};
   const objProps = isObject(props);
@@ -1427,18 +1577,22 @@ function _readValueToProps(value, props) {
   }
   return ret;
 }
+
 function toTRBL(value) {
   return _readValueToProps(value, {top: 'y', right: 'x', bottom: 'y', left: 'x'});
 }
+
 function toTRBLCorners(value) {
   return _readValueToProps(value, ['topLeft', 'topRight', 'bottomLeft', 'bottomRight']);
 }
+
 function toPadding(value) {
   const obj = toTRBL(value);
   obj.width = obj.left + obj.right;
   obj.height = obj.top + obj.bottom;
   return obj;
 }
+
 function toFont(options, fallback) {
   options = options || {};
   fallback = fallback || defaults.font;
@@ -1462,6 +1616,7 @@ function toFont(options, fallback) {
   font.string = toFontString(font);
   return font;
 }
+
 function resolve(inputs, context, index, info) {
   let cacheable = true;
   let i, ilen, value;
@@ -1486,6 +1641,7 @@ function resolve(inputs, context, index, info) {
     }
   }
 }
+
 function _addGrace(minmax, grace, beginAtZero) {
   const {min, max} = minmax;
   const change = toDimension(grace, (max - min) / 2);
@@ -1495,6 +1651,7 @@ function _addGrace(minmax, grace, beginAtZero) {
     max: keepZero(max, change)
   };
 }
+
 function createContext(parentContext, context) {
   return Object.assign(Object.create(parentContext), context);
 }
@@ -1514,10 +1671,12 @@ function _lookup(table, value, cmp) {
   }
   return {lo, hi};
 }
+
 const _lookupByKey = (table, key, value) =>
   _lookup(table, value, index => table[index][key] < value);
 const _rlookupByKey = (table, key, value) =>
   _lookup(table, value, index => table[index][key] >= value);
+
 function _filterBetween(values, min, max) {
   let start = 0;
   let end = values.length;
@@ -1531,7 +1690,9 @@ function _filterBetween(values, min, max) {
     ? values.slice(start, end)
     : values;
 }
+
 const arrayEvents = ['push', 'pop', 'shift', 'splice', 'unshift'];
+
 function listenArrayEvents(array, listener) {
   if (array._chartjs) {
     array._chartjs.listeners.push(listener);
@@ -1562,6 +1723,7 @@ function listenArrayEvents(array, listener) {
     });
   });
 }
+
 function unlistenArrayEvents(array, listener) {
   const stub = array._chartjs;
   if (!stub) {
@@ -1580,6 +1742,7 @@ function unlistenArrayEvents(array, listener) {
   });
   delete array._chartjs;
 }
+
 function _arrayUnique(items) {
   const set = new Set();
   let i, ilen;
@@ -1636,6 +1799,7 @@ function _createResolver(scopes, prefixes = [''], rootScopes = scopes, fallback,
     }
   });
 }
+
 function _attachContext(proxy, context, subProxy, descriptorDefaults) {
   const cache = {
     _cacheable: false,
@@ -1678,6 +1842,7 @@ function _attachContext(proxy, context, subProxy, descriptorDefaults) {
     }
   });
 }
+
 function _descriptors(proxy, defaults = {scriptable: true, indexable: true}) {
   const {_scriptable = defaults.scriptable, _indexable = defaults.indexable, _allKeys = defaults.allKeys} = proxy;
   return {
@@ -1688,9 +1853,11 @@ function _descriptors(proxy, defaults = {scriptable: true, indexable: true}) {
     isIndexable: isFunction(_indexable) ? _indexable : () => _indexable
   };
 }
+
 const readKey = (prefix, name) => prefix ? prefix + _capitalize(name) : name;
 const needsSubResolver = (prop, value) => isObject(value) && prop !== 'adapters' &&
   (Object.getPrototypeOf(value) === null || value.constructor === Object);
+
 function _cached(target, prop, resolve) {
   if (Object.prototype.hasOwnProperty.call(target, prop)) {
     return target[prop];
@@ -1699,6 +1866,7 @@ function _cached(target, prop, resolve) {
   target[prop] = value;
   return value;
 }
+
 function _resolveWithContext(target, prop, receiver) {
   const {_proxy, _context, _subProxy, _descriptors: descriptors} = target;
   let value = _proxy[prop];
@@ -1713,6 +1881,7 @@ function _resolveWithContext(target, prop, receiver) {
   }
   return value;
 }
+
 function _resolveScriptable(prop, value, target, receiver) {
   const {_proxy, _context, _subProxy, _stack} = target;
   if (_stack.has(prop)) {
@@ -1726,6 +1895,7 @@ function _resolveScriptable(prop, value, target, receiver) {
   }
   return value;
 }
+
 function _resolveArray(prop, value, target, isIndexable) {
   const {_proxy, _context, _subProxy, _descriptors: descriptors} = target;
   if (defined(_context.index) && isIndexable(prop)) {
@@ -1741,11 +1911,14 @@ function _resolveArray(prop, value, target, isIndexable) {
   }
   return value;
 }
+
 function resolveFallback(fallback, prop, value) {
   return isFunction(fallback) ? fallback(prop, value) : fallback;
 }
+
 const getScope = (key, parent) => key === true ? parent
   : typeof key === 'string' ? resolveObjectKey(parent, key) : undefined;
+
 function addScopes(set, parentScopes, key, parentFallback, value) {
   for (const parent of parentScopes) {
     const scope = getScope(key, parent);
@@ -1761,6 +1934,7 @@ function addScopes(set, parentScopes, key, parentFallback, value) {
   }
   return false;
 }
+
 function createSubResolver(parentScopes, resolver, prop, value) {
   const rootScopes = resolver._rootScopes;
   const fallback = resolveFallback(resolver._fallback, prop, value);
@@ -1780,12 +1954,14 @@ function createSubResolver(parentScopes, resolver, prop, value) {
   return _createResolver(Array.from(set), [''], rootScopes, fallback,
     () => subGetTarget(resolver, prop, value));
 }
+
 function addScopesFromKey(set, allScopes, key, fallback, item) {
   while (key) {
     key = addScopes(set, allScopes, key, fallback, item);
   }
   return key;
 }
+
 function subGetTarget(resolver, prop, value) {
   const parent = resolver._getTarget();
   if (!(prop in parent)) {
@@ -1797,6 +1973,7 @@ function subGetTarget(resolver, prop, value) {
   }
   return target;
 }
+
 function _resolveWithPrefixes(prop, prefixes, scopes, proxy) {
   let value;
   for (const prefix of prefixes) {
@@ -1808,6 +1985,7 @@ function _resolveWithPrefixes(prop, prefixes, scopes, proxy) {
     }
   }
 }
+
 function _resolve(key, scopes) {
   for (const scope of scopes) {
     if (!scope) {
@@ -1819,6 +1997,7 @@ function _resolve(key, scopes) {
     }
   }
 }
+
 function getKeysFromAllScopes(target) {
   let keys = target._keys;
   if (!keys) {
@@ -1826,6 +2005,7 @@ function getKeysFromAllScopes(target) {
   }
   return keys;
 }
+
 function resolveKeysFromAllScopes(scopes) {
   const set = new Set();
   for (const scope of scopes) {
@@ -1839,6 +2019,7 @@ function resolveKeysFromAllScopes(scopes) {
 const EPSILON = Number.EPSILON || 1e-14;
 const getPoint = (points, i) => i < points.length && !points[i].skip && points[i];
 const getValueAxis = (indexAxis) => indexAxis === 'x' ? 'y' : 'x';
+
 function splineCurve(firstPoint, middlePoint, afterPoint, t) {
   const previous = firstPoint.skip ? middlePoint : firstPoint;
   const current = middlePoint;
@@ -1862,6 +2043,7 @@ function splineCurve(firstPoint, middlePoint, afterPoint, t) {
     }
   };
 }
+
 function monotoneAdjust(points, deltaK, mK) {
   const pointsLen = points.length;
   let alphaK, betaK, tauK, squaredMagnitude, pointCurrent;
@@ -1887,6 +2069,7 @@ function monotoneAdjust(points, deltaK, mK) {
     mK[i + 1] = betaK * tauK * deltaK[i];
   }
 }
+
 function monotoneCompute(points, mK, indexAxis = 'x') {
   const valueAxis = getValueAxis(indexAxis);
   const pointsLen = points.length;
@@ -1913,6 +2096,7 @@ function monotoneCompute(points, mK, indexAxis = 'x') {
     }
   }
 }
+
 function splineCurveMonotone(points, indexAxis = 'x') {
   const valueAxis = getValueAxis(indexAxis);
   const pointsLen = points.length;
@@ -1933,15 +2117,17 @@ function splineCurveMonotone(points, indexAxis = 'x') {
     }
     mK[i] = !pointBefore ? deltaK[i]
       : !pointAfter ? deltaK[i - 1]
-      : (sign(deltaK[i - 1]) !== sign(deltaK[i])) ? 0
-      : (deltaK[i - 1] + deltaK[i]) / 2;
+        : (sign(deltaK[i - 1]) !== sign(deltaK[i])) ? 0
+          : (deltaK[i - 1] + deltaK[i]) / 2;
   }
   monotoneAdjust(points, deltaK, mK);
   monotoneCompute(points, mK, indexAxis);
 }
+
 function capControlPoint(pt, min, max) {
   return Math.max(Math.min(pt, max), min);
 }
+
 function capBezierPoints(points, area) {
   let i, ilen, point, inArea, inAreaPrev;
   let inAreaNext = _isPointInArea(points[0], area);
@@ -1963,6 +2149,7 @@ function capBezierPoints(points, area) {
     }
   }
 }
+
 function _updateBezierControlPoints(points, options, area, loop, indexAxis) {
   let i, ilen, point, controlPoints;
   if (options.spanGaps) {
@@ -1995,6 +2182,7 @@ function _updateBezierControlPoints(points, options, area, loop, indexAxis) {
 function _isDomSupported() {
   return typeof window !== 'undefined' && typeof document !== 'undefined';
 }
+
 function _getParentNode(domNode) {
   let parent = domNode.parentNode;
   if (parent && parent.toString() === '[object ShadowRoot]') {
@@ -2002,6 +2190,7 @@ function _getParentNode(domNode) {
   }
   return parent;
 }
+
 function parseMaxStyle(styleValue, node, parentProperty) {
   let valueInPixels;
   if (typeof styleValue === 'string') {
@@ -2014,11 +2203,15 @@ function parseMaxStyle(styleValue, node, parentProperty) {
   }
   return valueInPixels;
 }
+
 const getComputedStyle = (element) => window.getComputedStyle(element, null);
+
 function getStyle(el, property) {
   return getComputedStyle(el).getPropertyValue(property);
 }
+
 const positions = ['top', 'right', 'bottom', 'left'];
+
 function getPositionedStyle(styles, style, suffix) {
   const result = {};
   suffix = suffix ? '-' + suffix : '';
@@ -2030,7 +2223,9 @@ function getPositionedStyle(styles, style, suffix) {
   result.height = result.top + result.bottom;
   return result;
 }
+
 const useOffsetPos = (x, y, target) => (x > 0 || y > 0) && (!target || !target.shadowRoot);
+
 function getCanvasPosition(evt, canvas) {
   const e = evt.native || evt;
   const touches = e.touches;
@@ -2049,6 +2244,7 @@ function getCanvasPosition(evt, canvas) {
   }
   return {x, y, box};
 }
+
 function getRelativePosition(evt, chart) {
   const {canvas, currentDevicePixelRatio} = chart;
   const style = getComputedStyle(canvas);
@@ -2068,6 +2264,7 @@ function getRelativePosition(evt, chart) {
     y: Math.round((y - yOffset) / height * canvas.height / currentDevicePixelRatio)
   };
 }
+
 function getContainerSize(canvas, width, height) {
   let maxWidth, maxHeight;
   if (width === undefined || height === undefined) {
@@ -2093,7 +2290,9 @@ function getContainerSize(canvas, width, height) {
     maxHeight: maxHeight || INFINITY
   };
 }
+
 const round1 = v => Math.round(v * 10) / 10;
+
 function getMaximumSize(canvas, bbWidth, bbHeight, aspectRatio) {
   const style = getComputedStyle(canvas);
   const margins = getPositionedStyle(style, 'margin');
@@ -2119,6 +2318,7 @@ function getMaximumSize(canvas, bbWidth, bbHeight, aspectRatio) {
     height
   };
 }
+
 function retinaScale(chart, forceRatio, forceStyle) {
   const pixelRatio = forceRatio || 1;
   const deviceHeight = Math.floor(chart.height * pixelRatio);
@@ -2131,8 +2331,8 @@ function retinaScale(chart, forceRatio, forceStyle) {
     canvas.style.width = `${chart.width}px`;
   }
   if (chart.currentDevicePixelRatio !== pixelRatio
-      || canvas.height !== deviceHeight
-      || canvas.width !== deviceWidth) {
+    || canvas.height !== deviceHeight
+    || canvas.width !== deviceWidth) {
     chart.currentDevicePixelRatio = pixelRatio;
     canvas.height = deviceHeight;
     canvas.width = deviceWidth;
@@ -2141,7 +2341,8 @@ function retinaScale(chart, forceRatio, forceStyle) {
   }
   return false;
 }
-const supportsEventListenerOptions = (function() {
+
+const supportsEventListenerOptions = (function () {
   let passiveSupported = false;
   try {
     const options = {
@@ -2156,6 +2357,7 @@ const supportsEventListenerOptions = (function() {
   }
   return passiveSupported;
 }());
+
 function readUsedSize(element, property) {
   const value = getStyle(element, property);
   const matches = value && value.match(/^(\d+)(\.\d+)?px$/);
@@ -2168,14 +2370,16 @@ function _pointInLine(p1, p2, t, mode) {
     y: p1.y + t * (p2.y - p1.y)
   };
 }
+
 function _steppedInterpolation(p1, p2, t, mode) {
   return {
     x: p1.x + t * (p2.x - p1.x),
     y: mode === 'middle' ? t < 0.5 ? p1.y : p2.y
-    : mode === 'after' ? t < 1 ? p1.y : p2.y
-    : t > 0 ? p2.y : p1.y
+      : mode === 'after' ? t < 1 ? p1.y : p2.y
+        : t > 0 ? p2.y : p1.y
   };
 }
+
 function _bezierInterpolation(p1, p2, t, mode) {
   const cp1 = {x: p1.cp2x, y: p1.cp2y};
   const cp2 = {x: p2.cp1x, y: p2.cp1y};
@@ -2188,6 +2392,7 @@ function _bezierInterpolation(p1, p2, t, mode) {
 }
 
 const intlCache = new Map();
+
 function getNumberFormat(locale, options) {
   options = options || {};
   const cacheKey = locale + JSON.stringify(options);
@@ -2198,11 +2403,12 @@ function getNumberFormat(locale, options) {
   }
   return formatter;
 }
+
 function formatNumber(num, locale, options) {
   return getNumberFormat(locale, options).format(num);
 }
 
-const getRightToLeftAdapter = function(rectX, width) {
+const getRightToLeftAdapter = function (rectX, width) {
   return {
     x(x) {
       return rectX + rectX + width - x;
@@ -2224,7 +2430,7 @@ const getRightToLeftAdapter = function(rectX, width) {
     },
   };
 };
-const getLeftToRightAdapter = function() {
+const getLeftToRightAdapter = function () {
   return {
     x(x) {
       return x;
@@ -2242,9 +2448,11 @@ const getLeftToRightAdapter = function() {
     },
   };
 };
+
 function getRtlAdapter(rtl, rectX, width) {
   return rtl ? getRightToLeftAdapter(rectX, width) : getLeftToRightAdapter();
 }
+
 function overrideTextDirection(ctx, direction) {
   let style, original;
   if (direction === 'ltr' || direction === 'rtl') {
@@ -2257,6 +2465,7 @@ function overrideTextDirection(ctx, direction) {
     ctx.prevTextDirection = original;
   }
 }
+
 function restoreTextDirection(ctx, original) {
   if (original !== undefined) {
     delete ctx.prevTextDirection;
@@ -2278,6 +2487,7 @@ function propertyFn(property) {
     normalize: x => x
   };
 }
+
 function normalizeSegment({start, end, count, loop, style}) {
   return {
     start: start % count,
@@ -2286,6 +2496,7 @@ function normalizeSegment({start, end, count, loop, style}) {
     style
   };
 }
+
 function getSegment(segment, points, bounds) {
   const {property, start: startBound, end: endBound} = bounds;
   const {between, normalize} = propertyFn(property);
@@ -2310,6 +2521,7 @@ function getSegment(segment, points, bounds) {
   }
   return {start, end, loop, style: segment.style};
 }
+
 function _boundSegment(segment, points, bounds) {
   if (!bounds) {
     return [segment];
@@ -2351,6 +2563,7 @@ function _boundSegment(segment, points, bounds) {
   }
   return result;
 }
+
 function _boundSegments(line, bounds) {
   const result = [];
   const segments = line.segments;
@@ -2362,6 +2575,7 @@ function _boundSegments(line, bounds) {
   }
   return result;
 }
+
 function findStartAndEnd(points, count, loop, spanGaps) {
   let start = 0;
   let end = count - 1;
@@ -2383,6 +2597,7 @@ function findStartAndEnd(points, count, loop, spanGaps) {
   end %= count;
   return {start, end};
 }
+
 function solidSegments(points, start, max, loop) {
   const count = points.length;
   const result = [];
@@ -2410,6 +2625,7 @@ function solidSegments(points, start, max, loop) {
   }
   return result;
 }
+
 function _computeSegments(line, segmentOptions) {
   const points = line.points;
   const spanGaps = line.options.spanGaps;
@@ -2426,12 +2642,14 @@ function _computeSegments(line, segmentOptions) {
   const completeLoop = !!line._fullLoop && start === 0 && end === count - 1;
   return splitByStyles(line, solidSegments(points, start, max, completeLoop), points, segmentOptions);
 }
+
 function splitByStyles(line, segments, points, segmentOptions) {
   if (!segmentOptions || !segmentOptions.setContext || !points) {
     return segments;
   }
   return doSplitByStyles(line, segments, points, segmentOptions);
 }
+
 function doSplitByStyles(line, segments, points, segmentOptions) {
   const chartContext = line._chart.getContext();
   const baseStyle = readStyle(line.options);
@@ -2441,6 +2659,7 @@ function doSplitByStyles(line, segments, points, segmentOptions) {
   let prevStyle = baseStyle;
   let start = segments[0].start;
   let i = start;
+
   function addStyle(s, e, l, st) {
     const dir = spanGaps ? -1 : 1;
     if (s === e) {
@@ -2459,6 +2678,7 @@ function doSplitByStyles(line, segments, points, segmentOptions) {
       start = e % count;
     }
   }
+
   for (const segment of segments) {
     start = spanGaps ? start : segment.start;
     let prev = points[start % count];
@@ -2485,6 +2705,7 @@ function doSplitByStyles(line, segments, points, segmentOptions) {
   }
   return result;
 }
+
 function readStyle(options) {
   return {
     backgroundColor: options.backgroundColor,
@@ -2496,8 +2717,128 @@ function readStyle(options) {
     borderColor: options.borderColor
   };
 }
+
 function styleChanged(style, prevStyle) {
   return prevStyle && JSON.stringify(style) !== JSON.stringify(prevStyle);
 }
 
-export { _toLeftRightCenter as $, _rlookupByKey as A, getAngleFromPoint as B, toPadding as C, each as D, getMaximumSize as E, _getParentNode as F, readUsedSize as G, HALF_PI as H, throttled as I, supportsEventListenerOptions as J, _isDomSupported as K, log10 as L, _factorize as M, finiteOrDefault as N, callback as O, PI as P, _addGrace as Q, toDegrees as R, _measureText as S, TAU as T, _int16Range as U, _alignPixel as V, clipArea as W, renderText as X, unclipArea as Y, toFont as Z, _arrayUnique as _, resolve as a, _angleDiff as a$, _alignStartEnd as a0, overrides as a1, merge as a2, _capitalize as a3, descriptors as a4, isFunction as a5, _attachContext as a6, _createResolver as a7, _descriptors as a8, mergeIf as a9, restoreTextDirection as aA, noop as aB, distanceBetweenPoints as aC, _setMinAndMaxByKey as aD, niceNum as aE, almostWhole as aF, almostEquals as aG, _decimalPlaces as aH, _longestText as aI, _filterBetween as aJ, _lookup as aK, getHoverColor as aL, clone$1 as aM, _merger as aN, _mergerIf as aO, _deprecated as aP, toFontString as aQ, splineCurve as aR, splineCurveMonotone as aS, getStyle as aT, fontString as aU, toLineHeight as aV, PITAU as aW, INFINITY as aX, RAD_PER_DEG as aY, QUARTER_PI as aZ, TWO_THIRDS_PI as a_, uid as aa, debounce as ab, retinaScale as ac, clearCanvas as ad, setsEqual as ae, _elementsEqual as af, _isClickEvent as ag, _isBetween as ah, _readValueToProps as ai, _updateBezierControlPoints as aj, _computeSegments as ak, _boundSegments as al, _steppedInterpolation as am, _bezierInterpolation as an, _pointInLine as ao, _steppedLineTo as ap, _bezierCurveTo as aq, drawPoint as ar, addRoundedRectPath as as, toTRBL as at, toTRBLCorners as au, _boundSegment as av, _normalizeAngle as aw, getRtlAdapter as ax, overrideTextDirection as ay, _textX as az, isArray as b, color as c, defaults as d, effects as e, resolveObjectKey as f, isNumberFinite as g, createContext as h, isObject as i, defined as j, isNullOrUndef as k, listenArrayEvents as l, toPercentage as m, toDimension as n, formatNumber as o, _angleBetween as p, isNumber as q, requestAnimFrame as r, sign as s, toRadians as t, unlistenArrayEvents as u, valueOrDefault as v, _limitValue as w, _lookupByKey as x, getRelativePosition as y, _isPointInArea as z };
+export {
+  _toLeftRightCenter as $,
+  _rlookupByKey as A,
+  getAngleFromPoint as B,
+  toPadding as C,
+  each as D,
+  getMaximumSize as E,
+  _getParentNode as F,
+  readUsedSize as G,
+  HALF_PI as H,
+  throttled as I,
+  supportsEventListenerOptions as J,
+  _isDomSupported as K,
+  log10 as L,
+  _factorize as M,
+  finiteOrDefault as N,
+  callback as O,
+  PI as P,
+  _addGrace as Q,
+  toDegrees as R,
+  _measureText as S,
+  TAU as T,
+  _int16Range as U,
+  _alignPixel as V,
+  clipArea as W,
+  renderText as X,
+  unclipArea as Y,
+  toFont as Z,
+  _arrayUnique as _,
+  resolve as a,
+  _angleDiff as a$,
+  _alignStartEnd as a0,
+  overrides as a1,
+  merge as a2,
+  _capitalize as a3,
+  descriptors as a4,
+  isFunction as a5,
+  _attachContext as a6,
+  _createResolver as a7,
+  _descriptors as a8,
+  mergeIf as a9,
+  restoreTextDirection as aA,
+  noop as aB,
+  distanceBetweenPoints as aC,
+  _setMinAndMaxByKey as aD,
+  niceNum as aE,
+  almostWhole as aF,
+  almostEquals as aG,
+  _decimalPlaces as aH,
+  _longestText as aI,
+  _filterBetween as aJ,
+  _lookup as aK,
+  getHoverColor as aL,
+  clone$1 as aM,
+  _merger as aN,
+  _mergerIf as aO,
+  _deprecated as aP,
+  toFontString as aQ,
+  splineCurve as aR,
+  splineCurveMonotone as aS,
+  getStyle as aT,
+  fontString as aU,
+  toLineHeight as aV,
+  PITAU as aW,
+  INFINITY as aX,
+  RAD_PER_DEG as aY,
+  QUARTER_PI as aZ,
+  TWO_THIRDS_PI as a_,
+  uid as aa,
+  debounce as ab,
+  retinaScale as ac,
+  clearCanvas as ad,
+  setsEqual as ae,
+  _elementsEqual as af,
+  _isClickEvent as ag,
+  _isBetween as ah,
+  _readValueToProps as ai,
+  _updateBezierControlPoints as aj,
+  _computeSegments as ak,
+  _boundSegments as al,
+  _steppedInterpolation as am,
+  _bezierInterpolation as an,
+  _pointInLine as ao,
+  _steppedLineTo as ap,
+  _bezierCurveTo as aq,
+  drawPoint as ar,
+  addRoundedRectPath as as,
+  toTRBL as at,
+  toTRBLCorners as au,
+  _boundSegment as av,
+  _normalizeAngle as aw,
+  getRtlAdapter as ax,
+  overrideTextDirection as ay,
+  _textX as az,
+  isArray as b,
+  color as c,
+  defaults as d,
+  effects as e,
+  resolveObjectKey as f,
+  isNumberFinite as g,
+  createContext as h,
+  isObject as i,
+  defined as j,
+  isNullOrUndef as k,
+  listenArrayEvents as l,
+  toPercentage as m,
+  toDimension as n,
+  formatNumber as o,
+  _angleBetween as p,
+  isNumber as q,
+  requestAnimFrame as r,
+  sign as s,
+  toRadians as t,
+  unlistenArrayEvents as u,
+  valueOrDefault as v,
+  _limitValue as w,
+  _lookupByKey as x,
+  getRelativePosition as y,
+  _isPointInArea as z
+};

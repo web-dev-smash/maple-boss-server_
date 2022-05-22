@@ -7,15 +7,15 @@
  * Version: 5.10.2 (2021-11-17)
  */
 (function () {
-    'use strict';
+  'use strict';
 
-    var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
+  var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
 
-    function Plugin () {
-      global.add('colorpicker', function () {
-      });
-    }
+  function Plugin() {
+    global.add('colorpicker', function () {
+    });
+  }
 
-    Plugin();
+  Plugin();
 
 }());

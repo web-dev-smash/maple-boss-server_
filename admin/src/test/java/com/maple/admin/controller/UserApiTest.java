@@ -45,14 +45,14 @@ class UserApiTest extends BaseApiTest {
     @Test
     void 전체_유저_목록_조회() throws Exception {
         mockMvc.perform(get("/user")
-                        .param("page", "0")
-                        .param("size", "4"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpectAll(유저_목록_조회_검증(0, user1))
-                .andExpectAll(유저_목록_조회_검증(1, user2))
-                .andExpectAll(유저_목록_조회_검증(2, user3))
-                .andExpectAll(유저_목록_조회_검증(3, user4));
+                       .param("page", "0")
+                       .param("size", "4"))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpectAll(유저_목록_조회_검증(0, user1))
+               .andExpectAll(유저_목록_조회_검증(1, user2))
+               .andExpectAll(유저_목록_조회_검증(2, user3))
+               .andExpectAll(유저_목록_조회_검증(3, user4));
     }
 
     private ResultMatcher[] 유저_목록_조회_검증(int index, User user) {

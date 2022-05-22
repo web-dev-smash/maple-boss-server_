@@ -19,14 +19,14 @@ class ItemApiTest extends BaseApiTest {
         val req = new ItemCreateRequest("태초의정수", ItemType.EXTRA);
 
         mockMvc.perform(post("/item")
-                        .content(objectMapper.writeValueAsString(req))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.item.id").isNotEmpty(),
-                        jsonPath("$.item.name").value("태초의정수"),
-                        jsonPath("$.item.type").value(ItemType.EXTRA.name()),
-                        jsonPath("$.item.createAt").isNotEmpty()
-                );
+                       .content(objectMapper.writeValueAsString(req))
+                       .contentType(MediaType.APPLICATION_JSON))
+               .andExpectAll(
+                       status().isOk(),
+                       jsonPath("$.item.id").isNotEmpty(),
+                       jsonPath("$.item.name").value("태초의정수"),
+                       jsonPath("$.item.type").value(ItemType.EXTRA.name()),
+                       jsonPath("$.item.createAt").isNotEmpty()
+               );
     }
 }

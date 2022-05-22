@@ -57,12 +57,12 @@ class PartyApiTest extends BaseApiTest {
     @Test
     void 파티_전체_목록_조회() throws Exception {
         mockMvc.perform(get("/party")
-                        .param("page", "0")
-                        .param("size", "3"))
-                .andExpect(status().isOk())
-                .andExpectAll(파티_목록_조회_검증(0, party1))
-                .andExpectAll(파티_목록_조회_검증(1, party2))
-                .andExpectAll(파티_목록_조회_검증(2, party3));
+                       .param("page", "0")
+                       .param("size", "3"))
+               .andExpect(status().isOk())
+               .andExpectAll(파티_목록_조회_검증(0, party1))
+               .andExpectAll(파티_목록_조회_검증(1, party2))
+               .andExpectAll(파티_목록_조회_검증(2, party3));
     }
 
     private ResultMatcher[] 파티_목록_조회_검증(int index, Party party) {

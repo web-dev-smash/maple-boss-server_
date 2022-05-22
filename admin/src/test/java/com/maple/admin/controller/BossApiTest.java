@@ -33,24 +33,24 @@ class BossApiTest extends BaseApiTest {
         );
 
         mockMvc.perform(post("/boss")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(req)))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.boss.id").isNotEmpty(),
-                        jsonPath("$.boss.name").value("윌"),
-                        jsonPath("$.boss.level").value(100),
-                        jsonPath("$.boss.clazz").value(BossClass.EASY.name()),
-                        jsonPath("$.boss.entryMinLevel").value(30),
-                        jsonPath("$.boss.entryMaxLevel").value(50),
-                        jsonPath("$.boss.hpPhaseOne").value(100L),
-                        jsonPath("$.boss.hpPhaseTwo").value(200L),
-                        jsonPath("$.boss.hpPhaseThree").value(300L),
-                        jsonPath("$.boss.hpPhaseFour").value(400L),
-                        jsonPath("$.boss.totalHpPhase").value(100L + 200L + 300L + 400L),
-                        jsonPath("$.boss.arcaneForce").value(100),
-                        jsonPath("$.boss.deathLimit").value(3)
-                );
+                       .contentType(MediaType.APPLICATION_JSON)
+                       .content(objectMapper.writeValueAsString(req)))
+               .andExpectAll(
+                       status().isOk(),
+                       jsonPath("$.boss.id").isNotEmpty(),
+                       jsonPath("$.boss.name").value("윌"),
+                       jsonPath("$.boss.level").value(100),
+                       jsonPath("$.boss.clazz").value(BossClass.EASY.name()),
+                       jsonPath("$.boss.entryMinLevel").value(30),
+                       jsonPath("$.boss.entryMaxLevel").value(50),
+                       jsonPath("$.boss.hpPhaseOne").value(100L),
+                       jsonPath("$.boss.hpPhaseTwo").value(200L),
+                       jsonPath("$.boss.hpPhaseThree").value(300L),
+                       jsonPath("$.boss.hpPhaseFour").value(400L),
+                       jsonPath("$.boss.totalHpPhase").value(100L + 200L + 300L + 400L),
+                       jsonPath("$.boss.arcaneForce").value(100),
+                       jsonPath("$.boss.deathLimit").value(3)
+               );
     }
 
     @Test
@@ -58,21 +58,21 @@ class BossApiTest extends BaseApiTest {
         val boss = bossRepository.save(BossFixture.createBoss());
 
         mockMvc.perform(get("/boss/{id}", boss.getId()))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.boss.name").value(boss.getName()),
-                        jsonPath("$.boss.level").value(boss.getLevel()),
-                        jsonPath("$.boss.clazz").value(BossClass.EASY.name()),
-                        jsonPath("$.boss.entryMinLevel").value(boss.getEntryMinLevel()),
-                        jsonPath("$.boss.entryMaxLevel").value(boss.getEntryMaxLevel()),
-                        jsonPath("$.boss.hpPhaseOne").value(boss.getHpPhaseOne()),
-                        jsonPath("$.boss.hpPhaseTwo").value(boss.getHpPhaseTwo()),
-                        jsonPath("$.boss.hpPhaseThree").value(boss.getHpPhaseThree()),
-                        jsonPath("$.boss.hpPhaseFour").value(boss.getHpPhaseFour()),
-                        jsonPath("$.boss.totalHpPhase").value(boss.totalHpPhase()),
-                        jsonPath("$.boss.arcaneForce").value(boss.getArcaneForce()),
-                        jsonPath("$.boss.deathLimit").value(boss.getDeathLimit())
-                );
+               .andExpectAll(
+                       status().isOk(),
+                       jsonPath("$.boss.name").value(boss.getName()),
+                       jsonPath("$.boss.level").value(boss.getLevel()),
+                       jsonPath("$.boss.clazz").value(BossClass.EASY.name()),
+                       jsonPath("$.boss.entryMinLevel").value(boss.getEntryMinLevel()),
+                       jsonPath("$.boss.entryMaxLevel").value(boss.getEntryMaxLevel()),
+                       jsonPath("$.boss.hpPhaseOne").value(boss.getHpPhaseOne()),
+                       jsonPath("$.boss.hpPhaseTwo").value(boss.getHpPhaseTwo()),
+                       jsonPath("$.boss.hpPhaseThree").value(boss.getHpPhaseThree()),
+                       jsonPath("$.boss.hpPhaseFour").value(boss.getHpPhaseFour()),
+                       jsonPath("$.boss.totalHpPhase").value(boss.totalHpPhase()),
+                       jsonPath("$.boss.arcaneForce").value(boss.getArcaneForce()),
+                       jsonPath("$.boss.deathLimit").value(boss.getDeathLimit())
+               );
     }
 
     @Test
@@ -82,10 +82,10 @@ class BossApiTest extends BaseApiTest {
         val boss3 = bossRepository.save(new Boss("A", 1, BossClass.HARD, 1, 2, 100L, 200L, 300L, 400L, 100, 5));
 
         mockMvc.perform(get("/boss"))
-                .andExpectAll(status().isOk())
-                .andExpectAll(보스_목록_조회_검증(0, boss1))
-                .andExpectAll(보스_목록_조회_검증(1, boss2))
-                .andExpectAll(보스_목록_조회_검증(2, boss3));
+               .andExpectAll(status().isOk())
+               .andExpectAll(보스_목록_조회_검증(0, boss1))
+               .andExpectAll(보스_목록_조회_검증(1, boss2))
+               .andExpectAll(보스_목록_조회_검증(2, boss3));
     }
 
     private ResultMatcher[] 보스_목록_조회_검증(int index, Boss boss) {
