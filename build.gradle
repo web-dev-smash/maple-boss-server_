@@ -121,6 +121,8 @@ project(':admin') {
         implementation(project(':core'))
         implementation(project(':common'))
         implementation(project(':integration'))
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.7'
+        implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
     }
 
     bootJar {
